@@ -1,13 +1,10 @@
-`dotnet ef migrations add initialmigration`
-`dotnet ef migrations remove`
-`dotnet ef database update`
 
 # Getting your environment ready
 ## Required tools, libraries and platforms
 Os                 |Tool                           |Version|Link
 -------------------|-------------------------------|-------|-------------------------------------------------------------------|
 Mac, Windows       | .Net Core                     |3.1    |[DotNet Core](https://dotnet.microsoft.com/download)
--------------------|-------------------------------|-------|-------------------------------------------------------------------| 
+                   |                               |       |                                                                   | 
 Mac, Windows       | NodeJs                        |14.17.0|[NodeJs](https://nodejs.org/en/)
 -------------------|-------------------------------|-------|-------------------------------------------------------------------|
 Mac                | Docker(to run sql server)     |       |[Docker](https://docs.docker.com/docker-for-mac/install/)
