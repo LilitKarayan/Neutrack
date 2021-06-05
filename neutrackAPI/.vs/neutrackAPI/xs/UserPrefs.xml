@@ -1,17 +1,20 @@
 ﻿<Properties StartupConfiguration="{C3993609-A9B8-419D-90B8-E1E9099F0A72}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="neutrackAPI.tests/UnitTest1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="neutrackAPI/Controllers/UsersController.cs">
     <Files>
-      <File FileName="neutrackAPI/Profiles/UsersProfile.cs" Line="1" Column="1" />
-      <File FileName="neutrackAPI/Startup.cs" Line="16" Column="22" />
-      <File FileName="neutrackAPI/Program.cs" Line="21" Column="56" />
-      <File FileName="neutrackAPI/Migrations/20210605122115_InitialMigration.Designer.cs" Line="22" Column="1" />
-      <File FileName="neutrackAPI.tests/UnitTest1.cs" Line="10" Column="10" />
+      <File FileName="neutrackAPI/Profiles/UsersProfile.cs" Line="14" Column="6" />
+      <File FileName="neutrackAPI/Controllers/UsersController.cs" Line="35" Column="30" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="NeutrackAPI" expanded="True">
-            <Node name="NeutrackAPI.tests" expanded="True" selected="True" />
+            <Node name="NeutrackAPI" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="UsersController.cs" selected="True" />
+              </Node>
+              <Node name="Profiles" expanded="True" />
+            </Node>
+            <Node name="NeutrackAPI.tests" expanded="True" />
           </Node>
         </State>
       </Pad>
