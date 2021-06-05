@@ -11,9 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using neutrackAPI.Data;
+using NeutrackAPI.Data;
 
-namespace neutrackAPI
+namespace NeutrackAPI
 {
     public class Startup
     {
@@ -30,6 +30,7 @@ namespace neutrackAPI
             services.AddDbContext<NeutrackContext>(opt => opt.UseSqlServer(
                 Configuration.GetConnectionString("NeutrackDBConnection")));
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IUserRepository, UserRepository>();
             
         }

@@ -1,32 +1,25 @@
 ﻿<Properties StartupConfiguration="{C3993609-A9B8-419D-90B8-E1E9099F0A72}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="neutrackAPI/Startup.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="neutrackAPI.tests/UnitTest1.cs">
     <Files>
-      <File FileName="neutrackAPI/Models/User.cs" Line="10" Column="45" />
-      <File FileName="neutrackAPI/Data/IUserRepository.cs" Line="11" Column="9" />
-      <File FileName="neutrackAPI/Data/UserRepository.cs" Line="17" Column="129" />
-      <File FileName="neutrackAPI/Data/NeutrackContext.cs" Line="16" Column="1" />
-      <File FileName="neutrackAPI/appsettings.json" Line="1" Column="1" />
-      <File FileName="neutrackAPI/appsettings.Development.json" Line="13" Column="1" />
-      <File FileName="neutrackAPI/Startup.cs" Line="1" Column="1" />
+      <File FileName="neutrackAPI/Profiles/UsersProfile.cs" Line="1" Column="1" />
+      <File FileName="neutrackAPI/Startup.cs" Line="16" Column="22" />
+      <File FileName="neutrackAPI/Program.cs" Line="21" Column="56" />
+      <File FileName="neutrackAPI/Migrations/20210605122115_InitialMigration.Designer.cs" Line="22" Column="1" />
+      <File FileName="neutrackAPI.tests/UnitTest1.cs" Line="10" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="neutrackAPI" expanded="True">
-            <Node name="neutrackAPI" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True" />
-              <Node name="appsettings.json" expanded="True" />
-              <Node name="Startup.cs" selected="True" />
-            </Node>
+          <Node name="NeutrackAPI" expanded="True">
+            <Node name="NeutrackAPI.tests" expanded="True" selected="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.NeutrackAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.neutrackAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

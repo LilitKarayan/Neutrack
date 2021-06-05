@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace neutrackAPI.tests
+namespace NeutrackAPI.tests
 {
     [TestClass]
     public class UnitTest1

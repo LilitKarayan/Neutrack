@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using neutrackAPI.Data;
-using neutrackAPI.Models;
+using NeutrackAPI.Data;
+using NeutrackAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace neutrackAPI.Controllers
+namespace NeutrackAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

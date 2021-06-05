@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using neutrackAPI.Models;
+using NeutrackAPI.Models;
 
-namespace neutrackAPI.Data
+namespace NeutrackAPI.Data
 {
     public class NeutrackContext : DbContext
     {
