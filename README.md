@@ -2,24 +2,16 @@
 # Getting your environment ready
 ## Required tools, libraries and platforms
 Os                 |Tool                           |Version|Link
--------------------|-------------------------------|-------|-------------------------------------------------------------------|
-Mac, Windows       | .Net Core                     |3.1    |[DotNet Core](https://dotnet.microsoft.com/download)
-                   |                               |       |                                                                   | 
-Mac, Windows       | NodeJs                        |14.17.0|[NodeJs](https://nodejs.org/en/)
--------------------|-------------------------------|-------|-------------------------------------------------------------------|
-Mac                | Docker(to run sql server)     |       |[Docker](https://docs.docker.com/docker-for-mac/install/)
--------------------|-------------------------------|-------|-------------------------------------------------------------------|
-Mac                | Azure Data Studio             |       |[Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15)
--------------------|-------------------------------|-------|-------------------------------------------------------------------|
-Mac                | VS Code & Visual Studio for Mac|      |[Visual Studio](https://visualstudio.microsoft.com/)
--------------------|-------------------------------|-------|-------------------------------------------------------------------|
-Windows            | VS Code & Visual Studio 2019  |2019   |[Visual Studio](https://visualstudio.microsoft.com/)
--------------------|-------------------------------|-------|-------------------------------------------------------------------|
-Windows            | SQL Management Studio         |       |[SQL Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
--------------------|-------------------------------|-------|-------------------------------------------------------------------|
+-------------------|-------------------------------|-------|-------------------------------------------------------------------
+Mac, Windows       | .Net Core                     |3.1    |[DotNet Core](https://dotnet.microsoft.com/download)                                                                 
+Mac, Windows       | NodeJs                        |14.17.0|[NodeJs](https://nodejs.org/en/)                                                                  
+Mac                | Docker(to run sql server)     |       |[Docker](https://docs.docker.com/docker-for-mac/install/)                                                       
+Mac                | Azure Data Studio             |       |[Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15)                                                     
+Mac                | VS Code & Visual Studio for Mac|      |[Visual Studio](https://visualstudio.microsoft.com/)                                                       
+Windows            | VS Code & Visual Studio 2019  |2019   |[Visual Studio](https://visualstudio.microsoft.com/)                                                       
+Windows            | SQL Management Studio         |       |[SQL Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)                                                      
 Mac, Windows       | Postman                       |current|[Postman](https://www.postman.com/downloads/)
--------------------|-------------------------------|-------|-------------------------------------------------------------------| 
- 
+
 ## Guide to setup project
  * Clone repository
  * confirm dotnet core is installed and version is 3.1 or greater by running this command in your terminal `dotnet --version`
@@ -53,11 +45,7 @@ Mac, Windows       | Postman                       |current|[Postman](https://ww
 Framework                 | Command                                            |Description
 --------------------------|----------------------------------------------------|------------------------------------------
 dotnet                    | `dotnet build`                                     | builds the dotnet project
---------------------------|----------------------------------------------------|------------------------------------------
 dotnet                    | `dotnet run`                                       | starts the dotnet project
---------------------------|----------------------------------------------------|------------------------------------------
 dotnet entity Framework   | `dotnet ef migrations add <MigrationName> `        | creates a migration file
---------------------------|----------------------------------------------------|------------------------------------------
 dotnet entity Framework   | `dotnet ef migrations remove`                      | removes all migrations file
---------------------------|----------------------------------------------------|------------------------------------------
 dotnet entity Framework   | `dotnet ef database update`                        | Updates database with current migrations
