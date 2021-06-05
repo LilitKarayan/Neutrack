@@ -1,18 +1,14 @@
 ﻿<Properties StartupConfiguration="{C3993609-A9B8-419D-90B8-E1E9099F0A72}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="neutrackAPI/Controllers/UsersController.cs">
-    <Files>
-      <File FileName="neutrackAPI/Profiles/UsersProfile.cs" Line="14" Column="6" />
-      <File FileName="neutrackAPI/Controllers/UsersController.cs" Line="35" Column="30" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="NeutrackAPI" expanded="True">
             <Node name="NeutrackAPI" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="UsersController.cs" selected="True" />
+              <Node name="DTOs" expanded="True" />
+              <Node name="appsettings.json" expanded="True">
+                <Node name="appsettings.Development.json" selected="True" />
               </Node>
-              <Node name="Profiles" expanded="True" />
             </Node>
             <Node name="NeutrackAPI.tests" expanded="True" />
           </Node>

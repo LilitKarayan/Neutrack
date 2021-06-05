@@ -14,6 +14,14 @@ namespace NeutrackAPI.Data
             _context = context;
         }
 
+        public void CreateUser(User user)
+        {
+            if(user != null)
+            {
+                _context.Add(user);
+            }
+        }
+
         public IEnumerable<User> GetAllUsers()
         {
             return _context.users.ToList();

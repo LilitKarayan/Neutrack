@@ -14,4 +14,10 @@
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Data.Tests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data.Tests\" />
+  </ItemGroup>
 </Project>

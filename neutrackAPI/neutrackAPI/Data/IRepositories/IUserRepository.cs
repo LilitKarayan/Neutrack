@@ -8,6 +8,7 @@ namespace NeutrackAPI.Data
     {
         IEnumerable<User> GetAllUsers();
         User GetUserById(int id);
+        void CreateUser(User user);
         
     }
 }
