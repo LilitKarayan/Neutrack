@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj": {}
+    "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI/neutrackAPI.csproj": {}
   },
   "projects": {
-    "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj": {
+    "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI/neutrackAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj",
-        "projectName": "neutrackAPI.tests",
-        "projectPath": "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj",
+        "projectUniqueName": "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI/neutrackAPI.csproj",
+        "projectName": "neutrackAPI",
+        "projectPath": "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI/neutrackAPI.csproj",
         "packagesPath": "/Users/mide/.nuget/packages/",
-        "outputPath": "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/obj/",
+        "outputPath": "/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/mide/.config/NuGet/NuGet.Config"
@@ -37,24 +37,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "dependencies": {
-            "MSTest.TestAdapter": {
-              "target": "Package",
-              "version": "[2.1.0, )"
-            },
-            "MSTest.TestFramework": {
-              "target": "Package",
-              "version": "[2.1.0, )"
-            },
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[16.5.0, )"
-            },
-            "coverlet.collector": {
-              "target": "Package",
-              "version": "[1.2.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -66,6 +48,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

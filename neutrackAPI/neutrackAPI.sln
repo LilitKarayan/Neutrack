@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neutrackAPI", "neutrackAPI.csproj", "{2011AA4A-E385-4FD0-884A-1D5473AB1317}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neutrackAPI", "neutrackAPI\neutrackAPI.csproj", "{C3993609-A9B8-419D-90B8-E1E9099F0A72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neutrackAPI.tests", "neutrackAPI.tests\neutrackAPI.tests.csproj", "{BADA671E-F0FC-40D1-A201-F2BD03FF331F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neutrackAPI.tests", "neutrackAPI.tests\neutrackAPI.tests.csproj", "{91E70A39-A8F7-43F5-94CC-0018063CEF33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +13,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2011AA4A-E385-4FD0-884A-1D5473AB1317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2011AA4A-E385-4FD0-884A-1D5473AB1317}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2011AA4A-E385-4FD0-884A-1D5473AB1317}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2011AA4A-E385-4FD0-884A-1D5473AB1317}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BADA671E-F0FC-40D1-A201-F2BD03FF331F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BADA671E-F0FC-40D1-A201-F2BD03FF331F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BADA671E-F0FC-40D1-A201-F2BD03FF331F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BADA671E-F0FC-40D1-A201-F2BD03FF331F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3993609-A9B8-419D-90B8-E1E9099F0A72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3993609-A9B8-419D-90B8-E1E9099F0A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3993609-A9B8-419D-90B8-E1E9099F0A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3993609-A9B8-419D-90B8-E1E9099F0A72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91E70A39-A8F7-43F5-94CC-0018063CEF33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91E70A39-A8F7-43F5-94CC-0018063CEF33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91E70A39-A8F7-43F5-94CC-0018063CEF33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91E70A39-A8F7-43F5-94CC-0018063CEF33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A3BE162E-2909-4274-9404-72379E735EC8}
+		SolutionGuid = {80A4EF79-656B-4F1F-A2A4-320B32FF58FE}
 	EndGlobalSection
 EndGlobal
