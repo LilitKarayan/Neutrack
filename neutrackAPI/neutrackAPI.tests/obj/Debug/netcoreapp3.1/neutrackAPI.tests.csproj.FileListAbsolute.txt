@@ -84,7 +84,6 @@
 /Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/bin/Debug/netcoreapp3.1/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 /Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/bin/Debug/netcoreapp3.1/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 /Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/bin/Debug/netcoreapp3.1/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-/Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.csprojAssemblyReference.cache
 /Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.AssemblyInfoInputs.cache
 /Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.AssemblyInfo.cs
 /Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.csproj.CoreCompileInputs.cache
@@ -92,3 +91,4 @@
 /Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.dll
 /Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.pdb
 /Users/mide/Desktop/CS6920/Neutrack/neutrackAPI/neutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.genruntimeconfig.cache
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.csproj.AssemblyReference.cache
