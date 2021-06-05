@@ -1,5 +1,4 @@
 ﻿<Properties StartupConfiguration="{2011AA4A-E385-4FD0-884A-1D5473AB1317}|Default">
-  <MonoDevelop.Ide.ItemProperties.neutrackAPI.tests FirstBuild="True" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Startup.cs">
     <Files>
       <File FileName="Program.cs" Line="1" Column="1" />
@@ -12,7 +11,6 @@
             <Node name="neutrackAPI" expanded="True">
               <Node name="Startup.cs" selected="True" />
             </Node>
-            <Node name="neutrackAPI.tests" expanded="True" />
           </Node>
         </State>
       </Pad>
