@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NeutrackAPI.Data;
+using NeutrackAPI.Data.IRepositories;
+using NeutrackAPI.Data.Repositories;
 
 namespace NeutrackAPI
 {
@@ -29,10 +31,13 @@ namespace NeutrackAPI
         {
             services.AddDbContext<NeutrackContext>(opt => opt.UseSqlServer(
                 Configuration.GetConnectionString("NeutrackDBConnection")));
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                       options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IUserRepository, UserRepository>();
-            
+            services.AddScoped<IRoleRepository, RoleRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
