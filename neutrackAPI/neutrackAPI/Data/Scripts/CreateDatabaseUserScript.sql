@@ -7,3 +7,6 @@ GO
 USE NeutrackDB; 
 CREATE USER NeutrackUser FOR LOGIN NeutrackUser; 
 GO
+
+USE NeutrackDB;
+GRANT SELECT, ALTER, INSERT, UPDATE, DELETE TO NeutrackUser
