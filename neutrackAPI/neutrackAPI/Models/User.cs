@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace NeutrackAPI.Models
@@ -24,6 +25,9 @@ namespace NeutrackAPI.Models
         [MaxLength(100)]
         public string LastName { get; set; }
 
+        [MaxLength(200)]
+        public string FullName { get; set; }
+
         [MaxLength(15)]
         public string PhoneNumber { get; set; }
 
@@ -43,6 +47,9 @@ namespace NeutrackAPI.Models
         public string Goal {get; set;}
 
         public int ActivityLevel {get; set;}
-        public List<Role> Roles { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public List<UserRole> UserRoles { get; set; }
     }
 }

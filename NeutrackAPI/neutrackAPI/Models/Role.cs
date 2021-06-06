@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace NeutrackAPI.Models
@@ -12,6 +13,8 @@ namespace NeutrackAPI.Models
         [MaxLength(20)]
         public string Name { get; set; }
 
-        public List<User> Users {get; set;}
+        public bool IsActive { get; set; } = true;
+
+        public List<UserRole> UserRoles {get; set;}
     }
 }

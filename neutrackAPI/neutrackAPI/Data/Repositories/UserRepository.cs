@@ -24,12 +24,12 @@ namespace NeutrackAPI.Data
 
         public IEnumerable<User> GetAllUsers()
         {
-            return _context.users.ToList();
+            return _context.Users.ToList();
         }
 
         public User GetUserById(int id)
         {
-            return _context.users.FirstOrDefault(x => x.Id.Equals(id));
+            return _context.Users.FirstOrDefault(x => x.Id.Equals(id));
         }
     }
 }
