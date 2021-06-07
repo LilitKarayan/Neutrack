@@ -142,3 +142,10 @@
 /Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.pdb
 /Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.genruntimeconfig.cache
 /Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/obj/Debug/netcoreapp3.1/neutrackAPI.tests.csprojAssemblyReference.cache
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.JsonPatch.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/bin/Debug/netcoreapp3.1/Microsoft.OpenApi.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/bin/Debug/netcoreapp3.1/Newtonsoft.Json.Bson.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.Swagger.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI.tests/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerUI.dll
