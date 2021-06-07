@@ -65,3 +65,8 @@
 /Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/bin/Debug/netcoreapp3.1/Newtonsoft.Json.Bson.dll
 /Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/obj/Debug/netcoreapp3.1/neutrackAPI.csprojAssemblyReference.cache
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/bin/Debug/netcoreapp3.1/Microsoft.OpenApi.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.Swagger.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/obj/Debug/netcoreapp3.1/neutrackAPI.MvcApplicationPartsAssemblyInfo.cs
