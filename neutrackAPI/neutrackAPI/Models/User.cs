@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NeutrackAPI.Models
 {
@@ -50,5 +51,13 @@ namespace NeutrackAPI.Models
         public bool IsActive { get; set; }
 
         public List<UserRole> UserRoles { get; set; }
+
+        [InverseProperty("FeedbackTo")]
+        public List<Feedback> FeedbacksTo { get; set; }
+
+        [InverseProperty("FeedbackFrom")]
+        public List<Feedback> FeedbacksFrom { get; set; }
+
+        public List<NutritionistRate> NutritionistRates { get; set; }
     }
 }

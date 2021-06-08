@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NeutrackAPI.Data;
+using NeutrackAPI.Data.IRepositories;
+using NeutrackAPI.Data.Repositories;
 
 namespace NeutrackAPI
 {
@@ -29,10 +31,14 @@ namespace NeutrackAPI
         {
             services.AddDbContext<NeutrackContext>(opt => opt.UseSqlServer(
                 Configuration.GetConnectionString("NeutrackDBConnection")));
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                       options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IUserRepository, UserRepository>();
-            
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddSwaggerGen();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +50,16 @@ namespace NeutrackAPI
             }
 
             app.UseHttpsRedirection();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Neutrack API v1");
+            });
 
             app.UseRouting();
 
