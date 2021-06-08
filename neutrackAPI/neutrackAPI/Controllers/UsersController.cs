@@ -47,7 +47,7 @@ namespace NeutrackAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>A user matching the id parameter</returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUserById")]
         public ActionResult<UserReadDTO> GetUserById(int id)
         {
             try
