@@ -66,7 +66,11 @@ namespace NeutrackAPI.Controllers
             
         }
 
-        // POST api/users
+        /// <summary>
+        /// Register a new User with user role
+        /// </summary>
+        /// <param name="userCreateDTO"></param>
+        /// <returns>The new created User</returns>
         [HttpPost, Route("newuser")]
         public ActionResult<UserReadDTO> RegisterUser(UserCreateDTO userCreateDTO)
         {
@@ -75,13 +79,54 @@ namespace NeutrackAPI.Controllers
 
                 var userModel = _mapper.Map<User>(userCreateDTO);
                 var roleModel = _roleRepository.GetRoleByName(Roles.User.ToString());
-                if(userModel == null)
-                {
-                    throw new ArgumentNullException("User data is required");
-                }
-                if(_userRepository.GetUserByEmail(userModel.Email) != null)
+                var existingUser = _userRepository.GetUserByEmail(userModel.Email);
+                if (existingUser != null && existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
                 {
                     throw new Exception("Email has already been taken");
+                }else if(existingUser != null && !existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
+                {
+                    return StatusCode(403, new { message = "User exists but has a different role" });
+                }
+                userModel.UserRoles = new List<UserRole>
+                {
+                    new UserRole
+                    {
+                        User = userModel,
+                        Role = roleModel,
+                    },
+                };
+                _userRepository.CreateUser(userModel);
+                _userRepository.SaveChanges();
+                var userReadDTO = _mapper.Map<UserReadDTO>(userModel);
+                return CreatedAtRoute(nameof(GetUserById), new { userReadDTO.Id }, userReadDTO);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Register a new User with user role
+        /// </summary>
+        /// <param name="userCreateDTO"></param>
+        /// <returns>The new created User</returns>
+        [HttpPost, Route("newnutritionist")]
+        public ActionResult<UserReadDTO> RegisterNutritionist(UserCreateDTO userCreateDTO)
+        {
+            try
+            {
+                var userModel = _mapper.Map<User>(userCreateDTO);
+                var roleModel = _roleRepository.GetRoleByName(Roles.Nutritionist.ToString());
+                var existingUser = _userRepository.GetUserByEmail(userModel.Email);
+                if (existingUser != null && existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
+                {
+                    throw new Exception("Email has already been taken");
+                }
+                else if (existingUser != null && !existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
+                {
+                    return StatusCode(403, new { message = "User exists but has a different role" });
                 }
                 userModel.UserRoles = new List<UserRole>
                 {
