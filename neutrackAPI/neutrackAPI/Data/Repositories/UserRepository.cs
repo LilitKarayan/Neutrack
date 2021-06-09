@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
+using NeutrackAPI.DTOs;
 using NeutrackAPI.Models;
 
 namespace NeutrackAPI.Data
@@ -14,6 +15,14 @@ namespace NeutrackAPI.Data
         public UserRepository(NeutrackContext context)
         {
             _context = context;
+        }
+
+        public User AuthenticateUser(AuthRequestDTO userAuthDTO)
+        {
+            return _context.Users
+                .Include(x => x.UserRoles)
+                .ThenInclude(xr => xr.Role)
+                .FirstOrDefault(x => x.Email.Equals(userAuthDTO.Email) && x.Password.Equals(userAuthDTO.Password));
         }
 
         public void CreateUser(User user)

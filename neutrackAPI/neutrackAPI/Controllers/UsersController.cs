@@ -159,5 +159,27 @@ namespace NeutrackAPI.Controllers
         public void Delete(int id)
         {
         }
+
+        /// <summary>
+        /// Authenticates User
+        /// </summary>
+        /// <param name="userAuth"></param>
+        /// <returns></returns>
+        [HttpPost, Route("login")]
+        public ActionResult<UserReadDTO> Login(AuthRequestDTO userAuth)
+        {
+            try
+            {
+                var user = _userRepository.AuthenticateUser(userAuth);
+                if(user == null)
+                {
+                    return NotFound(new { Error = "User not found" });
+                }
+                return Ok(_mapper.Map<UserReadDTO>(user));
+            }
+            catch(Exception ex){
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
     }
 }
