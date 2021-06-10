@@ -12,7 +12,7 @@ namespace NeutrackAPI.Data
         User GetUserById(int id);
         User GetUserByEmail(string email);
         void CreateUser(User user);
-        User AuthenticateUser(AuthRequestDTO userAuthDTO);
+        AuthResponseDTO AuthenticateUser(AuthRequestDTO userAuthDTO);
         
     }
 }

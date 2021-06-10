@@ -1,10 +1,10 @@
 ﻿using System;
 namespace NeutrackAPI.Helpers
 {
-    public enum Roles
+    public static class Roles
     {
-        Admin,
-        User,
-        Nutritionist
+        public const string Admin = "Admin";
+        public const string User = "User";
+        public const string Nutritionist = "Nutritionist";
     }
 }

@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "PRXMeUtpcNsEPJv1x8ba9l8uI8X7gjoRjl2e51SXW3kl7JlnebFrxVICsw7BlDziETYS1FXGEbhs+uqZJdTX2w==",
+  "dgSpecHash": "UF1QdbUG/LZ4T00AcTtYw8RTMSEQv7JMBSezMmMRcmMm+HGOnuq+ueUsHxUlh3ZX/j2B8fdwbZ45F4kYCZ1paw==",
   "success": true,
   "projectFilePath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
   "expectedPackageFiles": [
     "/Users/mide/.nuget/packages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
     "/Users/mide/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.1.1/automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "/Users/mide/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
+    "/Users/mide/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.0/microsoft.aspnetcore.authentication.jwtbearer.3.1.0.nupkg.sha512",
     "/Users/mide/.nuget/packages/microsoft.aspnetcore.jsonpatch/3.0.0/microsoft.aspnetcore.jsonpatch.3.0.0.nupkg.sha512",
     "/Users/mide/.nuget/packages/microsoft.aspnetcore.mvc.newtonsoftjson/3.0.0/microsoft.aspnetcore.mvc.newtonsoftjson.3.0.0.nupkg.sha512",
     "/Users/mide/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",

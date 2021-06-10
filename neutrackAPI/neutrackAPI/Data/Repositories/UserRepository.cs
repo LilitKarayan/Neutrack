@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using NeutrackAPI.DTOs;
+using NeutrackAPI.Helpers;
 using NeutrackAPI.Models;
 
 namespace NeutrackAPI.Data
@@ -11,20 +17,61 @@ namespace NeutrackAPI.Data
     public class UserRepository: IUserRepository
     {
         private readonly NeutrackContext _context;
+        private readonly AppSettings _appSettings;
 
-        public UserRepository(NeutrackContext context)
+        /// <summary>
+        /// Sets the DB Context
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="appSettings"></param>
+        public UserRepository(NeutrackContext context, IOptions<AppSettings> appSettings)
         {
             _context = context;
+            _appSettings = appSettings.Value;
+
         }
 
-        public User AuthenticateUser(AuthRequestDTO userAuthDTO)
+        /// <summary>
+        /// Authenticates the User and generates a token for accessing the API
+        /// </summary>
+        /// <param name="userAuthDTO"></param>
+        /// <returns></returns>
+        public AuthResponseDTO AuthenticateUser(AuthRequestDTO userAuthDTO)
         {
-            return _context.Users
+            var _user = _context.Users
                 .Include(x => x.UserRoles)
                 .ThenInclude(xr => xr.Role)
-                .FirstOrDefault(x => x.Email.Equals(userAuthDTO.Email) && x.Password.Equals(userAuthDTO.Password));
+                .FirstOrDefault(x => x.Email == userAuthDTO.Email && x.Password == userAuthDTO.Password);
+
+            // return null if user not found
+            if (_user == null) return null;
+
+            // authentication successful so generate jwt token
+            var token = GenerateJwtToken(_user);
+            return new AuthResponseDTO(_user, token);
         }
 
+        private string GenerateJwtToken(User user)
+        {
+            var claims = user.UserRoles.Select(x => new Claim(ClaimTypes.Role, x.Role.Name)).ToList();
+            claims.Add(new Claim(ClaimTypes.Name, user.Id.ToString()));
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                //Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+        /// <summary>
+        /// Creates a new User
+        /// </summary>
+        /// <param name="user"></param>
         public void CreateUser(User user)
         {
             if(user == null)
@@ -34,21 +81,39 @@ namespace NeutrackAPI.Data
             _context.Add(user);
         }
 
+        /// <summary>
+        /// Gets a list of all users
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<User> GetAllUsers()
         {
             return _context.Users.Where(u => u.IsActive).Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
         }
 
+        /// <summary>
+        /// Gets a user by email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public User GetUserByEmail(string email)
         {
             return _context.Users.Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Email.Equals(email));
         }
 
+        /// <summary>
+        /// Gets a user by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public User GetUserById(int id)
         {
             return _context.Users.Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Id.Equals(id));
         }
 
+        /// <summary>
+        /// Method to save changes to the DB
+        /// </summary>
+        /// <returns></returns>
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
