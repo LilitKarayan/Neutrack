@@ -198,10 +198,35 @@ namespace NeutrackAPI.Controllers
             }
         }
 
-        // PUT api/values/5
+        /// <summary>
+        /// Allows a user to update their information
+        /// </summary>
+        /// <param name="userUpdate"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<UserReadDTO> UpdateUser(int id, UserCreateDTO userUpdate)
         {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                if (id != currentUserId)
+                {
+                    return Forbid();
+                }
+                var userItem = _userRepository.GetUserById(id);
+                if (userItem == null)
+                {
+                    return NotFound();
+                }
+                _mapper.Map(userUpdate, userItem);
+                _userRepository.UpdateUser(userItem);
+                _userRepository.SaveChanges();
+                return Ok(_mapper.Map<UserReadDTO>(userItem));
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message});
+            }
         }
 
         // DELETE api/values/5
