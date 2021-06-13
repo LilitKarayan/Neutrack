@@ -1,0 +1,9 @@
+.content {
+    /* background-color: aquamarine; */
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
+    overflow: auto;
+    height: 550px;
+    /* height: calc(100% - 50px); */
+}
