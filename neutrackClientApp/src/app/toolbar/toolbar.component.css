@@ -8,7 +8,6 @@ a.sidenav-button {
     margin: 0 20px 0 30px;
     font-size: 25px;
     transform: all .3s ease 0s;
-
 }
 
 a.sidenav-button:hover {
@@ -16,7 +15,7 @@ a.sidenav-button:hover {
     transition: all .3s ease 0s;
 }
 
-.navbar .photo {
+.photo {
     display: inline-block;
     height: 30px;
     width: 30px;
@@ -25,6 +24,11 @@ a.sidenav-button:hover {
     overflow: hidden;
 }
 
-.navbar .photo imp {
+/* .photo imp {
     width: 100%;
+} */
+
+.logo-img img {
+    width: 15%;
+    height: 15%;
 }
