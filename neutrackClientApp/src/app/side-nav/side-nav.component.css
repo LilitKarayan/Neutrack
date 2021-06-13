@@ -3,7 +3,7 @@
     background: linear-gradient(0deg,#ec250d 0,#fd5d93 100%); */
     background-color: #095040;
     background: linear-gradient(0deg,#095040 0, #109374 100%);
-    height: 100%;
+    height: calc(100% - 10px);
     width: 200px;
     display: block;
     /* box-shadow: 0 0 45px 0 rgba(0, 0, 0, .6); */
