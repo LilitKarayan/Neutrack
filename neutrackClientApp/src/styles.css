@@ -1,7 +1,7 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-html, body {height: 100%;}
+html, body {height: 100%; width: 100%;}
 
 body {
     margin:  0;
@@ -11,5 +11,5 @@ body {
     line-height: 1.5;
     color: #525f7f;
     text-align: left;
-    background-color: #1e1e2f;
+    /* background-color: #1e1e2f; */
 }
