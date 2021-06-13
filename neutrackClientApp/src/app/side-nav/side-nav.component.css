@@ -21,13 +21,13 @@
     margin: 10px 15px 0;
     border-radius: 30px;
     color: rgba(255, 255, 255, 0.892);
-    font-family: 'Brush Script MT', cursive;
+    font-family: 'Times', serif;
     width: 200px;
     display: block;
     text-decoration: none;
     position: relative;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 100;
     padding: 10px 15px;
     line-height: 1.5rem;

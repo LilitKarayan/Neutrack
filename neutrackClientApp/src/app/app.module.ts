@@ -16,6 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     CalculatorComponent,
     AccountComponent,
     SideNavComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
