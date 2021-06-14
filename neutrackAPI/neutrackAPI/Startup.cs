@@ -28,7 +28,9 @@ namespace NeutrackAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<NeutrackContext>(opt => opt.UseSqlServer(
-                Configuration.GetConnectionString("NeutrackDBConnection")));
+               Configuration.GetConnectionString("NeutrackDBConnection")));
+            // services.AddDbContext<NeutrackContext>(opt => opt.UseSqlServer(
+            //     Configuration.GetConnectionString("NeutrackDBTestConnection")));
             services.AddCors();
             services.AddControllers()
                     .AddNewtonsoftJson(options =>
