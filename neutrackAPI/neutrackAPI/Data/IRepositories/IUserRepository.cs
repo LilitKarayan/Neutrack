@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NeutrackAPI.DTOs;
 using NeutrackAPI.Models;
 
 namespace NeutrackAPI.Data
@@ -11,6 +12,8 @@ namespace NeutrackAPI.Data
         User GetUserById(int id);
         User GetUserByEmail(string email);
         void CreateUser(User user);
+        AuthResponseDTO AuthenticateUser(AuthRequestDTO userAuthDTO);
+        void UpdateUser(User user);
         
     }
 }

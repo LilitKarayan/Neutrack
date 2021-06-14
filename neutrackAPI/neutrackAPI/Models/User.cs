@@ -13,7 +13,6 @@ namespace NeutrackAPI.Models
         [MaxLength(60)]
         public string Email { get; set; }
 
-        [Required]
         [MaxLength(256)]
         public string Password { get; set; }
 
