@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MatSidenavModule,
     BrowserAnimationsModule,
     MatSliderModule,
+    MatTableModule,
+    MatPaginatorModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
