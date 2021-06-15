@@ -1,4 +1,4 @@
-.dashboardWindow {
+.dashboardComponent{
     /* background-color: aquamarine; */
     margin: 5px;
     border-radius: 5px;
@@ -17,10 +17,8 @@ h2 {
 }
 table {
     width: 80%;
-    /* border: 1px solid black; */
     margin-left: auto;
     margin-right: auto;
-
     border-spacing: 1; 
     border-collapse: collapse; 
     background:white;
