@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './nutritionist/account/account.component';
 import { CalculatorComponent } from './nutritionist/calculator/calculator.component';
 import { DashboardComponent } from './nutritionist/dashboard/dashboard.component';
 import { PatientsComponent } from './nutritionist/patients/patients.component';
 import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
+
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -15,7 +17,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+            CommonModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

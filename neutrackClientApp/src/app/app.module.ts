@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -21,6 +20,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -37,14 +39,16 @@ import { AddPatientComponent } from './nutritionist/add-patient/add-patient.comp
     AddPatientComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     MatSidenavModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
+    RouterModule,
+    CommonModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
