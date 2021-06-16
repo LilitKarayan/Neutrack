@@ -1,9 +1,12 @@
-.patientsComponent {
+
+.patientsComponent{
+    /* background-color: aquamarine; */
     margin: 5px;
     border-radius: 5px;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
     overflow: auto;
     height: 550px;
+    /* height: calc(100% - 50px); */
 }
 
 .patientsContent {
@@ -12,6 +15,27 @@
 
 h2 {
     color: #084a3a;
+}
+table {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 1; 
+    border-collapse: collapse; 
+    background:white;
+    border-radius:6px;
+    overflow:hidden;
+    max-width:800px;
+    position:relative;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
+}
+
+table th { 
+    background: #FFED86;
+}
+
+table td { 
+    background: white;
 }
 
 mat-form-field  input {
@@ -26,64 +50,10 @@ mat-form-field  input:active {
     border: none;
 }
 
-table {
-    width: 80%;
-    margin: 0 auto 20px auto;
-    border-spacing: 1; 
-    border-collapse: collapse; 
-    background:white;
-    border-radius:6px;
-    overflow:hidden;
-    max-width:800px;
-    position:relative;
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
-  }
-
-  table th { 
-    background: #FFED86;
+td, th {
+    width: 5%;
 }
-  
-  tr.example-detail-row {
-    height: 0;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: whitesmoke;
-    background: rgb(255, 237, 134, .3);
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
-  
-  .example-element-row td {
-    border-bottom-width: 0;
-  }
-  
-  .example-element-detail {
-    overflow: hidden;
-    display: flex;
-  }
-  
-  .patient-picture {
-    min-width: 100px;
-    border: 2px solid black;
-    padding: 8px;
-    font-weight: lighter;
-    margin: 8px 0;
-    height: 104px;
-  }
-  
-  .example-element-symbol {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: normal;
-  }
-  
-  .patient-info {
-    padding: 16px;
-  }
-  
-  .example-element-description-attribution {
-    opacity: 0.5;
-  }
+
+mat-paginator {
+    margin: 15px 80px 0 0;
+}
