@@ -1,0 +1,70 @@
+
+.patientsComponent{
+    /* background-color: aquamarine; */
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
+    overflow: auto;
+    height: 550px;
+    /* height: calc(100% - 50px); */
+}
+
+.patientsContent {
+    margin: 30px;
+}
+
+.addPatient {
+    float: right;
+    margin: 0 100px 30px 0;
+    background-color: #109374;
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 20%;
+}
+
+h2 {
+    color: #084a3a;
+}
+
+table {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 1; 
+    border-collapse: collapse; 
+    background:white;
+    border-radius:6px;
+    overflow:hidden;
+    max-width:800px;
+    position:relative;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
+}
+
+table th { 
+    background: #FFED86;
+    background: linear-gradient(0deg,#fafaf7 0, #FFED86 100%);
+}
+
+table td { 
+    background: white;
+}
+
+mat-form-field  input {
+    border: none;
+    border-bottom: 1px solid #919191;
+    width: 80%;
+    font-size: 14px;
+    margin: 0 0 5px 88px;   
+}
+
+mat-form-field  input:active {
+    border: none;
+}
+
+td, th {
+    width: 5%;
+}
+
+mat-paginator {
+    margin: 15px 80px 0 0;
+}
