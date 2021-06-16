@@ -41,6 +41,7 @@ table {
 
   table th { 
     background: #FFED86;
+    background: linear-gradient(0deg,#fafaf7 0, #FFED86 100%);
 }
   
   tr.example-detail-row {
@@ -49,7 +50,7 @@ table {
   
   tr.example-element-row:not(.example-expanded-row):hover {
     background: whitesmoke;
-    background: rgb(255, 237, 134, .3);
+    background: rgb(252,243,189, .5);
   }
   
   tr.example-element-row:not(.example-expanded-row):active {

@@ -2,6 +2,8 @@
 
     <div class="patientsContent">
 
+        <button class="addPatient" (click)="goToPage('add-patient')">Add Patient</button>           
+
         <h2>List of patients</h2>
         <mat-form-field>
             <!-- <mat-label>Filter: </mat-label> -->
@@ -46,9 +48,6 @@
               [pageSizeOptions]="[5, 10, 25, 100]">
             </mat-paginator>
         </div>
-    </div>
-
-    
-      
+    </div>    
 </div>
 

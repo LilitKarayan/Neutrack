@@ -19,6 +19,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AccountComponent,
     SideNavComponent,
     ToolbarComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    AddPatientComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSliderModule,
     MatTableModule,
     MatPaginatorModule,
+    MatButtonModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
