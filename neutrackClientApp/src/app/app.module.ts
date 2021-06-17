@@ -23,10 +23,10 @@ import { AddPatientComponent } from './nutritionist/add-patient/add-patient.comp
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
 import { UserDataService } from './services/user-data.service';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './forms/login/login.component';
 
 @NgModule({
   declarations: [
