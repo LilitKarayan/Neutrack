@@ -9,7 +9,7 @@ import { LoginService } from 'src/app/services/loginService/login.service';
 export class LoginComponent implements OnInit {
   // public initialObject: object;
 
-  constructor(private service: LoginService) { }
+  constructor(public service: LoginService) { }
 
   ngOnInit(): void {
     // this.initialObject = {};
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   }
 
   clear() {
-    this.service.form.reset;
+    console.log("working");
+    this.service.form.reset('');
     this.service.initializeForm;
   }
 

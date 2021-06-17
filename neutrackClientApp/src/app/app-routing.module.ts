@@ -6,6 +6,8 @@ import { CalculatorComponent } from './nutritionist/calculator/calculator.compon
 import { DashboardComponent } from './nutritionist/dashboard/dashboard.component';
 import { PatientsComponent } from './nutritionist/patients/patients.component';
 import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
+import { SignUpComponent } from './forms/sign-up/sign-up.component';
+import { LoginComponent } from './forms/login/login.component';
 
 
 const routes: Routes = [
@@ -13,7 +15,8 @@ const routes: Routes = [
   {path: 'account', component: AccountComponent},
   {path: 'calculator', component: CalculatorComponent},
   {path: 'patients', component: PatientsComponent},
-  {path: 'add-patient', component: AddPatientComponent}
+  {path: 'add-patient', component: AddPatientComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

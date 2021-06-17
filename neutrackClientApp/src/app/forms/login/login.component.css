@@ -1,8 +1,33 @@
+mat-card {
+  max-width: 600px;
+  margin: 2em auto;
+  text-align: center;
+  max-height: 600px;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+input {
+  padding: 6px;
+}
+
 form.normal-form {
   margin: 10px;
 }
 
-form.button-row button {
+.normal-full-width{
+  width: 80%;
+}
+
+.theContainer {
+  width: 100%;
+  padding: 5%;
+}
+
+.theContainer > * {
+  width: 100%;
+}
+
+form button {
   margin: 5px;
 }
 

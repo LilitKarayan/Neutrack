@@ -1,24 +1,58 @@
-<form [formGroup]="service.form" class="normal-form">
-  <mat-form-field>
-    <mat-label>Email*</mat-label>
-    <input formControlName="email" matInput >
-    <mat-error>Invalid email address</mat-error>
-  </mat-form-field>
+<mat-card>
+  <mat-card-content>
+    <div class="header">
+      <h3>Login</h3>
+    </div>
 
-  <mat-form-field>
-    <mat-label>Password*</mat-label>
-    <input formControlName="password" matInput >
-    <mat-error *ngIf="service.form.controls['password'].errors?.required">Password is mandatory</mat-error>
-    <mat-error *ngIf="service.form.controls['password'].errors?.minLength">Minimum length not met</mat-error>
-  </mat-form-field>
+    <form [formGroup]="service.form" class="normal-form">
+      <div class="theContainer">
+        <mat-label>*Email</mat-label>
+        <mat-form-field class="normal-full-width" appearance="outline">
+          <input formControlName="email" matInput />
+          <mat-error *ngIf="service.form.controls['email'].errors?.email">Invalid email address</mat-error>
+          <mat-error *ngIf="service.form.controls['email'].errors?.required"
+          >Email is mandatory</mat-error
+        >
+        </mat-form-field>
+      </div>
 
-  <div class="button-row">
-    <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
-    <button mat-raised-button color="warn" (click)="clear()">Clear</button>
-  </div>
-</form>
+      <div class="theContainer">
+        <mat-label>*Password: minimum length of 5 characters</mat-label>
+        <mat-form-field class="normal-full-width" appearance="outline">
+          <input formControlName="password" matInput type="password" minlength="5"/>
+          <mat-error *ngIf="service.form.controls['password'].errors?.required"
+            >Password is mandatory</mat-error
+          >
+          <!-- <mat-error *ngIf="service.form.controls['password'].errors?.minLength"
+            > Password needs minimum length of 6 characters</mat-error
+          > -->
+        </mat-form-field>
+      </div>
 
+      <div>
+        <button
+          class="button-row"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="service.form.controls['email'].invalid || service.form.controls['password'].invalid || service.form.controls['password'].errors?.minLength"
+        >
+          Submit
+        </button>
+        <button
+          class="button-row"
+          mat-raised-button
+          color="warn"
+          (click)="clear()"
+        >
+          Clear
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
 
+<!--
 <div id="login">
   <form #loginForm="ngForm">
     <h1>Login</h1>
@@ -83,3 +117,4 @@
     </div>
   </form>
 </div>
+-->

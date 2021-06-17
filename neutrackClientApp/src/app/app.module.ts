@@ -21,7 +21,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -59,6 +62,7 @@ import { LoginService } from './services/loginService/login.service';
     MatButtonModule,
     MatInputModule,
     MatGridListModule,
+    MatCardModule,
     MatFormFieldModule,
     RouterModule,
     CommonModule,
