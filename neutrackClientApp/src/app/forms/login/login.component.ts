@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/loginService/login.service';
 
 @Component({
   selector: 'app-login',
@@ -6,18 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public initialObject: object;
+  // public initialObject: object;
 
-  constructor() { }
+  constructor(private service: LoginService) { }
 
   ngOnInit(): void {
-    this.initialObject = {};
-    this.initializeValues();
+    // this.initialObject = {};
+    // this.initializeValues();
   }
 
-  initializeValues() {
-    this.initialObject['email'] = "";
-    this.initialObject['password'] = "";
+  clear() {
+    this.service.form.reset;
+    this.service.initializeForm;
   }
+
+  // initializeValues() {
+  //   this.initialObject['email'] = "";
+  //   this.initialObject['password'] = "";
+  // }
 
 }

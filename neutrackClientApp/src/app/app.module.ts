@@ -19,14 +19,18 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDataService } from './services/user-data.service';
 import { LoginComponent } from './forms/login/login.component';
+import { LoginService } from './services/loginService/login.service';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,9 @@ import { LoginComponent } from './forms/login/login.component';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatInputModule,
+    MatGridListModule,
+    MatFormFieldModule,
     RouterModule,
     CommonModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -61,9 +68,11 @@ import { LoginComponent } from './forms/login/login.component';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [UserDataService],
+  providers: [UserDataService,
+    LoginService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

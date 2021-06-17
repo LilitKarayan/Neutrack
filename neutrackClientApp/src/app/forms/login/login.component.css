@@ -1,3 +1,12 @@
+form.normal-form {
+  margin: 10px;
+}
+
+form.button-row button {
+  margin: 5px;
+}
+
+/*
 #login {
     padding-top: 25px;
     min-height: 100vh;
@@ -27,3 +36,4 @@ label {
   font-family: sans-serif;
   font-weight: bold;
 }
+*/
