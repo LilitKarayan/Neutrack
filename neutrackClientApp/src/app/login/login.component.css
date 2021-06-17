@@ -1,0 +1,29 @@
+#login {
+    padding-top: 25px;
+    min-height: 100vh;
+    background-image: url("../../assets/images/neutrackLogin3.jpg");
+    background-position: center;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  padding: 10px;
+  width: 600px;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
+  margin: 0 auto;
+  background-color: whitesmoke;
+}
+
+form,
+label {
+  font-family: sans-serif;
+  font-weight: bold;
+}

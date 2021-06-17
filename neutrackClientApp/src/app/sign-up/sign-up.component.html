@@ -1,0 +1,351 @@
+<div *ngIf="initialObject['selectedRole'].length === 0">
+  <h1>Please select which role you would like to sign up as</h1>
+
+  <form>
+    <div class="form-group">
+      <div *ngFor="let role of theRoles">
+        <label for="role">{{ role }}</label>
+        <input
+          type="radio"
+          name="role"
+          value="{{ role }}"
+          (change)="radioChangeHandlerRole($event)"
+          class="form-control"
+        />
+      </div>
+      <br />
+    </div>
+    <div
+      *ngIf="initialObject['selectedRole'] === ''"
+      class="alert alert-info"
+    >
+      Please select a role
+    </div>
+  </form>
+</div>
+
+<div id="signingUp" *ngIf="initialObject['selectedRole'].length > 0">
+  <form #userForm="ngForm" (ngSubmit)="signUp()">
+    <h1 id="signingUpHeader">{{ initialObject['selectedRole'] }} Sign Up</h1>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        #emailRef="ngModel"
+        required
+        class="form-control"
+        name="email"
+        [(ngModel)]="initialObject['email']"
+      />
+      <div
+        *ngIf="
+          emailRef.errors?.required &&
+          emailRef.invalid &&
+          (emailRef.dirty || emailRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        Email is required
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="text"
+        #passwordRef="ngModel"
+        required
+        class="form-control"
+        name="password"
+        [(ngModel)]="initialObject['password']"
+      />
+      <div
+        *ngIf="
+          passwordRef.errors?.required &&
+          passwordRef.invalid &&
+          (passwordRef.dirty || passwordRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        Password is required.
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        #firstNameRef="ngModel"
+        required
+        class="form-control"
+        name="firstName"
+        [(ngModel)]="initialObject['firstName']"
+      />
+      <div
+        *ngIf="
+          firstNameRef.errors?.required &&
+          firstNameRef.invalid &&
+          (firstNameRef.dirty || firstNameRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        First Name is required.
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        #lastNameRef="ngModel"
+        required
+        class="form-control"
+        name="lastName"
+        [(ngModel)]="initialObject['lastName']"
+      />
+      <div
+        *ngIf="
+          lastNameRef.errors?.required &&
+          lastNameRef.invalid &&
+          (lastNameRef.dirty || lastNameRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        Last Name is required.
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth</label>
+      <input
+        type="date"
+        min="1900-01-01"
+        max="2021-06-10"
+        #dobRef="ngModel"
+        required
+        class="form-control"
+        name="initialObject['dateOfBirth']"
+        ngModel
+      />
+      <div
+        *ngIf="
+          dobRef.errors?.required &&
+          dobRef.invalid &&
+          (dobRef.dirty || dobRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        Date of Birth is required.
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input
+        type="tel"
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        placeholder="123-456-7890"
+        #phoneNumberRef="ngModel"
+        required
+        class="form-control"
+        name="phoneNumber"
+        [(ngModel)]="initialObject['phoneNumber']"
+      />
+      <small>Format: 123-456-7890</small>
+      <div
+        *ngIf="
+          phoneNumberRef.errors?.required &&
+          phoneNumberRef.invalid &&
+          (phoneNumberRef.dirty || phoneNumberRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        Phone Number is required.
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <div *ngFor="let gender of genders">
+        <label for="gender">{{ gender }}</label>
+        <input
+          type="radio"
+          name="gender"
+          value="{{ gender }}"
+          (change)="radioChangeHandlerGender($event)"
+          class="form-control"
+        />
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <label for="height-feet">Height in Feet</label>
+      <input
+        type="number"
+        min="0"
+        max="8"
+        #heightFeetRef="ngModel"
+        required
+        class="form-control"
+        name="heightFeet"
+        [(ngModel)]="heightFeet"
+      />
+      <small>feet</small>
+      <div
+        *ngIf="
+          heightFeetRef.errors?.required &&
+          heightFeetRef.invalid &&
+          (heightFeetRef.dirty || heightFeetRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        Height in feet is required.
+      </div>
+      <br />
+      <label for="height-inches">Height in Inches</label>
+      <input
+        type="number"
+        min="0"
+        max="11"
+        #heightInchesRef="ngModel"
+        required
+        class="form-control"
+        name="heightInches"
+        [(ngModel)]="heightInches"
+      />
+      <small>inches</small>
+      <div
+        *ngIf="
+          heightInchesRef.errors?.required &&
+          heightInchesRef.invalid &&
+          (heightInchesRef.dirty || heightInchesRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        Height in inches is required.
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <label for="weight">Weight</label>
+      <input
+        type="number"
+        min="0"
+        max="600"
+        #weightRef="ngModel"
+        required
+        class="form-control"
+        name="weight"
+        [(ngModel)]="initialObject['weight']"
+      />
+      <div
+        *ngIf="
+          weightRef.errors?.required &&
+          weightRef.invalid &&
+          (weightRef.dirty || weightRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        Weight is required.
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <label for="dynamic">{{ userDynamicInfo }}</label
+      ><br />
+      <input
+        type="number"
+        min="0"
+        max="100"
+        name="dynamic"
+        #userDynamicRef="ngModel"
+        required
+        class="form-control"
+        [(ngModel)]="initialObject['yearsOfExperience']"
+      />
+      <div
+        *ngIf="
+          userDynamicRef.errors?.required &&
+          userDynamicRef.invalid &&
+          (userDynamicRef.dirty || userDynamicRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        {{ userDynamicInfo }} is required.
+      </div>
+      <br />
+    </div>
+
+    <div class="form-group">
+      <label for="goal">Goal</label>
+      <textarea
+        cols="30"
+        rows="8"
+        class="form-control"
+        name="goal"
+        #goalRef="ngModel"
+        required
+        [(ngModel)]="initialObject['goal']"
+      ></textarea>
+      <div
+        *ngIf="
+          goalRef.errors?.required &&
+          goalRef.invalid &&
+          (goalRef.dirty || goalRef.touched)
+        "
+        class="alert alert-danger"
+      >
+        Goal is required.
+      </div>
+      <br />
+    </div>
+
+    <button
+      [disabled]="
+        emailRef.invalid ||
+        passwordRef.invalid ||
+        firstNameRef.invalid ||
+        lastNameRef.invalid ||
+        dobRef.invalid ||
+        phoneNumberRef.invalid ||
+        initialObject['selectedGender'] === '' ||
+        heightFeetRef.invalid ||
+        heightInchesRef.invalid ||
+        weightRef.invalid ||
+        userDynamicRef.invalid ||
+        goalRef.invalid
+      "
+      type="submit"
+      class="btn btn-primary"
+    >
+      Sign Up
+    </button>
+    <div
+      *ngIf="
+        emailRef.invalid ||
+        passwordRef.invalid ||
+        firstNameRef.invalid ||
+        lastNameRef.invalid ||
+        dobRef.invalid ||
+        phoneNumberRef.invalid ||
+        initialObject['selectedGender'] === '' ||
+        heightFeetRef.invalid ||
+        heightInchesRef.invalid ||
+        weightRef.invalid ||
+        userDynamicRef.invalid ||
+        goalRef.invalid
+      "
+      class="alert alert-danger"
+    >
+      Please fill out all fields before proceeding
+    </div>
+  </form>
+</div>

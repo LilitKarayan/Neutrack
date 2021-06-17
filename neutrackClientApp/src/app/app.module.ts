@@ -23,6 +23,10 @@ import { AddPatientComponent } from './nutritionist/add-patient/add-patient.comp
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { FormsModule } from '@angular/forms';
+import { UserDataService } from './services/user-data.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { CommonModule } from '@angular/common';
     SideNavComponent,
     ToolbarComponent,
     WelcomeComponent,
-    AddPatientComponent
+    AddPatientComponent,
+    SignUpComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,
@@ -54,9 +60,10 @@ import { CommonModule } from '@angular/common';
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    FormsModule
   ],
-  providers: [],
+  providers: [UserDataService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
