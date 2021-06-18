@@ -24,12 +24,13 @@ export class SignUpComponent implements OnInit {
 
   clear() {
     this.signUpService.form.reset('');
-    this.signUpService.initializeForm;
+    //this.signUpService.initializeForm;
   }
 
   
   signUp() {
-    
+    this.signUpService.generateNutritionist();
+    console.log(this.signUpService.getNutritionist());
   }
   // ngOnInit(): void {
   //   this.initialObject = {};
