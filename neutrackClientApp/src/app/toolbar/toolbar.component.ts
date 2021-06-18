@@ -16,8 +16,8 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.testLogin = {
-      email: 'vinadeyems@gmail.com',
-      password: 'Ifem!de051616'
+      email: '',
+      password: ''
     }
   }
 
