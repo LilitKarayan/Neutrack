@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "esModuleInterop": true,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "strictPropertyInitialization": false,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -16,6 +16,13 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
+    "paths": {
+      "@services/*": ["app/services/*"],
+      "@models": ["app/shared/models/index"],
+      "@env": ["environments/environment"],
+      "@api-config": ["config/api.config"],
+      "@assets/*": ["assets/*"]
+    },
     "module": "es2020",
     "lib": [
       "es2018",

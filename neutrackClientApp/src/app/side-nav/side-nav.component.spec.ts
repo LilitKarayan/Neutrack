@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import { SideNavComponent } from './side-nav.component';
-
+import { RouterTestingModule } from '@angular/router/testing';
 describe('SideNavComponent', () => {
+  let fixture;
   let component: SideNavComponent;
-  let fixture: ComponentFixture<SideNavComponent>;
+  beforeAll(() => {
+    TestBed.initTestEnvironment( BrowserDynamicTestingModule, platformBrowserDynamicTesting() );
+  })
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [ SideNavComponent ]
     })
     .compileComponents();
   });
 
-  beforeEach(() => {
+  it('should create', () => {
     fixture = TestBed.createComponent(SideNavComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

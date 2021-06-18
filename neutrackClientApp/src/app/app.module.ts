@@ -36,7 +36,7 @@ import { CommonModule } from '@angular/common';
     SideNavComponent,
     ToolbarComponent,
     WelcomeComponent,
-    AddPatientComponent
+    AddPatientComponent,
   ],
   imports: [
     AppRoutingModule,
