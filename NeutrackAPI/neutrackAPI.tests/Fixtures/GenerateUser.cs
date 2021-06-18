@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using NeutrackAPI.Models;
 
 namespace NeutrackAPI.tests.Fixtures
@@ -56,6 +60,24 @@ namespace NeutrackAPI.tests.Fixtures
             }
 
             return lowerCase ? builder.ToString().ToLower() : builder.ToString();
+        }
+
+        public static string GenerateToken(User user, string[] roles)
+        {
+            var secret = "UWG-TESTING-SECRETS";
+            var claims = roles.Select(x => new Claim(ClaimTypes.Role, x)).ToList();
+            claims.Add(new Claim(ClaimTypes.Name, user.Id.ToString()));
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                //Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }
