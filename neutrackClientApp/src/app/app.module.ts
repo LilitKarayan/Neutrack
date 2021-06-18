@@ -22,6 +22,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DialogComponent } from './nutritionist/patients/dialog/dialog.component';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -36,7 +39,8 @@ import { CommonModule } from '@angular/common';
     SideNavComponent,
     ToolbarComponent,
     WelcomeComponent,
-    AddPatientComponent
+    AddPatientComponent,
+    DialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -47,7 +51,9 @@ import { CommonModule } from '@angular/common';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatDialogModule,
     RouterModule,
+    FormsModule,
     CommonModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
