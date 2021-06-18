@@ -5,7 +5,7 @@ export const environment = {
   env: 'LOCAL',
   production: false,
   apiBaseUrl: 'https://neutrackapi.azurewebsites.net/api',
-  apiLocalBaseUrl: 'http://localhost:5000/api',
+  apiLocalBaseUrl: 'https://localhost:5001/api',
 };
 export function useTestApi() {
   environment.env = 'TEST';
