@@ -1,22 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import { ToolbarComponent } from './toolbar.component';
 
 describe('ToolbarComponent', () => {
+  let fixture;
   let component: ToolbarComponent;
-  let fixture: ComponentFixture<ToolbarComponent>;
+  beforeAll(() => {
+    TestBed.initTestEnvironment( BrowserDynamicTestingModule, platformBrowserDynamicTesting() );
+  })
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ToolbarComponent ]
     })
     .compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(ToolbarComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

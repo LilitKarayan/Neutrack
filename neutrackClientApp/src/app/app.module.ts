@@ -22,6 +22,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HttpErrorHandlerService } from './services/http-error-handler.service';
+import { AuthenticationService } from '@services/authentication.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from '@services/message.service';
 
 
 @NgModule({
@@ -36,7 +40,7 @@ import { CommonModule } from '@angular/common';
     SideNavComponent,
     ToolbarComponent,
     WelcomeComponent,
-    AddPatientComponent
+    AddPatientComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -49,6 +53,7 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     RouterModule,
     CommonModule,
+    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -56,7 +61,7 @@ import { CommonModule } from '@angular/common';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [],
+  providers: [AuthenticationService, HttpErrorHandlerService, MessageService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
