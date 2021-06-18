@@ -4,9 +4,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
-export class SignUpNutritionistServiceService {
+export class SignUpNutritionistService {
+  public maxDate: Date;
+  public genders: string[];
 
-  constructor() { }
+  constructor() {
+    const currentYear = new Date().getFullYear();
+    this.maxDate = new Date(currentYear - 18, 12, 31);
+    this.genders = ['Male', 'Female', "Other"];
+   }
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),

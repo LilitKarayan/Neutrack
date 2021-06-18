@@ -20,8 +20,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -34,6 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDataService } from './services/user-data.service';
 import { LoginComponent } from './forms/login/login.component';
 import { LoginService } from './services/loginService/login.service';
+import { SignUpNutritionistService } from './services/signUpNutritionistService/sign-up-nutritionist.service';
+
 
 @NgModule({
   declarations: [
@@ -61,9 +65,11 @@ import { LoginService } from './services/loginService/login.service';
     MatPaginatorModule,
     MatButtonModule,
     MatInputModule,
-    MatGridListModule,
     MatCardModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
     RouterModule,
     CommonModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -76,7 +82,8 @@ import { LoginService } from './services/loginService/login.service';
     ReactiveFormsModule
   ],
   providers: [UserDataService,
-    LoginService],
+    LoginService,
+    SignUpNutritionistService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
