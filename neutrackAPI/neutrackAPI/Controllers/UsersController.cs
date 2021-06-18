@@ -257,5 +257,28 @@ namespace NeutrackAPI.Controllers
                 return StatusCode(500, new { Error = ex.Message });
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("signedinuser")]
+        public ActionResult<UserReadDTO> GetAuthenticatedUser()
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                var userItem = _userRepository.GetUserById(currentUserId);
+                if (userItem == null)
+                {
+                    return NotFound();
+                }
+                return Ok(_mapper.Map<UserReadDTO>(userItem));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
     }
 }
