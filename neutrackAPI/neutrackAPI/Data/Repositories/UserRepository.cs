@@ -97,7 +97,7 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public User GetUserByEmail(string email)
         {
-            return _context.Users.Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Email.Equals(email));
+            return _context.Users.Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Email.Equals(email) && x.IsActive);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public User GetUserById(int id)
         {
-            return _context.Users.Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Id.Equals(id));
+            return _context.Users.Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Id.Equals(id) && x.IsActive);
         }
 
         /// <summary>
@@ -122,6 +122,25 @@ namespace NeutrackAPI.Data
         public void UpdateUser(User user)
         {
             // do nothing
+        }
+
+        public void DeactivateUser(User user)
+        {
+            _context.UserRoles.RemoveRange(user.UserRoles);
+        }
+
+        public IEnumerable<User> SearchUser(string searchQuery, Role role)
+        {
+            DateTime dob;
+            int yop ;
+            return _context.Users.Where(x => x.IsActive &&
+            (x.FirstName.Contains(searchQuery) ||
+             x.LastName.Contains(searchQuery) ||
+             x.Email.Contains(searchQuery) ||
+             x.DateOfBirth.Equals(DateTime.TryParse(searchQuery, out dob)) ||
+             x.YearsOfExperience.Equals(int.TryParse(searchQuery, out yop)) &&
+             x.UserRoles.Any(x => x.RoleId == role.Id)
+             ));
         }
     }
 }
