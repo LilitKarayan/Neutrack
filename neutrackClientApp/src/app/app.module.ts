@@ -25,7 +25,16 @@ import { CommonModule } from '@angular/common';
 import { DialogComponent } from './nutritionist/patients/dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-
+import { MatSortModule } from '@angular/material/sort';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { CdkTableModule } from '@angular/cdk/table';
+import { DataTableComponent } from './nutritionist/patients/data-table/data-table.component';
+import { ConfirmationDialogComponent } from './nutritionist/patients/confirmation-dialog/confirmation-dialog.component';
+import { PatientFormDialogComponent } from './nutritionist/patients/patient-form-dialog/patient-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +49,10 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
     ToolbarComponent,
     WelcomeComponent,
     AddPatientComponent,
-    DialogComponent
+    DialogComponent,
+    DataTableComponent,
+    ConfirmationDialogComponent,
+    PatientFormDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -55,6 +67,20 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
     RouterModule,
     FormsModule,
     CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+
+    CdkTableModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -64,6 +90,7 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [ConfirmationDialogComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ]
