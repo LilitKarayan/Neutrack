@@ -33,7 +33,6 @@ export class PatientAddFormDialogComponent implements OnInit {
     }
 
     get rc() {
-      debugger
       return (this.formInstance.controls['name']?.errors?.required && this.formInstance.controls['name']?.errors) || (this.formInstance.controls['gender']?.errors?.required && this.formInstance.controls['gender']?.errors) || (this.formInstance.controls['age']?.errors?.required && this.formInstance.controls['age']?.errors) || (this.formInstance.controls['email']?.errors?.required && this.formInstance.controls['email']?.errors) || this.formInstance.controls['email']?.errors?.email;
     }
 
@@ -45,7 +44,6 @@ export class PatientAddFormDialogComponent implements OnInit {
   }
 
   save(): void {
-    debugger
     this.dialogRef.close(Object.assign(new Patient(), this.formInstance.value));
   }
 }

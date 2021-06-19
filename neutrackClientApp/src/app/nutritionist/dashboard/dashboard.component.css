@@ -3,12 +3,13 @@
     border-radius: 5px;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
     overflow: auto;
-    height: 550px;
+    /* height: 550px; */
+    height: calc(100vh - 100px);
 }
 
-.dashboardContent {
+/* .dashboardContent {
     margin: 30px;
-}
+} */
 
 h2 {
     color: #084a3a;
@@ -39,52 +40,52 @@ table {
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
   }
 
-  table th { 
+table th { 
     background: #FFED86;
     background: linear-gradient(0deg,#fafaf7 0, #FFED86 100%);
 }
   
-  tr.example-detail-row {
+tr.example-detail-row {
     height: 0;
-  }
+}
   
-  tr.example-element-row:not(.example-expanded-row):hover {
+tr.example-element-row:not(.example-expanded-row):hover {
     background: whitesmoke;
     background: rgb(252,243,189, .5);
-  }
+}
   
-  tr.example-element-row:not(.example-expanded-row):active {
+tr.example-element-row:not(.example-expanded-row):active {
     background: #efefef;
-  }
+}
   
-  .example-element-row td {
+.example-element-row td {
     border-bottom-width: 0;
-  }
+}
   
-  .example-element-detail {
+.example-element-detail {
     overflow: hidden;
     display: flex;
-  }
+}
   
-  .patient-picture {
+.patient-picture {
     min-width: 100px;
     border: 2px solid black;
     padding: 8px;
     font-weight: lighter;
     margin: 8px 0;
     height: 104px;
-  }
+}
   
-  .example-element-symbol {
+.example-element-symbol {
     font-weight: bold;
     font-size: 40px;
     line-height: normal;
-  }
+}
   
-  .patient-info {
+.patient-info {
     padding: 16px;
-  }
+}
   
-  .example-element-description-attribution {
+.example-element-description-attribution {
     opacity: 0.5;
-  }
+}

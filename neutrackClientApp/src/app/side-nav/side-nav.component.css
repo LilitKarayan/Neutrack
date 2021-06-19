@@ -1,7 +1,7 @@
 .sidenav {
     background-color: #095040;
     background: linear-gradient(0deg,#095040 0, #109374 100%);
-    height: calc(100vh - 10px);
+    height: calc(100vh - 100px);
     width: 200px;
     display: block;
     margin: 5px;
@@ -14,7 +14,7 @@
     margin: 16px 0 20px 33px;
     width: 100px;
     height: 100px;
-    /* border-radius: 50%; */
+    border-radius: 10%;
 }
 
 .nav li>a {
@@ -57,49 +57,8 @@
     border-radius: 50%;
 }
 
-/* .logo {
+.logo {
     position: relative;
     padding: 0.5rem 0.7rem;
     z-index: 4;
-} */
-
-/* .logo a.logo-mini {
-    opacity: 1;
-    float: left;
-    width: 34px;
-    text-align: center;
-    margin-left: 10px;
-    margin-right: 12px;
 }
-
-.logo a.logo-normal {
-    display: block;
-    opacity: 1;
-    -webkit-transform: translate3d(0px, 0, 0);
-    -moz-transform: translate3d(0px, 0, 0);
-    -o-transform: translate3d(0px, 0, 0);
-    -ms-transform: translate3d(0px, 0, 0);
-    transform: translate3d(0px, 0, 0);
-}
-
-.logo:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 15px;
-    height: 1px;
-    width: cals(100%-30px);
-    background: rgba(255, 255, 255, 0.5);
-}
-
-.logo .simple-text {
-    text-transform: uppercase;
-    padding: 0.5rem 0;
-    display: block;
-    white-space: nowrap;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 400;
-    line-height: 30px;
-    overflow: hidden;
-} */
