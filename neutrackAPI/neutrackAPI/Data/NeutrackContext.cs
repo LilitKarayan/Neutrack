@@ -12,13 +12,21 @@ namespace NeutrackAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().Property(u => u.FullName).HasComputedColumnSql("[FirstName] + ' ' + [LastName]");
-            modelBuilder.Entity<User>().Property(u => u.IsActive).HasDefaultValue(true);
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<User>().HasOne(p => p.Patient).WithOne(u => u.User).HasForeignKey<Patient>(u => u.UserId).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<User>().HasOne(n => n.Nutritionist).WithOne(u => u.User).HasForeignKey<Nutritionist>(u => u.UserId).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Patient>().Property(u => u.IsActive).HasDefaultValue(true);
+            modelBuilder.Entity<Nutritionist>().Property(u => u.IsActive).HasDefaultValue(true);
             modelBuilder.Entity<Role>().Property(r => r.IsActive).HasDefaultValue(true);
             modelBuilder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId });
-            modelBuilder.Entity<NutritionistRate>().HasKey(nr => new {nr.UserId, nr.RateId});
+            modelBuilder.Entity<NutritionistRate>().HasKey(nr => new {nr.NutritionistId, nr.RateId});
+            modelBuilder.Entity<NutritionistPatientHistory>().HasKey(np => new { np.NutritionistId, np.PatientId });
+            modelBuilder.Entity<NutritionistPatientHistory>().Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
             modelBuilder.Entity<Rate>().HasOne(r => r.RateType).WithMany(r => r.Rates);
-            modelBuilder.Entity<Feedback>().HasOne(f => f.FeedbackFrom).WithMany(f => f.FeedbacksFrom).OnDelete(DeleteBehavior.Restrict); 
-            modelBuilder.Entity<Feedback>().HasOne(f => f.FeedbackTo).WithMany(f => f.FeedbacksTo).OnDelete(DeleteBehavior.Restrict); 
+            modelBuilder.Entity<Feedback>().HasOne(f => f.Nutritionist).WithMany(f => f.Feedbacks).OnDelete(DeleteBehavior.Restrict); 
+            modelBuilder.Entity<Feedback>().HasOne(f => f.Patient).WithMany(f => f.Feedbacks).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<PatientActivityHistory>().HasOne(p => p.Patient).WithMany(h => h.PatientActivityHistories);
+            modelBuilder.Entity<PatientActivityHistory>().Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -27,5 +35,10 @@ namespace NeutrackAPI.Data
         public DbSet<RateType> RateTypes { get; set; }
         public DbSet<Rate> Rates { get; set; }
         public DbSet<NutritionistRate> NutritionistRates { get; set; }
+        public DbSet<Patient>Patients { get; set; }
+        public DbSet<Nutritionist> Nutritionists { get; set; }
+        public DbSet<NutritionistPatientHistory> NutritionistPatientHistories { get; set; }
+        public DbSet<PatientActivityHistory> PatientActivityHistories { get; set; }
+
     }
 }

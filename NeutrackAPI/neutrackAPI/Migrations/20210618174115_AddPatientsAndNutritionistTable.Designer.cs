@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NeutrackAPI.Data;
 
 namespace NeutrackAPI.Migrations
 {
     [DbContext(typeof(NeutrackContext))]
-    partial class NeutrackContextModelSnapshot : ModelSnapshot
+    [Migration("20210618174115_AddPatientsAndNutritionistTable")]
+    partial class AddPatientsAndNutritionistTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,26 +85,6 @@ namespace NeutrackAPI.Migrations
                     b.ToTable("Nutritionists");
                 });
 
-            modelBuilder.Entity("NeutrackAPI.Models.NutritionistPatientHistory", b =>
-                {
-                    b.Property<int>("NutritionistId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
-
-                    b.HasKey("NutritionistId", "PatientId");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("NutritionistPatientHistories");
-                });
-
             modelBuilder.Entity("NeutrackAPI.Models.NutritionistRate", b =>
                 {
                     b.Property<int>("NutritionistId")
@@ -143,7 +125,7 @@ namespace NeutrackAPI.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<int?>("NutritionistId")
+                    b.Property<int>("NutritionistId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -160,31 +142,6 @@ namespace NeutrackAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("Patients");
-                });
-
-            modelBuilder.Entity("NeutrackAPI.Models.PatientActivityHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("PatientActivityHistories");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.Rate", b =>
@@ -295,9 +252,6 @@ namespace NeutrackAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
                     b.ToTable("Users");
                 });
 
@@ -346,25 +300,6 @@ namespace NeutrackAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("NeutrackAPI.Models.NutritionistPatientHistory", b =>
-                {
-                    b.HasOne("NeutrackAPI.Models.Nutritionist", "Nutritionist")
-                        .WithMany("NutritionistPatientHistories")
-                        .HasForeignKey("NutritionistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NeutrackAPI.Models.Patient", "Patient")
-                        .WithMany("NutritionistPatientHistories")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Nutritionist");
-
-                    b.Navigation("Patient");
-                });
-
             modelBuilder.Entity("NeutrackAPI.Models.NutritionistRate", b =>
                 {
                     b.HasOne("NeutrackAPI.Models.Nutritionist", "Nutritionist")
@@ -388,7 +323,9 @@ namespace NeutrackAPI.Migrations
                 {
                     b.HasOne("NeutrackAPI.Models.Nutritionist", "Nutritionist")
                         .WithMany("Patients")
-                        .HasForeignKey("NutritionistId");
+                        .HasForeignKey("NutritionistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("NeutrackAPI.Models.User", "User")
                         .WithOne("Patient")
@@ -399,17 +336,6 @@ namespace NeutrackAPI.Migrations
                     b.Navigation("Nutritionist");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("NeutrackAPI.Models.PatientActivityHistory", b =>
-                {
-                    b.HasOne("NeutrackAPI.Models.Patient", "Patient")
-                        .WithMany("PatientActivityHistories")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.Rate", b =>
@@ -446,8 +372,6 @@ namespace NeutrackAPI.Migrations
                 {
                     b.Navigation("Feedbacks");
 
-                    b.Navigation("NutritionistPatientHistories");
-
                     b.Navigation("NutritionistRates");
 
                     b.Navigation("Patients");
@@ -456,10 +380,6 @@ namespace NeutrackAPI.Migrations
             modelBuilder.Entity("NeutrackAPI.Models.Patient", b =>
                 {
                     b.Navigation("Feedbacks");
-
-                    b.Navigation("NutritionistPatientHistories");
-
-                    b.Navigation("PatientActivityHistories");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.Rate", b =>
