@@ -7,8 +7,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { PatientEditFormDialogComponent } from '../patient-edit-form-dialog/patient-edit-form-dialog.component';
-import { PatientService } from 'src/app/core/services/patient.service';
-import { Patient } from 'src/app/core/models/patient';
+import { PatientService } from '../../../core/services/patient.service';
+import { Patient } from '../../../core/models/patient';
 import { PatientAddFormDialogComponent } from '../patient-add-form-dialog/patient-add-form-dialog.component';
 import { PatientInfoComponent } from '../patient-info/patient-info.component';
 
