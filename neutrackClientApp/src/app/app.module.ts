@@ -19,8 +19,21 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
-// import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { CdkTableModule } from '@angular/cdk/table';
+import { DataTableComponent } from './nutritionist/patients/data-table/data-table.component';
+import { ConfirmationDialogComponent } from './nutritionist/patients/confirmation-dialog/confirmation-dialog.component';
+import { PatientEditFormDialogComponent } from './nutritionist/patients/patient-edit-form-dialog/patient-edit-form-dialog.component';
+import { PatientAddFormDialogComponent } from './nutritionist/patients/patient-add-form-dialog/patient-add-form-dialog.component';
+import { PatientInfoComponent } from './nutritionist/patients/patient-info/patient-info.component';
 import { CommonModule } from '@angular/common';
 import { HttpErrorHandlerService } from './services/http-error-handler.service';
 import { AuthenticationService } from './services/authentication.service';
@@ -42,7 +55,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     SideNavComponent,
     ToolbarComponent,
     WelcomeComponent,
-    // AddPatientComponent,
+    DataTableComponent,
+    ConfirmationDialogComponent,
+    PatientEditFormDialogComponent,
+    PatientAddFormDialogComponent,
+    PatientInfoComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -55,8 +72,21 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatDialogModule,
     RouterModule,
+    FormsModule,
     CommonModule,
+    CdkTableModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
@@ -67,6 +97,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [AuthenticationService, HttpErrorHandlerService, MessageService],
   bootstrap: [AppComponent],
+  entryComponents: [ConfirmationDialogComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ]
