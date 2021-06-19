@@ -1,0 +1,26 @@
+<div mat-dialog-content>
+    <form [formGroup]="formInstance">
+      <h1 mat-dialog-title>{{formInstance.value['name']}}</h1>
+      <p>Age:  {{formInstance.value['age']}}</p>
+      <p>Gender:  {{formInstance.value['gender']}}</p>
+      
+      <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Email *</mat-label>
+            <input matInput type="text" 
+            name="email" formControlName="email">
+            <mat-error *ngIf="
+            formInstance.controls['email']?.errors?.required">field required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="" mat-dialog-actions>
+          <button [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary" 
+           (click)="save()"
+            cdkFocusInitial>Update</button>
+          <button mat-raised-button mat-dialog-close>Close</button>
+        
+        </div>
+    </form>
+  </div>
+  
+  

@@ -10,6 +10,7 @@ import { PatientEditFormDialogComponent } from '../patient-edit-form-dialog/pati
 import { PatientService } from 'src/app/core/services/patient.service';
 import { Patient } from 'src/app/core/models/patient';
 import { PatientAddFormDialogComponent } from '../patient-add-form-dialog/patient-add-form-dialog.component';
+import { PatientInfoComponent } from '../patient-info/patient-info.component';
 
 @Component({
   selector: 'app-data-table',
@@ -41,9 +42,24 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource = new MatTableDataSource<Patient>();
   }   
 
+  
+
   edit(data: Patient) {
     const dialogRef = this.dialog.open(PatientEditFormDialogComponent, {
       width: '400px',
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.patientsService.edit(result);
+      }
+    });
+  }
+
+  view(data: Patient) {
+    const dialogRef = this.dialog.open(PatientInfoComponent, {
+      width: '100%',
       data: data
     });
 

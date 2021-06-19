@@ -34,6 +34,7 @@ import { DataTableComponent } from './nutritionist/patients/data-table/data-tabl
 import { ConfirmationDialogComponent } from './nutritionist/patients/confirmation-dialog/confirmation-dialog.component';
 import { PatientEditFormDialogComponent } from './nutritionist/patients/patient-edit-form-dialog/patient-edit-form-dialog.component';
 import { PatientAddFormDialogComponent } from './nutritionist/patients/patient-add-form-dialog/patient-add-form-dialog.component';
+import { PatientInfoComponent } from './nutritionist/patients/patient-info/patient-info.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { PatientAddFormDialogComponent } from './nutritionist/patients/patient-a
     ConfirmationDialogComponent,
     PatientEditFormDialogComponent,
     PatientAddFormDialogComponent,
+    PatientInfoComponent,
     
   ],
   imports: [
