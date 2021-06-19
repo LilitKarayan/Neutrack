@@ -4,15 +4,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Patient } from 'src/app/core/models/patient';
 
 @Component({
-  selector: 'app-patient-form-dialog',
-  templateUrl: './patient-form-dialog.component.html',
-  styleUrls: ['./patient-form-dialog.component.css']
+  selector: 'app-patient-edit-form-dialog',
+  templateUrl: './patient-edit-form-dialog.component.html',
+  styleUrls: ['./patient-edit-form-dialog.component.css']
 })
 
-export class PatientFormDialogComponent implements OnInit {
+export class PatientEditFormDialogComponent implements OnInit {
   formInstance: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<PatientFormDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<PatientEditFormDialogComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: Patient) {
     this.formInstance = this.formBuilder.group({

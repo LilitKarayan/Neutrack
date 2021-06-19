@@ -6,10 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { PatientFormDialogComponent } from '../patient-form-dialog/patient-form-dialog.component';
+import { PatientEditFormDialogComponent } from '../patient-edit-form-dialog/patient-edit-form-dialog.component';
 import { PatientService } from 'src/app/core/services/patient.service';
 import { Patient } from 'src/app/core/models/patient';
-
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-data-table',
@@ -21,6 +21,9 @@ import { Patient } from 'src/app/core/models/patient';
 export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  animal: string;
+  name: string;
 
   public displayedColumns: string[] = ['name', 'gender', 'age', 'email'];
   public columnsToDisplay: string[] = [...this.displayedColumns, 'actions'];
@@ -40,7 +43,7 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
   }   
 
   edit(data: Patient) {
-    const dialogRef = this.dialog.open(PatientFormDialogComponent, {
+    const dialogRef = this.dialog.open(PatientEditFormDialogComponent, {
       width: '400px',
       data: data
     });
@@ -49,6 +52,18 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
       if (result) {
         this.patientsService.edit(result);
       }
+    });
+  }
+
+  addPatient(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
     });
   }
 

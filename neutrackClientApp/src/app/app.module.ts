@@ -34,7 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DataTableComponent } from './nutritionist/patients/data-table/data-table.component';
 import { ConfirmationDialogComponent } from './nutritionist/patients/confirmation-dialog/confirmation-dialog.component';
-import { PatientFormDialogComponent } from './nutritionist/patients/patient-form-dialog/patient-form-dialog.component';
+import { PatientEditFormDialogComponent } from './nutritionist/patients/patient-edit-form-dialog/patient-edit-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,8 @@ import { PatientFormDialogComponent } from './nutritionist/patients/patient-form
     DialogComponent,
     DataTableComponent,
     ConfirmationDialogComponent,
-    PatientFormDialogComponent
+    PatientEditFormDialogComponent,
+    
   ],
   imports: [
     AppRoutingModule,
