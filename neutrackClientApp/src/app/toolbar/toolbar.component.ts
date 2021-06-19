@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthenticationService } from '../services/authentication.service';
 import { IUser, IUserLogin } from '../shared/models';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -10,8 +12,12 @@ import { IUser, IUserLogin } from '../shared/models';
 export class ToolbarComponent implements OnInit {
   @Input() inputSideNav: MatSidenav;
   testLogin: IUserLogin
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService, private router:Router) {
 
+  }
+
+  goToPage(pageName:String):void {
+    this.router.navigate([`${pageName}`]);
   }
 
   ngOnInit(): void {

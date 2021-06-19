@@ -19,7 +19,6 @@ export class SideNavComponent implements OnInit {
   constructor(private router:Router) {
   }
 
-
   goToPage(pageName:String):void {
     this.router.navigate([`${pageName}`]);
   }

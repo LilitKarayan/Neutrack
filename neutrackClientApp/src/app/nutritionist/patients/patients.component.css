@@ -21,8 +21,9 @@
     /* border-radius: 20%; */
 }
 
-h2 {
+h1 {
     color: #084a3a;
+    font-weight: bold;
 }
 
 /* table {

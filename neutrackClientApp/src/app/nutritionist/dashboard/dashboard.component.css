@@ -9,10 +9,12 @@
 
 .dashboardContent {
     margin: 30px;
+    font-weight: bold;
 }
 
-h2 {
+h1 {
     color: #084a3a;
+    font-weight: bold;
 }
 
 mat-form-field  input {
