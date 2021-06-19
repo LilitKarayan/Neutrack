@@ -16,17 +16,17 @@
 .addPatient {
     float: right;
     margin: 0 100px 30px 0;
-    background-color: #109374;
-    color: #ffffff;
-    font-size: 18px;
-    border-radius: 20%;
+    /* background-color: #109374; */
+    /* color: #ffffff; */
+    /* font-size: 18px; */
+    /* border-radius: 20%; */
 }
 
 h2 {
     color: #084a3a;
 }
 
-table {
+/* table {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -67,4 +67,4 @@ td, th {
 
 mat-paginator {
     margin: 15px 80px 0 0;
-}
+} */

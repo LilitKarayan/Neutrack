@@ -1,8 +1,8 @@
-<div class="">
+<div class="patientsComponent">
 
-    <div class="">
+    <div class="patientsContent">
 
-        <ol>
+        <!-- <ol>
             <li>
                 <mat-form-field>
                 <mat-label>What's your name?</mat-label>
@@ -15,8 +15,13 @@
             <li *ngIf="animal">
                 You chose: <i>{{animal}}</i>
             </li>
-        </ol>
+        </ol> -->
 
+
+
+        <h2> List of Patients </h2>
+        <button class="addPatient" mat-raised-button color="primary" (click)="openDialog()"> Add Patient </button>
+       
         <app-data-table></app-data-table>
 
         
