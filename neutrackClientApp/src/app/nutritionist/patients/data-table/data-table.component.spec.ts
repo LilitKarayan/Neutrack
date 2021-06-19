@@ -1,20 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 
-import { AddPatientComponent } from './add-patient.component';
+import { DataTableComponent } from './data-table.component';
 
-describe('AddPatientComponent', () => {
+describe('DataTableComponent', () => {
   let fixture;
-  let component: AddPatientComponent;
+  let component: DataTableComponent;
   beforeAll(() => {
     TestBed.initTestEnvironment( BrowserDynamicTestingModule, platformBrowserDynamicTesting() );
   })
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddPatientComponent ]
+      declarations: [ DataTableComponent ]
     })
     .compileComponents();
-    fixture = TestBed.createComponent(AddPatientComponent);
+    fixture = TestBed.createComponent(DataTableComponent);
     component = fixture.componentInstance;
   });
 
