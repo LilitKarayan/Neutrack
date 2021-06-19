@@ -22,7 +22,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { DialogComponent } from './nutritionist/patients/dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
@@ -35,6 +34,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { DataTableComponent } from './nutritionist/patients/data-table/data-table.component';
 import { ConfirmationDialogComponent } from './nutritionist/patients/confirmation-dialog/confirmation-dialog.component';
 import { PatientEditFormDialogComponent } from './nutritionist/patients/patient-edit-form-dialog/patient-edit-form-dialog.component';
+import { PatientAddFormDialogComponent } from './nutritionist/patients/patient-add-form-dialog/patient-add-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,10 +49,10 @@ import { PatientEditFormDialogComponent } from './nutritionist/patients/patient-
     ToolbarComponent,
     WelcomeComponent,
     AddPatientComponent,
-    DialogComponent,
     DataTableComponent,
     ConfirmationDialogComponent,
     PatientEditFormDialogComponent,
+    PatientAddFormDialogComponent,
     
   ],
   imports: [

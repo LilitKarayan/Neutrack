@@ -9,7 +9,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { PatientEditFormDialogComponent } from '../patient-edit-form-dialog/patient-edit-form-dialog.component';
 import { PatientService } from 'src/app/core/services/patient.service';
 import { Patient } from 'src/app/core/models/patient';
-import { DialogComponent } from '../dialog/dialog.component';
+import { PatientAddFormDialogComponent } from '../patient-add-form-dialog/patient-add-form-dialog.component';
 
 @Component({
   selector: 'app-data-table',
@@ -56,7 +56,7 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addPatient(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(PatientAddFormDialogComponent, {
       width: '250px',
       data: {name: this.name, animal: this.animal}
     });
