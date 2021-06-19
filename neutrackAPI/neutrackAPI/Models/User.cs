@@ -36,27 +36,10 @@ namespace NeutrackAPI.Models
 
         [Required]
         public DateTime DateOfBirth { get; set; }
-
-        public double Height {get; set;}
-        public double Weight {get; set;}
-
-        public int YearsOfExperience {get; set;}
-        
-        [MaxLength(250)]
-        public string Goal {get; set;}
-
-        public int ActivityLevel {get; set;}
-
-        public bool IsActive { get; set; }
-
+        public Nutritionist Nutritionist { get; set; }
+        public Patient Patient { get; set; }
         public List<UserRole> UserRoles { get; set; }
 
-        [InverseProperty("FeedbackTo")]
-        public List<Feedback> FeedbacksTo { get; set; }
-
-        [InverseProperty("FeedbackFrom")]
-        public List<Feedback> FeedbacksFrom { get; set; }
-
-        public List<NutritionistRate> NutritionistRates { get; set; }
+        
     }
 }

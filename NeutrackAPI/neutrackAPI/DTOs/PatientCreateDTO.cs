@@ -3,9 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NeutrackAPI.DTOs
 {
-    public class UserCreateDTO
+    public class PatientCreateDTO
     {
-
         [Required(ErrorMessage = "Email is required")]
         [MaxLength(60)]
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$",
@@ -32,6 +31,19 @@ namespace NeutrackAPI.DTOs
         [Required]
         public DateTime DateOfBirth { get; set; }
 
+        [Required]
+        public string Goal { get; set; }
+
+        [Required]
+        public int ActivityLevel { get; set; }
+
+        [Required]
+        public double Height { get; set; }
+
+        [Required]
+        public double Weight { get; set; }
+
+        [Required]
         public string PhoneNumber { get; set; }
 
     }
