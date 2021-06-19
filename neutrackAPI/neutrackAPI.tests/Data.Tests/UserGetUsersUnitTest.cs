@@ -23,6 +23,7 @@ namespace NeutrackAPI.tests.Data.Tests
         {
             mockUsersData = GenerateUser.GenerateListData(3).AsQueryable();
             mockUserData = GenerateUser.GeneratData();
+            mockUserData.Email = "testuser@test.com";
             mockUserRepository = new Mock<IUserRepository>();
             
         }
@@ -52,6 +53,20 @@ namespace NeutrackAPI.tests.Data.Tests
             mockUserRepository.Setup(x => x.GetUserById(1)).Returns(mockUserData);
             var user = mockUserRepository.Object.GetUserById(1);
             Assert.AreEqual(1, user.Id);
+            Assert.IsNotNull(user);
+        }
+
+        /// <summary>
+        /// Test should get a user by Email
+        /// </summary>
+        [TestMethod]
+        [TestCategory("Repository Test")]
+        public void GetAUserByEmailShouldReturnAUser()
+        {
+            var testEmail = "testuser@test.com";
+            mockUserRepository.Setup(x => x.GetUserByEmail(testEmail)).Returns(mockUserData);
+            var user = mockUserRepository.Object.GetUserByEmail("testuser@test.com");
+            Assert.AreEqual(testEmail, user.Email);
             Assert.IsNotNull(user);
         }
     }

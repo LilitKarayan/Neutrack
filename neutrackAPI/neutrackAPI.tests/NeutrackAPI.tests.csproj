@@ -19,10 +19,12 @@
     <None Remove="Data.Tests\" />
     <None Remove="Moq" />
     <None Remove="Fixtures\" />
+    <None Remove="Controller.Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data.Tests\" />
     <Folder Include="Fixtures\" />
+    <Folder Include="Controller.Tests\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\neutrackAPI\neutrackAPI.csproj" />

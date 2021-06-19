@@ -28,7 +28,9 @@ namespace NeutrackAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<NeutrackContext>(opt => opt.UseSqlServer(
-                Configuration.GetConnectionString("NeutrackDBConnection")));
+               Configuration.GetConnectionString("NeutrackDBConnection")));
+            // services.AddDbContext<NeutrackContext>(opt => opt.UseSqlServer(
+            //     Configuration.GetConnectionString("NeutrackDBTestConnection")));
             services.AddCors();
             services.AddControllers()
                     .AddNewtonsoftJson(options =>
@@ -60,6 +62,9 @@ namespace NeutrackAPI
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IRateRepository, RateRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            services.AddScoped<INutritionistRepository, NutritionistRepository>();
             services.AddSwaggerGen();
 
         }

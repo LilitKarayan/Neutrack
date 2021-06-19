@@ -39,6 +39,8 @@ namespace NeutrackAPI.Data
         public AuthResponseDTO AuthenticateUser(AuthRequestDTO userAuthDTO)
         {
             var _user = _context.Users
+                .Include(x => x.Nutritionist)
+                .Include(x => x.Patient)
                 .Include(x => x.UserRoles)
                 .ThenInclude(xr => xr.Role)
                 .FirstOrDefault(x => x.Email == userAuthDTO.Email && x.Password == userAuthDTO.Password);
@@ -55,6 +57,14 @@ namespace NeutrackAPI.Data
         {
             var claims = user.UserRoles.Select(x => new Claim(ClaimTypes.Role, x.Role.Name)).ToList();
             claims.Add(new Claim(ClaimTypes.Name, user.Id.ToString()));
+            if(user.Patient != null)
+            {
+                claims.Add(new Claim(ClaimTypes.Upn, user.Patient.Id.ToString()));
+            }
+            if (user.Nutritionist != null)
+            {
+                claims.Add(new Claim(ClaimTypes.Spn, user.Nutritionist.Id.ToString()));
+            }
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -87,7 +97,7 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public IEnumerable<User> GetAllUsers()
         {
-            return _context.Users.Where(u => u.IsActive).Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
+            return _context.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
         }
 
         /// <summary>
@@ -122,6 +132,16 @@ namespace NeutrackAPI.Data
         public void UpdateUser(User user)
         {
             // do nothing
+        }
+
+        public void DeactivateUser(User user)
+        {
+            _context.UserRoles.RemoveRange(user.UserRoles);
+        }
+
+        public IEnumerable<User> SearchUser(string searchQuery, Role role)
+        {
+            return null;
         }
     }
 }

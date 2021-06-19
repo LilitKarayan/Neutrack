@@ -26,16 +26,16 @@ namespace NeutrackAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeedbackFromId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FeedbackToId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("NutritionistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
 
                     b.Property<double>("Rating")
                         .HasColumnType("float");
@@ -50,26 +50,141 @@ namespace NeutrackAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FeedbackFromId");
+                    b.HasIndex("NutritionistId");
 
-                    b.HasIndex("FeedbackToId");
+                    b.HasIndex("PatientId");
 
                     b.ToTable("Feedbacks");
                 });
 
+            modelBuilder.Entity("NeutrackAPI.Models.Nutritionist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("YearsOfExperience")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Nutritionists");
+                });
+
+            modelBuilder.Entity("NeutrackAPI.Models.NutritionistPatientHistory", b =>
+                {
+                    b.Property<int>("NutritionistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getutcdate()");
+
+                    b.HasKey("NutritionistId", "PatientId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("NutritionistPatientHistories");
+                });
+
             modelBuilder.Entity("NeutrackAPI.Models.NutritionistRate", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("NutritionistId")
                         .HasColumnType("int");
 
                     b.Property<int>("RateId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "RateId");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("NutritionistId", "RateId");
 
                     b.HasIndex("RateId");
 
                     b.ToTable("NutritionistRates");
+                });
+
+            modelBuilder.Entity("NeutrackAPI.Models.Patient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActivityLevel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Goal")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int?>("NutritionistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NutritionistId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Patients");
+                });
+
+            modelBuilder.Entity("NeutrackAPI.Models.PatientActivityHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getutcdate()");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("PatientActivityHistories");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.Rate", b =>
@@ -141,9 +256,6 @@ namespace NeutrackAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActivityLevel")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -168,18 +280,6 @@ namespace NeutrackAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Goal")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -193,13 +293,10 @@ namespace NeutrackAPI.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
-                    b.Property<int>("YearsOfExperience")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -221,40 +318,98 @@ namespace NeutrackAPI.Migrations
 
             modelBuilder.Entity("NeutrackAPI.Models.Feedback", b =>
                 {
-                    b.HasOne("NeutrackAPI.Models.User", "FeedbackFrom")
-                        .WithMany("FeedbacksFrom")
-                        .HasForeignKey("FeedbackFromId")
+                    b.HasOne("NeutrackAPI.Models.Nutritionist", "Nutritionist")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("NutritionistId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("NeutrackAPI.Models.User", "FeedbackTo")
-                        .WithMany("FeedbacksTo")
-                        .HasForeignKey("FeedbackToId")
+                    b.HasOne("NeutrackAPI.Models.Patient", "Patient")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("FeedbackFrom");
+                    b.Navigation("Nutritionist");
 
-                    b.Navigation("FeedbackTo");
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("NeutrackAPI.Models.Nutritionist", b =>
+                {
+                    b.HasOne("NeutrackAPI.Models.User", "User")
+                        .WithOne("Nutritionist")
+                        .HasForeignKey("NeutrackAPI.Models.Nutritionist", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NeutrackAPI.Models.NutritionistPatientHistory", b =>
+                {
+                    b.HasOne("NeutrackAPI.Models.Nutritionist", "Nutritionist")
+                        .WithMany("NutritionistPatientHistories")
+                        .HasForeignKey("NutritionistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NeutrackAPI.Models.Patient", "Patient")
+                        .WithMany("NutritionistPatientHistories")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Nutritionist");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.NutritionistRate", b =>
                 {
+                    b.HasOne("NeutrackAPI.Models.Nutritionist", "Nutritionist")
+                        .WithMany("NutritionistRates")
+                        .HasForeignKey("NutritionistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("NeutrackAPI.Models.Rate", "Rate")
                         .WithMany("NutritionistRates")
                         .HasForeignKey("RateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Nutritionist");
+
+                    b.Navigation("Rate");
+                });
+
+            modelBuilder.Entity("NeutrackAPI.Models.Patient", b =>
+                {
+                    b.HasOne("NeutrackAPI.Models.Nutritionist", "Nutritionist")
+                        .WithMany("Patients")
+                        .HasForeignKey("NutritionistId");
+
                     b.HasOne("NeutrackAPI.Models.User", "User")
-                        .WithMany("NutritionistRates")
-                        .HasForeignKey("UserId")
+                        .WithOne("Patient")
+                        .HasForeignKey("NeutrackAPI.Models.Patient", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Nutritionist");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NeutrackAPI.Models.PatientActivityHistory", b =>
+                {
+                    b.HasOne("NeutrackAPI.Models.Patient", "Patient")
+                        .WithMany("PatientActivityHistories")
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Rate");
-
-                    b.Navigation("User");
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.Rate", b =>
@@ -287,6 +442,26 @@ namespace NeutrackAPI.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("NeutrackAPI.Models.Nutritionist", b =>
+                {
+                    b.Navigation("Feedbacks");
+
+                    b.Navigation("NutritionistPatientHistories");
+
+                    b.Navigation("NutritionistRates");
+
+                    b.Navigation("Patients");
+                });
+
+            modelBuilder.Entity("NeutrackAPI.Models.Patient", b =>
+                {
+                    b.Navigation("Feedbacks");
+
+                    b.Navigation("NutritionistPatientHistories");
+
+                    b.Navigation("PatientActivityHistories");
+                });
+
             modelBuilder.Entity("NeutrackAPI.Models.Rate", b =>
                 {
                     b.Navigation("NutritionistRates");
@@ -304,11 +479,9 @@ namespace NeutrackAPI.Migrations
 
             modelBuilder.Entity("NeutrackAPI.Models.User", b =>
                 {
-                    b.Navigation("FeedbacksFrom");
+                    b.Navigation("Nutritionist");
 
-                    b.Navigation("FeedbacksTo");
-
-                    b.Navigation("NutritionistRates");
+                    b.Navigation("Patient");
 
                     b.Navigation("UserRoles");
                 });
