@@ -10,18 +10,18 @@ export class LoginComponent implements OnInit {
   // public initialObject: object;
 
   constructor(
-    // public loginService: LoginService
+    public loginService: LoginService
     ) { }
 
   ngOnInit(): void {
-    // this.initialObject = {};
-    // this.initializeValues();
+    this.initialObject = {};
+    this.initializeValues();
   }
 
   clear() {
     console.log("working");
-    // this.loginService.form.reset('');
-    // this.loginService.initializeForm;
+    this.loginService.form.reset('');
+    this.loginService.initializeForm;
   }
 
   // initializeValues() {
