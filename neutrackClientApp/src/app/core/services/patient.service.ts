@@ -22,6 +22,7 @@ export class PatientService {
 
   add(patient: Patient) {
     this.patients.push(patient);
+    this.patients$.next(this.patients);
   }
 
   edit(patient: Patient) {

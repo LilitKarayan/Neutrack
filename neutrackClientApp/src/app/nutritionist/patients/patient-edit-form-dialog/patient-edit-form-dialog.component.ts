@@ -12,7 +12,8 @@ import { Patient } from 'src/app/core/models/patient';
 export class PatientEditFormDialogComponent implements OnInit {
   formInstance: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<PatientEditFormDialogComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<PatientEditFormDialogComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: Patient) {
     this.formInstance = this.formBuilder.group({
@@ -24,19 +25,19 @@ export class PatientEditFormDialogComponent implements OnInit {
     });
 
     this.formInstance.setValue(data);
-  }
+    }
 
-  get rc() {
-    debugger
-    return (this.formInstance.controls['name']?.errors?.required && this.formInstance.controls['name']?.errors) || (this.formInstance.controls['gender']?.errors?.required && this.formInstance.controls['gender']?.errors) || (this.formInstance.controls['age']?.errors?.required && this.formInstance.controls['age']?.errors) || (this.formInstance.controls['email']?.errors?.required && this.formInstance.controls['email']?.errors);
-  }
+    get rc() {
+      debugger
+      return (this.formInstance.controls['name']?.errors?.required && this.formInstance.controls['name']?.errors) || (this.formInstance.controls['gender']?.errors?.required && this.formInstance.controls['gender']?.errors) || (this.formInstance.controls['age']?.errors?.required && this.formInstance.controls['age']?.errors) || (this.formInstance.controls['email']?.errors?.required  && this.formInstance.controls['email']?.errors) || this.formInstance.controls['email']?.errors?.email;
+    }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
 
-  }
+    }
 
-  save(): void {
-    debugger
-    this.dialogRef.close(Object.assign(new Patient(), this.formInstance.value));
-  }
+    save(): void {
+      debugger
+      this.dialogRef.close(Object.assign(new Patient(), this.formInstance.value));
+    }
 }

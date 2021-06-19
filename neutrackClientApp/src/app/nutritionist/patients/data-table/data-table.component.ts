@@ -22,8 +22,7 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  animal: string;
-  name: string;
+  
 
   public displayedColumns: string[] = ['name', 'gender', 'age', 'email'];
   public columnsToDisplay: string[] = [...this.displayedColumns, 'actions'];
@@ -57,13 +56,13 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addPatient(): void {
     const dialogRef = this.dialog.open(PatientAddFormDialogComponent, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal}
+      width: '400px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      if (result) {
+        this.patientsService.add(result);
+      }
     });
   }
 
