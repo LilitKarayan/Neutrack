@@ -5,15 +5,15 @@
         <h1>Login</h1>
       </div>
 
-      <form [formGroup]="loginService.form" class="normal-form">
+      <form [formGroup]="form" class="normal-form">
         <div class="theContainer">
           <mat-label>*Email</mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
             <input formControlName="email" matInput />
-            <mat-error *ngIf="loginService.form.controls['email'].errors?.email"
+            <mat-error *ngIf="form.controls['email'].errors?.email"
               >Invalid email address</mat-error
             >
-            <mat-error *ngIf="loginService.form.controls['email'].errors?.required"
+            <mat-error *ngIf="form.controls['email'].errors?.required"
               >Email is mandatory</mat-error
             >
           </mat-form-field>
@@ -29,7 +29,7 @@
               minlength="5"
             />
             <mat-error
-              *ngIf="loginService.form.controls['password'].errors?.required"
+              *ngIf="form.controls['password'].errors?.required"
               >Password is mandatory</mat-error
             >
           </mat-form-field>
@@ -42,8 +42,8 @@
             color="primary"
             type="submit"
             [disabled]="
-            loginService.form.controls['email'].invalid ||
-            loginService.form.controls['password'].invalid
+            form.controls['email'].invalid ||
+            form.controls['password'].invalid
             "
           >
             Submit

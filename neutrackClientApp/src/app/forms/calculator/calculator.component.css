@@ -1,0 +1,61 @@
+#calculator {
+    padding-top: 25px;
+    min-height: 120vh;
+    background-image: url("../../../assets/images/neutrackLogin1.jpg");
+    background-position: left;
+  }
+  
+  mat-card {
+    max-width: 600px;
+    margin: 2em auto;
+    text-align: center;
+    max-height: 1200px;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
+    background-color: white;
+  }
+
+  mat-form-field {
+    margin-bottom: 10px;
+  }
+  
+  mat-radio-group mat-radio-button {
+    margin-left: 10px;
+  }
+  
+  mat-error {
+    text-align: center;
+    color: red;
+  }
+  
+  input {
+    padding: 8px;
+  }
+  
+  form.normal-form {
+    margin: 10px;
+  }
+  
+  .normal-full-width {
+    width: 80%;
+  }
+  
+  .theContainer {
+    width: 100%;
+    padding: 5%;
+  }
+  
+  .theContainer > * {
+    width: 100%;
+  }
+  
+  form button {
+    margin: 10px;
+  }
+  
+  button.button-row-submit:hover {
+    background-color: lightblue;
+  }
+  
+  button.button-row-clear:hover {
+    background-color: lightsalmon;
+  }
