@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "esModuleInterop": true,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "strictPropertyInitialization": false,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -11,12 +11,20 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "strictNullChecks": false,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
+    "paths": {
+      "@services/*": ["app/services/*"],
+      "@models": ["app/shared/models/index"],
+      "@env": ["environments/environment"],
+      "@api-config": ["config/api.config"],
+      "@assets/*": ["assets/*"]
+    },
     "module": "es2020",
     "lib": [
       "es2018",
@@ -27,6 +35,7 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "strictNullChecks": false,
   }
 }

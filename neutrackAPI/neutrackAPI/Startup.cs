@@ -62,6 +62,9 @@ namespace NeutrackAPI
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IRateRepository, RateRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            services.AddScoped<INutritionistRepository, NutritionistRepository>();
             services.AddSwaggerGen();
 
         }

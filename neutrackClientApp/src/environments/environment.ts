@@ -1,11 +1,18 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
 export const environment = {
-  production: false
+  env: 'LOCAL',
+  production: false,
+  apiBaseUrl: 'https://neutrackapi.azurewebsites.net/api',
+  apiLocalBaseUrl: 'https://localhost:5001/api',
 };
-
+export function useTestApi() {
+  environment.env = 'TEST';
+}
+export function getApiRoute(apiEndPoint: string): string {
+  return environment.env === 'TEST' ? environment.apiBaseUrl + apiEndPoint : environment.apiLocalBaseUrl + apiEndPoint
+}
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

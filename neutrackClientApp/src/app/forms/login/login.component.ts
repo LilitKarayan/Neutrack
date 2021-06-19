@@ -9,7 +9,9 @@ import { LoginService } from 'src/app/services/loginService/login.service';
 export class LoginComponent implements OnInit {
   // public initialObject: object;
 
-  constructor(public loginService: LoginService) { }
+  constructor(
+    // public loginService: LoginService
+    ) { }
 
   ngOnInit(): void {
     // this.initialObject = {};
@@ -18,8 +20,8 @@ export class LoginComponent implements OnInit {
 
   clear() {
     console.log("working");
-    this.loginService.form.reset('');
-    this.loginService.initializeForm;
+    // this.loginService.form.reset('');
+    // this.loginService.initializeForm;
   }
 
   // initializeValues() {

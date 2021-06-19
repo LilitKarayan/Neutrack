@@ -16,21 +16,23 @@ export class SignUpComponent implements OnInit {
 
   // public initialObject: object;
 
-  constructor(public signUpService: SignUpNutritionistService) {}
+  constructor(
+    // public signUpService: SignUpNutritionistService
+    ) {}
 
   ngOnInit(): void {
-    
+
   }
 
   clear() {
-    this.signUpService.form.reset('');
+    // this.signUpService.form.reset('');
     //this.signUpService.initializeForm;
   }
 
-  
+
   signUp() {
-    this.signUpService.generateNutritionist();
-    console.log(this.signUpService.getNutritionist());
+    // this.signUpService.generateNutritionist();
+    // console.log(this.signUpService.getNutritionist());
   }
   // ngOnInit(): void {
   //   this.initialObject = {};
@@ -45,7 +47,7 @@ export class SignUpComponent implements OnInit {
   //   this.theRoles = [
   //     'Nutritionist', 'Patient'
   //   ];
-    
+
   //   this.initialObject['selectedRole'] = '';
   //   this.initialObject['email'] = '';
   //   this.initialObject['password'] = '';
@@ -78,7 +80,7 @@ export class SignUpComponent implements OnInit {
   //     this.userDynamicInfo = 'Years of Experience';
   //   } else {
   //     this.userDynamicInfo = 'Activity Level';
-  //   } 
+  //   }
   // }
 
   // radioChangeHandlerGender(event: any): void  {

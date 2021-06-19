@@ -1,0 +1,21 @@
+.mat-table {
+    width: 100%;
+    margin: 0px;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto 20px auto;
+    border-spacing: 1; 
+    border-collapse: collapse; 
+    background:white;
+    border-radius:6px;
+    overflow:hidden;
+    position:relative;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
+}
+
+table th { 
+    background: #FFED86;
+    background: linear-gradient(0deg,#fafaf7 0, #FFED86 100%);
+}

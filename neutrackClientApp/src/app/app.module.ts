@@ -27,9 +27,13 @@ import { MatRadioModule } from '@angular/material/radio';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
+// import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HttpErrorHandlerService } from './services/http-error-handler.service';
+import { AuthenticationService } from './services/authentication.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from './services/message.service';
 
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -51,9 +55,9 @@ import { SignUpNutritionistService } from './services/signUpNutritionistService/
     SideNavComponent,
     ToolbarComponent,
     WelcomeComponent,
-    AddPatientComponent,
     SignUpComponent,
     LoginComponent
+    // AddPatientComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -72,6 +76,7 @@ import { SignUpNutritionistService } from './services/signUpNutritionistService/
     MatRadioModule,
     RouterModule,
     CommonModule,
+    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -83,7 +88,7 @@ import { SignUpNutritionistService } from './services/signUpNutritionistService/
   ],
   providers: [UserDataService,
     LoginService,
-    SignUpNutritionistService],
+    SignUpNutritionistService, AuthenticationService, HttpErrorHandlerService, MessageService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

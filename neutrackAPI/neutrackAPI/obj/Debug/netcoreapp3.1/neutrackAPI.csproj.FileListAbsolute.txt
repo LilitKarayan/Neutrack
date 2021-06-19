@@ -70,4 +70,3 @@
 /Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/obj/Debug/netcoreapp3.1/neutrackAPI.dll
 /Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/obj/Debug/netcoreapp3.1/neutrackAPI.pdb
 /Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/obj/Debug/netcoreapp3.1/neutrackAPI.genruntimeconfig.cache
-/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/obj/Debug/netcoreapp3.1/NeutrackAPI.csproj.AssemblyReference.cache
