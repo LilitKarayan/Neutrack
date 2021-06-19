@@ -1,12 +1,11 @@
-
 .patientsComponent{
     /* background-color: aquamarine; */
     margin: 5px;
     border-radius: 5px;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
     overflow: auto;
-    height: 550px;
-    /* height: calc(100% - 50px); */
+    /* height: 550px; */
+    height: calc(100% - 50px);
 }
 
 .patientsContent {
@@ -16,17 +15,17 @@
 .addPatient {
     float: right;
     margin: 0 100px 30px 0;
-    background-color: #109374;
-    color: #ffffff;
-    font-size: 18px;
-    border-radius: 20%;
+    /* background-color: #109374; */
+    /* color: #ffffff; */
+    /* font-size: 18px; */
+    /* border-radius: 20%; */
 }
 
 h2 {
     color: #084a3a;
 }
 
-table {
+/* table {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -67,4 +66,8 @@ td, th {
 
 mat-paginator {
     margin: 15px 80px 0 0;
+} */
+
+.data-table-patient {
+    padding: 0 10%;
 }

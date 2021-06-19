@@ -22,14 +22,14 @@ namespace NeutrackAPI.Models
         public double Rating { get; set; }
 
         
-        public int FeedbackFromId { get; set; }
+        public int PatientId { get; set; }
 
-        public User FeedbackFrom { get; set; }
+        public Patient Patient { get; set; }
 
         
-        public int FeedbackToId { get; set; }
+        public int NutritionistId { get; set; }
 
-        public User FeedbackTo { get; set; }
+        public Nutritionist Nutritionist { get; set; }
 
 
     }
