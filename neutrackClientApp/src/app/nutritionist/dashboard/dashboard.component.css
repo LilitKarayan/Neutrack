@@ -7,9 +7,9 @@
     height: calc(100vh - 100px);
 }
 
-/* .dashboardContent {
+.dashboardContent {
     margin: 30px;
-} */
+}
 
 h2 {
     color: #084a3a;
