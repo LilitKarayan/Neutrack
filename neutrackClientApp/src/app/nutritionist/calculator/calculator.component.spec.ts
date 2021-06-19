@@ -1,22 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 
 import { CalculatorComponent } from './calculator.component';
 
 describe('CalculatorComponent', () => {
+  let fixture;
   let component: CalculatorComponent;
-  let fixture: ComponentFixture<CalculatorComponent>;
+  beforeAll(() => {
+    TestBed.initTestEnvironment( BrowserDynamicTestingModule, platformBrowserDynamicTesting() );
+  })
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CalculatorComponent ]
     })
     .compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(CalculatorComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

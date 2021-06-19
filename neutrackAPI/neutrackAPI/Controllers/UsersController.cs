@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NeutrackAPI.Data;
@@ -229,10 +227,36 @@ namespace NeutrackAPI.Controllers
             }
         }
 
-        // DELETE api/values/5
+        /// <summary>
+        /// This will deactivate a user by setting IsActive to false
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                if(id != currentUserId && !User.IsInRole(Roles.Admin))
+                {
+                    return Forbid();
+                }
+                var userItem = _userRepository.GetUserById(id);
+                if (userItem == null)
+                {
+                    return NotFound();
+                }
+                _userRepository.DeactivateUser(userItem);
+                userItem.IsActive = false;
+                _userRepository.SaveChanges();
+                return NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
         }
 
         /// <summary>
@@ -254,6 +278,29 @@ namespace NeutrackAPI.Controllers
                 return Ok(user);
             }
             catch(Exception ex){
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("signedinuser")]
+        public ActionResult<UserReadDTO> GetAuthenticatedUser()
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                var userItem = _userRepository.GetUserById(currentUserId);
+                if (userItem == null)
+                {
+                    return NotFound();
+                }
+                return Ok(_mapper.Map<UserReadDTO>(userItem));
+            }
+            catch (Exception ex)
+            {
                 return StatusCode(500, new { Error = ex.Message });
             }
         }

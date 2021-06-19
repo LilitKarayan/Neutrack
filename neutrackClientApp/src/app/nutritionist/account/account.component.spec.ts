@@ -1,22 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 
 import { AccountComponent } from './account.component';
 
 describe('AccountComponent', () => {
+  let fixture;
   let component: AccountComponent;
-  let fixture: ComponentFixture<AccountComponent>;
+  beforeAll(() => {
+    TestBed.initTestEnvironment( BrowserDynamicTestingModule, platformBrowserDynamicTesting() );
+  })
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ AccountComponent ]
     })
     .compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(AccountComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
