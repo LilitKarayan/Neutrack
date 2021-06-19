@@ -26,6 +26,8 @@ import { HttpErrorHandlerService } from './services/http-error-handler.service';
 import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from './services/message.service';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { MessageService } from './services/message.service';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     BrowserAnimationsModule,
     MatSliderModule,
