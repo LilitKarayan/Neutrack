@@ -19,7 +19,6 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
-import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -48,7 +47,6 @@ import { PatientAddFormDialogComponent } from './nutritionist/patients/patient-a
     SideNavComponent,
     ToolbarComponent,
     WelcomeComponent,
-    AddPatientComponent,
     DataTableComponent,
     ConfirmationDialogComponent,
     PatientEditFormDialogComponent,
