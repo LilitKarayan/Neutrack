@@ -19,13 +19,13 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
-import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
+// import { AddPatientComponent } from './nutritionist/add-patient/add-patient.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpErrorHandlerService } from './services/http-error-handler.service';
-import { AuthenticationService } from '@services/authentication.service';
+import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MessageService } from '@services/message.service';
+import { MessageService } from './services/message.service';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { MessageService } from '@services/message.service';
     SideNavComponent,
     ToolbarComponent,
     WelcomeComponent,
-    AddPatientComponent,
+    // AddPatientComponent,
   ],
   imports: [
     AppRoutingModule,
