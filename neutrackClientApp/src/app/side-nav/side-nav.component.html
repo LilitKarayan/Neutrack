@@ -1,14 +1,14 @@
-<div class="sidenav">
+<div *ngIf='roles.length > 0' class="sidenav">
     <div class="logo">
         <a href="/">
             <img class="apple_logo mat-elevation-z8" src="./../../assets/images/apple_logo.png"/>
         </a>
     </div>
     <ul class="nav">
-        <li><a routerlink="/" (click)="goToPage('')"><i class="fa fa-home"></i>Dashboard</a></li>
-        <li><a routerlink="/patients" (click)="goToPage('patients')"><i class="fa fa-users fa-lg"></i>Patients</a></li>
-        <li><a routerlink="/calculator" (click)="goToPage('calculator')"><i class="fas fa-calculator fa-lg"></i>Calculator</a></li>
-        <!-- <li class="active"><a routerlink="/calculator"><i class="fas fa-calculator fa-lg"></i>Calculator</a></li> -->
+        <li *ngIf='isNutritionist()' ><a routerLink="/dashboard"><i class="fa fa-home"></i>Dashboard</a></li>
+        <li *ngIf='isNutritionist()'><a routerLink="/patients"><i class="fa fa-users fa-lg"></i>Patients</a></li>
+        <li *ngIf='isNutritionist()'><a routerLink="/calculator"><i class="fas fa-calculator fa-lg"></i>Calculator</a></li>
+        <!-- <li class="active"><a routerLink="/calculator"><i class="fas fa-calculator fa-lg"></i>Calculator</a></li> -->
 
     </ul>
 </div>
