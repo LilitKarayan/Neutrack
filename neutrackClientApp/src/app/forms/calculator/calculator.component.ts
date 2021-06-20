@@ -14,6 +14,7 @@ export class CalculatorComponent implements OnInit {
   public goalDailyCalories: number;
   public form: FormGroup;
   public genders: string[];
+  public calculated: boolean;
 
   constructor() {}
 
@@ -32,6 +33,8 @@ export class CalculatorComponent implements OnInit {
       age: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
     });
+
+    this.calculated = false;
   }
 
   getCalculator(): object {
@@ -110,7 +113,7 @@ export class CalculatorComponent implements OnInit {
     this.calculator['gender'] = this.form.controls['age'].value;
   }
 
-  calculate() {
+  onSubmit() {
     this.getBmi(this.calculator['height'], this.calculator['weight']);
     this.getBmiCategory();
     this.currentDailyCalories = this.getDailyCalories(
@@ -128,6 +131,8 @@ export class CalculatorComponent implements OnInit {
       this.calculator['age'],
       this.calculator['activityLevel']
     );
+
+    this.calculated = true;
   }
 
   clear() {
