@@ -14,7 +14,7 @@ export class NutritionistGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const roles: any[] = this.authService.getLoggedUserRole();
-    if(roles.includes('Nutritionist')){
+    if(roles && roles.includes('Nutritionist')){
       return true;
     } else {
       this.router.navigateByUrl('/');

@@ -16,9 +16,9 @@ export class AutomaticLoginGuard implements CanActivate {
       return true;
     } else {
       const role: any[] = this.authService.getLoggedUserRole();
-      if(role.includes('Nutritionist')){
-        this.router.navigateByUrl('/nutritionist/dashboard')
-      } else if(role.includes('User')){
+      if(role && role.includes('Nutritionist')){
+        this.router.navigateByUrl('/dashboard')
+      } else if(role && role.includes('User')){
         this.router.navigateByUrl('/')
       }
       return false;

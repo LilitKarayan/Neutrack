@@ -11,7 +11,7 @@ export class WelcomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.title = 'Welcome to Neutrack App';
+    this.title = 'Welcome to Neutrack';
   }
 
 }
