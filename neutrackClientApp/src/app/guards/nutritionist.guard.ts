@@ -2,24 +2,29 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '@services/authentication.service';
+import { IUser } from '@models';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class NutritionistGuard implements CanActivate {
+  isUserLoggedIn: boolean;
+  activeUser: IUser;
+  roles:string[];
   constructor(private router: Router, private authService: AuthenticationService){
+    this.authService.user.subscribe(user => this.activeUser = user);
+    this.authService.userLoggedIn.subscribe(userLoggedIn => this.isUserLoggedIn = userLoggedIn);
+    this.authService.userRoles.subscribe(userRoles => this.roles = userRoles);
   }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const roles: any[] = this.authService.getLoggedUserRole();
-    if(roles && roles.includes('Nutritionist')){
+    if(this.roles && this.roles.includes('Nutritionist')){
       return true;
     } else {
-      this.router.navigateByUrl('/');
+      this.router.navigate(['/home']);
       return false;
     }
   }
-
 }

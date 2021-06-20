@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthenticationService } from '../services/authentication.service';
 import { IUser, IUserLogin } from '../shared/models';
@@ -11,13 +11,20 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent implements OnInit {
   @Input() inputSideNav: MatSidenav;
-  isUserLoggedIn = false;
+  @Input() isUserLoggedIn: boolean;
   activeUser: IUser;
+  roles:string[];
 
   constructor(private authService: AuthenticationService, private router:Router) {
-    this.activeUser = this.authService.getActiveUser();
+    this.authService.user.subscribe(user => this.activeUser = user);
+    this.authService.userLoggedIn.subscribe(userLoggedIn => this.isUserLoggedIn = userLoggedIn);
+    this.authService.userRoles.subscribe(userRoles => this.roles = userRoles);
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.authService.user.subscribe(user => this.activeUser = user);
+    this.isUserLoggedIn = this.authService.isLoggedIn();
 
+  }
   goToPage(pageName:String):void {
     this.router.navigate([`${pageName}`]);
   }
@@ -28,6 +35,7 @@ export class ToolbarComponent implements OnInit {
   }
   logout(): void {
     this.authService.logout();
+    this.goToPage('/home');
   }
 
 }

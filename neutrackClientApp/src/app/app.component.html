@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <app-toolbar [inputSideNav]= sideNav></app-toolbar>
+    <app-toolbar [isUserLoggedIn]='isUserLoggedIn' [inputSideNav]= sideNav></app-toolbar>
     <mat-sidenav-container >
         <mat-sidenav #sideNav mode="side" opened>
           <app-side-nav *ngIf="isUserLoggedIn" ></app-side-nav>

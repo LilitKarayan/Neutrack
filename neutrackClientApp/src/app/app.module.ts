@@ -49,8 +49,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { UserDataService } from './services/user-data.service';
 import { LoginComponent } from './forms/login/login.component';
-import { LoginService } from './services/loginService/login.service';
-import { SignUpNutritionistService } from './services/signUpNutritionistService/sign-up-nutritionist.service';
 
 @NgModule({
   declarations: [
@@ -114,9 +112,7 @@ import { SignUpNutritionistService } from './services/signUpNutritionistService/
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UserDataService,
-    LoginService,
-    SignUpNutritionistService, AuthenticationService, HttpErrorHandlerService, MessageService],
+  providers: [UserDataService, AuthenticationService, HttpErrorHandlerService, MessageService],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent],
   schemas: [

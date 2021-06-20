@@ -4,8 +4,8 @@ export interface IUser {
   password?:	string | null;
   firstName:	string;
   lastName:	string;
-  gender:	string;
-  dateOfBirth:	string;
+  gender?:	string;
+  dateOfBirth?:	string;
   goal?:	string | null;
   activityLevel?:	number | null;
   isActive?:	boolean | null
@@ -15,6 +15,8 @@ export interface IUser {
   fullName?: string | null;
   phoneNumber?: string | null;
   roles?: string[];
+  nutritionistId?: number | null;
+  patientId?: number | null;
 }
 export interface IUserLogin {
   email:	string;

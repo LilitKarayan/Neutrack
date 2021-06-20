@@ -11,7 +11,10 @@ namespace NeutrackAPI.Profiles
     {
         public UsersProfile()
         {
-            CreateMap<User, UserReadDTO>().ForMember(dest => dest.Roles, o => o.MapFrom(x => x.UserRoles.Select(x=>x.Role.Name)));
+            CreateMap<User, UserReadDTO>()
+                .ForMember(dest => dest.NutritionistId, o => o.MapFrom(x => x.Nutritionist.Id))
+                .ForMember(dest => dest.PatientId, o => o.MapFrom(x => x.Patient.Id))
+                .ForMember(dest => dest.Roles, o => o.MapFrom(x => x.UserRoles.Select(x=>x.Role.Name)));
             CreateMap<UserRole, UserRoleDTO>();
             CreateMap<UserCreateDTO, User>();
             CreateMap<PatientCreateDTO, User>();
