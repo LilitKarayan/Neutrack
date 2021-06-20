@@ -1,11 +1,11 @@
 <div class="container-fluid">
-    <app-toolbar [inputSideNav]=sideNav></app-toolbar>
-    <mat-sidenav-container>
+    <app-toolbar [inputSideNav]= sideNav></app-toolbar>
+    <mat-sidenav-container >
         <mat-sidenav #sideNav mode="side" opened>
-            <app-side-nav></app-side-nav>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+          <app-side-nav *ngIf="isUserLoggedIn" ></app-side-nav>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

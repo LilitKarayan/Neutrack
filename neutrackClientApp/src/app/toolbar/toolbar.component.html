@@ -1,6 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="sidenav-button"><i class="fas fa-bars" aria-hidden="true" (click)="inputSideNav.toggle()"></i></a>
+  <div class="container-fluid">
+    <a *ngIf="isUserLoggedIn" class="sidenav-button"><i class="fas fa-bars" aria-hidden="true" (click)="inputSideNav.toggle()"></i></a>
     <a class="navbar-brand">
         <a href="/" class="simple-text logo-mini">
             <div class="logo-img">
@@ -12,8 +13,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-auto ">
-            <li class="nav-item dropdown">
+        <ul  class="navbar-nav ms-auto ">
+            <li *ngIf="isUserLoggedIn" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="photo">
                         <img alt="Profile Photo" src="https://www.adobe.com/content/dam/cc/us/en/creativecloud/photography/discover/portrait-photography/CODERED_B1_portrait_photography-P4a_438x447.jpg.img.jpg" width="30" height="30">
@@ -25,7 +26,22 @@
                     <a class="dropdown-item"><mat-icon>exit_to_app</mat-icon> Sign Out</a>
                 </div>
             </li>
+            <li *ngIf="!isUserLoggedIn" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  Sign Up
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item"><i class="fa fa-user fa-sm"></i> Nutritionist</a>
+                  <a class="dropdown-item"><i class="fa fa-sign-out fa-sm" aria-hidden="true"> </i>Create a user account</a>
+              </div>
+          </li>
+          <li *ngIf="!isUserLoggedIn" class="nav-item">
+            <a class="nav-link" href="#" aria-expanded="false">
+                Log In
+            </a>
+        </li>
         </ul>
     </div>
-    <button (click)="loginUser()">Login</button>
+  </div>
+
   </nav>

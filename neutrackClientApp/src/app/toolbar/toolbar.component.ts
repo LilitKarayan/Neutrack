@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
   @Input() inputSideNav: MatSidenav;
   testLogin: IUserLogin
+  isUserLoggedIn = false;
+  
   constructor(private authService: AuthenticationService, private router:Router) {
 
   }
@@ -21,6 +23,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isUserLoggedIn = this.authService.isLoggedIn();
     this.testLogin = {
       email: '',
       password: ''
