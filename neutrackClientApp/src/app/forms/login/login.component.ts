@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../services/authentication.service';
+import { IUserLogin } from '@models';
 //import { LoginService } from 'src/app/services/loginService/login.service';
 
 @Component({
@@ -10,8 +12,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   // public initialObject: object;
   public form: FormGroup;
+  loginInfo: IUserLogin;
 
-  constructor() {}
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -19,25 +22,23 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl(''),
     });
-    // this.initialObject = {};
-    // this.initializeValues();
+
+  }
+
+  defaultLoginInfo(): void{
+    this.loginInfo.email ='';
+    this.loginInfo.password = '';
+  }
+  onSubmit(): void {
+    const formData = this.form.getRawValue();
+    const addedEntity = {...this.loginInfo, ...formData};
+    this.authService.login(addedEntity);
+    console.log('Form data', formData);
+    console.log('addedEntity', addedEntity);
   }
 
   clear() {
     console.log('working');
     this.form.reset('');
-    //this.initializeForm;
   }
-
-  // initializeForm() {
-  //   this.form.setValue({
-  //     email: '',
-  //     password: ''
-  //   })
-  // }
-
-  // initializeValues() {
-  //   this.initialObject['email'] = "";
-  //   this.initialObject['password'] = "";
-  // }
 }

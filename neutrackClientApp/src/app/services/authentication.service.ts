@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import {useTestApi, getApiRoute } from '../../environments/environment';
 import { IUser, IUserLogin } from '@models';
-import { userLoginEndpoint, userSignUpEndpoint } from '../../config/api.config';
+import { userLoginEndpoint, userSignUpEndpoint, nutritionistSignUpEndpoint } from '../../config/api.config';
 import {
   HttpErrorHandlerService,
   HandleError,
@@ -24,9 +25,10 @@ const httpOptions = {
 })
 export class AuthenticationService {
   private handleError: HandleError;
-  user:any;
+  user:IUser;
 
   constructor(private http: HttpClient,
+    private router: Router,
     httpErrorHandler: HttpErrorHandlerService) {
       this.handleError = httpErrorHandler.createHandleError('AuthenticationService');
       // useTestApi();
@@ -35,12 +37,26 @@ export class AuthenticationService {
   public isLoggedIn(){
     return moment().isBefore(this.getExpiration());
   }
+  getActiveUser():IUser{
+    return this.user;
+  }
   login(loginInfo: IUserLogin) {
-     this.http.post(getApiRoute(userLoginEndpoint), loginInfo, httpOptions).subscribe(res => {
+     this.http.post<IUser>(getApiRoute(userLoginEndpoint), loginInfo, httpOptions).subscribe(res => {
+       this.user = res;
+       console.log('response', res);
        this.setSession(res);
+       this.router.navigateByUrl('/home');
      }, err => {
        this.handleError(err);
      });
+  }
+  signUpNutritionist(userInfo: IUser) {
+    this.http.post<IUser>(getApiRoute(nutritionistSignUpEndpoint), userInfo, httpOptions).subscribe(res => {
+      this.router.navigateByUrl('/login');
+    }, err => {
+      console.log(err);
+      this.handleError(err);
+    });
   }
   private setSession(authResult: any) {
     if(authResult.token){
@@ -54,6 +70,7 @@ export class AuthenticationService {
   logout() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("expires_at");
+    this.router.navigateByUrl('/home');
   }
   isLoggedOut() {
     return !this.isLoggedIn();

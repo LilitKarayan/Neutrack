@@ -5,7 +5,7 @@
         <h1>Login</h1>
       </div>
 
-      <form [formGroup]="form" class="normal-form">
+      <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
         <div class="theContainer">
           <mat-label>*Email</mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">

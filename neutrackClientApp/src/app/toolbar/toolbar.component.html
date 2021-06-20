@@ -19,11 +19,11 @@
                     <div class="photo">
                         <img alt="Profile Photo" src="https://www.adobe.com/content/dam/cc/us/en/creativecloud/photography/discover/portrait-photography/CODERED_B1_portrait_photography-P4a_438x447.jpg.img.jpg" width="30" height="30">
                     </div>
-                    Name Surname
+                    {{activeUser.firstName}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a crouterlink="/account" (click)="goToPage('account')" class="dropdown-item"><mat-icon>account_box</mat-icon> My account</a>
-                    <a class="dropdown-item"><mat-icon>exit_to_app</mat-icon> Sign Out</a>
+                    <a routerLink="/account" (click)="goToPage('account')" class="dropdown-item"><mat-icon>account_box</mat-icon> My account</a>
+                    <a class="dropdown-item" (click)="logout()"><mat-icon>exit_to_app</mat-icon> Sign Out</a>
                 </div>
             </li>
             <li *ngIf="!isUserLoggedIn" class="nav-item dropdown">
@@ -31,12 +31,12 @@
                   Sign Up
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item"><i class="fa fa-user fa-sm"></i> Nutritionist</a>
-                  <a class="dropdown-item"><i class="fa fa-sign-out fa-sm" aria-hidden="true"> </i>Create a user account</a>
+                  <a routerLink="/signup" class="dropdown-item"><i class="fa fa-user fa-sm"></i> Nutritionist</a>
+                  <!-- <a class="dropdown-item"><i class="fa fa-sign-out fa-sm" aria-hidden="true"> </i>Create a user account</a> -->
               </div>
           </li>
           <li *ngIf="!isUserLoggedIn" class="nav-item">
-            <a class="nav-link" href="#" aria-expanded="false">
+            <a routerLink="/login" class="nav-link" aria-expanded="false">
                 Log In
             </a>
         </li>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { SignUpNutritionistService } from 'src/app/services/signUpNutritionistService/sign-up-nutritionist.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { IUser } from '@models';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,16 +13,9 @@ export class SignUpComponent implements OnInit {
   public genders: string[];
   public nutritionist: Object;
   public form: FormGroup;
-  // public heightFeet: number;
-  // public heightInches: number;
-  // public genders: string[];
+  nutritionistInfo:IUser;
 
-  // public theRoles: string[];
-  // public userDynamicInfo: string;
-
-  // public initialObject: object;
-
-  constructor() {
+  constructor(private authService: AuthenticationService) {
 
   }
 
@@ -59,15 +53,22 @@ export class SignUpComponent implements OnInit {
     })
   }
 
-  generateNutritionist(): void {
-    this.nutritionist['email'] = this.form.controls['email'].value
-    this.nutritionist['password'] = this.form.controls['password'].value
-    this.nutritionist['firstName'] = this.form.controls['firstName'].value
-    this.nutritionist['lastName'] = this.form.controls['lastName'].value
-    this.nutritionist['dateOfBirth'] = this.form.controls['dateOfBirth'].value
-    this.nutritionist['phoneNumber'] = this.form.controls['phoneNumber'].value
-    this.nutritionist['gender'] = this.form.controls['gender'].value
-    this.nutritionist['yearsOfExperience'] = this.form.controls['yearsOfExperience'].value
+  defaultNutritionistObject(): void {
+    this.nutritionistInfo.email = '';
+    this.nutritionistInfo.password = '';
+    this.nutritionistInfo.firstName = '';
+    this.nutritionistInfo.lastName = '';
+    this.nutritionistInfo.dateOfBirth = '';
+    this.nutritionistInfo.phoneNumber = '';
+    this.nutritionistInfo.gender = '';
+    this.nutritionistInfo.yearsOfExperience = 0;
+  }
+  onSubmit(): void {
+    const formData = this.form.getRawValue();
+    const addedEntity = {...this.nutritionistInfo, ...formData};
+    this.authService.signUpNutritionist(addedEntity);
+    console.log('Form data', formData);
+    console.log('addedEntity', addedEntity);
   }
 
   clear() {
@@ -75,60 +76,4 @@ export class SignUpComponent implements OnInit {
     this.initializeForm;
   }
 
-  signUp() {
-    this.generateNutritionist();
-    console.log(this.getNutritionist());
-  }
-  // ngOnInit(): void {
-  //   this.initialObject = {};
-  //   this.initializeValues();
-  // }
-
-  // initializeValues(): void  {
-  //   this.genders = ['Male', 'Female'];
-  //   this.heightFeet = null;
-  //   this.heightInches = null;
-
-  //   this.theRoles = [
-  //     'Nutritionist', 'Patient'
-  //   ];
-
-  //   this.initialObject['selectedRole'] = '';
-  //   this.initialObject['email'] = '';
-  //   this.initialObject['password'] = '';
-  //   this.initialObject['firstName'] = '';
-  //   this.initialObject['lastName'] = '';
-  //   this.initialObject['dateOfBirth'] = '';
-  //   this.initialObject['phoneNumber'] = '';
-  //   this.initialObject['selectedGender'] = '';
-  //   this.initialObject['height'] = null;
-  //   this.initialObject['weight'] = null;
-  //   this.initialObject['yearsOfExperience'] = null;
-  //   this.initialObject['activityLevel'] = null;
-  //   this.initialObject['goal'] = '';
-  // }
-
-  // signUp(): void  {
-  //   this.initialObject['height'] = parseFloat(this.heightFeet + '.' + this.heightInches);
-
-  //   for(let [key, value] of Object.entries(this.initialObject)) {
-  //     this.userDataService.addSignUpInfo(key, value);
-  //   }
-
-  //   console.log(this.userDataService.getSignUpInfo());
-  // }
-
-  // radioChangeHandlerRole(event: any): void  {
-  //   this.initialObject['selectedRole'] = event.target.value;
-
-  //   if(this.initialObject['selectedRole'] === 'nutritionist') {
-  //     this.userDynamicInfo = 'Years of Experience';
-  //   } else {
-  //     this.userDynamicInfo = 'Activity Level';
-  //   }
-  // }
-
-  // radioChangeHandlerGender(event: any): void  {
-  //   this.initialObject['selectedGender'] = event.target.value;
-  // }
 }

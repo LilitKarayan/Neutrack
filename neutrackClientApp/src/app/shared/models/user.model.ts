@@ -15,7 +15,6 @@ export interface IUser {
   fullName?: string | null;
   phoneNumber?: string | null;
   roles?: string[];
-  token?: string | null;
 }
 export interface IUserLogin {
   email:	string;

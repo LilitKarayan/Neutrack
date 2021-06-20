@@ -52,7 +52,6 @@ import { LoginComponent } from './forms/login/login.component';
 import { LoginService } from './services/loginService/login.service';
 import { SignUpNutritionistService } from './services/signUpNutritionistService/sign-up-nutritionist.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,

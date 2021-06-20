@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent implements OnInit {
   @Input() inputSideNav: MatSidenav;
-  testLogin: IUserLogin
   isUserLoggedIn = false;
-  
-  constructor(private authService: AuthenticationService, private router:Router) {
+  activeUser: IUser;
 
+  constructor(private authService: AuthenticationService, private router:Router) {
+    this.activeUser = this.authService.getActiveUser();
   }
 
   goToPage(pageName:String):void {
@@ -23,15 +23,11 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activeUser = this.authService.getActiveUser();
     this.isUserLoggedIn = this.authService.isLoggedIn();
-    this.testLogin = {
-      email: '',
-      password: ''
-    }
   }
-
-  async loginUser() {
-    this.authService.login(this.testLogin);
+  logout(): void {
+    this.authService.logout();
   }
 
 }
