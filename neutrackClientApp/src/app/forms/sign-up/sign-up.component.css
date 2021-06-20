@@ -1,0 +1,90 @@
+#signUpNutritionist {
+  padding-top: 25px;
+  min-height: 120vh;
+  background-image: url("../../../assets/images/neutrackLogin3.jpg");
+  background-position: center;
+}
+
+mat-card {
+  max-width: 600px;
+  margin: 2em auto;
+  text-align: center;
+  max-height: 1400px;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
+  background-color: white;
+}
+
+mat-radio-group mat-radio-button {
+  margin-left: 10px;
+}
+
+mat-error {
+  text-align: center;
+  color: red;
+}
+
+input {
+  padding: 8px;
+}
+
+form.normal-form {
+  margin: 10px;
+}
+
+.normal-full-width {
+  width: 80%;
+}
+
+.theContainer {
+  width: 100%;
+  padding: 5%;
+}
+
+.theContainer > * {
+  width: 100%;
+}
+
+form button {
+  margin: 10px;
+}
+
+button.button-row-submit:hover {
+  background-color: lightblue;
+}
+
+button.button-row-clear:hover {
+  background-color: lightsalmon;
+}
+
+/*
+div
+{
+    margin: 0;
+    padding: 0;
+}
+
+#signingUp {
+    padding-top: 25px;
+    background-image: url("../../../assets/images/neutrackSignUp1.jpg");
+    background-position: center;
+}
+
+h1
+{
+    text-align: center;
+}
+form
+{
+    padding: 10px;
+    width: 600px;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+    background-color: whitesmoke;
+}
+
+form, label 
+{
+    font-family: sans-serif;
+    font-weight: bold;
+}
+*/

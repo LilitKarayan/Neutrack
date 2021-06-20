@@ -19,6 +19,12 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
@@ -40,6 +46,12 @@ import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from './services/message.service';
 
+import { SignUpComponent } from './forms/sign-up/sign-up.component';
+import { UserDataService } from './services/user-data.service';
+import { LoginComponent } from './forms/login/login.component';
+import { LoginService } from './services/loginService/login.service';
+import { SignUpNutritionistService } from './services/signUpNutritionistService/sign-up-nutritionist.service';
+
 
 @NgModule({
   declarations: [
@@ -53,6 +65,8 @@ import { MessageService } from './services/message.service';
     SideNavComponent,
     ToolbarComponent,
     WelcomeComponent,
+    SignUpComponent,
+    LoginComponent,
     DataTableComponent,
     ConfirmationDialogComponent,
     PatientEditFormDialogComponent,
@@ -68,6 +82,12 @@ import { MessageService } from './services/message.service';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatInputModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
     MatDialogModule,
     RouterModule,
     FormsModule,
@@ -89,9 +109,13 @@ import { MessageService } from './services/message.service';
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthenticationService, HttpErrorHandlerService, MessageService],
+  providers: [UserDataService,
+    LoginService,
+    SignUpNutritionistService, AuthenticationService, HttpErrorHandlerService, MessageService],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent],
   schemas: [
