@@ -8,14 +8,7 @@
       "TRACE",
       "DEBUG",
       "NETCOREAPP",
-      "NETCOREAPP3_1",
-      "NETCOREAPP1_0_OR_GREATER",
-      "NETCOREAPP1_1_OR_GREATER",
-      "NETCOREAPP2_0_OR_GREATER",
-      "NETCOREAPP2_1_OR_GREATER",
-      "NETCOREAPP2_2_OR_GREATER",
-      "NETCOREAPP3_0_OR_GREATER",
-      "NETCOREAPP3_1_OR_GREATER"
+      "NETCOREAPP3_1"
     ],
     "languageVersion": "8.0",
     "platform": "",
@@ -29,7 +22,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "neutrackAPI/1.0.0": {
+      "NeutrackAPI/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.0",
@@ -311,10 +304,10 @@
           "WindowsBase": "4.0.0.0"
         },
         "runtime": {
-          "neutrackAPI.dll": {}
+          "NeutrackAPI.dll": {}
         },
         "compile": {
-          "neutrackAPI.dll": {}
+          "NeutrackAPI.dll": {}
         }
       },
       "AutoMapper/10.1.1": {
@@ -3076,7 +3069,7 @@
     }
   },
   "libraries": {
-    "neutrackAPI/1.0.0": {
+    "NeutrackAPI/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
