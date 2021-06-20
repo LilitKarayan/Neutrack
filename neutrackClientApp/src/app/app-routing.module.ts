@@ -22,7 +22,6 @@ const routes: Routes = [
   {path: 'patient-info', component: PatientInfoComponent, canActivate: [NutritionistGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignUpComponent},
-
 ];
 
 @NgModule({

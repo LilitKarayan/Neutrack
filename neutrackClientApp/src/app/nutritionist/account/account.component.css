@@ -1,0 +1,17 @@
+.accountComponent {
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
+    overflow: auto;
+    /* height: 550px; */
+    height: calc(100vh - 100px);
+}
+
+.accountContent {
+    margin: 30px;
+}
+
+h1 {
+    color: #084a3a;
+    font-weight: bold;
+}
