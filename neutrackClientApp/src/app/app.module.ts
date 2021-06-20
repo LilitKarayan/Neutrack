@@ -51,6 +51,7 @@ import { UserDataService } from './services/user-data.service';
 import { LoginComponent } from './forms/login/login.component';
 import { LoginService } from './services/loginService/login.service';
 import { SignUpNutritionistService } from './services/signUpNutritionistService/sign-up-nutritionist.service';
+import { CalculatorFormComponent } from './forms/calculator-form/calculator-form.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { SignUpNutritionistService } from './services/signUpNutritionistService/
     PatientEditFormDialogComponent,
     PatientAddFormDialogComponent,
     PatientInfoComponent,
+    CalculatorFormComponent,
   ],
   imports: [
     AppRoutingModule,

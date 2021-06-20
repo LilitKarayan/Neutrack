@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-calculator',
-  templateUrl: './calculator.component.html',
-  styleUrls: ['./calculator.component.css'],
+  selector: 'app-calculator-form',
+  templateUrl: './calculator-form.component.html',
+  styleUrls: ['./calculator-form.component.css']
 })
-export class CalculatorComponent implements OnInit {
+export class CalculatorFormComponent implements OnInit {
   public calculator: object;
   public bmiInt: number;
   public bmiCategory: string;
@@ -138,4 +138,5 @@ export class CalculatorComponent implements OnInit {
   clear() {
     this.form.reset('');
   }
+
 }
