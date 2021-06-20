@@ -49,6 +49,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { UserDataService } from './services/user-data.service';
 import { LoginComponent } from './forms/login/login.component';
+import { CalculatorFormComponent } from './forms/calculator-form/calculator-form.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { LoginComponent } from './forms/login/login.component';
     PatientEditFormDialogComponent,
     PatientAddFormDialogComponent,
     PatientInfoComponent,
+    CalculatorFormComponent,
   ],
   imports: [
     AppRoutingModule,
