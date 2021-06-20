@@ -26,10 +26,8 @@ import { MatRadioModule } from '@angular/material/radio';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
@@ -45,6 +43,8 @@ import { HttpErrorHandlerService } from './services/http-error-handler.service';
 import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from './services/message.service';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { UserDataService } from './services/user-data.service';
@@ -76,6 +76,8 @@ import { SignUpNutritionistService } from './services/signUpNutritionistService/
   imports: [
     AppRoutingModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     BrowserAnimationsModule,
     MatSliderModule,

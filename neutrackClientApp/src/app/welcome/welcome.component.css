@@ -1,0 +1,10 @@
+.landing{
+  background-image:url('../../assets/images/landing.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  background-color: #cccccc;
+  height: 100%;
+  opacity:1;
+}

@@ -10,11 +10,13 @@ import { IUser, IUserLogin } from '../shared/models';
 export class ToolbarComponent implements OnInit {
   @Input() inputSideNav: MatSidenav;
   testLogin: IUserLogin
+  isUserLoggedIn = false;
   constructor(private authService: AuthenticationService) {
 
   }
 
   ngOnInit(): void {
+    this.isUserLoggedIn = this.authService.isLoggedIn();
     this.testLogin = {
       email: '',
       password: ''

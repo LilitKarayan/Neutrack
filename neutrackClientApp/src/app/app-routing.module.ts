@@ -8,16 +8,21 @@ import { PatientsComponent } from './nutritionist/patients/patients.component';
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { LoginComponent } from './forms/login/login.component';
 import { PatientInfoComponent } from './nutritionist/patients/patient-info/patient-info.component';
-
+import { WelcomeComponent } from './welcome/welcome.component';
+import { AutomaticLoginGuard } from './guards/automatic-login.guard';
+import { NutritionistGuard } from './guards/nutritionist.guard';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
-  {path: 'account', component: AccountComponent},
-  {path: 'calculator', component: CalculatorComponent},
-  {path: 'patients', component: PatientsComponent},
+  {path: 'home', component: WelcomeComponent, canActivate: [AutomaticLoginGuard]},
+  {path: '', redirectTo:'home', pathMatch: 'full'},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [NutritionistGuard]},
+  {path: 'account', component: AccountComponent, canActivate: [NutritionistGuard]},
+  {path: 'calculator', component: CalculatorComponent, canActivate: [NutritionistGuard]},
+  {path: 'patients', component: PatientsComponent, canActivate: [NutritionistGuard]},
+  {path: 'patient-info', component: PatientInfoComponent, canActivate: [NutritionistGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignUpComponent},
-  {path: 'calculator', component: CalculatorComponent}
+
 ];
 
 @NgModule({
