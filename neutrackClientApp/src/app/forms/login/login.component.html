@@ -20,16 +20,21 @@
         </div>
 
         <div class="theContainer">
-          <mat-label>Password: between 8-16 characters*</mat-label>
+          <mat-label>Password*</mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
             <input
               formControlName="password"
               matInput
               type="password"
-              minlength="8"
-              maxlength="16"
-              pattern="[a-zA-Z0-9@!]{8,16}"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,16}"
             />
+            <ul>
+              <li>8-16 characters</li>
+              <li>1 lower case character</li>
+              <li>1 upper case character</li>
+              <li>1 numerical character</li>
+              <li>1 special character</li>
+            </ul>
             <mat-error
               *ngIf="form.controls['password'].errors?.required"
               >Password is mandatory</mat-error

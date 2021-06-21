@@ -6,6 +6,9 @@ import { MatInputModule } from '@angular/material/input';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpErrorHandlerService } from '../../services/http-error-handler.service';
+import { MessageService } from '../../services/message.service';
 
 import { LoginComponent } from './login.component';
 
@@ -20,7 +23,8 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
-      imports: [MatCardModule, MatInputModule, ReactiveFormsModule, MatFormFieldModule]
+      imports: [MatCardModule, MatInputModule, ReactiveFormsModule, MatFormFieldModule, RouterTestingModule, HttpClientModule],
+      providers: [HttpErrorHandlerService, MessageService]
     })
     .compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
@@ -85,7 +89,7 @@ describe('LoginComponent', () => {
 
     component.form.setValue({
       email: 'test',
-      password: 'uwG-1234'
+      password: 'Medicine1531!'
     })
 
     expect(component.form.controls['email'].invalid).toEqual(true);
@@ -97,7 +101,7 @@ describe('LoginComponent', () => {
 
     component.form.setValue({
       email: 'test@test.com',
-      password: 'uwG-1234'
+      password: 'Medicine1531!'
     })
 
     expect(component.form.controls['email'].invalid).toEqual(false);

@@ -10,7 +10,6 @@ import { IUserLogin } from '@models';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  // public initialObject: object;
   public form: FormGroup;
   loginInfo: IUserLogin;
   returnToUrl: string = '';
