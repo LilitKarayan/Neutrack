@@ -50,6 +50,7 @@ import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { UserDataService } from './services/user-data.service';
 import { LoginComponent } from './forms/login/login.component';
 import { InterceptorService } from '@services/interceptor.service';
+import { CalculatorFormComponent } from './forms/calculator-form/calculator-form.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { InterceptorService } from '@services/interceptor.service';
     PatientEditFormDialogComponent,
     PatientAddFormDialogComponent,
     PatientInfoComponent,
+    CalculatorFormComponent,
   ],
   imports: [
     AppRoutingModule,

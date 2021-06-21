@@ -7,7 +7,7 @@
 
       <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
         <div class="theContainer">
-          <mat-label>*Email</mat-label>
+          <mat-label>Email*</mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
             <input formControlName="email" matInput />
             <mat-error *ngIf="form.controls['email'].errors?.email"
@@ -20,7 +20,7 @@
         </div>
 
         <div class="theContainer">
-          <mat-label>*Password: minimum length of 5 characters</mat-label>
+          <mat-label>Password: minimum length of 5 characters*</mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
             <input
               formControlName="password"
