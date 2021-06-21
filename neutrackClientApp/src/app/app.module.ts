@@ -41,7 +41,7 @@ import { PatientInfoComponent } from './nutritionist/patients/patient-info/patie
 import { CommonModule } from '@angular/common';
 import { HttpErrorHandlerService } from './services/http-error-handler.service';
 import { AuthenticationService } from './services/authentication.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MessageService } from './services/message.service';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -49,6 +49,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { UserDataService } from './services/user-data.service';
 import { LoginComponent } from './forms/login/login.component';
+import { InterceptorService } from '@services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,12 @@ import { LoginComponent } from './forms/login/login.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UserDataService, AuthenticationService, HttpErrorHandlerService, MessageService],
+  providers: [UserDataService,
+    AuthenticationService,
+    HttpErrorHandlerService,
+    MessageService,
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent],
   schemas: [
