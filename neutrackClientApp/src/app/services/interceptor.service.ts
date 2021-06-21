@@ -3,11 +3,16 @@ import { HttpInterceptor, HttpEvent, HttpResponse, HttpRequest, HttpHandler, Htt
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/do';
 import { Router } from '@angular/router';
+import {useTestApi, getApiRoute } from '../../environments/environment';
+import { userLoginEndpoint, userSignUpEndpoint, nutritionistSignUpEndpoint } from '../../config/api.config';
 
 
+const loginUrl = userLoginEndpoint;
+const nutritionistSignupUrl = nutritionistSignUpEndpoint;
 @Injectable({
   providedIn: 'root'
 })
+
 export class InterceptorService implements HttpInterceptor {
   private errorsSubject: BehaviorSubject<string>;
   public error: Observable<string>;
@@ -32,17 +37,42 @@ export class InterceptorService implements HttpInterceptor {
     return next.handle(req).do((event: HttpEvent<any>) => {
       if(event instanceof HttpResponse){
         if(event.ok){
-          this.messageSubject.next('Your request was successfully processed');
+          if(req.url.includes(loginUrl) && event.body.roles){
+            event.body.roles.includes('Nutritionist')?this.router.navigateByUrl('/dashboard'):this.router.navigateByUrl('/home');
+          } else if(req.url.includes(nutritionistSignupUrl)){
+            this.router.navigateByUrl('/login');
+          }
         }
       }
     }, (err: any) => {
       if(err instanceof HttpErrorResponse){
-        if(err.status === 401){
-          this.router.navigateByUrl('/login');
-        } else {
-          this.errorsSubject.next(err.message);
+        let errors = []
+        if(err.error.errors){
+          const errorKey = Object.keys(err.error.errors);
+          errorKey.forEach(key => {
+            errors.push(err.error.errors[key]);
+          });
         }
+        if(err.status === 401){
+          errors.push('Sorry you do not have access to view this page.');
+          this.router.navigateByUrl('/login');
+        } else if ([0, 405, 422].includes(err.status))
+        {
+          errors.push('Unable to connect to server. Please try again later');
+        } else if ([400, 403].includes(err.status))
+        {
+          errors.push('You have submitted invalid data');
+        }
+         else {
+          errors.push(err.message);
+        }
+        window.alert(errors.join('\n'));
       }
     })
   }
 }
+// if(res.roles.includes('Nutritionist')){
+
+// }else {
+//   this.router.navigateByUrl('/home');
+// }

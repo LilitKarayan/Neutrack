@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
-
+import { MatDialog } from '@angular/material/dialog';
 import { DataTableComponent } from './data-table.component';
 
 describe('DataTableComponent', () => {
@@ -11,7 +11,7 @@ describe('DataTableComponent', () => {
   })
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DataTableComponent ]
+      declarations: [ DataTableComponent , MatDialog]
     })
     .compileComponents();
     fixture = TestBed.createComponent(DataTableComponent);

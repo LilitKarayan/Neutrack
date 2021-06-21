@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
     const formData = this.form.getRawValue();
     const loginData = {...this.loginInfo, ...formData};
      this.authService.login(loginData);
-     this.router.navigateByUrl('/home');
   }
 
   clear() {
