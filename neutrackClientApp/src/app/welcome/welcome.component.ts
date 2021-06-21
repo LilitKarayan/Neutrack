@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
   title: string;
-  info: string;
+  nutritionistInfo: string;
+  patientInfo: string;
   roles:string[];
   getRole(){
     this.authService.userRoles.subscribe(userRoles => this.roles = userRoles);
@@ -24,6 +25,8 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
     this.getRole();
     this.title = 'Welcome to Neutrack';
+    this.nutritionistInfo = 'Join as a nutritionist and start managing your patients fitness';
+    this.patientInfo = 'Create an account and connect with registered dieticians and nutritionist';
   }
 
 }

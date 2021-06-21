@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a *ngIf="isUserLoggedIn" class="sidenav-button"><i class="fas fa-bars" aria-hidden="true" (click)="inputSideNav.toggle()"></i></a>
-    <a class="navbar-brand">
+    <a class="ps-5 navbar-brand">
         <a href="/" class="simple-text logo-mini">
             <div class="logo-img">
                 <img src="./../../assets/images/neutrack_logo.png">
@@ -12,7 +12,7 @@
     <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="pe-5 collapse navbar-collapse" id="navbarNavDropdown">
         <ul  class="navbar-nav ms-auto ">
             <li *ngIf="isUserLoggedIn" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,9 +36,7 @@
               </div>
           </li>
           <li *ngIf="!isUserLoggedIn" class="nav-item">
-            <a routerLink="/login" class="nav-link" aria-expanded="false">
-                Log In
-            </a>
+            <a routerLink="/login" class="nav-link" aria-expanded="false">Login</a>
         </li>
         </ul>
     </div>
