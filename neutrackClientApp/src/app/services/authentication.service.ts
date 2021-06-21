@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import {useTestApi, getApiRoute } from '../../environments/environment';
 import { IUser, IUserLogin } from '@models';
-import { userLoginEndpoint, userSignUpEndpoint } from '../../config/api.config';
+import { userLoginEndpoint, userSignUpEndpoint, nutritionistSignUpEndpoint } from '../../config/api.config';
 import {
   HttpErrorHandlerService,
   HandleError,
@@ -23,11 +24,36 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthenticationService {
+  private userSubject: BehaviorSubject<IUser>;
+  private isLoggedInSubject: BehaviorSubject<boolean>;
+  private isLoggedOutSubject: BehaviorSubject<boolean>;
+  private rolesSubject: BehaviorSubject<string[]>;
+  public user: Observable<IUser>;
+  public userLoggedIn: Observable<boolean>;
+  public userLoggedOut: Observable<boolean>;
+  public userRoles: Observable<any[]>;
+
   private handleError: HandleError;
-  user:any;
 
   constructor(private http: HttpClient,
+    private router: Router,
     httpErrorHandler: HttpErrorHandlerService) {
+      this.userSubject = new BehaviorSubject<IUser>(
+        this.getActiveUser()
+      );
+      this.rolesSubject = new BehaviorSubject<string[]>(
+        this.getLoggedUserRole()
+      );
+      this.isLoggedInSubject = new BehaviorSubject<boolean>(
+        this.isLoggedIn()
+      );
+      this.isLoggedOutSubject = new BehaviorSubject<boolean>(
+        this.isLoggedOut()
+      );
+      this.user = this.userSubject.asObservable();
+      this.userRoles = this.rolesSubject.asObservable();
+      this.userLoggedIn = this.isLoggedInSubject.asObservable();
+      this.userLoggedOut = this.isLoggedOutSubject.asObservable();
       this.handleError = httpErrorHandler.createHandleError('AuthenticationService');
       // useTestApi();
   }
@@ -35,25 +61,70 @@ export class AuthenticationService {
   public isLoggedIn(){
     return moment().isBefore(this.getExpiration());
   }
-  login(loginInfo: IUserLogin) {
-     this.http.post(getApiRoute(userLoginEndpoint), loginInfo, httpOptions).subscribe(res => {
-       this.setSession(res);
-     }, err => {
-       this.handleError(err);
-     });
+  public get userValue(): IUser {
+    return this.userSubject.value;
   }
-  private setSession(authResult: any) {
-    if(authResult.token){
-      const decodedToken: any = jwt_decode(authResult.token);
-      console.log('decoded', decodedToken);
+  getActiveUser():IUser{
+    const token = localStorage.getItem("access_token");
+    if(token){
+      const data:any = jwt_decode(token)
+      const currentUser: IUser = {
+        email: data.email,
+        firstName: data.given_name,
+        id: data.unique_name,
+        lastName: data.family_name,
+        patientId: data.upn?data.upn:null,
+        nutritionistId: data.actor?data.actor:null,
+      }
+      return currentUser;
+    }
+    return null;
+  }
+  login(loginInfo: IUserLogin) {
+      this.http.post<any>(getApiRoute(userLoginEndpoint), loginInfo, httpOptions).subscribe(res => {
+      let user: IUser = {
+        email: res.email,
+        firstName: res.firstName,
+        id: res.id,
+        lastName: res.lastName,
+        patientId: res.patientId,
+        nutritionistId: res.nutritionistId
+      }
+      this.rolesSubject.next(res.roles);
+      this.setSession(res.token);
+      this.userSubject.next(user);
+      this.isLoggedInSubject.next(true);
+      this.isLoggedOutSubject.next(false);
+   }, error =>{
+     console.log(error)
+    this.handleError(error)
+
+  });
+
+  }
+
+
+  signUpNutritionist(userInfo: IUser) {
+    return this.http.post<IUser>(getApiRoute(nutritionistSignUpEndpoint), userInfo, httpOptions).pipe(
+      catchError(this.handleError<any>('sign up error'))
+    );
+  }
+
+  private setSession(token: any) {
+    if(token){
+      const decodedToken: any = jwt_decode(token);
       const expiresAt = moment().add(decodedToken.exp,'second');
-      localStorage.setItem('access_token', authResult.token);
+      localStorage.setItem('access_token', token);
       localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
     }
 }
   logout() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("expires_at");
+    this.userSubject.next(null);
+    this.rolesSubject.next(null);
+    this.isLoggedInSubject.next(false);
+    this.isLoggedOutSubject.next(true);
   }
   isLoggedOut() {
     return !this.isLoggedIn();
@@ -64,12 +135,13 @@ export class AuthenticationService {
         return moment(expiresAt);
   }
   getLoggedUserRole(){
-    if(this.isLoggedIn()){
-      const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem("access_token");
       const decodedToken: any = token ? jwt_decode(token) : {};
-      return decodedToken.role ? decodedToken.role : null;
-    }
-    return null;
+      if (decodedToken.role && Array.isArray(decodedToken.role)){
+        return decodedToken.role
+      }
+      const roles = decodedToken.role ?  [decodedToken.role] : [];
+      return roles;
   }
   getAccessToken(){
     const token = localStorage.getItem("access_token");

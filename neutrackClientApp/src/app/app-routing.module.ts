@@ -20,8 +20,8 @@ const routes: Routes = [
   {path: 'calculator', component: CalculatorComponent, canActivate: [NutritionistGuard]},
   {path: 'patients', component: PatientsComponent, canActivate: [NutritionistGuard]},
   {path: 'patient-info', component: PatientInfoComponent, canActivate: [NutritionistGuard]},
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignUpComponent},
+  {path: 'login', component: LoginComponent, canActivate: [AutomaticLoginGuard]},
+  {path: 'signup', component: SignUpComponent, canActivate: [AutomaticLoginGuard]},
 ];
 
 @NgModule({

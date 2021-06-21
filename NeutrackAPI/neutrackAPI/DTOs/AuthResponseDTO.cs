@@ -14,6 +14,8 @@ namespace NeutrackAPI.DTOs
         public string FullName { get; set; }
         public string Token { get; set; }
         public List<string> Roles { get; set; }
+        public int? NutritionistId { get; set; }
+        public int? PatientId { get; set; }
         public AuthResponseDTO(User user, string token)
         {
             Id = user.Id;
@@ -23,6 +25,8 @@ namespace NeutrackAPI.DTOs
             FullName  = user.FullName;
             Token = token;
             Roles = user.UserRoles.Select(x => x.Role.Name).ToList();
+            NutritionistId = user.Nutritionist == null ? 0 : user.Nutritionist.Id;
+            PatientId = user.Patient == null ? 0 : user.Patient.Id;
         }
     }
 }

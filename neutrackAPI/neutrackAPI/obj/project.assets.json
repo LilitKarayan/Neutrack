@@ -5748,26 +5748,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Apollo\\.nuget\\packages\\": {}
+    "/Users/mide/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Apollo\\Documents\\MS Comp Science Current Semester\\CS6290 - Project II\\Neutrack\\NeutrackAPI\\neutrackAPI\\NeutrackAPI.csproj",
-      "projectName": "NeutrackAPI",
-      "projectPath": "C:\\Users\\Apollo\\Documents\\MS Comp Science Current Semester\\CS6290 - Project II\\Neutrack\\NeutrackAPI\\neutrackAPI\\NeutrackAPI.csproj",
-      "packagesPath": "C:\\Users\\Apollo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Apollo\\Documents\\MS Comp Science Current Semester\\CS6290 - Project II\\Neutrack\\NeutrackAPI\\neutrackAPI\\obj\\",
+      "projectUniqueName": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
+      "projectName": "neutrackAPI",
+      "projectPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
+      "packagesPath": "/Users/mide/.nuget/packages/",
+      "outputPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Apollo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/mide/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5831,12 +5829,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.13, 3.1.13]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"

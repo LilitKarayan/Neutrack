@@ -20,6 +20,7 @@ namespace NeutrackAPI.tests.Controller.Tests
     {
         private Mock<IUserRepository> mockUserRepository;
         private Mock<IRoleRepository> mockRoleRepository;
+        private Mock<INutritionistRepository> mockNutritionistRepository;
         private Mock<IMapper> mockMapper;
         private IQueryable<User> mockUsersData;
         private User mockUser;
@@ -33,6 +34,7 @@ namespace NeutrackAPI.tests.Controller.Tests
             mockUserRepository = new Mock<IUserRepository>();
             mockRoleRepository = new Mock<IRoleRepository>();
             mockMapper = new Mock<IMapper>();
+            mockNutritionistRepository = new Mock<INutritionistRepository>();
             mockUsersData = GenerateUser.GenerateListData(3).AsQueryable();
             mockUser = GenerateUser.GeneratData();
         }
@@ -46,7 +48,7 @@ namespace NeutrackAPI.tests.Controller.Tests
         {
             mockUserRepository.Setup(x => x.GetAllUsers()).Returns(mockUsersData);
             UsersController testUserController = new UsersController(mockUserRepository.Object,
-                mockRoleRepository.Object, mockMapper.Object);
+                mockRoleRepository.Object, mockNutritionistRepository.Object, mockMapper.Object);
             var allUsers = testUserController.GetUsers();
             Assert.IsInstanceOfType(allUsers.Result, typeof(OkObjectResult));
         }
@@ -61,7 +63,7 @@ namespace NeutrackAPI.tests.Controller.Tests
             int userId = 1;
             mockUserRepository.Setup(x => x.GetUserById(userId)).Returns(mockUser);
             UsersController testUserController = new UsersController(mockUserRepository.Object,
-                mockRoleRepository.Object, mockMapper.Object);
+                mockRoleRepository.Object, mockNutritionistRepository.Object, mockMapper.Object);
             var user = testUserController.GetUserById(userId);
             Assert.IsInstanceOfType(user.Result, typeof(OkObjectResult));
         }

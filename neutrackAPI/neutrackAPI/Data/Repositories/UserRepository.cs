@@ -57,12 +57,17 @@ namespace NeutrackAPI.Data
         {
             var claims = user.UserRoles.Select(x => new Claim(ClaimTypes.Role, x.Role.Name)).ToList();
             claims.Add(new Claim(ClaimTypes.Name, user.Id.ToString()));
-            if(user.Patient != null)
+            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            claims.Add(new Claim(ClaimTypes.GivenName, user.FirstName));
+            claims.Add(new Claim(ClaimTypes.Surname, user.LastName));
+            
+            if (user.Patient != null)
             {
                 claims.Add(new Claim(ClaimTypes.Upn, user.Patient.Id.ToString()));
             }
             if (user.Nutritionist != null)
             {
+                claims.Add(new Claim(ClaimTypes.Actor, user.Nutritionist.Id.ToString()));
                 claims.Add(new Claim(ClaimTypes.Spn, user.Nutritionist.Id.ToString()));
             }
             var tokenHandler = new JwtSecurityTokenHandler();
