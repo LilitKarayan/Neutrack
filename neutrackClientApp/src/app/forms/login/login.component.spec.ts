@@ -92,18 +92,6 @@ describe('LoginComponent', () => {
     expect(component.form.controls['password'].invalid).toEqual(false);
   });
 
-  it('should be invalid if minLength password not met', () => {
-    component.ngOnInit();
-
-    component.form.setValue({
-      email: 'test@test.com',
-      password: 'uwG'
-    })
-
-    expect(component.form.controls['email'].invalid).toEqual(false);
-    expect(component.form.controls['password'].invalid).toEqual(true);
-  });
-
   it('should be valid', () => {
     component.ngOnInit();
 
