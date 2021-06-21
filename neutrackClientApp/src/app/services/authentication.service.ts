@@ -55,7 +55,7 @@ export class AuthenticationService {
       this.userLoggedIn = this.isLoggedInSubject.asObservable();
       this.userLoggedOut = this.isLoggedOutSubject.asObservable();
       this.handleError = httpErrorHandler.createHandleError('AuthenticationService');
-      // useTestApi();
+      useTestApi();
   }
 
   public isLoggedIn(){
@@ -95,19 +95,10 @@ export class AuthenticationService {
       this.userSubject.next(user);
       this.isLoggedInSubject.next(true);
       this.isLoggedOutSubject.next(false);
-   }, error =>{
-     console.log(error)
-    this.handleError(error)
-
-  });
-
+   });
   }
-
-
   signUpNutritionist(userInfo: IUser) {
-    return this.http.post<IUser>(getApiRoute(nutritionistSignUpEndpoint), userInfo, httpOptions).pipe(
-      catchError(this.handleError<any>('sign up error'))
-    );
+     this.http.post<IUser>(getApiRoute(nutritionistSignUpEndpoint), userInfo, httpOptions);
   }
 
   private setSession(token: any) {

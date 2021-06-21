@@ -13,7 +13,7 @@ import { AutomaticLoginGuard } from './guards/automatic-login.guard';
 import { NutritionistGuard } from './guards/nutritionist.guard';
 
 const routes: Routes = [
-  {path: 'home', component: WelcomeComponent, canActivate: [AutomaticLoginGuard]},
+  {path: 'home', component: WelcomeComponent},
   {path: '', redirectTo:'home', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent, canActivate: [NutritionistGuard]},
   {path: 'account', component: AccountComponent, canActivate: [NutritionistGuard]},

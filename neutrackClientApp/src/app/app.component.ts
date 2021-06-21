@@ -23,7 +23,5 @@ export class AppComponent implements OnInit {
     this.interceptor.message.subscribe(msg => this.infMessage = msg);
   }
   ngOnInit(): void {
-    // this.isUserLoggedIn = this.authService.isLoggedIn();
-    // this.roles = this.authService.getLoggedUserRole();
   }
 }
