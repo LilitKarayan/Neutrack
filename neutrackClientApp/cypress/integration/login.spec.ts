@@ -1,4 +1,4 @@
-describe('successful scenario tests', () => {
+describe('successful scenario tests - login', () => {
   it('should route to login page', () => {
     cy.visit('/login');
     cy.contains('Login');
@@ -23,7 +23,7 @@ describe('successful scenario tests', () => {
     })
   });
 
-  it('should have submit button remaining disabled - password', () => {
+  it('should have submit button remaining disabled - email', () => {
     cy.visit('/login');
 
     cy.get('[formcontrolname=email]').click().then(() => {
