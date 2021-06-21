@@ -15,11 +15,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class DashboardComponent {
   dataSource = ELEMENT_DATA;
-  // columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   columnsToDisplay = ['Name', 'DOB', 'gender', 'email'];
   expandedElement: PatientsList | null;
-
-  // constructor() { }
 }
 
 export interface PatientsList {
@@ -35,8 +32,7 @@ export interface PatientsList {
 }
 
 const ELEMENT_DATA: PatientsList[] = [
-  {
-    
+  {   
     Name: 'Lilit Karayan',
     DOB: '01/24/1992',
     gender: 'F',
