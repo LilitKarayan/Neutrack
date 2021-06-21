@@ -7,8 +7,8 @@ import {useTestApi, getApiRoute } from '../../environments/environment';
 import { userLoginEndpoint, userSignUpEndpoint, nutritionistSignUpEndpoint } from '../../config/api.config';
 
 
-const loginUrl = getApiRoute(userLoginEndpoint);
-const signupUrl = getApiRoute(userSignUpEndpoint);
+const loginUrl = userLoginEndpoint;
+const signupUrl = userSignUpEndpoint;
 @Injectable({
   providedIn: 'root'
 })
@@ -35,14 +35,11 @@ export class InterceptorService implements HttpInterceptor {
       })
     }
     return next.handle(req).do((event: HttpEvent<any>) => {
-      console.log(req.url);
       if(event instanceof HttpResponse){
         if(event.ok){
-          if(req.url === loginUrl && event.body['roles'].includes('Nutritionist')){
-            this.router.navigateByUrl('/dashboard');
-          }else if(req.url === loginUrl){
-            this.router.navigateByUrl('/home');
-          } else if(req.url === signupUrl){
+          if(req.url.includes(loginUrl) && event.body.roles){
+            event.body.roles.includes('Nutritionist')?this.router.navigateByUrl('/dashboard'):this.router.navigateByUrl('/home');
+          } else if(req.url.includes(signupUrl)){
             this.router.navigateByUrl('/login');
           }
         }
