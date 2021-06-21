@@ -4,13 +4,14 @@ import { PatientService } from './patient.service';
 
 describe('PatientService', () => {
   let service: PatientService;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(PatientService);
+  beforeEach(() => { 
+    service = new PatientService(); 
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+
+  it('#getAll should return real value', () => {
+    service.getAll();
+    expect(service.patients$["_value"][0]["name"]).toContain('person 1');
   });
+
 });
