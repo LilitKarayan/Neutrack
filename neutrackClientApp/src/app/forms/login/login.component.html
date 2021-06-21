@@ -26,7 +26,7 @@
               formControlName="password"
               matInput
               type="password"
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,16}"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"
             />
             <ul>
               <li>8-16 characters</li>
@@ -56,6 +56,7 @@
             Submit
           </button>
           <button
+          id="theButton"
             class="button-row-clear"
             mat-raised-button
             color="warn"
