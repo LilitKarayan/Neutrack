@@ -1,7 +1,13 @@
 <div class="container-fluid">
     <app-toolbar [isUserLoggedIn]='isUserLoggedIn' [inputSideNav]= sideNav></app-toolbar>
+    <div class="alert alert-danger" *ngIf='errorMessage' role="alert">
+      {{errorMessage}}
+    </div>
+    <div class="alert alert-info" *ngIf='infMessage' role="alert">
+      {{infMessage}}
+    </div>
     <mat-sidenav-container >
-        <mat-sidenav #sideNav mode="side" opened>
+        <mat-sidenav #sideNav mode="side" [(opened)]="isUserLoggedIn">
           <app-side-nav *ngIf="isUserLoggedIn" ></app-side-nav>
       </mat-sidenav>
       <mat-sidenav-content>

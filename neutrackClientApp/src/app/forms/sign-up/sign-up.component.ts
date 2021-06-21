@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { IUser } from '@models';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-up',
@@ -68,15 +67,7 @@ export class SignUpComponent implements OnInit {
   onSubmit(): void {
     const formData = this.form.getRawValue();
     const addedEntity = {...this.nutritionistInfo, ...formData};
-    this.authService.signUpNutritionist(addedEntity).pipe(first())
-    .subscribe({
-      next:() => {
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    })
+    this.authService.signUpNutritionist(addedEntity)
   }
 
   clear() {
