@@ -10,7 +10,6 @@ import { IUserLogin } from '@models';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  // public initialObject: object;
   public form: FormGroup;
   loginInfo: IUserLogin;
   returnToUrl: string = '';
@@ -26,8 +25,7 @@ export class LoginComponent implements OnInit {
     this.route.queryParams.subscribe(params => this.returnToUrl = params['returnToUrl'] || '/home');
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl(''),
+      password: new FormControl('', Validators.required)
     });
 
   }
