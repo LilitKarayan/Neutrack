@@ -98,7 +98,8 @@ export class AuthenticationService {
    });
   }
   signUpNutritionist(userInfo: IUser) {
-     this.http.post<IUser>(getApiRoute(nutritionistSignUpEndpoint), userInfo, httpOptions);
+     return this.http.post<IUser>(getApiRoute(nutritionistSignUpEndpoint), userInfo, httpOptions).subscribe(res => {
+     })
   }
 
   private setSession(token: any) {

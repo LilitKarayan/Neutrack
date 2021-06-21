@@ -8,7 +8,7 @@ import { userLoginEndpoint, userSignUpEndpoint, nutritionistSignUpEndpoint } fro
 
 
 const loginUrl = userLoginEndpoint;
-const signupUrl = userSignUpEndpoint;
+const nutritionistSignupUrl = nutritionistSignUpEndpoint;
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +39,7 @@ export class InterceptorService implements HttpInterceptor {
         if(event.ok){
           if(req.url.includes(loginUrl) && event.body.roles){
             event.body.roles.includes('Nutritionist')?this.router.navigateByUrl('/dashboard'):this.router.navigateByUrl('/home');
-          } else if(req.url.includes(signupUrl)){
+          } else if(req.url.includes(nutritionistSignupUrl)){
             this.router.navigateByUrl('/login');
           }
         }
