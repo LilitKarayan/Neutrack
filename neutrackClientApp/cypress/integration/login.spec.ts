@@ -65,20 +65,20 @@ describe('successful scenario tests - login', () => {
     })
   });
 
-  // it('should clear inputs', () => {
-  //   cy.visit('/login');
+  it('should successfully login', () => {
+    cy.visit('/login');
 
-  //   cy.get('[formcontrolname=email]').click().then(() => {
-  //     cy.get('[formcontrolname=email]').type('test@test.com');
-  //   })
+    cy.get('[formcontrolname=email]').click().then(() => {
+      cy.get('[formcontrolname=email]').type('test@test.com');
+    })
 
-  //   cy.get('[formcontrolname=password]').click().then(() => {
-  //     cy.get('[formcontrolname=password]').type('123');
-  //   }).then(() => {
-  //     cy.get('.button-row-clear').click();
-  //   })
-
-  //   cy.get('[formcontrolname=email]').should('have.value', 'undefined');
-  //   cy.get('[formcontrolname=password]').should('have.value', 'undefined');
-  // });
+    cy.get('[formcontrolname=password]').click().then(() => {
+      cy.get('[formcontrolname=password]').type('uwG-1234');
+    }).then(() => {
+      cy.get('button[type=submit]').click();
+    }).then(() => {
+      cy.contains('Johnny');
+    })
+  
+  });
 });
