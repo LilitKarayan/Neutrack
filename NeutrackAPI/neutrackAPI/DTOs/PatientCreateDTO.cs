@@ -11,8 +11,6 @@ namespace NeutrackAPI.DTOs
             ErrorMessage = "Email is invalid")]
         public string Email { get; set; }
 
-        [RegularExpression(@"^(?=.{8,16}$)(?=.*?[a-z])(?=.*?[0-9]).*$",
-            ErrorMessage = "Password must be between 8 - 16 characters, should contain at least one digit and a lower case.")]
         [MaxLength(256)]
         public string Password { get; set; }
 

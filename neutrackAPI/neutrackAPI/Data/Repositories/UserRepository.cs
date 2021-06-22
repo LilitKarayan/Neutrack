@@ -38,6 +38,7 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public AuthResponseDTO AuthenticateUser(AuthRequestDTO userAuthDTO)
         {
+            userAuthDTO.Password = PasswordHelper.GenerateSHA256tring(_appSettings.Secret + userAuthDTO.Password);
             var _user = _context.Users
                 .Include(x => x.Nutritionist)
                 .Include(x => x.Patient)
@@ -92,6 +93,10 @@ namespace NeutrackAPI.Data
             if(user == null)
             {
                 throw new ArgumentNullException(nameof(user));
+            }
+            if (!String.IsNullOrEmpty(user.Password))
+            {
+                user.Password = PasswordHelper.GenerateSHA256tring(_appSettings.Secret + user.Password);
             }
             _context.Add(user);
         }
