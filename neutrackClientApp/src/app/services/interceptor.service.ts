@@ -47,13 +47,14 @@ export class InterceptorService implements HttpInterceptor {
     }, (err: any) => {
       if(err instanceof HttpErrorResponse){
         let errors = []
-        if(err.error.errors){
-          const errorKey = Object.keys(err.error.errors);
+        if(err.error.errors || err.error.message){
+          const errorKey = err.error.errors? Object.keys(err.error.errors):[];
+          const errMsg = err.error.message ? err.error.message: '';
           errorKey.forEach(key => {
             errors.push(err.error.errors[key]);
           });
-        }
-        if(err.status === 401){
+          errors.push(errMsg);
+        } else if(err.status === 401){
           errors.push('Sorry you do not have access to view this page.');
           this.router.navigateByUrl('/login');
         } else if ([0, 405, 422].includes(err.status))
