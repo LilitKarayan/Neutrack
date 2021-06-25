@@ -4,12 +4,15 @@
   background-image: url("../../../assets/images/neutrackLogin3.jpg");
   background-position: center;
 }
+span {
+  color: red;
+}
 
 mat-card {
   max-width: 600px;
   margin: 2em auto;
   text-align: center;
-  max-height: 1600px;
+  max-height: 1800px;
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
   background-color: white;
 }

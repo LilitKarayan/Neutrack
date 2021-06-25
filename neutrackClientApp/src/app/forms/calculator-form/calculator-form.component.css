@@ -4,6 +4,10 @@
     background-image: url("../../../assets/images/neutrackLogin2.jpg");
     background-position: left;
   }
+
+  span {
+    color: red;
+  }
   
   mat-card {
     max-width: 600px;
