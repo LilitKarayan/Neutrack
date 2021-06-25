@@ -52,6 +52,8 @@ import { ErrorDialogService } from '@services/error-dialog.service';
 import { GlobalErrorHandlerService } from '@services/global-error-handler.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SharedModule } from './shared/shared.module';
+import { NutritionistService } from '@services/nutritionist.service';
+import { PatientService } from '@services/patient.service';
 
 @NgModule({
   declarations: [
@@ -121,7 +123,8 @@ import { SharedModule } from './shared/shared.module';
   providers: [UserDataService,
     AuthenticationService, LoadingDialogService, ErrorDialogService,
     {provide: ErrorHandler, useClass: GlobalErrorHandlerService},
-    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
+    NutritionistService, PatientService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent],
