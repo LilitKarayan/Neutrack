@@ -60,7 +60,7 @@ describe('CalculatorFormComponent', () => {
       goal: 230,
       activityLevel: 1,
       age: 32,
-      gender: 'Other'
+      gender: 'Female'
     });
 
     expect(component.form.controls['height'].value).toEqual(99);
@@ -68,7 +68,7 @@ describe('CalculatorFormComponent', () => {
     expect(component.form.controls['goal'].value).toEqual(230);
     expect(component.form.controls['activityLevel'].value).toEqual(1);
     expect(component.form.controls['age'].value).toEqual(32);
-    expect(component.form.controls['gender'].value).toEqual('Other');
+    expect(component.form.controls['gender'].value).toEqual('Female');
   });
 
   it('should have invalid controls initially', () => {
@@ -91,7 +91,7 @@ describe('CalculatorFormComponent', () => {
       goal: 230,
       activityLevel: 1,
       age: 32,
-      gender: 'Other'
+      gender: 'Female'
     });
 
     expect(component.form.controls['height'].value).toEqual(99);
@@ -99,7 +99,7 @@ describe('CalculatorFormComponent', () => {
     expect(component.form.controls['goal'].value).toEqual(230);
     expect(component.form.controls['activityLevel'].value).toEqual(1);
     expect(component.form.controls['age'].value).toEqual(32);
-    expect(component.form.controls['gender'].value).toEqual('Other');
+    expect(component.form.controls['gender'].value).toEqual('Female');
 
     component.clear();
 

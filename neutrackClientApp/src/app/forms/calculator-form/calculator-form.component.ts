@@ -19,7 +19,7 @@ export class CalculatorFormComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.genders = ['Male', 'Female', 'Other'];
+    this.genders = ['Male', 'Female'];
     this.calculator = {};
     this.bmiInt = 0;
     this.bmiCategory = '';
@@ -114,6 +114,8 @@ export class CalculatorFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.setCalculator();
+    console.log(this.calculator);
     this.getBmi(this.calculator['height'], this.calculator['weight']);
     this.getBmiCategory();
     this.currentDailyCalories = this.getDailyCalories(
