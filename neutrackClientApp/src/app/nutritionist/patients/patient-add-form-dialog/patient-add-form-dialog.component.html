@@ -17,8 +17,8 @@
         <mat-form-field class="fullWidth" appearance="outline">
           <mat-label>Gender *</mat-label>
           <mat-select name="gender" formControlName="gender">
-            <mat-option value="M">M</mat-option>
-            <mat-option value="F">F</mat-option>
+            <mat-option value="M">Male</mat-option>
+            <mat-option value="F">Female</mat-option>
           </mat-select>
           <mat-error *ngIf="formInstance.controls['gender']?.errors?.required">field required
           </mat-error>
