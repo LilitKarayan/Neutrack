@@ -26,10 +26,8 @@ namespace NeutrackAPI.DTOs
         [MaxLength(50)]
         public string Gender { get; set; }
 
-        [Required]
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
         public string Goal { get; set; }
 
         [Required]
@@ -41,8 +39,9 @@ namespace NeutrackAPI.DTOs
         [Required]
         public double Weight { get; set; }
 
-        [Required]
         public string PhoneNumber { get; set; }
+
+        public bool IsActive { get; set; }
 
     }
 }

@@ -13,6 +13,6 @@ namespace NeutrackAPI.Data.IRepositories
         void DeactivateNutritionist(Nutritionist nutritionist);
         Patient GetNutritionistPatientById(int patientId, int nutritionistId);
         IEnumerable<Patient> GetAllNutritionistPatients(int nutritionistId);
-
+        void AddNewPatientActivityHistory(PatientActivityHistory activityHistory);
     }
 }

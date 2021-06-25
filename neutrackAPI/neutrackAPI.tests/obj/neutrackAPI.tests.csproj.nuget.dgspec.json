@@ -124,9 +124,13 @@
               "target": "Package",
               "version": "[3.1.0, )"
             },
+            "Microsoft.AspNetCore.JsonPatch": {
+              "target": "Package",
+              "version": "[5.0.7, )"
+            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.13, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

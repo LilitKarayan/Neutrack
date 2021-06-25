@@ -12,6 +12,7 @@ using NeutrackAPI.Data.Repositories;
 using NeutrackAPI.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 
 namespace NeutrackAPI
 {
@@ -33,6 +34,7 @@ namespace NeutrackAPI
             //     Configuration.GetConnectionString("NeutrackDBTestConnection")));
             services.AddCors();
             services.AddControllers()
+                    .AddNewtonsoftJson(s => s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver())
                     .AddNewtonsoftJson(options =>
                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 

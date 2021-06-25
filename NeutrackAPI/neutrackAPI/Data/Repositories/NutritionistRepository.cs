@@ -15,6 +15,12 @@ namespace NeutrackAPI.Data.Repositories
         {
             _context = context;
         }
+
+        public void AddNewPatientActivityHistory(PatientActivityHistory activityHistory)
+        {
+            _context.Add(activityHistory);
+        }
+
         public void DeactivateNutritionist(Nutritionist nutritionist)
         {
             _context.Nutritionists.RemoveRange();
@@ -49,5 +55,6 @@ namespace NeutrackAPI.Data.Repositories
         {
             throw new NotImplementedException();
         }
+
     }
 }
