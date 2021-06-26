@@ -23,11 +23,12 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
     const currentYear = new Date().getFullYear();
     this.maxDate = new Date(currentYear - 18, 12, 31);
-    this.genders = ['Male', 'Female', 'Other'];
+    this.genders = ['Male', 'Female'];
     this.nutritionist = {};
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
+      confirmationPassword: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       dateOfBirth: new FormControl('', Validators.required),
@@ -45,6 +46,7 @@ export class SignUpComponent implements OnInit {
     this.form.setValue({
       email: '',
       password: '',
+      confirmationPassword: '',
       firstName: '',
       lastName: '',
       dateOfBirth: '',

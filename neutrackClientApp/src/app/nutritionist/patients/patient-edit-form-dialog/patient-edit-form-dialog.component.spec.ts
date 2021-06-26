@@ -93,7 +93,7 @@ describe('PatientFormDialogComponent', () => {
     component.formInstance.setValue({
       id: 1000,
       name: 'Lilit',
-      gender: 'F',
+      gender: 'Female',
       age: 29,
       email: 'test'
     })

@@ -4,12 +4,29 @@
     background-image: url("../../../assets/images/neutrackLogin2.jpg");
     background-position: left;
   }
+
+  #calculatorResult {
+    max-width: 600px;
+    margin: 2em auto;
+    text-align: left;
+    max-height: 1300px;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
+    background-color: white;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  span {
+    color: red;
+  }
   
   mat-card {
     max-width: 600px;
     margin: 2em auto;
     text-align: center;
-    max-height: 1200px;
+    max-height: 1300px;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
     background-color: white;
   }
