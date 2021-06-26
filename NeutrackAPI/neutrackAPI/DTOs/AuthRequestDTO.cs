@@ -11,8 +11,6 @@ namespace NeutrackAPI.DTOs
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
-        [RegularExpression(@"^(?=.{8,16}$)(?=.*?[a-z])(?=.*?[0-9]).*$",
-            ErrorMessage = "Password must be between 8 - 16 characters and should contain at least one digit.")]
         public string Password { get; set; }
     }
 }

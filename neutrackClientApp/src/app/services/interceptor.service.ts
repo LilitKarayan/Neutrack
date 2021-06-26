@@ -3,9 +3,9 @@ import { HttpInterceptor, HttpEvent, HttpResponse, HttpRequest, HttpHandler, Htt
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/do';
 import { Router } from '@angular/router';
-import {useTestApi, getApiRoute } from '../../environments/environment';
 import { userLoginEndpoint, userSignUpEndpoint, nutritionistSignUpEndpoint } from '../../config/api.config';
-
+import { LoadingDialogService } from './loading-dialog.service';
+import { ErrorDialogService } from './error-dialog.service';
 
 const loginUrl = userLoginEndpoint;
 const nutritionistSignupUrl = nutritionistSignUpEndpoint;
@@ -14,18 +14,15 @@ const nutritionistSignupUrl = nutritionistSignUpEndpoint;
 })
 
 export class InterceptorService implements HttpInterceptor {
-  private errorsSubject: BehaviorSubject<string>;
-  public error: Observable<string>;
-  public messageSubject: BehaviorSubject<string>;
-  public message: Observable<string>;
+  private messages: string[] = [];
 
-  constructor(private router: Router) {
-    this.errorsSubject = new BehaviorSubject<string>('');
-    this.error = this.errorsSubject.asObservable();
-    this.messageSubject = new BehaviorSubject<string>('');
-    this.message = this.errorsSubject.asObservable();
+  constructor(private router: Router,
+    private loadingDialogService: LoadingDialogService,
+    private errorDialogService: ErrorDialogService
+    ) {
    }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.loadingDialogService.openDialog();
     const token = localStorage.getItem("access_token");
     if(token){
       req = req.clone({
@@ -42,11 +39,12 @@ export class InterceptorService implements HttpInterceptor {
           } else if(req.url.includes(nutritionistSignupUrl)){
             this.router.navigateByUrl('/login');
           }
+          this.loadingDialogService.hideDialog();
         }
       }
     }, (err: any) => {
+      let errors = []
       if(err instanceof HttpErrorResponse){
-        let errors = []
         if(err.error.errors || err.error.message){
           const errorKey = err.error.errors? Object.keys(err.error.errors):[];
           const errMsg = err.error.message ? err.error.message: '';
@@ -67,13 +65,10 @@ export class InterceptorService implements HttpInterceptor {
          else {
           errors.push(err.message);
         }
-        window.alert(errors.join('\n'));
       }
+      console.log(err);
+      this.errorDialogService.openDialog(errors.join('\n'))
+      this.loadingDialogService.hideDialog();
     })
   }
 }
-// if(res.roles.includes('Nutritionist')){
-
-// }else {
-//   this.router.navigateByUrl('/home');
-// }

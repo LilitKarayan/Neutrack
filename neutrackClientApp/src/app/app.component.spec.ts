@@ -4,8 +4,6 @@ import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angul
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpErrorHandlerService} from './services/http-error-handler.service';
-import { MessageService } from './services/message.service';
 
 describe('AppComponent', () => {
   beforeAll(() => {
@@ -20,8 +18,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      providers: [HttpErrorHandlerService,
-                  MessageService],
+      providers: [],
       schemas:[NO_ERRORS_SCHEMA]
     }).compileComponents();
   });

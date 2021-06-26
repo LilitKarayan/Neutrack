@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "R0Xvjus0fgZaK94uzdljEPzG7OYECSoDAK+xrkEwpYElO+xnAJLIX7Q+kDLaQAp4EteLXJKWnCb5EW97/aTYHQ==",
+  "dgSpecHash": "7y3x5wNW9rWzDurc2qV+5wq3VO1FYCauvSsAqIbxgwuM0yr4JQ1XIi5PLTvI2N2D9tw1bLoIlPQQP2FbT0qiiQ==",
   "success": true,
   "projectFilePath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj",
   "expectedPackageFiles": [
@@ -9,8 +9,8 @@
     "/Users/mide/.nuget/packages/castle.core/4.4.0/castle.core.4.4.0.nupkg.sha512",
     "/Users/mide/.nuget/packages/coverlet.collector/1.2.0/coverlet.collector.1.2.0.nupkg.sha512",
     "/Users/mide/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.0/microsoft.aspnetcore.authentication.jwtbearer.3.1.0.nupkg.sha512",
-    "/Users/mide/.nuget/packages/microsoft.aspnetcore.jsonpatch/3.0.0/microsoft.aspnetcore.jsonpatch.3.0.0.nupkg.sha512",
-    "/Users/mide/.nuget/packages/microsoft.aspnetcore.mvc.newtonsoftjson/3.0.0/microsoft.aspnetcore.mvc.newtonsoftjson.3.0.0.nupkg.sha512",
+    "/Users/mide/.nuget/packages/microsoft.aspnetcore.jsonpatch/5.0.7/microsoft.aspnetcore.jsonpatch.5.0.7.nupkg.sha512",
+    "/Users/mide/.nuget/packages/microsoft.aspnetcore.mvc.newtonsoftjson/3.1.13/microsoft.aspnetcore.mvc.newtonsoftjson.3.1.13.nupkg.sha512",
     "/Users/mide/.nuget/packages/microsoft.codecoverage/16.5.0/microsoft.codecoverage.16.5.0.nupkg.sha512",
     "/Users/mide/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/mide/.nuget/packages/microsoft.data.sqlclient/2.0.1/microsoft.data.sqlclient.2.0.1.nupkg.sha512",

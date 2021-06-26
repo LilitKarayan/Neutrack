@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import 'rxjs/add/operator/map';
-import { AuthenticationService } from './authentication.service';
+import { PatientService } from './patient.service';
 
-describe('AuthenticationService', () => {
-  let service: AuthenticationService;
+describe('PatientService', () => {
+  let service: PatientService;
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   beforeAll(() => {
@@ -14,18 +14,18 @@ describe('AuthenticationService', () => {
     TestBed.initTestEnvironment(BrowserDynamicTestingModule,
     platformBrowserDynamicTesting());
   })
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [],
       imports: [HttpClientTestingModule]
     });
-    service = TestBed.inject(AuthenticationService);
+    service = TestBed.inject(PatientService);
     httpClient = TestBed.inject(HttpClient);
-    httpTestingController = TestBed.inject(HttpTestingController);
+    httpTestingController = TestBed.inject(HttpTestingController)
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });
-

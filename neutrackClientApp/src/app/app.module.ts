@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +23,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule } from '@angular/router';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
@@ -39,18 +38,22 @@ import { PatientEditFormDialogComponent } from './nutritionist/patients/patient-
 import { PatientAddFormDialogComponent } from './nutritionist/patients/patient-add-form-dialog/patient-add-form-dialog.component';
 import { PatientInfoComponent } from './nutritionist/patients/patient-info/patient-info.component';
 import { CommonModule } from '@angular/common';
-import { HttpErrorHandlerService } from './services/http-error-handler.service';
 import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MessageService } from './services/message.service';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { UserDataService } from './services/user-data.service';
 import { LoginComponent } from './forms/login/login.component';
 import { InterceptorService } from '@services/interceptor.service';
 import { CalculatorFormComponent } from './forms/calculator-form/calculator-form.component';
+import { LoadingDialogService } from '@services/loading-dialog.service';
+import { ErrorDialogService } from '@services/error-dialog.service';
+import { GlobalErrorHandlerService } from '@services/global-error-handler.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SharedModule } from './shared/shared.module';
+import { NutritionistService } from '@services/nutritionist.service';
+import { PatientService } from '@services/patient.service';
 
 @NgModule({
   declarations: [
@@ -106,6 +109,8 @@ import { CalculatorFormComponent } from './forms/calculator-form/calculator-form
     MatInputModule,
     MatSelectModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
+    SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -116,10 +121,10 @@ import { CalculatorFormComponent } from './forms/calculator-form/calculator-form
     ReactiveFormsModule
   ],
   providers: [UserDataService,
-    AuthenticationService,
-    HttpErrorHandlerService,
-    MessageService,
-    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+    AuthenticationService, LoadingDialogService, ErrorDialogService,
+    {provide: ErrorHandler, useClass: GlobalErrorHandlerService},
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
+    NutritionistService, PatientService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent],

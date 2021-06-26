@@ -7,12 +7,9 @@ import 'rxjs/add/operator/map';
 import {useTestApi, getApiRoute } from '../../environments/environment';
 import { IUser, IUserLogin } from '@models';
 import { userLoginEndpoint, userSignUpEndpoint, nutritionistSignUpEndpoint } from '../../config/api.config';
-import {
-  HttpErrorHandlerService,
-  HandleError,
-} from './http-error-handler.service';
 import jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
+import CryptoJS from 'crypto-js';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -33,11 +30,8 @@ export class AuthenticationService {
   public userLoggedOut: Observable<boolean>;
   public userRoles: Observable<any[]>;
 
-  private handleError: HandleError;
-
   constructor(private http: HttpClient,
-    private router: Router,
-    httpErrorHandler: HttpErrorHandlerService) {
+    private router: Router) {
       this.userSubject = new BehaviorSubject<IUser>(
         this.getActiveUser()
       );
@@ -54,8 +48,7 @@ export class AuthenticationService {
       this.userRoles = this.rolesSubject.asObservable();
       this.userLoggedIn = this.isLoggedInSubject.asObservable();
       this.userLoggedOut = this.isLoggedOutSubject.asObservable();
-      this.handleError = httpErrorHandler.createHandleError('AuthenticationService');
-      useTestApi();
+      // useTestApi();
   }
 
   public isLoggedIn(){
@@ -80,7 +73,12 @@ export class AuthenticationService {
     }
     return null;
   }
+  hashPassword(password: string){
+    var hash = CryptoJS.SHA256(password);
+    return hash.toString(CryptoJS.enc.Base64);
+  }
   login(loginInfo: IUserLogin) {
+      loginInfo.password = this.hashPassword(loginInfo.password);
       this.http.post<any>(getApiRoute(userLoginEndpoint), loginInfo, httpOptions).subscribe(res => {
       let user: IUser = {
         email: res.email,
@@ -98,6 +96,7 @@ export class AuthenticationService {
    });
   }
   signUpNutritionist(userInfo: IUser) {
+    userInfo.password = this.hashPassword(userInfo.password);
      return this.http.post<IUser>(getApiRoute(nutritionistSignUpEndpoint), userInfo, httpOptions).subscribe(res => {
      })
   }

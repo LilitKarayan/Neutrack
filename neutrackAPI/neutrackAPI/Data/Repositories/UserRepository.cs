@@ -38,6 +38,7 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public AuthResponseDTO AuthenticateUser(AuthRequestDTO userAuthDTO)
         {
+            userAuthDTO.Password = PasswordHelper.GenerateSHA256tring(_appSettings.Secret + userAuthDTO.Password);
             var _user = _context.Users
                 .Include(x => x.Nutritionist)
                 .Include(x => x.Patient)
@@ -93,6 +94,10 @@ namespace NeutrackAPI.Data
             {
                 throw new ArgumentNullException(nameof(user));
             }
+            if (!String.IsNullOrEmpty(user.Password))
+            {
+                user.Password = PasswordHelper.GenerateSHA256tring(_appSettings.Secret + user.Password);
+            }
             _context.Add(user);
         }
 
@@ -102,7 +107,10 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public IEnumerable<User> GetAllUsers()
         {
-            return _context.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
+            return _context.Users
+                .Include(x => x.Nutritionist)
+                .Include(x => x.Patient)
+                .Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
         }
 
         /// <summary>
@@ -112,7 +120,8 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public User GetUserByEmail(string email)
         {
-            return _context.Users.Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Email.Equals(email));
+            return _context.Users.Include(x => x.Nutritionist)
+                .Include(x => x.Patient).Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Email.Equals(email));
         }
 
         /// <summary>
@@ -122,7 +131,8 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public User GetUserById(int id)
         {
-            return _context.Users.Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Id.Equals(id));
+            return _context.Users.Include(x => x.Nutritionist)
+                .Include(x => x.Patient).Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Id.Equals(id));
         }
 
         /// <summary>

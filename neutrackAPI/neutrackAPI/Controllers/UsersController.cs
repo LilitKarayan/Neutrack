@@ -244,7 +244,7 @@ namespace NeutrackAPI.Controllers
         /// <param name="userUpdate"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public ActionResult<UserReadDTO> UpdateUser(int id, UserCreateDTO userUpdate)
+        public ActionResult<UserReadDTO> UpdateUser(int id, PatientCreateDTO userUpdate)
         {
             try
             {
@@ -257,6 +257,10 @@ namespace NeutrackAPI.Controllers
                 if (userItem == null)
                 {
                     return NotFound();
+                }
+                if(userItem.Patient != null)
+                {
+                    _mapper.Map(userUpdate, userItem.Patient);
                 }
                 _mapper.Map(userUpdate, userItem);
                 _userRepository.UpdateUser(userItem);
