@@ -16,6 +16,5 @@ namespace NeutrackAPI.Data
         void UpdateUser(User user);
         void DeactivateUser(User user);
         IEnumerable<User> SearchUser(string searchQuery, Role role);
-        
     }
 }
