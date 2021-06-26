@@ -1,158 +1,161 @@
 <div *ngIf="calculated === false" id="calculator">
-    <mat-card>
-      <mat-card-content>
-        <div class="header">
-          <h1>BMI & Calorie Calculator</h1>
+  <mat-card>
+    <mat-card-content>
+      <div class="header">
+        <h1>BMI & Calorie Calculator</h1>
+      </div>
+
+      <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
+        <div class="theContainer">
+          <mat-label>Height<span>*</span></mat-label>
+          <mat-form-field class="normal-full-width" appearance="outline">
+            <input
+              formControlName="height"
+              matInput
+              type="number"
+              min="0"
+              max="100"
+            />
+            <mat-error *ngIf="form.controls['height'].errors?.required"
+              >Height is mandatory</mat-error
+            >
+          </mat-form-field>
+          <small>inches</small>
         </div>
-  
-        <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
-          <div class="theContainer">
-            <mat-label>Height*</mat-label>
-            <mat-form-field class="normal-full-width" appearance="outline">
-              <input
-                formControlName="height"
-                matInput
-                type="number"
-                min="0"
-                max="100"
-              />
-              <mat-error *ngIf="form.controls['height'].errors?.required"
-                >Height is mandatory</mat-error
-              >
-            </mat-form-field>
-            <small>inches</small>
-          </div>
-  
-          <div class="theContainer">
-            <mat-label>Weight*</mat-label>
-            <mat-form-field class="normal-full-width" appearance="outline">
-              <input
-                formControlName="weight"
-                matInput
-                type="number"
-                min="0"
-                max="1000"
-              />
-              <mat-error *ngIf="form.controls['weight'].errors?.required"
-                >Weight is mandatory</mat-error
-              >
-            </mat-form-field>
-            <small>lbs</small>
-          </div>
-  
-          <div class="theContainer">
-            <mat-label>Goal* (Ideal Weight)</mat-label>
-            <mat-form-field class="normal-full-width" appearance="outline">
-              <input
-                formControlName="goal"
-                matInput
-                type="number"
-                min="0"
-                max="1000"
-              />
-              <mat-error *ngIf="form.controls['goal'].errors?.required"
-                >Goal is mandatory</mat-error
-              >
-            </mat-form-field>
-            <small>lbs</small>
-          </div>
-  
-          <div class="theContainer">
-            <mat-label>Activity Level*</mat-label>
-            <mat-form-field class="normal-full-width" appearance="outline">
-              <input
-                formControlName="activityLevel"
-                matInput
-                type="number"
-                min="0"
-                max="7"
-              />
-              <mat-error *ngIf="form.controls['activityLevel'].errors?.required"
-                >Activity Level is mandatory</mat-error
-              >
-            </mat-form-field>
-            <small>days per week</small>
-          </div>
-  
-          <div class="theContainer">
-            <mat-label>Age*</mat-label>
-            <mat-form-field class="normal-full-width" appearance="outline">
-              <input
-                formControlName="age"
-                matInput
-                type="number"
-                min="0"
-                max="100"
-              />
-              <mat-error *ngIf="form.controls['age'].errors?.required"
-                >Age is mandatory</mat-error
-              >
-            </mat-form-field>
-            <small>years</small>
-          </div>
-  
-          <div class="theContainer">
-            <mat-label>Gender*</mat-label><br />
-            <mat-radio-group formControlName="gender">
-              <mat-radio-button [value]="genders[0]">Male</mat-radio-button>
-              <mat-radio-button [value]="genders[1]">Female</mat-radio-button>
-              <mat-radio-button [value]="genders[2]">Other</mat-radio-button>
-            </mat-radio-group>
-          </div>
-  
-          <div>
-            <button
-              class="button-row-submit"
-              mat-raised-button
-              color="primary"
-              type="submit"
-              [disabled]="
-                form.controls['height'].invalid ||
-                form.controls['weight'].invalid ||
-                form.controls['goal'].invalid ||
-                form.controls['activityLevel'].invalid
-              "
+
+        <div class="theContainer">
+          <mat-label>Weight<span>*</span></mat-label>
+          <mat-form-field class="normal-full-width" appearance="outline">
+            <input
+              formControlName="weight"
+              matInput
+              type="number"
+              min="0"
+              max="1000"
+            />
+            <mat-error *ngIf="form.controls['weight'].errors?.required"
+              >Weight is mandatory</mat-error
             >
-              Calculate
-            </button>
-            <button
-              class="button-row-clear"
-              mat-raised-button
-              color="warn"
-              (click)="clear()"
+          </mat-form-field>
+          <small>lbs</small>
+        </div>
+
+        <div class="theContainer">
+          <mat-label>Goal<span>*</span> (Ideal Weight)</mat-label>
+          <mat-form-field class="normal-full-width" appearance="outline">
+            <input
+              formControlName="goal"
+              matInput
+              type="number"
+              min="0"
+              max="1000"
+            />
+            <mat-error *ngIf="form.controls['goal'].errors?.required"
+              >Goal is mandatory</mat-error
             >
-              Clear
-            </button>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  
-  <div *ngIf="calculated === true"  id="calculator">
-    <h1>Results</h1>
-  
-    <p>Height: {{ calculator["height"] }} inches</p>
-    <p>Weight: {{ calculator["weight"] }} lbs</p>
-    <p>Goal Weight: {{ calculator["goal"] }} lbs</p>
-    <p>Activity Level: {{ calculator["activityLevel"] }} days per week</p>
-    <p>Age: {{ calculator["age"] }} years</p>
-    <p>Gender: {{ calculator["gender"] }}</p>
-  
-    <p>Based on the above information the following has been calculated:</p>
+          </mat-form-field>
+          <small>lbs</small>
+        </div>
+
+        <div class="theContainer">
+          <mat-label>Activity Level<span>*</span></mat-label>
+          <mat-form-field class="normal-full-width" appearance="outline">
+            <input
+              formControlName="activityLevel"
+              matInput
+              type="number"
+              min="0"
+              max="7"
+            />
+            <mat-error *ngIf="form.controls['activityLevel'].errors?.required"
+              >Activity Level is mandatory</mat-error
+            >
+          </mat-form-field>
+          <small>days per week</small>
+        </div>
+
+        <div class="theContainer">
+          <mat-label>Age<span>*</span></mat-label>
+          <mat-form-field class="normal-full-width" appearance="outline">
+            <input
+              formControlName="age"
+              matInput
+              type="number"
+              min="18"
+              max="100"
+            />
+            <mat-error *ngIf="form.controls['age'].errors?.required"
+              >Age is mandatory</mat-error
+            >
+          </mat-form-field>
+          <small>years</small>
+        </div>
+
+        <div class="theContainer">
+          <mat-label>Gender<span>*</span></mat-label
+          ><br />
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button [value]="genders[0]">Male</mat-radio-button>
+            <mat-radio-button [value]="genders[1]">Female</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div>
+          <button
+            class="button-row-submit"
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="
+              form.controls['height'].invalid ||
+              form.controls['weight'].invalid ||
+              form.controls['goal'].invalid ||
+              form.controls['activityLevel'].invalid ||
+              form.controls['age'].invalid ||
+              form.controls['gender'].invalid
+            "
+          >
+            Calculate
+          </button>
+          <button
+            class="button-row-clear"
+            mat-raised-button
+            color="warn"
+            (click)="clear()"
+          >
+            Clear
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div *ngIf="calculated === true" id="calculator">
+  <mat-card id="calculatorResult">
+    <h1 class="center">Results</h1>
+
+    <p><b>Height:</b> {{ calculator["height"] }} inches</p>
+    <p><b>Weight:</b> {{ calculator["weight"] }} lbs</p>
+    <p><b>Goal Weight:</b> {{ calculator["goal"] }} lbs</p>
+    <p><b>Activity Level:</b> {{ calculator["activityLevel"] }} days per week</p>
+    <p><b>Age:</b> {{ calculator["age"] }} years</p>
+    <p><b>Gender:</b> {{ calculator["gender"] }}</p>
+
+    <p class="center">Based on the above information the following has been calculated:</p>
     <ul>
-      <li>Body Mass Index of {{ bmiInt }}</li>
-      <li>The BMI would fall in the category of {{ bmiCategory }}</li>
-      <li>Current daily calorie intake is {{ currentDailyCalories }}</li>
+      <li>Body Mass Index of <b>{{ bmiInt }}</b></li>
+      <li>The BMI would fall in the category of <b>{{ bmiCategory }}</b> </li>
+      <li>Currently, you intake <b>{{ currentDailyCalories }}</b> calories per day</li>
       <li>
-        At the ideal goal, the daily calorie intake is {{ goalDailyCalories }}
+        At the ideal goal, you need to intake <b>{{ goalDailyCalories }}</b> calories per day 
       </li>
     </ul>
-    <p>
-      Regardless if your goal is to gain or lose weight, it should be a gradual
-      process. The recommendation is to reduce/increase calorie intake by anywhere
-      between 500-900 calories. It is also recommended that calorie levels never
-      drop below 1200 for women, 1800 for men, and 1500 for those who identify as
-      other.
+    <p class="center">For you journey you need to <b>{{ direction }}</b> your calories intake by <b>{{ amount }}</b>
+      <b>Note:</b> Regardless if your goal is to gain or lose weight, it should be a <b>gradual</b> 
+      process. The <b>recommendation</b> is to {{ direction }} calorie intake by
+      anywhere between 500-900 calories per day. It is also recommended that calorie
+      levels <b>never drop below</b> 1200 per day for women and 1800 per day for men
     </p>
-  </div>
+  </mat-card>
+</div>

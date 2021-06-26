@@ -44,6 +44,7 @@ describe('SignUpPatientComponent', () => {
     component.ngOnInit();
     expect(component.form.controls['email'].value).toEqual('');
     expect(component.form.controls['password'].value).toEqual('');
+    expect(component.form.controls['confirmationPassword'].value).toEqual('');
     expect(component.form.controls['firstName'].value).toEqual('');
     expect(component.form.controls['lastName'].value).toEqual('');
     expect(component.form.controls['dateOfBirth'].value).toEqual('');
@@ -58,6 +59,7 @@ describe('SignUpPatientComponent', () => {
     component.form.setValue({
       email: 'test@test.com',
       password: 'uwG-1234',
+      confirmationPassword: 'Medicine1531!',
       firstName: 'Johnny',
       lastName: 'test',
       dateOfBirth: '10/01/2003',
@@ -68,6 +70,7 @@ describe('SignUpPatientComponent', () => {
 
     expect(component.form.controls['email'].value).toEqual('test@test.com');
     expect(component.form.controls['password'].value).toEqual('uwG-1234');
+    expect(component.form.controls['confirmationPassword'].value).toEqual('Medicine1531!');
     expect(component.form.controls['firstName'].value).toEqual('Johnny');
     expect(component.form.controls['lastName'].value).toEqual('test');
     expect(component.form.controls['dateOfBirth'].value).toEqual('10/01/2003');
@@ -81,6 +84,7 @@ describe('SignUpPatientComponent', () => {
 
     expect(component.form.controls['email'].invalid).toEqual(true);
     expect(component.form.controls['password'].invalid).toEqual(true);
+    expect(component.form.controls['confirmationPassword'].invalid).toEqual(true);
     expect(component.form.controls['firstName'].invalid).toEqual(true);
     expect(component.form.controls['lastName'].invalid).toEqual(true);
     expect(component.form.controls['dateOfBirth'].invalid).toEqual(true);
@@ -95,6 +99,7 @@ describe('SignUpPatientComponent', () => {
     component.form.setValue({
       email: 'test@test.com',
       password: 'uwG-1234',
+      confirmationPassword: 'Medicine1531!',
       firstName: 'Johnny',
       lastName: 'test',
       dateOfBirth: '10/01/2003',
@@ -105,6 +110,7 @@ describe('SignUpPatientComponent', () => {
 
     expect(component.form.controls['email'].value).toEqual('test@test.com');
     expect(component.form.controls['password'].value).toEqual('uwG-1234');
+    expect(component.form.controls['confirmationPassword'].value).toEqual('Medicine1531!');
     expect(component.form.controls['firstName'].value).toEqual('Johnny');
     expect(component.form.controls['lastName'].value).toEqual('test');
     expect(component.form.controls['dateOfBirth'].value).toEqual('10/01/2003');
@@ -116,6 +122,7 @@ describe('SignUpPatientComponent', () => {
 
     expect(component.form.controls['email'].value).toEqual(null);
     expect(component.form.controls['password'].value).toEqual(null);
+    expect(component.form.controls['confirmationPassword'].value).toEqual(null);
     expect(component.form.controls['firstName'].value).toEqual(null);
     expect(component.form.controls['lastName'].value).toEqual(null);
     expect(component.form.controls['dateOfBirth'].value).toEqual(null);

@@ -10,21 +10,23 @@ export class CalculatorFormComponent implements OnInit {
   public calculator: object;
   public bmiInt: number;
   public bmiCategory: string;
-  public currentDailyCalories: number;
-  public goalDailyCalories: number;
+  public currentDailyCalories: string;
+  public goalDailyCalories: string;
   public form: FormGroup;
   public genders: string[];
   public calculated: boolean;
+  public direction: string;
+  public amount: number;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.genders = ['Male', 'Female', 'Other'];
+    this.genders = ['Male', 'Female'];
     this.calculator = {};
     this.bmiInt = 0;
     this.bmiCategory = '';
-    this.currentDailyCalories = 0;
-    this.goalDailyCalories = 0;
+    this.currentDailyCalories = '';
+    this.goalDailyCalories = '';
     this.form = new FormGroup({
       height: new FormControl('', Validators.required),
       weight: new FormControl('', Validators.required),
@@ -35,16 +37,18 @@ export class CalculatorFormComponent implements OnInit {
     });
 
     this.calculated = false;
+    this.direction = '';
+    this.amount = 0;
   }
 
   getCalculator(): object {
     return this.calculator;
   }
 
-  getBmi(weight: number, height: number): number {
+  getBmi(weight: number, height: number): string {
     this.bmiInt = (703 * weight) / Math.pow(height, 2);
 
-    return this.bmiInt;
+    return this.bmiInt.toFixed(2);
   }
 
   getBmiCategory(): string {
@@ -67,7 +71,7 @@ export class CalculatorFormComponent implements OnInit {
     height: number,
     age: number,
     activityLevel: number
-  ): number {
+  ): string {
     let bmr: number = 0;
     let dailyCalories: number = 0;
 
@@ -82,7 +86,26 @@ export class CalculatorFormComponent implements OnInit {
       dailyCalories = bmr * this.activityFactor(activityLevel);
     }
 
-    return dailyCalories;
+    return dailyCalories.toFixed(2);
+  }
+
+  getDirection(currentWeight: number, goalWeight: number): string {
+    if(currentWeight < goalWeight) {
+      this.direction = 'increase';
+    } else if (currentWeight > goalWeight) {
+      this.direction = 'decrease';
+    } else {
+      this.direction = 'change';
+    }
+
+    return this.direction;
+  }
+
+  getAmount(currentCalorie: string, goalCalorie: string): number {
+
+    this.amount = Math.abs(Number(currentCalorie) - Number(goalCalorie));
+
+    return this.amount;
   }
 
   activityFactor(activityLevel: number): number {
@@ -114,6 +137,8 @@ export class CalculatorFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.setCalculator();
+    console.log(this.calculator);
     this.getBmi(this.calculator['height'], this.calculator['weight']);
     this.getBmiCategory();
     this.currentDailyCalories = this.getDailyCalories(
@@ -126,11 +151,15 @@ export class CalculatorFormComponent implements OnInit {
 
     this.goalDailyCalories = this.getDailyCalories(
       this.calculator['gender'],
-      this.calculator['weight'],
+      this.calculator['goal'],
       this.calculator['height'],
       this.calculator['age'],
       this.calculator['activityLevel']
     );
+
+    this.getDirection(this.calculator['weight'], this.calculator['goal']);
+
+    this.getAmount(this.currentDailyCalories, this.goalDailyCalories);
 
     this.calculated = true;
   }
