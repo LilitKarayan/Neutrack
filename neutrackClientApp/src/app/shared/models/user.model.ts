@@ -22,3 +22,11 @@ export interface IUserLogin {
   email:	string;
   password:	string;
 }
+export interface IPatient extends IUser{
+  userId: number;
+  initialWeight?: number | null
+}
+
+export interface INutritionist extends IUser{
+  userId: number
+}

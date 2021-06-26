@@ -1,5 +1,10 @@
+import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { NutritionistService } from '@services/nutritionist.service';
+import { IUser, IPatient } from '@models';
+import { AuthenticationService } from '@services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,51 +18,27 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ]),
   ],
 })
-export class DashboardComponent {
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['Name', 'DOB', 'gender', 'email'];
-  expandedElement: PatientsList | null;
-}
+export class DashboardComponent implements OnInit {
+  private patientsSubject = new BehaviorSubject<IPatient[]> (null);
+  activeUser: IUser;
+  patients: Observable<IPatient[]>;
+  columnsToDisplay =
+  ['fullName','dateOfBirth','gender','email' ];
 
-export interface PatientsList {
-  Name: string;
-  DOB: string;
-  gender: string;
-  email: string;
-  current_weight: number;
-  initial_weight: number;
-  goal_weight: number;
-  height: number;
-  
-}
+  expandedElement: IPatient | null;
 
-const ELEMENT_DATA: PatientsList[] = [
-  {   
-    Name: 'Lilit Karayan',
-    DOB: '01/24/1992',
-    gender: 'F',
-    email: 'lkaraya1@my.westga.edu',
-    current_weight: 10,
-    initial_weight: 8,
-    goal_weight: 78,
-    height: 66
-  }, {
-    Name: 'Vincent Adeyemi',
-    DOB: '01/24/1992',
-    gender: 'F',
-    email: 'vadeyem1@my.westga.edu',
-    current_weight: 67,
-    initial_weight: 89,
-    goal_weight: 60,
-    height: 69
-  }, {
-    Name: 'Jordan Barron',
-    DOB: '01/24/1992',
-    gender: 'F',
-    email: 'barron8@my.westga.edu',
-    current_weight: 89,
-    initial_weight: 120,
-    goal_weight: 85,
-    height: 70
-  },  
-];
+  constructor(private authService: AuthenticationService,private nutritionistService: NutritionistService){
+    this.authService.user.subscribe(user => this.activeUser = user);
+    this.patients = this.patientsSubject.asObservable();
+  }
+  ngOnInit(): void {
+    this.getAllPatients();
+  }
+
+  getAllPatients(): void{
+    this.nutritionistService.getAllNutritionistPatient(this.activeUser.nutritionistId).subscribe(data => {
+      this.patientsSubject.next(data);
+      }
+    );
+  }
+}

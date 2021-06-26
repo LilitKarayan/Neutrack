@@ -36,6 +36,7 @@ namespace NeutrackAPI.Profiles
 
             CreateMap<PatientCreateDTO, User>();
             CreateMap<Patient, PatientReadDTO>()
+                .ForMember(d => d.InitialWeight, o => o.MapFrom(c => c.PatientActivityHistories.OrderByDescending(x => x.CreatedDate).FirstOrDefault().Weight))
                 .ForMember(d => d.DateOfBirth, o => o.MapFrom(c => c.User.DateOfBirth))
                 .ForMember(d => d.Email, o => o.MapFrom(c => c.User.Email))
                 .ForMember(d => d.FirstName, o => o.MapFrom(c => c.User.FirstName))

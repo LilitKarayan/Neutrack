@@ -70,6 +70,18 @@ namespace NeutrackAPI.Controllers
                         Patient = patientModel
                     }
                 };
+                if (userCreateDTO.Weight > 0)
+                {
+                    patientModel.PatientActivityHistories = new List<PatientActivityHistory>
+                    {
+                        new PatientActivityHistory
+                        {
+                            Patient = patientModel,
+                            Weight = userCreateDTO.Weight,
+                            CreatedDate = DateTime.UtcNow
+                        }
+                    };
+                }
                 userModel.UserRoles = new List<UserRole>
                 {
                     new UserRole

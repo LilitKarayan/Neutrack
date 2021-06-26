@@ -28,7 +28,7 @@ namespace NeutrackAPI.DTOs
 
         public DateTime DateOfBirth { get; set; }
 
-        public string Goal { get; set; }
+        public double Goal { get; set; }
 
         [Required]
         public int ActivityLevel { get; set; }
