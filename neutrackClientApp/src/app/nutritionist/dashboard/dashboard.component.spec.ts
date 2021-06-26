@@ -42,5 +42,4 @@ describe('DashboardComponent', () => {
     const td = compiled.querySelector('td');
     expect(td.textContent).toContain('Lilit Karayan');
   })
-
 });

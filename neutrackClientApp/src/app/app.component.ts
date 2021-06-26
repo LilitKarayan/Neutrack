@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '@models';
-import { AuthenticationService } from '@services/authentication.service';
-import { InterceptorService } from '@services/interceptor.service';
+import { AuthenticationService } from '../app/services/authentication.service';
+import { InterceptorService } from '../app/services/interceptor.service';
 
 @Component({
   selector: 'app-root',

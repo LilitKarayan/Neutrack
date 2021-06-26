@@ -2,11 +2,13 @@ import { TestBed } from '@angular/core/testing';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DataTableComponent } from './data-table.component';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import {PatientEditFormDialogComponent} from '../../patients/patient-edit-form-dialog/patient-edit-form-dialog.component';
 import { By } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('DataTableComponent', () => {
   let fixture;
   let component: DataTableComponent;
@@ -17,7 +19,7 @@ describe('DataTableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ DataTableComponent, PatientEditFormDialogComponent ],
-      imports: [MatDialogModule, MatTableModule]
+      imports: [MatDialogModule, MatTableModule, MatIconModule, MatPaginatorModule, BrowserAnimationsModule]
     })
     .compileComponents();
     fixture = TestBed.createComponent(DataTableComponent);
@@ -38,7 +40,7 @@ describe('DataTableComponent', () => {
   it('should have correct rows', () => {
     fixture.detectChanges();
     const rowHtmlElements = fixture.debugElement.nativeElement.querySelectorAll('tbody tr');
-    expect(rowHtmlElements.length).toBe(10);
+    expect(rowHtmlElements.length).toBe(5);
   });
 
   it('should have <person 1> in the first row', () => {

@@ -3,6 +3,9 @@ import { TestBed } from '@angular/core/testing';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpErrorHandlerService} from './services/http-error-handler.service';
+import { MessageService } from './services/message.service';
 
 describe('AppComponent', () => {
   beforeAll(() => {
@@ -11,11 +14,14 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent
       ],
+      providers: [HttpErrorHandlerService,
+                  MessageService],
       schemas:[NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
