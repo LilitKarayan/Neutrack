@@ -7,11 +7,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
 
-
 @NgModule({
   declarations: [
     ErrorDialogComponent,
-    LoadingDialogComponent
+    LoadingDialogComponent,
   ],
   imports: [
     CommonModule,

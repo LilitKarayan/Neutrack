@@ -67,7 +67,7 @@ export class AuthenticationService {
         id: data.unique_name,
         lastName: data.family_name,
         patientId: data.upn?data.upn:null,
-        nutritionistId: data.actor?data.actor:null,
+        nutritionistId: data.actort?data.actort:null,
       }
       return currentUser;
     }
