@@ -10,13 +10,11 @@ namespace NeutrackAPI.Models
         public int UserId { get; set; }
         public User User { get; set; }
         public bool IsActive { get; set; }
-        public double Height { get; set; }
-        public double Weight { get; set; }
+        public double? Height { get; set; }
+        public double? Weight { get; set; }
+        public double? Goal { get; set; }
 
-        [MaxLength(250)]
-        public string Goal { get; set; }
-
-        public int ActivityLevel { get; set; }
+        public int? ActivityLevel { get; set; }
 
         public int? NutritionistId { get; set; }
 

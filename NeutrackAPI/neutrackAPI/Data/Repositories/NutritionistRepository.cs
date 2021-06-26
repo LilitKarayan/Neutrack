@@ -33,7 +33,10 @@ namespace NeutrackAPI.Data.Repositories
 
         public IEnumerable<Patient> GetAllNutritionistPatients(int nutritionistId)
         {
-            return _context.Patients.Where(x => x.IsActive && x.NutritionistId == nutritionistId).Include(u => u.User).ToList();
+            return _context.Patients.Where(x => x.IsActive && x.NutritionistId == nutritionistId)
+                .Include(u => u.User)
+                .Include(u => u.PatientActivityHistories)
+                .ToList();
         }
 
         public Nutritionist GetNutritionistById(int id)
@@ -43,7 +46,10 @@ namespace NeutrackAPI.Data.Repositories
 
         public Patient GetNutritionistPatientById(int patientId, int nutritionistId)
         {
-            return _context.Patients.Include(u => u.User).FirstOrDefault(x => x.Id == patientId && x.NutritionistId == nutritionistId);
+            return _context.Patients
+                .Include(u => u.User)
+                .Include(u => u.PatientActivityHistories)
+                .FirstOrDefault(x => x.Id == patientId && x.NutritionistId == nutritionistId);
         }
 
         public bool SaveChanges()

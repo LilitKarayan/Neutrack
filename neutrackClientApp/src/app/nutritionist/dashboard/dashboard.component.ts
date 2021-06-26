@@ -33,12 +33,10 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAllPatients();
-    console.log(this.patients);
   }
 
   getAllPatients(): void{
     this.nutritionistService.getAllNutritionistPatient(this.activeUser.nutritionistId).subscribe(data => {
-      console.log(data);
       this.patientsSubject.next(data);
       }
     );

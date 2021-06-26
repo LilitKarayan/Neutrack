@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O7mDhYN3zOrfB7n0G/5+nGaf+D3jRTLAFVWPys2A1Uge8NE7AA4oI3hWVSfq+94urD7bwmlLB+9KI0OLoBsZuQ==",
+  "dgSpecHash": "6B7w1x3WiblW37W4TdjWnYPyPcGmhywYSWKyaMX+a/hYPQR9/c0hEqES8WuWY1+opSYOyexCPwQW3I/WcbakEg==",
   "success": true,
-  "projectFilePath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
+  "projectFilePath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/NeutrackAPI.csproj",
   "expectedPackageFiles": [
     "/Users/mide/.nuget/packages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
     "/Users/mide/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.1.1/automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

@@ -23,7 +23,8 @@ export interface IUserLogin {
   password:	string;
 }
 export interface IPatient extends IUser{
-  userId: number
+  userId: number;
+  initialWeight?: number | null
 }
 
 export interface INutritionist extends IUser{
