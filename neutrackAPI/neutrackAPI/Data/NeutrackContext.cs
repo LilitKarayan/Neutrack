@@ -27,6 +27,12 @@ namespace NeutrackAPI.Data
             modelBuilder.Entity<Feedback>().HasOne(f => f.Patient).WithMany(f => f.Feedbacks).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<PatientActivityHistory>().HasOne(p => p.Patient).WithMany(h => h.PatientActivityHistories);
             modelBuilder.Entity<PatientActivityHistory>().Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
+            
+            modelBuilder.Entity<ReceipeProduct>().HasKey(rp => new { rp.ReceipeID, rp.ProductID });
+            modelBuilder.Entity<ReceipeProduct>().HasOne(p => p.Product).WithMany(rp => rp.ReceipeProducts).HasForeignKey(pi => pi.ProductID);
+            modelBuilder.Entity<ReceipeProduct>().HasOne(r => r.Receipe).WithMany(rp => rp.ReceipeProducts).HasForeignKey(ri => ri.ReceipeID);
+
+
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -39,6 +45,8 @@ namespace NeutrackAPI.Data
         public DbSet<Nutritionist> Nutritionists { get; set; }
         public DbSet<NutritionistPatientHistory> NutritionistPatientHistories { get; set; }
         public DbSet<PatientActivityHistory> PatientActivityHistories { get; set; }
-
+        public DbSet<Product>Products { get; set; }
+        public DbSet<Receipe>Receipes { get; set; }
+        public DbSet<ReceipeProduct>ReceipeProducts { get; set; }
     }
 }
