@@ -19,6 +19,6 @@ namespace NeutrackAPI.Models
         public double CarbInGrams { get; set; }
 
         // Navigation Properties
-        public List<ReceipeProduct> ReceipeProducts { get; set; }
+        public List<RecipeProduct> RecipeProducts { get; set; }
     }
 }
