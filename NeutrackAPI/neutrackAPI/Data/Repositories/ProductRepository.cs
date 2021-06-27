@@ -29,19 +29,6 @@ namespace NeutrackAPI.Data
         }
 
         /// <summary>
-        /// Creates a new Product
-        /// </summary>
-        /// <param name="product"></param>
-        public void CreateProduct(Product product)
-        {
-            if(product == null)
-            {
-                throw new ArgumentNullException(nameof(product));
-            }
-            _context.Add(product);
-        }
-
-        /// <summary>
         /// Gets a list of all products
         /// </summary>
         /// <returns></returns>
@@ -63,6 +50,21 @@ namespace NeutrackAPI.Data
             // return _context.Products.Include(x => x.RecipeProducts).ThenInclude(xr => xr.Recipe).FirstOrDefault(x => x.Id.Equals(id));
         }
 
+
+        /// <summary>
+        /// Creates a new Product
+        /// </summary>
+        /// <param name="product"></param>
+        public void CreateProduct(Product product)
+        {
+            if(product == null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+            _context.Add(product);
+        }
+
+        
         /// <summary>
         /// Method to save changes to the DB
         /// </summary>

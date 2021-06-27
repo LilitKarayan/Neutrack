@@ -32,10 +32,10 @@ namespace NeutrackAPI.Controllers
         /// </summary>
         /// <returns>A list of Products</returns>
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetProducts()
+        public ActionResult<IEnumerable<ProductReadDTO>> GetProducts()
         {
             var productItems = _productRepository.GetAllProducts();
-            return Ok(productItems);
+            return Ok(_mapper.Map<IEnumerable<ProductReadDTO>>(productItems));
         }
 
         /// <summary>
@@ -44,16 +44,16 @@ namespace NeutrackAPI.Controllers
         /// <param name="id"></param>
         /// <returns>A product matching the id parameter</returns>
         [HttpGet("{id}", Name = "GetProductById")]
-        public ActionResult <Product> GetProductById(int id)
+        public ActionResult<ProductReadDTO> GetProductById(int id)
         {
             try
             {
                 var productItem = _productRepository.GetProductById(id);
-                // if (productItem == null)
-                // {
-                //     return NotFound();
-                // }
-                return Ok(productItem);
+                if (productItem == null)
+                {
+                    return NotFound();
+                }
+                return Ok(_mapper.Map<ProductReadDTO>(productItem));
 
             }
             catch (Exception)
@@ -63,60 +63,28 @@ namespace NeutrackAPI.Controllers
 
         }
 
-    //     /// <summary>
-    //     /// Register a new Product
-    //     /// </summary>
-    //     /// <param name="productCreateDTO"></param>
-    //     /// <returns>The new created Product</returns>
-    //     [HttpPost, Route("newproduct")]
-    //     public ActionResult<ProductReadDTO> RegisterProduct(PatientCreateDTO userCreateDTO)
-    //     {
-    //         try
-    //         {
-    //             var patientModel = _mapper.Map<Patient>(userCreateDTO);
-    //             var userModel = _mapper.Map<User>(userCreateDTO);
-    //             var roleModel = _roleRepository.GetRoleByName(Roles.User);
-    //             var existingUser = _userRepository.GetUserByEmail(userModel.Email);
-    //             patientModel.User = userModel;
-    //             //patientModel.Nutritionist = null;
-    //             if (existingUser != null && existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
-    //             {
-    //                 return BadRequest("Email has already been taken");
-    //             }
-    //             else if(existingUser != null && !existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
-    //             {
-    //                 existingUser.UserRoles.Add(
-    //                     new UserRole
-    //                     {
-    //                         User = existingUser,
-    //                         Role = roleModel,
-    //                     }
-    //                 );
-    //                 existingUser.Patient = patientModel;
-    //                 _userRepository.SaveChanges();
-    //                 var user = _mapper.Map<UserReadDTO>(existingUser);
-    //                 return CreatedAtRoute(nameof(GetUserById), new { user.Id }, user);
-    //             }
-    //             userModel.UserRoles = new List<UserRole>
-    //             {
-    //                 new UserRole
-    //                 {
-    //                     User = userModel,
-    //                     Role = roleModel,
-    //                 },
-    //             };
-    //             userModel.Patient = patientModel;
-    //             _userRepository.CreateUser(userModel);
-    //             _userRepository.SaveChanges();
-    //             var userReadDTO = _mapper.Map<UserReadDTO>(userModel);
-    //             return CreatedAtRoute(nameof(GetUserById), new { userReadDTO.Id }, userReadDTO);
+        /// <summary>
+        /// Register a new Product
+        /// </summary>
+        /// <param name="productCreateDTO"></param>
+        /// <returns>The new created Product</returns>
+        [HttpPost, Route("newproduct")]
+        public ActionResult<Product> RegisterProduct(Product product)
+        {
+            try
+            {
+                
+                _productRepository.CreateProduct(product);
+                _productRepository.SaveChanges();
+                
+                return CreatedAtRoute(nameof(GetProductById), new { product.Id }, product);
 
-    //         }
-    //         catch (Exception ex)
-    //         {
-    //             return StatusCode(500, ex.Message);
-    //         }
-    //     }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
     //     /// <summary>
     //     /// Register a new User with user role
