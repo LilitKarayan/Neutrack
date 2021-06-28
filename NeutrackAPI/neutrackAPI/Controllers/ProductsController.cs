@@ -73,7 +73,6 @@ namespace NeutrackAPI.Controllers
         {
             try
             {
-                
                 _productRepository.CreateProduct(product);
                 _productRepository.SaveChanges();
                 
@@ -86,134 +85,32 @@ namespace NeutrackAPI.Controllers
             }
         }
 
-    //     /// <summary>
-    //     /// Register a new User with user role
-    //     /// </summary>
-    //     /// <param name="userCreateDTO"></param>
-    //     /// <returns>The new created User</returns>
-    //     [AllowAnonymous]
-    //     [HttpPost, Route("newnutritionist")]
-    //     public ActionResult<UserReadDTO> RegisterNutritionist(NutritionistCreateDTO nutritionistCreateDTO)
-    //     {
-    //         try
-    //         {
-    //             var nutritionistModel = _mapper.Map<Nutritionist>(nutritionistCreateDTO);
-    //             var userModel = _mapper.Map<User>(nutritionistCreateDTO);
-    //             var roleModel = _roleRepository.GetRoleByName(Roles.Nutritionist);
-    //             var existingUser = _userRepository.GetUserByEmail(userModel.Email);
-    //             nutritionistModel.User = userModel;
+        /// <summary>
+        /// Update their information
+        /// </summary>
+        /// <param name="productUpdate"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public ActionResult<ProductReadDTO> UpdateProduct(int id, ProductCreateDTO productUpdate)
+        {
+            try
+            {
                 
-    //             if (existingUser != null && existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
-    //             {
-    //                 return BadRequest("Email has already been taken");
-    //             }
-    //             else if (existingUser != null && !existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id) && existingUser.Nutritionist == null)
-    //             {
-    //                 existingUser.UserRoles.Add(
-    //                     new UserRole {
-    //                         User = existingUser,
-    //                         Role = roleModel,
-    //                     }
-    //                 );
-    //                 existingUser.Nutritionist = nutritionistModel;
-    //                 _userRepository.SaveChanges();
-    //                 var user = _mapper.Map<UserReadDTO>(existingUser);
-    //                 return CreatedAtRoute(nameof(GetUserById), new { user.Id }, user);
-
-    //             }
-    //             userModel.UserRoles = new List<UserRole>
-    //             {
-    //                 new UserRole
-    //                 {
-    //                     User = userModel,
-    //                     Role = roleModel,
-    //                 },
-    //             };
-    //             userModel.Nutritionist = nutritionistModel;
-    //             _userRepository.CreateUser(userModel);
-    //             _userRepository.SaveChanges();
-    //             var userReadDTO = _mapper.Map<UserReadDTO>(userModel);
-    //             return CreatedAtRoute(nameof(GetUserById), new { userReadDTO.Id }, userReadDTO);
-
-    //         }
-    //         catch (Exception ex)
-    //         {
-    //             return StatusCode(500, ex.Message);
-    //         }
-    //     }
-
-    //     /// <summary>
-    //     /// Register a new User with user role
-    //     /// </summary>
-    //     /// <param name="userCreateDTO"></param>
-    //     /// <returns>The new created User</returns>
-    //     [AllowAnonymous]
-    //     [HttpPost, Route("newadmin")]
-    //     public ActionResult<UserReadDTO> RegisterAdmin(UserCreateDTO userCreateDTO)
-    //     {
-    //         try
-    //         {
-    //             var userModel = _mapper.Map<User>(userCreateDTO);
-    //             var roleModel = _roleRepository.GetRoleByName(Roles.Admin);
-    //             var existingUser = _userRepository.GetUserByEmail(userModel.Email);
-    //             if (existingUser != null && existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
-    //             {
-    //                 throw new Exception("Email has already been taken");
-    //             }
-    //             userModel.UserRoles = new List<UserRole>
-    //             {
-    //                 new UserRole
-    //                 {
-    //                     User = userModel,
-    //                     Role = roleModel,
-    //                 },
-    //             };
-    //             _userRepository.CreateUser(userModel);
-    //             _userRepository.SaveChanges();
-    //             var userReadDTO = _mapper.Map<UserReadDTO>(userModel);
-    //             return CreatedAtRoute(nameof(GetUserById), new { userReadDTO.Id }, userReadDTO);
-
-    //         }
-    //         catch (Exception ex)
-    //         {
-    //             return BadRequest(ex.Message);
-    //         }
-    //     }
-
-    //     /// <summary>
-    //     /// Allows a user to update their information
-    //     /// </summary>
-    //     /// <param name="userUpdate"></param>
-    //     /// <returns></returns>
-    //     [HttpPut("{id}")]
-    //     public ActionResult<UserReadDTO> UpdateUser(int id, PatientCreateDTO userUpdate)
-    //     {
-    //         try
-    //         {
-    //             var currentUserId = int.Parse(User.Identity.Name);
-    //             if (id != currentUserId)
-    //             {
-    //                 return Forbid();
-    //             }
-    //             var userItem = _userRepository.GetUserById(id);
-    //             if (userItem == null)
-    //             {
-    //                 return NotFound();
-    //             }
-    //             if(userItem.Patient != null)
-    //             {
-    //                 _mapper.Map(userUpdate, userItem.Patient);
-    //             }
-    //             _mapper.Map(userUpdate, userItem);
-    //             _userRepository.UpdateUser(userItem);
-    //             _userRepository.SaveChanges();
-    //             return Ok(_mapper.Map<UserReadDTO>(userItem));
-    //         }
-    //         catch(Exception ex)
-    //         {
-    //             return StatusCode(500, new { message = ex.Message});
-    //         }
-    //     }
+                var productItem = _productRepository.GetProductById(id);
+                if (productItem == null)
+                {
+                    return NotFound();
+                }
+                _mapper.Map(productUpdate, productItem);
+                _productRepository.UpdateProduct(productItem);
+                _productRepository.SaveChanges();
+                return Ok(_mapper.Map<ProductReadDTO>(productItem));
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message});
+            }
+        }
 
     //     /// <summary>
     //     /// This will deactivate a user by setting IsActive to false

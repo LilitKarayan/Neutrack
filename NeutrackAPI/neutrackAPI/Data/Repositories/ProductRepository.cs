@@ -64,6 +64,15 @@ namespace NeutrackAPI.Data
             _context.Add(product);
         }
 
+        public void UpdateProduct(Product product)
+        {
+            if(product == null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+            _context.Update(product);
+        }
+
         
         /// <summary>
         /// Method to save changes to the DB
@@ -74,10 +83,7 @@ namespace NeutrackAPI.Data
             return (_context.SaveChanges() >= 0);
         }
 
-        // public void UpdateProduct(Product product)
-        // {
-        //     // do nothing
-        // }
+        
 
         // public void DeleteProduct(Product product)
         // {
