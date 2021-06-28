@@ -9,6 +9,7 @@ using NeutrackAPI.Models;
 using NeutrackAPI.Helpers;
 using NeutrackAPI.Data.IRepositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -118,14 +119,33 @@ namespace NeutrackAPI.Controllers
             var productItem = _productRepository.GetProductById(id);
             if (productItem == null)
             {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAA");
                 return NotFound();
             }
-            Console.WriteLine(productItem.Id);
-            Console.WriteLine("BBBBBBBBBBBBCCCCCCCAAAAAAAAAAAAAAAAAAAAAAAAA");
             _productRepository.DeleteProduct(productItem);
             _productRepository.SaveChanges();
             return NoContent();
+        }
+
+        
+        /// Search Product by name
+        [HttpGet("search/{name}")]
+        public ActionResult<IEnumerable<Product>> SearchProduct(string name)
+        {
+            try
+            {
+                var result = _productRepository.SearchProduct(name);
+
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
+
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
     //     /// <summary>

@@ -100,9 +100,16 @@ namespace NeutrackAPI.Data
             // _context.RecipeProducts.RemoveRange(product.RecipeProducts);
         }
 
-        // public IEnumerable<Product> SearchProduct(string searchQuery)
-        // {
-        //     return null;
-        // }
+        public IEnumerable<Product> SearchProduct(string searchQuery)
+        {
+            IQueryable<Product> query = _context.Products;
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                query = query.Where(e => e.Name.Contains(searchQuery));
+            }
+            return query.ToList();
+
+
+        }
     }
 }
