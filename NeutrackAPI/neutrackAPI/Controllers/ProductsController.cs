@@ -95,7 +95,6 @@ namespace NeutrackAPI.Controllers
         {
             try
             {
-                
                 var productItem = _productRepository.GetProductById(id);
                 if (productItem == null)
                 {
@@ -110,6 +109,23 @@ namespace NeutrackAPI.Controllers
             {
                 return StatusCode(500, new { message = ex.Message});
             }
+        }
+
+        //DELETE api/Products/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteProduct(int id)
+        {
+            var productItem = _productRepository.GetProductById(id);
+            if (productItem == null)
+            {
+                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAA");
+                return NotFound();
+            }
+            Console.WriteLine(productItem.Id);
+            Console.WriteLine("BBBBBBBBBBBBCCCCCCCAAAAAAAAAAAAAAAAAAAAAAAAA");
+            _productRepository.DeleteProduct(productItem);
+            _productRepository.SaveChanges();
+            return NoContent();
         }
 
     //     /// <summary>
@@ -143,50 +159,7 @@ namespace NeutrackAPI.Controllers
     //         }
     //     }
 
-    //     /// <summary>
-    //     /// Authenticates User
-    //     /// </summary>
-    //     /// <param name="userAuth"></param>
-    //     /// <returns></returns>
-    //     [AllowAnonymous]
-    //     [HttpPost, Route("login")]
-    //     public ActionResult<AuthResponseDTO> Login(AuthRequestDTO userAuth)
-    //     {
-    //         try
-    //         {
-    //             var user = _userRepository.AuthenticateUser(userAuth);
-    //             if(user == null)
-    //             {
-    //                 return BadRequest(new { message = "Username or password is incorrect" });
-    //             }
-    //             return Ok(user);
-    //         }
-    //         catch(Exception ex){
-    //             return StatusCode(500, new { Error = ex.Message });
-    //         }
-    //     }
 
-    //     /// <summary>
-    //     /// 
-    //     /// </summary>
-    //     /// <returns></returns>
-    //     [HttpGet, Route("signedinuser")]
-    //     public ActionResult<UserReadDTO> GetAuthenticatedUser()
-    //     {
-    //         try
-    //         {
-    //             var currentUserId = int.Parse(User.Identity.Name);
-    //             var userItem = _userRepository.GetUserById(currentUserId);
-    //             if (userItem == null)
-    //             {
-    //                 return NotFound();
-    //             }
-    //             return Ok(_mapper.Map<UserReadDTO>(userItem));
-    //         }
-    //         catch (Exception ex)
-    //         {
-    //             return StatusCode(500, new { Error = ex.Message });
-    //         }
-    //     }
+    
     }
 }

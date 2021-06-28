@@ -11,6 +11,7 @@ namespace NeutrackAPI.Profiles
         {
             CreateMap<Product, ProductReadDTO>();
             CreateMap<ProductCreateDTO, Product>();
+            CreateMap<Product, ProductCreateDTO>();
         }
     }
 }

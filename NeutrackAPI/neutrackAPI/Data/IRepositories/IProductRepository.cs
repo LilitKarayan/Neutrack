@@ -12,7 +12,7 @@ namespace NeutrackAPI.Data
         Product GetProductById(int id);
         void CreateProduct(Product product);
         void UpdateProduct(Product product);
-        // void DeleteProduct(Product product);
+        string DeleteProduct(Product product);
         // IEnumerable<Product> SearchProduct(string searchQuery);
     }
 }

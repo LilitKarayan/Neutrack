@@ -85,10 +85,20 @@ namespace NeutrackAPI.Data
 
         
 
-        // public void DeleteProduct(Product product)
-        // {
-        //     _context.RecipeProducts.RemoveRange(product.RecipeProducts);
-        // }
+        public string DeleteProduct(Product product)
+        {
+            if(product == null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+            if (product.RecipeProducts == null){
+                _context.Products.Remove(product); 
+                return "The product is deleted successfully."; 
+            } else {
+                return "The product can not be deleted as it is in a recipe.";
+            }            
+            // _context.RecipeProducts.RemoveRange(product.RecipeProducts);
+        }
 
         // public IEnumerable<Product> SearchProduct(string searchQuery)
         // {
