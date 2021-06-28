@@ -5760,14 +5760,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/NeutrackAPI.csproj",
-      "projectName": "NeutrackAPI",
-      "projectPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/NeutrackAPI.csproj",
+      "projectUniqueName": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
+      "projectName": "neutrackAPI",
+      "projectPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
       "packagesPath": "/Users/mide/.nuget/packages/",
-      "outputPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/NeutrackAPI/obj/",
+      "outputPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/mide/.nuget/NuGet/NuGet.Config"
+        "/Users/mide/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

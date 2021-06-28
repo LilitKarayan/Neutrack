@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
-
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -11,6 +10,10 @@ import { PatientService } from '../../../core/services/patient.service';
 import { Patient } from '../../../core/models/patient';
 import { PatientAddFormDialogComponent } from '../patient-add-form-dialog/patient-add-form-dialog.component';
 import { PatientInfoComponent } from '../patient-info/patient-info.component';
+import { NutritionistService } from '@services/nutritionist.service';
+import { IUser, IPatient } from '@models';
+import { AuthenticationService } from '@services/authentication.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-data-table',
@@ -19,32 +22,32 @@ import { PatientInfoComponent } from '../patient-info/patient-info.component';
 })
 
 
-export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DataTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  
-
-  public displayedColumns: string[] = ['name', 'gender', 'age', 'email'];
+  private patientsSubject = new BehaviorSubject<IPatient[]> (null);
+  activeUser: IUser;
+  public displayedColumns: string[] = ['fullName', 'gender', 'age', 'email'];
   public columnsToDisplay: string[] = [...this.displayedColumns, 'actions'];
 
-  /**
-   * it holds a list of active filter for each column.
-   * example: {firstName: {contains: 'person 1'}}
-   *
-   */
-  public columnsFilters = {};
+  public dataSource: MatTableDataSource<IPatient>;
 
-  public dataSource: MatTableDataSource<Patient>;
-  private serviceSubscribe: Subscription;
+  constructor(
+    private patientsService: PatientService,
+    public dialog: MatDialog,
+    private authService: AuthenticationService,
+    private nutritionistService: NutritionistService
+    ) {
+    this.authService.user.subscribe(user => this.activeUser = user);
+    this.dataSource = new MatTableDataSource<IPatient>();
+  }
 
-  constructor(private patientsService: PatientService, public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource<Patient>();
-  }   
 
-  
-
-  edit(data: Patient) {
+  getAge(dob: string){
+    const age = moment().diff(dob, 'years',false);
+    return age;
+  }
+  edit(data: IPatient) {
     const dialogRef = this.dialog.open(PatientEditFormDialogComponent, {
       width: '400px',
       data: data
@@ -57,7 +60,7 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  view(data: Patient) {
+  view(data: IPatient) {
     const dialogRef = this.dialog.open(PatientInfoComponent, {
       width: '100%',
       data: data
@@ -101,14 +104,14 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
    * initialize data-table by providing persons list to the dataSource.
    */
   ngOnInit(): void {
-    this.patientsService.getAll();
-    this.serviceSubscribe = this.patientsService.patients$.subscribe(res => {
-      this.dataSource.data = res;
-    })
+    this.getAllPatients();
   }
-
-  ngOnDestroy(): void {
-    this.serviceSubscribe.unsubscribe();
+  getAllPatients(): void{
+    this.nutritionistService.getAllNutritionistPatient(this.activeUser.nutritionistId).subscribe(data => {
+      this.dataSource.data = data;
+      this.patientsSubject.next(data);
+      }
+    );
   }
 }
 

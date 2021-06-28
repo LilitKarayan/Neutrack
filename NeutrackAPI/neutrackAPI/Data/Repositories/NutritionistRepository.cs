@@ -33,7 +33,7 @@ namespace NeutrackAPI.Data.Repositories
 
         public IEnumerable<Patient> GetAllNutritionistPatients(int nutritionistId)
         {
-            return _context.Patients.Where(x => x.IsActive && x.NutritionistId == nutritionistId)
+            return _context.Patients.Where(x => x.NutritionistId == nutritionistId)
                 .Include(u => u.User)
                 .Include(u => u.PatientActivityHistories)
                 .ToList();
