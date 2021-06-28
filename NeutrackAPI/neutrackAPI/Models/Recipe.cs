@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NeutrackAPI.Models
 {
-    public class Receipe 
+    public class Recipe 
     {
         public int Id { get; set; }
 
@@ -14,7 +14,7 @@ namespace NeutrackAPI.Models
         public string Instruction { get; set; }
 
         // Navigation Properties
-        public List<ReceipeProduct> ReceipeProducts { get; set; }
+        public List<RecipeProduct> RecipeProducts { get; set; }
 
     }
 }

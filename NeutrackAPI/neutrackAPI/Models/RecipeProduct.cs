@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NeutrackAPI.Models
 {
-    public class ReceipeProduct 
+    public class RecipeProduct 
     {
-        public int ReceipeID { get; set; }
+        public int RecipeID { get; set; }
 
-        public Receipe Receipe { get; set; }
+        public Recipe Recipe { get; set; }
 
         public int ProductID { get; set; }
 
