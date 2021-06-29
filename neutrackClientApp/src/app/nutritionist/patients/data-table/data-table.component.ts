@@ -49,8 +49,11 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   }
   edit(data: IPatient) {
     const dialogRef = this.dialog.open(PatientEditFormDialogComponent, {
-      width: '400px',
-      data: data
+      maxHeight: "100%",
+      width: "600px",
+      maxWidth: "100%",
+      data: data,
+      hasBackdrop: true,
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -62,7 +65,8 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
   view(data: IPatient) {
     const dialogRef = this.dialog.open(PatientInfoComponent, {
-      width: '100%',
+      width: '400%',
+      height: '600px',
       data: data
     });
 
@@ -76,6 +80,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   addPatient(): void {
     const dialogRef = this.dialog.open(PatientAddFormDialogComponent, {
       width: '400px',
+      height: '600px',
     });
 
     dialogRef.afterClosed().subscribe(result => {

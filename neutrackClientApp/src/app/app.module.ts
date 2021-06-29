@@ -54,6 +54,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SharedModule } from './shared/shared.module';
 import { NutritionistService } from '@services/nutritionist.service';
 import { PatientService } from '@services/patient.service';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 @NgModule({
   declarations: [
@@ -110,6 +113,8 @@ import { PatientService } from '@services/patient.service';
     MatSelectModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    MatGridListModule,
+    MatSlideToggleModule,
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
