@@ -1,5 +1,6 @@
-<button class="addPatient" mat-raised-button color="primary" (click)="addPatient()"> Add a new patient </button>
 
+<h1> List of Patients </h1>
+<button class="addPatient" mat-raised-button color="primary" (click)="addPatient()"> Add a new patient </button>
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <!-- Name column -->
@@ -26,9 +27,9 @@
       <ng-container [matColumnDef]="'actions'">
         <th mat-header-cell *matHeaderCellDef> actions </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button (click)="view(element)">
+          <a mat-icon-button [routerLink]="[element['id'], 'details']">
             <mat-icon mat-icon-button color="basic">portrait</mat-icon>
-          </button>
+          </a>
           <button class="edit_button" mat-icon-button (click)="edit(element)">
             <mat-icon mat-icon-button color='primary'>edit</mat-icon>
           </button>

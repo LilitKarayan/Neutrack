@@ -29,7 +29,9 @@ export class NutritionistService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getAllNutritionistPatient(nutritionistId): any{
-    console.log(getApiRoute(nutritionistGetAllPatients(nutritionistId)));
     return this.http.get<any>(getApiRoute(nutritionistGetAllPatients(nutritionistId))).pipe();
+  }
+  getANutritionistPatient(nutritionistId, patientId): any{
+    return this.http.get<any>(getApiRoute(nutritionistGetAPatient(nutritionistId, patientId))).pipe();
   }
 }

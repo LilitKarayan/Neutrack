@@ -56,6 +56,7 @@ import { NutritionistService } from '@services/nutritionist.service';
 import { PatientService } from '@services/patient.service';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -116,6 +117,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatGridListModule,
     MatSlideToggleModule,
     SharedModule,
+    ChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

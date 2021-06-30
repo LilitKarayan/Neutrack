@@ -7,9 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { PatientEditFormDialogComponent } from '../patient-edit-form-dialog/patient-edit-form-dialog.component';
 import { PatientService } from '../../../core/services/patient.service';
-import { Patient } from '../../../core/models/patient';
 import { PatientAddFormDialogComponent } from '../patient-add-form-dialog/patient-add-form-dialog.component';
-import { PatientInfoComponent } from '../patient-info/patient-info.component';
 import { NutritionistService } from '@services/nutritionist.service';
 import { IUser, IPatient } from '@models';
 import { AuthenticationService } from '@services/authentication.service';
@@ -63,24 +61,12 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  view(data: IPatient) {
-    const dialogRef = this.dialog.open(PatientInfoComponent, {
-      width: '400%',
-      height: '600px',
-      data: data
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.patientsService.edit(result);
-      }
-    });
-  }
-
   addPatient(): void {
     const dialogRef = this.dialog.open(PatientAddFormDialogComponent, {
-      width: '400px',
-      height: '600px',
+      maxHeight: "100%",
+      width: "600px",
+      maxWidth: "100%",
+      hasBackdrop: true,
     });
 
     dialogRef.afterClosed().subscribe(result => {

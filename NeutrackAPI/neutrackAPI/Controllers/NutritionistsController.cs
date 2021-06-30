@@ -111,7 +111,7 @@ namespace NeutrackAPI.Controllers
         [Authorize(Roles = Roles.Nutritionist)]
         [HttpGet]
         [Route("{id}/patients")]
-        public ActionResult<IEnumerable<PatientReadDTO>> GetPatients(int id)
+        public ActionResult<IEnumerable<AllPatientReadDTO>> GetPatients(int id)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace NeutrackAPI.Controllers
                     return Forbid();
                 }
                 var patients = _nutritionistRepository.GetAllNutritionistPatients(currentNutritionistId);
-                return Ok(_mapper.Map<IEnumerable<PatientReadDTO>>(patients));
+                return Ok(_mapper.Map<IEnumerable<AllPatientReadDTO>>(patients));
 
             }
             catch (Exception ex)

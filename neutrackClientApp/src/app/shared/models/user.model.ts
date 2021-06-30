@@ -1,3 +1,5 @@
+import { WeightHistory } from "@models";
+
 export interface IUser {
   id?: number | null;
   email:	string;
@@ -24,7 +26,8 @@ export interface IUserLogin {
 }
 export interface IPatient extends IUser{
   userId: number;
-  initialWeight?: number | null
+  initialWeight?: number | null;
+  patientActivityHistories: WeightHistory[];
 }
 
 export interface INutritionist extends IUser{

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-
 namespace NeutrackAPI.DTOs
 {
-    public class PatientReadDTO
+    public class AllPatientReadDTO
     {
         public int Id { get; set; }
         public int UserId { get; set; }
@@ -20,6 +18,5 @@ namespace NeutrackAPI.DTOs
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public double InitialWeight { get; set; }
-        public List<PatientActivityHistoryDTO> PatientActivityHistories { get; set; }
     }
 }
