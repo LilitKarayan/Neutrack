@@ -61,12 +61,10 @@ export class PatientEditFormDialogComponent implements OnInit {
     ngOnInit(): void {
 
     }
-    getDate18YearsAgo(){
-      const _maxDate =  moment().subtract(18, 'years').format();
-      return _maxDate;
-    }
 
     save(): void {
-      //this.dialogRef.close(Object.assign(new IPatient(), this.formInstance.value));
+      const formData = this.formInstance.getRawValue();
+      const addedEntity = {...this.data, ...formData};
+      this.dialogRef.close(addedEntity);
     }
 }

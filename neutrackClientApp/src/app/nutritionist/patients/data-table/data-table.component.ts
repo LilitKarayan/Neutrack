@@ -12,6 +12,7 @@ import { NutritionistService } from '@services/nutritionist.service';
 import { IUser, IPatient } from '@models';
 import { AuthenticationService } from '@services/authentication.service';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-table',
@@ -34,7 +35,8 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     private patientsService: PatientService,
     public dialog: MatDialog,
     private authService: AuthenticationService,
-    private nutritionistService: NutritionistService
+    private nutritionistService: NutritionistService,
+    private router: Router
     ) {
     this.authService.user.subscribe(user => this.activeUser = user);
     this.dataSource = new MatTableDataSource<IPatient>();
@@ -56,7 +58,10 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.patientsService.edit(result);
+        this.nutritionistService.updateNutritionistPatient(this.activeUser.nutritionistId, result.id, result).subscribe(() => {
+          this.getAllPatients();
+        })
+        // console.log(result);
       }
     });
   }
@@ -71,7 +76,11 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.patientsService.add(result);
+        this.nutritionistService.addPatientToNutritionist(result).subscribe(
+          () => {
+            this.getAllPatients();
+          }
+        );
       }
     });
   }
@@ -80,8 +89,10 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.patientsService.remove(id);
+      if (result && id) {
+        this.nutritionistService.deleteNutritionistPatient(this.activeUser.nutritionistId, id).subscribe(() => {
+          this.getAllPatients();
+        })
       }
     });
   }

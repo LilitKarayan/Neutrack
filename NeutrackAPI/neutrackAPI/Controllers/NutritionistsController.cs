@@ -286,6 +286,7 @@ namespace NeutrackAPI.Controllers
                 patient.User.LastName = patientDto.LastName;
                 patient.User.Gender = patientDto.Gender;
                 patient.User.PhoneNumber = patientDto.PhoneNumber;
+                patient.User.DateOfBirth = patientDto.DateOfBirth;
                 _mapper.Map(patientDto, patient);
                 _nutritionistRepository.SaveChanges();
                 return Ok(_mapper.Map<PatientReadDTO>(patient));

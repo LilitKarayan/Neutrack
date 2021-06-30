@@ -8,7 +8,7 @@ export interface IUser {
   lastName:	string;
   gender?:	string;
   dateOfBirth?:	string;
-  goal?:	string | null;
+  goal?:	number | null;
   activityLevel?:	number | null;
   isActive?:	boolean | null
   height?:	number;
@@ -25,9 +25,9 @@ export interface IUserLogin {
   password:	string;
 }
 export interface IPatient extends IUser{
-  userId: number;
+  userId?: number;
   initialWeight?: number | null;
-  patientActivityHistories: WeightHistory[];
+  patientActivityHistories?: WeightHistory[];
 }
 
 export interface INutritionist extends IUser{

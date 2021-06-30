@@ -48,7 +48,7 @@
         <div>
           <mat-form-field class="fullWidth" appearance="outline">
             <mat-label>Email *</mat-label>
-            <input matInput type="text" name="email" formControlName="email">
+            <input matInput type="email" name="email" formControlName="email">
             <mat-error *ngIf="formInstance.controls['email']?.errors?.required">field is required</mat-error>
           </mat-form-field>
         </div>
@@ -57,7 +57,7 @@
         <div>
           <mat-form-field class="fullWidth" appearance="outline">
             <mat-label>Height</mat-label>
-            <input  matInput type="number" name="height" formControlName="height">
+            <input  matInput type="number" step="0.01" name="height" formControlName="height">
             <span matSuffix>ft</span>
             <mat-error *ngIf="formInstance.controls['height']?.errors?.required">field is required</mat-error>
           </mat-form-field>
@@ -67,7 +67,7 @@
         <div>
           <mat-form-field class="fullWidth" appearance="outline">
             <mat-label>Weight</mat-label>
-            <input  matInput type="number" name="weight" formControlName="weight">
+            <input  matInput type="number" step="0.01" name="weight" formControlName="weight">
             <span matSuffix>lb</span>
             <mat-error *ngIf="formInstance.controls['weight']?.errors?.required">field is required</mat-error>
           </mat-form-field>
@@ -100,7 +100,10 @@
         <div>
           <mat-form-field class="fullWidth" appearance="outline">
             <mat-label>Phone number</mat-label>
-            <input  matInput type="number" name="phoneNumber" formControlName="phoneNumber">
+            <input  matInput
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="123-456-7890"
+            type="tel" name="phoneNumber" formControlName="phoneNumber">
           </mat-form-field>
         </div>
         </mat-grid-tile>

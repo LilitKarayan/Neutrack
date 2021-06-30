@@ -1,13 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Patient } from '../../../core/models/patient';
-
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+import { IUser, IPatient } from '@models';
+import * as moment from 'moment';
 
 
 @Component({
@@ -16,24 +11,55 @@ export interface DialogData {
   styleUrls: ['./patient-add-form-dialog.component.css']
 })
 export class PatientAddFormDialogComponent implements OnInit {
+  minDate: Date;
+  maxDate: Date;
+  patient: IPatient = {
+    email: '',
+    firstName: '',
+    lastName: '',
+    gender: '',
+    dateOfBirth: '',
+    phoneNumber: '',
+    height: 0,
+    weight: 0,
+    goal: 0,
+    activityLevel:0
+  };
+
   formInstance: FormGroup;
-  theEmptyPatient = new Patient(0, '', '', 0, '');
   constructor(
     public dialogRef: MatDialogRef<PatientAddFormDialogComponent>,
     private formBuilder: FormBuilder) {
+            const currentYear = new Date().getFullYear();
+      this.minDate = new Date(currentYear - 120, 0, 1);
+      this.maxDate = new Date(currentYear - 18, 11, 31);
       this.formInstance = this.formBuilder.group({
-        id: ['', Validators.compose([Validators.required])],
-        name: ['', Validators.compose([Validators.required])],
+        firstName: ['', Validators.compose([Validators.required])],
+        lastName: ['', Validators.compose([Validators.required])],
         gender: ['', Validators.compose([Validators.required])],
-        age: ['', Validators.compose([Validators.required])],
+        dateOfBirth: ['', Validators.compose([Validators.required])],
         email: ['', Validators.compose([Validators.email, Validators.required])],
+        phoneNumber:[''],
+        height:['', Validators.compose([Validators.required])],
+        weight:['', Validators.compose([Validators.required])],
+        goal:['', Validators.compose([Validators.required])],
+        activityLevel:['', Validators.compose([Validators.required])],
       });
-      
-      this.formInstance.setValue(this.theEmptyPatient);
+      this.formInstance.setValue(this.patient);
     }
 
     get rc() {
-      return (this.formInstance.controls['name']?.errors?.required && this.formInstance.controls['name']?.errors) || (this.formInstance.controls['gender']?.errors?.required && this.formInstance.controls['gender']?.errors) || (this.formInstance.controls['age']?.errors?.required && this.formInstance.controls['age']?.errors) || (this.formInstance.controls['email']?.errors?.required && this.formInstance.controls['email']?.errors) || this.formInstance.controls['email']?.errors?.email;
+      return (this.formInstance.controls['firstName']?.errors?.required && this.formInstance.controls['firstName']?.errors) ||
+      (this.formInstance.controls['lastName']?.errors?.required && this.formInstance.controls['lastName']?.errors) ||
+      (this.formInstance.controls['height']?.errors?.required && this.formInstance.controls['height']?.errors) ||
+      (this.formInstance.controls['weight']?.errors?.required && this.formInstance.controls['weight']?.errors) ||
+      (this.formInstance.controls['goal']?.errors?.required && this.formInstance.controls['goal']?.errors) ||
+      (this.formInstance.controls['activityLevel']?.errors?.required && this.formInstance.controls['activityLevel']?.errors) ||
+      (this.formInstance.controls['isActive']?.errors?.required && this.formInstance.controls['isActive']?.errors) ||
+      (this.formInstance.controls['gender']?.errors?.required && this.formInstance.controls['gender']?.errors) ||
+      (this.formInstance.controls['dateOfBirth']?.errors?.required && this.formInstance.controls['dateOfBirth']?.errors) ||
+      (this.formInstance.controls['email']?.errors?.required  && this.formInstance.controls['email']?.errors) ||
+      this.formInstance.controls['email']?.errors?.email;
     }
 
   onNoClick(): void {
@@ -44,6 +70,8 @@ export class PatientAddFormDialogComponent implements OnInit {
   }
 
   save(): void {
-    this.dialogRef.close(Object.assign(new Patient(), this.formInstance.value));
+    const formData = this.formInstance.getRawValue();
+    const addedEntity = {...this.patient, ...formData};
+    this.dialogRef.close(addedEntity);
   }
 }
