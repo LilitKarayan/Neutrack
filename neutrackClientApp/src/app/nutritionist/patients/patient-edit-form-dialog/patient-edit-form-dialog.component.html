@@ -2,57 +2,121 @@
 
 <div mat-dialog-content>
   <form [formGroup]="formInstance">
-    <div>
-      <mat-form-field class="fullWidth" appearance="outline">
-        <mat-label>Name *</mat-label>
-        <input matInput type="text" name="name" formControlName="name">
-        <mat-error *ngIf="formInstance.controls['name']?.errors?.required">field required</mat-error>
-      </mat-form-field>
-    </div>
-
-    <div>
-
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>First Name *</mat-label>
+            <input matInput type="text" name="firstName" formControlName="firstName">
+            <mat-error *ngIf="formInstance.controls['firstName']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Last Name *</mat-label>
+            <input matInput type="text" name="lastName" formControlName="lastName">
+            <mat-error *ngIf="formInstance.controls['lastName']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Gender *</mat-label>
+            <mat-select name="gender" formControlName="gender">
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+            </mat-select>
+            <mat-error *ngIf="formInstance.controls['gender']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Date of Birth *</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="dateOfBirth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="formInstance.controls['dateOfBirth']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Email *</mat-label>
+            <input matInput type="email" name="email" formControlName="email">
+            <mat-error *ngIf="formInstance.controls['email']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Height</mat-label>
+            <input  matInput type="number" step="0.01" name="height" formControlName="height">
+            <span matSuffix>ft</span>
+            <mat-error *ngIf="formInstance.controls['height']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Weight</mat-label>
+            <input  matInput type="number" step="0.01" name="weight" formControlName="weight">
+            <span matSuffix>lb</span>
+            <mat-error *ngIf="formInstance.controls['weight']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+      <div>
         <mat-form-field class="fullWidth" appearance="outline">
-          <mat-label>Gender *</mat-label>
-          <mat-select name="gender" formControlName="gender">
-            <mat-option value="M">Male</mat-option>
-            <mat-option value="F">Female</mat-option>
-          </mat-select>
-          <mat-error *ngIf="formInstance.controls['gender']?.errors?.required">field required</mat-error>
+          <mat-label>Activity Level</mat-label>
+          <input  matInput type="number" name="activityLevel" formControlName="activityLevel">
+          <mat-error *ngIf="formInstance.controls['activityLevel']?.errors?.required">field is required</mat-error>
         </mat-form-field>
       </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Goal</mat-label>
+            <input  matInput type="number" name="goal" formControlName="goal">
+            <mat-error *ngIf="formInstance.controls['goal']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-slide-toggle name="isActive" formControlName="isActive">Active *</mat-slide-toggle>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Phone number</mat-label>
+            <input  matInput
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="123-456-7890"
+            type="tel" name="phoneNumber" formControlName="phoneNumber">
+          </mat-form-field>
+        </div>
+        </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="" mat-dialog-actions>
+          <button [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary"
+           (click)="save()"
+            cdkFocusInitial>Save</button>
+          <button mat-raised-button mat-dialog-close>Cancel</button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
 
-    <!-- <div>     
-      <mat-form-field class="fullWidth" appearance="outline">
-        <mat-label>Date of Birth*</mat-label>
-        <input matInput type="date" name="dateOfBirth" min="1900-01-01" max="2003-12-31" formControlName="age"/>
-        <mat-error *ngIf="formInstance.controls['dateOfBirth'].errors?.required">Date of Birth is required</mat-error>
-      </mat-form-field>
-    </div> -->
-
-    <div>
-      <mat-form-field class="fullWidth" appearance="outline">
-        <mat-label>Age *</mat-label>
-        <input matInput type="number" name="age" formControlName="age" />
-        <mat-error *ngIf="formInstance.controls['age']?.errors?.required">field required</mat-error>
-      </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field class="fullWidth" appearance="outline">
-          <mat-label>Email *</mat-label>
-          <input matInput type="text" name="email" formControlName="email">
-          <mat-error *ngIf="formInstance.controls['email']?.errors?.required">field required</mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="" mat-dialog-actions>
-        <button [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary" 
-         (click)="save()"
-          cdkFocusInitial>Save</button>
-        <button mat-raised-button mat-dialog-close>Cancel</button>
-      
-      </div>
   </form>
 </div>
 

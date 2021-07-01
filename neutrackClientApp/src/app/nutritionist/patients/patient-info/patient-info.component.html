@@ -1,26 +1,70 @@
-<div mat-dialog-content>
-    <form [formGroup]="formInstance">
-      <h1 mat-dialog-title>{{formInstance.value['name']}}</h1>
-      <p>Age:  {{formInstance.value['age']}}</p>
-      <p>Gender:  {{formInstance.value['gender']}}</p>
-      
-      <div>
-          <mat-form-field class="fullWidth" appearance="outline">
-            <mat-label>Email *</mat-label>
-            <input matInput type="text" 
-            name="email" formControlName="email">
-            <mat-error *ngIf="
-            formInstance.controls['email']?.errors?.required">field required</mat-error>
-          </mat-form-field>
+<ng-container *ngIf="(patient$ | async) as patient">
+  <div>
+    <mat-card>
+      <mat-card-title>{{patient.fullName}}</mat-card-title>
+      <mat-card-subtitle>{{patient.email}}</mat-card-subtitle>
+      <mat-card-content>
+        <mat-grid-list  cols="2" rowHeight="5:1">
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Gender</strong> <br/><span>{{patient.gender}}</span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile >
+            <div class="mat-grid-tile-content">
+              <p><strong>Date of Birth</strong> <br/><span>{{patient.dateOfBirth | date}}</span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Height</strong> <br/><span>{{patient.height}}</span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Weight</strong> <br/><span>{{patient.weight}}</span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Phone Number</strong> <br/><span>{{patient.phoneNumber}}</span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Active</strong> <br/><span>
+                <mat-slide-toggle [checked]="patient.isActive" [disabled]="true"></mat-slide-toggle>
+              </span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Goal</strong> <br/><span>{{patient.goal}}</span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Activity Level</strong> <br/><span>{{patient.activityLevel|number}}</span></p>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
+    <div class="canvas">
+      <mat-card>
+        <div style="display: block;">
+          <canvas baseChart width="400" height="200"
+            [datasets]="dataset"
+            [labels]="labels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+          </canvas>
         </div>
-        <div class="" mat-dialog-actions>
-          <button [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary" 
-           (click)="save()"
-            cdkFocusInitial>Update</button>
-          <button mat-raised-button mat-dialog-close>Close</button>
-        
-        </div>
-    </form>
+      </mat-card>
+    </div>
+
   </div>
-  
-  
+</ng-container>
