@@ -15,6 +15,7 @@ using System.Net;
 
 namespace NeutrackAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
