@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NeutrackAPI.Data;
 
 namespace NeutrackAPI.Migrations
 {
     [DbContext(typeof(NeutrackContext))]
-    partial class NeutrackContextModelSnapshot : ModelSnapshot
+    [Migration("20210627205007_ReceipeProductManyToManyAdded")]
+    partial class ReceipeProductManyToManyAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,7 +256,7 @@ namespace NeutrackAPI.Migrations
                     b.ToTable("RateTypes");
                 });
 
-            modelBuilder.Entity("NeutrackAPI.Models.Recipe", b =>
+            modelBuilder.Entity("NeutrackAPI.Models.Receipe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -270,12 +272,12 @@ namespace NeutrackAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Receipes");
                 });
 
-            modelBuilder.Entity("NeutrackAPI.Models.RecipeProduct", b =>
+            modelBuilder.Entity("NeutrackAPI.Models.ReceipeProduct", b =>
                 {
-                    b.Property<int>("RecipeID")
+                    b.Property<int>("ReceipeID")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductID")
@@ -284,11 +286,11 @@ namespace NeutrackAPI.Migrations
                     b.Property<double>("WeightInGrams")
                         .HasColumnType("float");
 
-                    b.HasKey("RecipeID", "ProductID");
+                    b.HasKey("ReceipeID", "ProductID");
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("RecipeProducts");
+                    b.ToTable("ReceipeProducts");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.Role", b =>
@@ -487,23 +489,23 @@ namespace NeutrackAPI.Migrations
                     b.Navigation("RateType");
                 });
 
-            modelBuilder.Entity("NeutrackAPI.Models.RecipeProduct", b =>
+            modelBuilder.Entity("NeutrackAPI.Models.ReceipeProduct", b =>
                 {
                     b.HasOne("NeutrackAPI.Models.Product", "Product")
-                        .WithMany("RecipeProducts")
+                        .WithMany("ReceipeProducts")
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NeutrackAPI.Models.Recipe", "Recipe")
-                        .WithMany("RecipeProducts")
-                        .HasForeignKey("RecipeID")
+                    b.HasOne("NeutrackAPI.Models.Receipe", "Receipe")
+                        .WithMany("ReceipeProducts")
+                        .HasForeignKey("ReceipeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
 
-                    b.Navigation("Recipe");
+                    b.Navigation("Receipe");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.UserRole", b =>
@@ -547,7 +549,7 @@ namespace NeutrackAPI.Migrations
 
             modelBuilder.Entity("NeutrackAPI.Models.Product", b =>
                 {
-                    b.Navigation("RecipeProducts");
+                    b.Navigation("ReceipeProducts");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.Rate", b =>
@@ -560,9 +562,9 @@ namespace NeutrackAPI.Migrations
                     b.Navigation("Rates");
                 });
 
-            modelBuilder.Entity("NeutrackAPI.Models.Recipe", b =>
+            modelBuilder.Entity("NeutrackAPI.Models.Receipe", b =>
                 {
-                    b.Navigation("RecipeProducts");
+                    b.Navigation("ReceipeProducts");
                 });
 
             modelBuilder.Entity("NeutrackAPI.Models.Role", b =>

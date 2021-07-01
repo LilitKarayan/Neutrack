@@ -456,3 +456,6 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 *.cache
 .DS_Store
+/NeutrackAPI/NeutrackAPI/obj/project.assets.json
+/NeutrackAPI/NeutrackAPI/obj/project.nuget.cache
+/NeutrackAPI/NeutrackAPI/obj/neutrackAPI.csproj.nuget.g.props
