@@ -3,7 +3,8 @@ import { nutritionistUpdatePatient,
   nutritionistGetAllPatients,
   nutritionistGetAPatient,
   nutritionistDeleteAPatient,
-  getNutritionist
+  getNutritionist,
+  nutritionistDashboardData
  } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import {useTestApi, getApiRoute } from '../../environments/environment';
-import { IPatient } from '@models';
+import { IPatient, IDashboard } from '@models';
 import * as moment from 'moment';
 import CryptoJS from 'crypto-js';
 
@@ -49,5 +50,9 @@ export class NutritionistService {
   }
   deleteNutritionistPatient(nutritionistId, patientId):any{
     return this.http.delete<any>(getApiRoute(nutritionistDeleteAPatient(nutritionistId, patientId)), httpOptions).pipe();
+  }
+
+  getDashboardData(nutritionistId): Observable<IDashboard> {
+    return this.http.get<IDashboard>(getApiRoute(nutritionistDashboardData(nutritionistId)), httpOptions);
   }
 }

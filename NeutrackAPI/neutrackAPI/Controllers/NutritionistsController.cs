@@ -169,6 +169,35 @@ namespace NeutrackAPI.Controllers
         }
 
         /// <summary>
+        /// Get data to display on dashboard
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{id}/dashboard")]
+        public ActionResult<DashboardViewModel> GetNutritionistDashboardData(int id)
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                var currentNutritionistId = int.Parse(User.FindFirstValue(ClaimTypes.Spn));
+                if (!User.IsInRole(Roles.Nutritionist))
+                {
+                    return Forbid();
+                }
+                if (currentNutritionistId != id)
+                {
+                    return Forbid();
+                }
+                var dashboardData = _nutritionistRepository.GetNutritionistDashboardData(id);
+                return Ok(dashboardData);
+            } catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        /// <summary>
         /// GET api/users/{id}
         /// </summary>
         /// <param name="id"></param>
@@ -178,12 +207,6 @@ namespace NeutrackAPI.Controllers
         {
             try
             {
-                var currentUserId = int.Parse(User.Identity.Name);
-                if (id == currentUserId)
-                {
-                    return Forbid();
-                }
-
                 var nutritionistItem = _nutritionistRepository.GetNutritionistById(id);
                 if (nutritionistItem == null)
                 {

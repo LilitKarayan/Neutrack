@@ -1,2 +1,3 @@
-export * from './user.model'
-export * from './weight-history.model'
+export * from './user.model';
+export * from './weight-history.model';
+export * from './dashboard-view.model';

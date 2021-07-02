@@ -18,4 +18,6 @@ export const getNutritionist = (nutritionistId: number) => {
 export const nutritionistUpdatePatient = (nutritionistId: number, patientId: number) => {
   return `/nutritionists/${nutritionistId}/patients/${patientId}/update`;
 }
-
+export const  nutritionistDashboardData = (nutritionistId: number) => {
+  return `/nutritionists/${nutritionistId}/dashboard`;
+}
