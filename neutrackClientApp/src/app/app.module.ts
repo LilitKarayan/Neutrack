@@ -57,6 +57,7 @@ import { PatientService } from '@services/patient.service';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ChartsModule } from 'ng2-charts';
+import { ProductComponent } from './nutritionist/product/product.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { ChartsModule } from 'ng2-charts';
     PatientAddFormDialogComponent,
     PatientInfoComponent,
     CalculatorFormComponent,
+    ProductComponent,
   ],
   imports: [
     AppRoutingModule,
