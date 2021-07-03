@@ -28,7 +28,7 @@ describe('successful scenario tests - calculator', () => {
     calculatorHelper.initValues();
   });
 
-  it('should enable with all field filled out correctly', () => {
+  it('should enable submit button with all field filled out correctly', () => {
     helper.signInStartDashboard();
     calculatorHelper.calculatorFilledOut();
 
@@ -49,6 +49,10 @@ describe('successful scenario tests - calculator', () => {
 
     cy.get("#submitButton").click();
 
-    cy.contains("19.1")
+    cy.contains("Body Mass Index of 19.08");
+    cy.contains("normal");
+    cy.contains("2260.09 calories per day");
+    cy.contains("2407.35 calories per day");
+    cy.contains("increase your calorie intake by 147.26 per day")
   });
 });
