@@ -121,10 +121,16 @@
         <div class="theContainer">
           <mat-label>Gender<span>*</span></mat-label
           ><br />
+          <select formControlName="gender">
+            <option [value]="genders[0]">Male</option>
+            <option [value]="genders[1]">Female</option>
+          </select>
+          <!--
           <mat-radio-group formControlName="gender">
             <mat-radio-button [value]="genders[0]">Male</mat-radio-button>
             <mat-radio-button [value]="genders[1]">Female</mat-radio-button>
           </mat-radio-group>
+        -->
         </div>
 
         <div class="theContainer">
