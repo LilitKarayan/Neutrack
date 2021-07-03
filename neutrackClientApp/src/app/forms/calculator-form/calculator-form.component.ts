@@ -16,7 +16,7 @@ export class CalculatorFormComponent implements OnInit {
   public genders: string[];
   public calculated: boolean;
   public direction: string;
-  public amount: number;
+  public amount: string;
 
   constructor() {}
 
@@ -38,7 +38,7 @@ export class CalculatorFormComponent implements OnInit {
 
     this.calculated = false;
     this.direction = '';
-    this.amount = 0;
+    this.amount = '';
   }
 
   getCalculator(): object {
@@ -46,7 +46,7 @@ export class CalculatorFormComponent implements OnInit {
   }
 
   getBmi(weight: number, height: number): string {
-    this.bmiInt = (703 * weight) / Math.pow(height, 2);
+    this.bmiInt = (weight / Math.pow(height, 2)) * 703;
 
     return this.bmiInt.toFixed(2);
   }
@@ -101,11 +101,11 @@ export class CalculatorFormComponent implements OnInit {
     return this.direction;
   }
 
-  getAmount(currentCalorie: string, goalCalorie: string): number {
+  getAmount(currentCalorie: string, goalCalorie: string): string {
 
-    this.amount = Math.abs(Number(currentCalorie) - Number(goalCalorie));
+    let amount = Math.abs(Number(currentCalorie) - Number(goalCalorie));
 
-    return this.amount;
+    return amount.toFixed(2);
   }
 
   activityFactor(activityLevel: number): number {
@@ -159,7 +159,7 @@ export class CalculatorFormComponent implements OnInit {
 
     this.getDirection(this.calculator['weight'], this.calculator['goal']);
 
-    this.getAmount(this.currentDailyCalories, this.goalDailyCalories);
+    this.amount = this.getAmount(this.currentDailyCalories, this.goalDailyCalories);
 
     this.calculated = true;
   }
