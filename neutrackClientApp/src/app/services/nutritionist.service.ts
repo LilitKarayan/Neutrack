@@ -4,7 +4,8 @@ import { nutritionistUpdatePatient,
   nutritionistGetAPatient,
   nutritionistDeleteAPatient,
   getNutritionist,
-  nutritionistDashboardData
+  nutritionistDashboardData,
+  updateNutritionist,
  } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,7 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import {useTestApi, getApiRoute } from '../../environments/environment';
-import { IPatient, IDashboard } from '@models';
+import { IPatient, IDashboard, INutritionist } from '@models';
 import * as moment from 'moment';
 import CryptoJS from 'crypto-js';
 
@@ -54,5 +55,12 @@ export class NutritionistService {
 
   getDashboardData(nutritionistId): Observable<IDashboard> {
     return this.http.get<IDashboard>(getApiRoute(nutritionistDashboardData(nutritionistId)), httpOptions);
+  }
+  getNutritionist(nutritionistId): Observable<INutritionist> {
+    return this.http.get<INutritionist>(getApiRoute(getNutritionist(nutritionistId)), httpOptions);
+  }
+
+  updateNutritionist(nutritionistId, nutritionist: INutritionist){
+    return this.http.put<INutritionist>(getApiRoute(updateNutritionist(nutritionistId)), nutritionist, httpOptions).toPromise();
   }
 }

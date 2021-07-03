@@ -104,9 +104,9 @@ export class AuthenticationService {
   private setSession(token: any) {
     if(token){
       const decodedToken: any = jwt_decode(token);
-      const expiresAt = moment().add(decodedToken.exp,'second');
+      // const expiresAt = moment().add(decodedToken.exp,'seconds');
       localStorage.setItem('access_token', token);
-      localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+      localStorage.setItem("expires_at", decodedToken.exp);
     }
 }
   logout() {
@@ -123,7 +123,7 @@ export class AuthenticationService {
   getExpiration() {
         const expiration = localStorage.getItem("expires_at");
         const expiresAt = expiration ? JSON.parse(expiration): null;
-        return moment(expiresAt);
+        return moment.unix(expiresAt).utc();
   }
   getLoggedUserRole(){
     const token = localStorage.getItem("access_token");
