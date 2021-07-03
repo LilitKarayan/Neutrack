@@ -11,9 +11,11 @@ using NeutrackAPI.Data.IRepositories;
 using Microsoft.AspNetCore.Authorization;
 using System.Net;
 
+
+
 namespace NeutrackAPI.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -100,7 +102,7 @@ namespace NeutrackAPI.Controllers
                 }
                 _mapper.Map(recipeUpdate, recipeItem);
                 _recipeRepository.UpdateRecipe(recipeItem);
-                _precipeRepository.SaveChanges();
+                _recipeRepository.SaveChanges();
                 return Ok(_mapper.Map<RecipeReadDTO>(recipeItem));
             }
             catch(Exception ex)

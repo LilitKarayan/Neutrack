@@ -1,3 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using NeutrackAPI.DTOs;
+using NeutrackAPI.Helpers;
+using NeutrackAPI.Models;
+
 namespace NeutrackAPI.Data
 {
    public class RecipeRepository: IRecipeRepository
@@ -28,7 +42,7 @@ namespace NeutrackAPI.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Product GetRecipeById(int id)
+        public Recipe GetRecipeById(int id)
         {
             return _context.Recipes.FirstOrDefault(x => x.Id.Equals(id));
         }
