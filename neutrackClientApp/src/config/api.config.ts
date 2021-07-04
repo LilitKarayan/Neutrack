@@ -34,7 +34,7 @@ export const updateProduct = (productId) => {
 export const deleteProduct = (productId) => {
   return `/products/${productId}`;
 }
-export const createProduct = 'products/newproduct';
+export const createProduct = '/products/newproduct';
 export const searchProduct = (name) => {
   return `/products/search/${name}`;
 }

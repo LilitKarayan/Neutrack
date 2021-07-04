@@ -58,6 +58,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ChartsModule } from 'ng2-charts';
 import { ProductComponent } from './nutritionist/product/product.component';
+import { AddEditProductComponent } from './nutritionist/product/add-edit-product/add-edit-product.component';
+import { DeleteProductComponent } from './nutritionist/product/delete-product/delete-product.component';
 
 
 @NgModule({
@@ -81,6 +83,8 @@ import { ProductComponent } from './nutritionist/product/product.component';
     PatientInfoComponent,
     CalculatorFormComponent,
     ProductComponent,
+    AddEditProductComponent,
+    DeleteProductComponent,
   ],
   imports: [
     AppRoutingModule,

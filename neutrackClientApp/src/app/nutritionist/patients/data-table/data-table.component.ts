@@ -61,7 +61,6 @@ export class DataTableComponent implements OnInit, AfterViewInit {
         this.nutritionistService.updateNutritionistPatient(this.activeUser.nutritionistId, result.id, result).subscribe(() => {
           this.getAllPatients();
         })
-        // console.log(result);
       }
     });
   }

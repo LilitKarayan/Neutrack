@@ -58,6 +58,9 @@ export class AccountComponent implements OnInit {
       yearsOfExperience:[{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required, Validators.min(1), Validators.max(50)])],
       phoneNumber:[{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required])],
     });
+    // this.formInstance.get('dateOfBirth').valueChanges.subscribe(() => {
+    //   this.updateValue('dateOfBirth');
+    // })
   }
 
   async getNutritionist(){
@@ -78,8 +81,9 @@ export class AccountComponent implements OnInit {
   }
 
   updateValue(ctrlName){
-    console.log(ctrlName);
-    this.updatedFields.push(ctrlName);
+    if (!this.updatedFields.includes(ctrlName)){
+      this.updatedFields.push(ctrlName);
+    }
   }
   async save(){
     const formData = this.formInstance.getRawValue();

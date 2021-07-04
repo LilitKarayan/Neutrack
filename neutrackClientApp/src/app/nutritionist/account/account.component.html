@@ -42,8 +42,8 @@
                 <div class="mat-grid-tile-content">
                   <mat-form-field class="fullWidth" appearance="outline">
                     <mat-label>Date of Birth *</mat-label>
-                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="dateOfBirth">
-                    <mat-datepicker-toggle matSuffix [for]="picker" (selectedChanged)="updateValue($event)"></mat-datepicker-toggle>
+                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (dateChange)="updateValue('dateOfBirth')" formControlName="dateOfBirth">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-hint *ngIf="isEdit" align="start">Must be at least 18 years old</mat-hint>
                     <mat-error *ngIf="formInstance.controls['dateOfBirth']?.errors?.required">field is required</mat-error>

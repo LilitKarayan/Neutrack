@@ -1,0 +1,64 @@
+
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formInstance">
+    <mat-grid-list cols="2" rowHeight="3:1">
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Name *</mat-label>
+            <input matInput type="text" name="name" formControlName="name" (change)="updateValue('name')">
+            <mat-error *ngIf="formInstance.controls['name']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Calories / Gram *</mat-label>
+            <input matInput type="number" min="1.00" step="0.01" name="caloriesPerGram" formControlName="caloriesPerGram" (change)="updateValue('name')">
+            <span matSuffix>cal/g</span>
+            <mat-error *ngIf="formInstance.controls['caloriesPerGram']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Protein</mat-label>
+            <input  matInput type="number" min="0" step="0.01" name="proteinInGrams" formControlName="proteinInGrams" (change)="updateValue('proteinInGrams')">
+            <span matSuffix>g</span>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Fats</mat-label>
+            <input  matInput type="number" min="0" step="0.01" name="fatInGrams" formControlName="fatInGrams" (change)="updateValue('fatInGrams')">
+            <span matSuffix>g</span>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+      <div>
+        <mat-form-field class="fullWidth" appearance="outline">
+          <mat-label>Carbs</mat-label>
+          <input  matInput type="number" min="0" name="carbInGrams" formControlName="carbInGrams" (change)="updateValue('carbInGrams')">
+          <span matSuffix>g</span>
+        </mat-form-field>
+      </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="" mat-dialog-actions>
+          <button [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary"
+           (click)="save()" [disabled]="updatedFields.length < 1"
+            cdkFocusInitial>Save</button>
+          <button mat-raised-button mat-dialog-close>Cancel</button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+
+

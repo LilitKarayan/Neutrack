@@ -34,7 +34,7 @@ export class InterceptorService implements HttpInterceptor {
         }
       })
     }
-    else{
+    else if(token && moment().isAfter(this.authService.getExpiration())){
       this.authService.logout();
       this.router.navigateByUrl('/login');
       this.errorDialogService.openDialog('Your session has expired. Please sign in');
@@ -74,7 +74,6 @@ export class InterceptorService implements HttpInterceptor {
           errors.push(err.message);
         }
       }
-      console.log(err);
       this.errorDialogService.openDialog(errors.join('\n'))
       this.loadingDialogService.hideDialog();
     })
