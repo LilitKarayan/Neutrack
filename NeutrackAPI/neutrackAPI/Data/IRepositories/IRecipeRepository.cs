@@ -12,7 +12,8 @@ namespace NeutrackAPI.Data
         Recipe GetRecipeById(int id);
         void CreateRecipe(Recipe recipe);
         void UpdateRecipe(Recipe recipe);
-        void DeleteRecipe(Recipe recipe);
+        string DeleteRecipe(Recipe recipe);
         IEnumerable<Recipe> SearchRecipe(string searchQuery);
+        // ActionResult<Recipe> CreateRecipe(Recipe recipe);
     }
 }
