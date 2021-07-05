@@ -1,17 +1,17 @@
 import { DeleteProductComponent } from './delete-product/delete-product.component';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from '@services/authentication.service';
-import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { NutritionistService } from '@services/nutritionist.service';
 import { IUser, IProduct } from '@models';
 import { NgForm } from '@angular/forms';
 import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
 
 
 @Component({
@@ -33,7 +33,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
     private nutritionistService: NutritionistService,
     public dialog: MatDialog,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {
     this.authService.user.subscribe(user => this.activeUser = user);
     this.dataSource = new MatTableDataSource<IProduct>();
@@ -43,7 +44,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
   async searchProduct(form: NgForm){
     if(form.valid){
-      this.dataSource.data =  await this.nutritionistService.searchProduct(form.value['search']);
+       let result =  await this.nutritionistService.searchProduct(form.value['search']);
+       if(result.length > 0){
+        this.dataSource.data = result
+       } else {
+        this.dataSource.data = [];
+       }
     }
   }
   addProducts(){
@@ -63,6 +69,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
         let newProduct = await this.nutritionistService.addProduct(result);
         if(newProduct){
           this.searchFrm.resetForm();
+          this._snackBar.openFromComponent(MessageSnackbarComponent, {
+            data: `product added successfully`
+          })
         }
       }
     });
@@ -84,6 +93,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
         let updatedProduct = await this.nutritionistService.editProduct(result, data.id);
         if(updatedProduct){
           this.searchProduct(this.searchFrm);
+          this._snackBar.openFromComponent(MessageSnackbarComponent, {
+            data: `product: ${updatedProduct.name} updated successfully`
+          })
         }
       }
     });
@@ -92,10 +104,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(DeleteProductComponent);
     dialogRef.afterClosed().subscribe(async result => {
       if (result && id) {
-        let result = await this.nutritionistService.deleteProduct(id);
-        if(result){
-          this.dataSource.data = null;
-        }
+        await this.nutritionistService.deleteProduct(id);
+        this.searchFrm.resetForm();
+        this.dataSource.data = [];
+        this._snackBar.openFromComponent(MessageSnackbarComponent, {
+          data: `product: ${id} deleted successfully`
+        })
       }
     });
   }

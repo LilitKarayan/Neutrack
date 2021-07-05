@@ -24,17 +24,17 @@ export class AddEditProductComponent implements OnInit {
     this.formInstance = this.data.isEdit ?  this.formBuilder.group({
       id: [''],
       name: ['', Validators.compose([Validators.required])],
-      caloriesPerGram: ['', Validators.compose([Validators.required])],
-      proteinInGrams: [''],
-      fatInGrams: [''],
-      carbInGrams:[''],
+      caloriesPerGram: [0, Validators.compose([Validators.required, Validators.min(0.000001)])],
+      proteinInGrams: [0],
+      fatInGrams: [0],
+      carbInGrams:[0],
       recipeProducts:[[]]
     }):this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
-      caloriesPerGram: ['', Validators.compose([Validators.required])],
-      proteinInGrams: [''],
-      fatInGrams: [''],
-      carbInGrams:[''],
+      caloriesPerGram: [0, Validators.compose([Validators.required, Validators.min(0.000001)])],
+      proteinInGrams: [0],
+      fatInGrams: [0],
+      carbInGrams:[0],
     });
 
     if(this.data.product){
@@ -59,9 +59,11 @@ export class AddEditProductComponent implements OnInit {
   }
 
   save(): void {
-    const formData = this.formInstance.getRawValue();
-    const productEntity = {...this.data.product, ...formData};
-    this.dialogRef.close(productEntity);
+    if(this.formInstance.valid){
+      const formData = this.formInstance.getRawValue();
+      const productEntity = {...this.data.product, ...formData};
+      this.dialogRef.close(productEntity);
+    }
   }
 
 }

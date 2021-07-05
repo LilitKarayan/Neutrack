@@ -60,6 +60,8 @@ import { ChartsModule } from 'ng2-charts';
 import { ProductComponent } from './nutritionist/product/product.component';
 import { AddEditProductComponent } from './nutritionist/product/add-edit-product/add-edit-product.component';
 import { DeleteProductComponent } from './nutritionist/product/delete-product/delete-product.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -131,13 +133,19 @@ import { DeleteProductComponent } from './nutritionist/product/delete-product/de
       registrationStrategy: 'registerWhenStable:30000'
     }),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [UserDataService,
     AuthenticationService, LoadingDialogService, ErrorDialogService,
     {provide: ErrorHandler, useClass: GlobalErrorHandlerService},
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
-    NutritionistService, PatientService
+    NutritionistService, PatientService,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    }}
   ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent],

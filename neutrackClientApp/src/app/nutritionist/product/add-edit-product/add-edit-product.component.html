@@ -16,9 +16,10 @@
         <div>
           <mat-form-field class="fullWidth" appearance="outline">
             <mat-label>Calories / Gram *</mat-label>
-            <input matInput type="number" min="1.00" step="0.01" name="caloriesPerGram" formControlName="caloriesPerGram" (change)="updateValue('name')">
+            <input matInput type="number" min="0.000001" step="0.01" name="caloriesPerGram" formControlName="caloriesPerGram" (change)="updateValue('name')">
             <span matSuffix>cal/g</span>
             <mat-error *ngIf="formInstance.controls['caloriesPerGram']?.errors?.required">field is required</mat-error>
+            <mat-error *ngIf="formInstance.controls['caloriesPerGram']?.errors?.min">calories must be greater than 0</mat-error>
           </mat-form-field>
         </div>
       </mat-grid-tile>
@@ -52,7 +53,7 @@
       <mat-grid-tile>
         <div class="" mat-dialog-actions>
           <button [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary"
-           (click)="save()" [disabled]="updatedFields.length < 1"
+           (click)="save()" [disabled]="updatedFields.length < 1 && !rc"
             cdkFocusInitial>Save</button>
           <button mat-raised-button mat-dialog-close>Cancel</button>
         </div>
