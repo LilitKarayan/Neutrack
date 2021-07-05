@@ -138,7 +138,7 @@ namespace NeutrackAPI.Controllers
                     return Ok(result);
                 }
 
-                return NotFound();
+                return NotFound(new { message = $"Product: {name}  not found" });
             }
             catch (Exception)
             {

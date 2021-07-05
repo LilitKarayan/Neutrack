@@ -1,55 +1,40 @@
+
 <div class="dashboardComponent">
-
-    <div class="dashboardContent">
-        <h1>List of the active patients</h1>
-    </div>
-
-
-    <table mat-table [dataSource]="patients | async" multiTemplateDataRows class="mat-elevation-z8">
-      <!-- Name column -->
-        <ng-container matColumnDef="fullName" >
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
-      </ng-container>
-      <!-- Date of birth column -->
-      <ng-container matColumnDef="dateOfBirth" >
-        <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
-        <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date}} </td>
-      </ng-container>
-      <!-- gender column -->
-      <ng-container matColumnDef="gender" >
-        <th mat-header-cell *matHeaderCellDef> Gender </th>
-        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
-      </ng-container>
-      <!-- email column -->
-      <ng-container matColumnDef="email" >
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-      </ng-container>
-
-        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-        <ng-container matColumnDef="expandedDetail">
-            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-                <div class="example-element-detail"
-                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                    <div class="patient-info">
-                        <div class="patient-current-weight"> Current weight: {{element.weight}} lb </div>
-                        <div class="patient-initial-weight"> Initial weight: {{element.initialWeight}} lb </div>
-                        <div class="patient-weight"> Goal weight: {{element.goal}} lb </div>
-                        <div class="patient-height"> Height: {{element.height}} in</div>
-                        <!-- {{element.description}} -->
-                        <!-- <span class="example-element-description-attribution"> -- status </span> -->
-                    </div>
-                </div>
-            </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-            class="example-element-row"
-            [class.example-expanded-row]="expandedElement === element"
-            (click)="expandedElement = expandedElement === element ? null : element">
-        </tr>
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    </table>
+  <mat-grid-list cols="5" rowHeight="150" *ngIf="(dashboardData$ | async) as dashboardData">
+    <mat-grid-tile class="dashboard-data" [style.background]="tileColors[0]">
+        <p>
+          <mat-icon aria-hidden="false" aria-label="Insights icon">insights</mat-icon><br/>
+          <strong>Total Patients</strong><br/>
+          <span><strong id="data">{{dashboardData.totalPatient}}</strong></span>
+        </p>
+    </mat-grid-tile>
+    <mat-grid-tile class="dashboard-data" [style.background]="tileColors[1]">
+      <p>
+        <mat-icon aria-hidden="false" aria-label="Insights icon">toggle_on</mat-icon><br/>
+        <strong>Active Patients</strong><br/>
+        <span><strong id="data">{{dashboardData.numberOfActivePatients}}</strong></span>
+      </p>
+  </mat-grid-tile>
+  <mat-grid-tile class="dashboard-data" [style.background]="tileColors[2]">
+    <p>
+      <mat-icon aria-hidden="false" aria-label="Insights icon">toggle_off</mat-icon><br/>
+      <strong>Inactive Patients</strong><br/>
+      <span><strong id="data">{{dashboardData.numberOfInActivePatients}}</strong></span>
+    </p>
+  </mat-grid-tile>
+  <mat-grid-tile class="dashboard-data" [style.background]="tileColors[3]">
+    <p>
+      <mat-icon aria-hidden="false" aria-label="Insights icon">male</mat-icon><br/>
+      <strong>Male Patients</strong><br/>
+      <span><strong id="data">{{dashboardData.numberOfMalePatients}}</strong></span>
+    </p>
+  </mat-grid-tile>
+  <mat-grid-tile class="dashboard-data" [style.background]="tileColors[4]">
+    <p>
+      <mat-icon aria-hidden="false" aria-label="Insights icon">female</mat-icon><br/>
+      <strong>Female Patients</strong><br/>
+      <span><strong id="data">{{dashboardData.numberOfFemalePatients}}</strong></span>
+    </p>
+  </mat-grid-tile>
+</mat-grid-list>
 </div>

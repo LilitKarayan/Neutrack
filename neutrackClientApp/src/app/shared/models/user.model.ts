@@ -31,5 +31,5 @@ export interface IPatient extends IUser{
 }
 
 export interface INutritionist extends IUser{
-  userId: number
+  userId?: number
 }

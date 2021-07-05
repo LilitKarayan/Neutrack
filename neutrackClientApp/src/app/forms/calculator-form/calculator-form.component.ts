@@ -138,7 +138,6 @@ export class CalculatorFormComponent implements OnInit {
 
   onSubmit() {
     this.setCalculator();
-    console.log(this.calculator);
     this.getBmi(this.calculator['height'], this.calculator['weight']);
     this.getBmiCategory();
     this.currentDailyCalories = this.getDailyCalories(

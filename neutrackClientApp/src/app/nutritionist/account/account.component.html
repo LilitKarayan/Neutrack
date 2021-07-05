@@ -1,6 +1,87 @@
-<div class="accountComponent">
-
+<div class="accountComponent" *ngIf="(nutritionist$ | async) as nutritionist">
     <div class="accountContent">
-        <h1>Name of the Nutritionist</h1>
+        <h1>{{nutritionist.fullName}}</h1>
+        <p>{{nutritionist.email}}</p>
+        <div *ngIf="!isEdit">
+          <button mat-raised-button color="primary" (click)="toggleEditing(true)">Edit</button>
+        </div>
+        <div class="edit-form">
+          <form [formGroup]="formInstance">
+            <mat-grid-list cols="2" rowHeight="100">
+              <mat-grid-tile>
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="fullWidth" appearance="outline">
+                    <mat-label>First Name *</mat-label>
+                    <input matInput type="text" name="firstName" formControlName="firstName"(change)="updateValue('firstName')">
+                    <mat-error *ngIf="formInstance.controls['firstName']?.errors?.required">field is required</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="fullWidth" appearance="outline">
+                    <mat-label>Last Name *</mat-label>
+                    <input matInput type="text" name="lastName" formControlName="lastName" (change)="updateValue('lastName')">
+                    <mat-error *ngIf="formInstance.controls['lastName']?.errors?.required">field is required</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="fullWidth" appearance="outline">
+                    <mat-label>Gender *</mat-label>
+                    <mat-select name="gender" formControlName="gender" (change)="updateValue('gender')">
+                      <mat-option value="Male">Male</mat-option>
+                      <mat-option value="Female">Female</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formInstance.controls['gender']?.errors?.required">field is required</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="fullWidth" appearance="outline">
+                    <mat-label>Date of Birth *</mat-label>
+                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (dateChange)="updateValue('dateOfBirth')" formControlName="dateOfBirth">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-hint *ngIf="isEdit" align="start">Must be at least 18 years old</mat-hint>
+                    <mat-error *ngIf="formInstance.controls['dateOfBirth']?.errors?.required">field is required</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="fullWidth" appearance="outline">
+                    <mat-label>Years of Experience</mat-label>
+                    <input  matInput type="number" min="1.00" step="0.01" name="yearsOfExperience" formControlName="yearsOfExperience" (change)="updateValue('yearsOfExperience')">
+                    <span matSuffix>yrs</span>
+                    <mat-error *ngIf="formInstance.controls['yearsOfExperience']?.errors?.required">field is required</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="fullWidth" appearance="outline">
+                    <mat-label>Phone number *</mat-label>
+                    <input  matInput
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    placeholder="123-456-7890"
+                    type="tel" name="phoneNumber" formControlName="phoneNumber" (change)="updateValue('phoneNumber')">
+                    <mat-hint *ngIf="isEdit" align="start">Phone number format: 123-456-7890</mat-hint>
+                  </mat-form-field>
+                </div>
+                </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="mat-grid-tile-content" mat-dialog-actions>
+                  <button [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary" [disabled]="updatedFields.length < 1"
+                   (click)="save()"
+                    cdkFocusInitial>Save</button>
+                  <button mat-raised-button *ngIf="isEdit" (click)="toggleEditing(false)">Cancel</button>
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </form>
+        </div>
     </div>
 </div>

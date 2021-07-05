@@ -40,10 +40,10 @@ export class PatientAddFormDialogComponent implements OnInit {
         dateOfBirth: ['', Validators.compose([Validators.required])],
         email: ['', Validators.compose([Validators.email, Validators.required])],
         phoneNumber:[''],
-        height:['', Validators.compose([Validators.required])],
-        weight:['', Validators.compose([Validators.required])],
-        goal:['', Validators.compose([Validators.required])],
-        activityLevel:['', Validators.compose([Validators.required])],
+        height:['', Validators.compose([Validators.required, Validators.min(1)])],
+        weight:['', Validators.compose([Validators.required, Validators.min(1)])],
+        goal:['', Validators.compose([Validators.required, Validators.min(1)])],
+        activityLevel:['', Validators.compose([Validators.required, Validators.min(1)])],
       });
       this.formInstance.setValue(this.patient);
     }

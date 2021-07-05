@@ -22,7 +22,7 @@ mat-form-field  input {
     border-bottom: 1px solid #919191;
     width: 80%;
     font-size: 14px;
-    margin: 0 0 5px 88px;   
+    margin: 0 0 5px 88px;
 }
 
 mat-form-field  input:active {
@@ -32,8 +32,8 @@ mat-form-field  input:active {
 table {
     width: 80%;
     margin: 0 auto 20px auto;
-    border-spacing: 1; 
-    border-collapse: collapse; 
+    border-spacing: 1;
+    border-collapse: collapse;
     background:white;
     border-radius:6px;
     overflow:hidden;
@@ -42,33 +42,33 @@ table {
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
   }
 
-table th { 
+table th {
     background: #FFED86;
     background: linear-gradient(0deg,#fafaf7 0, #FFED86 100%);
 }
-  
+
 tr.example-detail-row {
     height: 0;
 }
-  
+
 tr.example-element-row:not(.example-expanded-row):hover {
     background: whitesmoke;
     background: rgb(252,243,189, .5);
 }
-  
+
 tr.example-element-row:not(.example-expanded-row):active {
     background: #efefef;
 }
-  
+
 .example-element-row td {
     border-bottom-width: 0;
 }
-  
+
 .example-element-detail {
     overflow: hidden;
     display: flex;
 }
-  
+
 .patient-picture {
     min-width: 100px;
     border: 2px solid black;
@@ -77,17 +77,31 @@ tr.example-element-row:not(.example-expanded-row):active {
     margin: 8px 0;
     height: 104px;
 }
-  
+
 .example-element-symbol {
     font-weight: bold;
     font-size: 40px;
     line-height: normal;
 }
-  
+
 .patient-info {
     padding: 16px;
 }
-  
+
 .example-element-description-attribution {
     opacity: 0.5;
 }
+
+.dashboard-data{
+  text-align: center;
+  color: #fff;
+  margin: 1em;
+  background-color: #dc3545;
+  padding: 1em;
+}
+
+#data{
+  font-size: 4em;
+  line-height: 1em;
+}
+/* #198754; */
