@@ -23,6 +23,17 @@
       </mat-grid-tile>
       <mat-grid-tile>
         <div>
+          
+          <div class="fullWidth" >
+            <mat-label>Gender<span>*</span></mat-label
+            ><br />
+            <select formControlName="gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <mat-error *ngIf="formInstance.controls['gender']?.errors?.required">field is required</mat-error>
+          </div>
+           <!--
           <mat-form-field class="fullWidth" appearance="outline">
             <mat-label>Gender *</mat-label>
             <mat-select name="gender" formControlName="gender">
@@ -31,6 +42,7 @@
             </mat-select>
             <mat-error *ngIf="formInstance.controls['gender']?.errors?.required">field is required</mat-error>
           </mat-form-field>
+          -->
         </div>
       </mat-grid-tile>
       <mat-grid-tile>
@@ -66,7 +78,7 @@
         </mat-grid-tile>
       <mat-grid-tile>
         <div class="" mat-dialog-actions>
-          <button [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary" (click)="save()" cdkFocusInitial>Add</button>
+          <button id="addButton" [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary" (click)="save()" cdkFocusInitial>Add</button>
           <button mat-raised-button mat-dialog-close>Cancel</button>
         </div>
       </mat-grid-tile>
