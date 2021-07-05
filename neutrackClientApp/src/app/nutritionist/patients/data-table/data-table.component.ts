@@ -13,6 +13,8 @@ import { IUser, IPatient } from '@models';
 import { AuthenticationService } from '@services/authentication.service';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
 
 @Component({
   selector: 'app-data-table',
@@ -36,7 +38,8 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     private authService: AuthenticationService,
     private nutritionistService: NutritionistService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
     ) {
     this.authService.user.subscribe(user => this.activeUser = user);
     this.dataSource = new MatTableDataSource<IPatient>();
@@ -59,6 +62,9 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.nutritionistService.updateNutritionistPatient(this.activeUser.nutritionistId, result.id, result).subscribe(() => {
+          this._snackBar.openFromComponent(MessageSnackbarComponent, {
+            data: `patient updated successfully`
+          })
           this.getAllPatients();
         })
       }
@@ -77,6 +83,9 @@ export class DataTableComponent implements OnInit, AfterViewInit {
       if (result) {
         this.nutritionistService.addPatientToNutritionist(result).subscribe(
           () => {
+            this._snackBar.openFromComponent(MessageSnackbarComponent, {
+              data: `patient added successfully`
+            })
             this.getAllPatients();
           }
         );
@@ -90,6 +99,9 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && id) {
         this.nutritionistService.deleteNutritionistPatient(this.activeUser.nutritionistId, id).subscribe(() => {
+          this._snackBar.openFromComponent(MessageSnackbarComponent, {
+            data: `patient deleted successfully`
+          })
           this.getAllPatients();
         })
       }
