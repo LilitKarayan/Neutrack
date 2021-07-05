@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { userLoginEndpoint, userSignUpEndpoint, nutritionistSignUpEndpoint } from '../../config/api.config';
 import { LoadingDialogService } from './loading-dialog.service';
 import { ErrorDialogService } from './error-dialog.service';
+import { AuthenticationService } from './authentication.service';
+import * as moment from 'moment';
 
 const loginUrl = userLoginEndpoint;
 const nutritionistSignupUrl = nutritionistSignUpEndpoint;
@@ -18,18 +20,24 @@ export class InterceptorService implements HttpInterceptor {
 
   constructor(private router: Router,
     private loadingDialogService: LoadingDialogService,
-    private errorDialogService: ErrorDialogService
+    private errorDialogService: ErrorDialogService,
+    private authService: AuthenticationService,
     ) {
    }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.loadingDialogService.openDialog();
     const token = localStorage.getItem("access_token");
-    if(token){
+    if(token && moment().isBefore(this.authService.getExpiration())){
       req = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`
         }
       })
+    }
+    else if(token && moment().isAfter(this.authService.getExpiration())){
+      this.authService.logout();
+      this.router.navigateByUrl('/login');
+      this.errorDialogService.openDialog('Your session has expired. Please sign in');
     }
     return next.handle(req).do((event: HttpEvent<any>) => {
       if(event instanceof HttpResponse){
@@ -66,7 +74,6 @@ export class InterceptorService implements HttpInterceptor {
           errors.push(err.message);
         }
       }
-      console.log(err);
       this.errorDialogService.openDialog(errors.join('\n'))
       this.loadingDialogService.hideDialog();
     })

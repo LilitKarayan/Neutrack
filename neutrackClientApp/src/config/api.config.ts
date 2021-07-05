@@ -18,4 +18,23 @@ export const getNutritionist = (nutritionistId: number) => {
 export const nutritionistUpdatePatient = (nutritionistId: number, patientId: number) => {
   return `/nutritionists/${nutritionistId}/patients/${patientId}/update`;
 }
-
+export const  nutritionistDashboardData = (nutritionistId: number) => {
+  return `/nutritionists/${nutritionistId}/dashboard`;
+}
+export const updateNutritionist = (nutritionistId: number) => {
+  return `/nutritionists/${nutritionistId}`;
+}
+export const getProducts = `/products`
+export const getProductById = (productId) => {
+  return `/products/${productId}`;
+}
+export const updateProduct = (productId) => {
+  return `/products/${productId}`;
+}
+export const deleteProduct = (productId) => {
+  return `/products/${productId}`;
+}
+export const createProduct = '/products/newproduct';
+export const searchProduct = (name) => {
+  return `/products/search/${name}`;
+}

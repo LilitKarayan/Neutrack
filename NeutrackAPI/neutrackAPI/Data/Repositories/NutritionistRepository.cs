@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using NeutrackAPI.Data.IRepositories;
+using NeutrackAPI.DTOs;
 using NeutrackAPI.Models;
 
 namespace NeutrackAPI.Data.Repositories
@@ -42,6 +44,20 @@ namespace NeutrackAPI.Data.Repositories
         public Nutritionist GetNutritionistById(int id)
         {
             return _context.Nutritionists.Include(u => u.User).FirstOrDefault(x => x.Id == id);
+        }
+
+        public DashboardViewModel GetNutritionistDashboardData(int nutritionistId)
+        {
+            DashboardViewModel dashboardData = new DashboardViewModel();
+            var nutritionistPatients = _context.Patients.Where(x => x.NutritionistId == nutritionistId)
+                .Include(u => u.User).AsQueryable();
+            dashboardData.TotalPatient = nutritionistPatients.Count();
+            dashboardData.NumberOfActivePatients = nutritionistPatients.Where(x => x.IsActive).Count();
+            dashboardData.NumberOfInActivePatients = dashboardData.TotalPatient - dashboardData.NumberOfActivePatients;
+            dashboardData.NumberOfMalePatients = nutritionistPatients.Where(x => x.User.Gender.ToLower() == "male" || x.User.Gender.ToLower() == "m").Count();
+            dashboardData.NumberOfFemalePatients = dashboardData.TotalPatient - dashboardData.NumberOfMalePatients;
+            return dashboardData;
+
         }
 
         public Patient GetNutritionistPatientById(int patientId, int nutritionistId)

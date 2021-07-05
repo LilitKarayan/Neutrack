@@ -11,7 +11,6 @@ namespace NeutrackAPI.DTOs
             ErrorMessage = "Email is invalid")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
         [MaxLength(256)]
         public string Password { get; set; }
 
@@ -35,5 +34,7 @@ namespace NeutrackAPI.DTOs
 
         [Required]
         public string PhoneNumber { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
