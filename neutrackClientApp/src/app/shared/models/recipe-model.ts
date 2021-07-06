@@ -1,7 +1,7 @@
 export interface IRecipe {
   id?: number;
   name?: string;
-  instructions?: string;
+  instruction?: string;
   recipeProducts?: IRecipeProduct[]
 }
 

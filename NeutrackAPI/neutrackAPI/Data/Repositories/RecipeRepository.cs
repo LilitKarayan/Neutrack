@@ -34,7 +34,7 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public IEnumerable<Recipe> GetAllRecipes()
         {
-            return _context.Recipes.ToList();
+            return _context.Recipes.Include(r => r.RecipeProducts).ThenInclude(p => p.Product).ToList();
         }
 
         /// <summary>
