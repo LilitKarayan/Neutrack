@@ -1,6 +1,10 @@
 export class PatientHelper {
   directToPatient() {
     cy.get("[routerLink='/patients']").click();
+  }
+
+  directToAddPatient() {
+    cy.get("[routerLink='/patients']").click();
     cy.get('.addPatient').click();
   }
 

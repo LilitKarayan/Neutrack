@@ -15,14 +15,14 @@ describe('successful scenario tests - add patient', () => {
     it('should have popup to add patient once button clicked', () => {
         helper.signInStartDashboard();
 
-        patientHelper.directToPatient();
+        patientHelper.directToAddPatient();
         cy.contains("Add Patient");
     });
 
     it('should have empty fields & add button disabled', () => {
         helper.signInStartDashboard();
 
-        patientHelper.directToPatient();
+        patientHelper.directToAddPatient();
 
         patientHelper.initValues();
         cy.get("#addButton").should("have.class", "button-color-validation")
@@ -31,7 +31,7 @@ describe('successful scenario tests - add patient', () => {
     it('should have add button enabled', () => {
         helper.signInStartDashboard();
 
-        patientHelper.directToPatient();
+        patientHelper.directToAddPatient();
 
         patientHelper.addPatientFilledOut();
         cy.get("#addButton").should("not.have.class", "button-color-validation")
@@ -40,7 +40,7 @@ describe('successful scenario tests - add patient', () => {
     it('should successfully add patient', () => {
         helper.signInStartDashboard();
 
-        patientHelper.directToPatient();
+        patientHelper.directToAddPatient();
 
         patientHelper.addPatientFilledOut();
         cy.get("#addButton").click();
