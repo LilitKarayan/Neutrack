@@ -169,6 +169,35 @@ namespace NeutrackAPI.Controllers
         }
 
         /// <summary>
+        /// Get data to display on dashboard
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{id}/dashboard")]
+        public ActionResult<DashboardViewModel> GetNutritionistDashboardData(int id)
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                var currentNutritionistId = int.Parse(User.FindFirstValue(ClaimTypes.Spn));
+                if (!User.IsInRole(Roles.Nutritionist))
+                {
+                    return Forbid();
+                }
+                if (currentNutritionistId != id)
+                {
+                    return Forbid();
+                }
+                var dashboardData = _nutritionistRepository.GetNutritionistDashboardData(id);
+                return Ok(dashboardData);
+            } catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        /// <summary>
         /// GET api/users/{id}
         /// </summary>
         /// <param name="id"></param>
@@ -178,12 +207,6 @@ namespace NeutrackAPI.Controllers
         {
             try
             {
-                var currentUserId = int.Parse(User.Identity.Name);
-                if (id == currentUserId)
-                {
-                    return Forbid();
-                }
-
                 var nutritionistItem = _nutritionistRepository.GetNutritionistById(id);
                 if (nutritionistItem == null)
                 {
@@ -303,7 +326,7 @@ namespace NeutrackAPI.Controllers
         /// <param name="id"></param>
         /// <param name="userUpdate"></param>
         /// <returns></returns>
-        [Authorize(Roles = Roles.Nutritionist)]
+        [Authorize(Roles = Roles.Admin + "," + Roles.Nutritionist)]
         [HttpPut("{id}")]
         public ActionResult<UserReadDTO> UpdateNutritionist(int id, NutritionistCreateDTO nutritionistUpdate)
         {
@@ -311,27 +334,24 @@ namespace NeutrackAPI.Controllers
             {
                 var currentUserId = int.Parse(User.Identity.Name);
                 var currentNutritionistId = int.Parse(User.FindFirstValue(ClaimTypes.Spn));
-                if (id != currentNutritionistId)
+                if (id != currentNutritionistId && !User.IsInRole(Roles.Admin))
                 {
                     return Forbid();
                 }
-                var userItem = _userRepository.GetUserById(currentUserId);
-                if (userItem == null)
+                var nutritionist = _nutritionistRepository.GetNutritionistById(id);
+                if (nutritionist == null)
                 {
                     return NotFound();
                 }
-                if (userItem.Nutritionist.Id != currentNutritionistId)
-                {
-                    return StatusCode(400, new { message = "Nutritionist to be updated is not the current user" });
-                }
-                if (userItem.Nutritionist != null)
-                {
-                    _mapper.Map(nutritionistUpdate, userItem.Nutritionist);
-                }
-                _mapper.Map(nutritionistUpdate, userItem);
-                _userRepository.UpdateUser(userItem);
-                _userRepository.SaveChanges();
-                return Ok(_mapper.Map<UserReadDTO>(userItem));
+                nutritionist.User.FirstName = nutritionistUpdate.FirstName;
+                nutritionist.User.LastName = nutritionistUpdate.LastName;
+                nutritionist.User.Gender = nutritionistUpdate.Gender;
+                nutritionist.User.PhoneNumber = nutritionistUpdate.PhoneNumber;
+                nutritionist.User.DateOfBirth = nutritionistUpdate.DateOfBirth;
+              
+                _mapper.Map(nutritionistUpdate, nutritionist);
+                _nutritionistRepository.SaveChanges();
+                return Ok(_mapper.Map<NutritionistReadDTO>(nutritionist));
             }
             catch (Exception ex)
             {

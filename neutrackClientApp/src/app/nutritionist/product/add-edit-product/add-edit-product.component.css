@@ -1,0 +1,5 @@
+.button-color-validation {
+  background-color: darkgrey;
+  pointer-events: none;
+  cursor: not-allowed;
+}
