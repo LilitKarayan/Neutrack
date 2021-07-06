@@ -21,7 +21,7 @@ export class PatientHelper {
     cy.get('[formcontrolname=firstName]')
       .click()
       .then(() => {
-        cy.get('[formcontrolname=firstName]').type('Jane');
+        cy.get('[formcontrolname=firstName]').type('Janice');
       });
 
     cy.get('[formcontrolname=lastName]')
@@ -35,19 +35,19 @@ export class PatientHelper {
     cy.get('[formcontrolname=dateOfBirth]')
       .click()
       .then(() => {
-        cy.get('[formcontrolname=dateOfBirth]').type('2002-12-01');
+        cy.get('[formcontrolname=dateOfBirth]').type('1986-12-01');
       });
 
     cy.get('[formcontrolname=email]')
       .click()
       .then(() => {
-        cy.get('[formcontrolname=email]').type('janeDoe@hello.com');
+        cy.get('[formcontrolname=email]').type('janiceDoe@hello.com');
       });
 
     cy.get('[formcontrolname=phoneNumber]')
       .click()
       .then(() => {
-        cy.get('[formcontrolname=phoneNumber]').type('333-333-3333');
+        cy.get('[formcontrolname=phoneNumber]').type('333-444-3333');
       });
   }
 
