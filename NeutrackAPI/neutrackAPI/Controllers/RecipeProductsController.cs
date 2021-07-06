@@ -55,7 +55,7 @@ namespace NeutrackAPI.Controllers
                 // if (recipeProductItems == null)
                 if (recipeProductItems == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = $"RecipeProduct: {recipeId}  not found" });
                 }
                 return Ok(_mapper.Map<IEnumerable<RecipeProductReadDTO>>(recipeProductItems));
             }
@@ -99,7 +99,7 @@ namespace NeutrackAPI.Controllers
                 var recipeProductItem = _recipeProductRepository.GetRecipeProductByIds(recipeId, productId);
                 if (recipeProductItem == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = $"RecipeProduct: {productId}  not found" });
                 }
                 _mapper.Map(recipeProductUpdate, recipeProductItem);
                 _recipeProductRepository.UpdateRecipeProduct(recipeProductItem);
@@ -119,7 +119,7 @@ namespace NeutrackAPI.Controllers
             var recipeProductItem = _recipeProductRepository.GetRecipeProductByIds(recipeId, productId);
                 if (recipeProductItem == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = $"RecipeProduct: {productId}  not found" });
                 }
             _recipeProductRepository.DeleteRecipeProduct(recipeProductItem);
             _recipeProductRepository.SaveChanges();

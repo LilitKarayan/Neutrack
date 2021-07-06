@@ -53,7 +53,7 @@ namespace NeutrackAPI.Controllers
                 var productItem = _productRepository.GetProductById(id);
                 if (productItem == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = $"Product: {id}  not found" });
                 }
                 return Ok(_mapper.Map<ProductReadDTO>(productItem));
             }
@@ -97,7 +97,7 @@ namespace NeutrackAPI.Controllers
                 var productItem = _productRepository.GetProductById(id);
                 if (productItem == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = $"Product: {id}  not found" });
                 }
                 _mapper.Map(productUpdate, productItem);
                 _productRepository.UpdateProduct(productItem);
@@ -117,7 +117,7 @@ namespace NeutrackAPI.Controllers
             var productItem = _productRepository.GetProductById(id);
             if (productItem == null)
             {
-                return NotFound();
+                return NotFound(new { message = $"Product: {id}  not found" });
             }
             _productRepository.DeleteProduct(productItem);
             _productRepository.SaveChanges();
