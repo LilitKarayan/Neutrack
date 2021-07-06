@@ -9,91 +9,51 @@
         <div class="theContainer">
           <mat-label>Height<span>*</span></mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
-            <input
-              formControlName="height"
-              matInput
-              type="number"
-              min="0"
-              max="100"
-            />
-            <mat-error *ngIf="form.controls['height'].errors?.required"
-              >Height is mandatory</mat-error
-            >
-          </mat-form-field>
-          <small>inches</small>
+            <input matInput formControlName="height" type="number" min="0" max="100"/>
+            <mat-error *ngIf="form.controls['height'].errors?.required">Height is mandatory</mat-error>
+            <small>inches</small>
+          </mat-form-field>          
         </div>
 
         <div class="theContainer">
           <mat-label>Weight<span>*</span></mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
-            <input
-              formControlName="weight"
-              matInput
-              type="number"
-              min="0"
-              max="1000"
-            />
-            <mat-error *ngIf="form.controls['weight'].errors?.required"
-              >Weight is mandatory</mat-error
-            >
-          </mat-form-field>
-          <small>lbs</small>
+            <input matInput formControlName="weight" type="number" min="0" max="1000"/>
+            <mat-error *ngIf="form.controls['weight'].errors?.required">Weight is mandatory</mat-error>
+            <small>lbs</small>
+          </mat-form-field>     
         </div>
 
         <div class="theContainer">
           <mat-label>Goal<span>*</span> (Ideal Weight)</mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
-            <input
-              formControlName="goal"
-              matInput
-              type="number"
-              min="0"
-              max="1000"
-            />
-            <mat-error *ngIf="form.controls['goal'].errors?.required"
-              >Goal is mandatory</mat-error
-            >
+            <input matInput formControlName="goal" type="number" min="0" max="1000"/>
+            <mat-error *ngIf="form.controls['goal'].errors?.required">Goal is mandatory</mat-error>
+            <small>lbs</small>
           </mat-form-field>
-          <small>lbs</small>
+          
         </div>
 
         <div class="theContainer">
           <mat-label>Activity Level<span>*</span></mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
-            <input
-              formControlName="activityLevel"
-              matInput
-              type="number"
-              min="0"
-              max="7"
-            />
-            <mat-error *ngIf="form.controls['activityLevel'].errors?.required"
-              >Activity Level is mandatory</mat-error
-            >
-          </mat-form-field>
-          <small>days per week</small>
+            <input formControlName="activityLevel" matInput type="number" min="0" max="7"/>
+            <mat-error *ngIf="form.controls['activityLevel'].errors?.required">Activity Level is mandatory</mat-error>
+            <small>days per week</small>
+          </mat-form-field>          
         </div>
 
         <div class="theContainer">
           <mat-label>Age<span>*</span></mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
-            <input
-              formControlName="age"
-              matInput
-              type="number"
-              min="18"
-              max="100"
-            />
-            <mat-error *ngIf="form.controls['age'].errors?.required"
-              >Age is mandatory</mat-error
-            >
-          </mat-form-field>
-          <small>years</small>
+            <input matInput formControlName="age" type="number" min="18" max="100" />
+            <mat-error *ngIf="form.controls['age'].errors?.required">Age is mandatory</mat-error>
+            <small>years</small>
+          </mat-form-field>          
         </div>
 
         <div class="theContainer">
-          <mat-label>Gender<span>*</span></mat-label
-          ><br />
+          <mat-label>Gender<span>*</span></mat-label><br />
           <mat-radio-group formControlName="gender">
             <mat-radio-button [value]="genders[0]">Male</mat-radio-button>
             <mat-radio-button [value]="genders[1]">Female</mat-radio-button>
@@ -101,30 +61,13 @@
         </div>
 
         <div>
-          <button
-            class="button-row-submit"
-            mat-raised-button
-            color="primary"
-            type="submit"
-            [disabled]="
-              form.controls['height'].invalid ||
-              form.controls['weight'].invalid ||
-              form.controls['goal'].invalid ||
-              form.controls['activityLevel'].invalid ||
-              form.controls['age'].invalid ||
-              form.controls['gender'].invalid
-            "
-          >
-            Calculate
-          </button>
-          <button
-            class="button-row-clear"
-            mat-raised-button
-            color="warn"
-            (click)="clear()"
-          >
-            Clear
-          </button>
+          <button class="button-row-submit" mat-raised-button type="submit" [disabled]="form.controls['height'].invalid ||
+                        form.controls['weight'].invalid ||
+                        form.controls['goal'].invalid ||
+                        form.controls['activityLevel'].invalid ||
+                        form.controls['age'].invalid ||
+                        form.controls['gender'].invalid"> Calculate </button>
+          <button class="button-row-clear" mat-raised-button (click)="clear()"> Clear </button>
         </div>
       </form>
     </mat-card-content>

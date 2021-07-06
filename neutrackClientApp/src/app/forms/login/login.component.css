@@ -5,9 +5,18 @@
   background-position: center;
 }
 
-span {
-  color: red;
+h1 {
+  color: #084a3a;
+  font-weight: bold;
 }
+
+mat-label {
+  color: #084a3a;
+}
+
+/* span {
+  color: red;
+} */
 
 mat-card {
   max-width: 600px;
@@ -48,42 +57,21 @@ form button {
   margin: 10px;
 }
 
+.button-row-submit
+{
+  background-color: #0D7A60;
+  color: white;
+}
+
 button.button-row-submit:hover {
-  background-color: lightblue;
+  background-color: #0F8D6E;
+}
+
+.button-row-clear {
+  background-color: #0F8D6E;
+  color: white;
 }
 
 button.button-row-clear:hover {
-  background-color: lightsalmon;
+  background-color: #0D7A60;
 }
-
-/*
-#login {
-    padding-top: 25px;
-    min-height: 100vh;
-    background-image: url("../../assets/images/neutrackLogin3.jpg");
-    background-position: center;
-}
-
-div {
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  text-align: center;
-}
-
-form {
-  padding: 10px;
-  width: 600px;
-  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
-  margin: 0 auto;
-  background-color: whitesmoke;
-}
-
-form,
-label {
-  font-family: sans-serif;
-  font-weight: bold;
-}
-*/

@@ -10,127 +10,34 @@
           <mat-label>Email<span>*</span></mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
             <input formControlName="email" matInput />
-            <mat-error *ngIf="form.controls['email'].errors?.email"
-              >Invalid email address</mat-error
-            >
-            <mat-error *ngIf="form.controls['email'].errors?.required"
-              >Email is mandatory</mat-error
-            >
+            <mat-error *ngIf="form.controls['email'].errors?.email">Invalid email address</mat-error>
+            <mat-error *ngIf="form.controls['email'].errors?.required">Email is mandatory</mat-error>
           </mat-form-field>
         </div>
 
         <div class="theContainer">
           <mat-label>Password<span>*</span></mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
-            <input
-              formControlName="password"
-              matInput
-              type="password"
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"
-            />
-            <ul>
+            <input formControlName="password" matInput type="password"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+            <!-- <ul>
               <li>8-16 characters</li>
               <li>1 lower case character</li>
               <li>1 upper case character</li>
               <li>1 numerical character</li>
               <li>1 special character</li>
-            </ul>
-            <mat-error
-              *ngIf="form.controls['password'].errors?.required"
-              >Password is mandatory</mat-error
-            >
+            </ul> -->
+            <mat-error *ngIf="form.controls['password'].errors?.required" >Password is mandatory</mat-error>
           </mat-form-field>
         </div>
 
         <div>
-          <button
-            class="button-row-submit"
-            mat-raised-button
-            color="primary"
-            type="submit"
-            [disabled]="
+          <button class="button-row-submit" mat-raised-button type="submit" [disabled]="
             form.controls['email'].invalid ||
-            form.controls['password'].invalid
-            "
-          >
-            Submit
-          </button>
-          <button
-          id="theButton"
-            class="button-row-clear"
-            mat-raised-button
-            color="warn"
-            (click)="clear()"
-          >
-            Clear
-          </button>
+            form.controls['password'].invalid"> Submit </button>
+          <button id="theButton" class="button-row-clear" mat-raised-button (click)="clear()">Clear</button>
         </div>
       </form>
     </mat-card-content>
   </mat-card>
 </div>
-
-<!--
-<div id="login">
-  <form #loginForm="ngForm">
-    <h1>Login</h1>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        #emailRefLog="ngModel"
-        required
-        class="form-control"
-        name="email"
-        [(ngModel)]="this.initialObject['email']"
-      />
-      <div
-        *ngIf="
-          emailRefLog.errors?.required &&
-          emailRefLog.invalid &&
-          (emailRefLog.dirty || emailRefLog.touched)
-        "
-        class="alert alert-danger"
-      >
-        Email is required
-      </div>
-      <br />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        #passwordRefLog="ngModel"
-        required
-        class="form-control"
-        name="password"
-        [(ngModel)]="this.initialObject['password']"
-      />
-      <div
-        *ngIf="
-          passwordRefLog.errors?.required &&
-          passwordRefLog.invalid &&
-          (passwordRefLog.dirty || passwordRefLog.touched)
-        "
-        class="alert alert-danger"
-      >
-        Password is required.
-      </div>
-      <br />
-    </div>
-    <button
-      [disabled]="emailRefLog.invalid || passwordRefLog.invalid"
-      type="submit"
-      class="btn btn-primary"
-    >
-      Sign Up
-    </button>
-    <div
-      *ngIf="emailRefLog.invalid || passwordRefLog.invalid"
-      class="alert alert-danger"
-    >
-      Please fill out all fields before proceeding
-    </div>
-  </form>
-</div>
--->
