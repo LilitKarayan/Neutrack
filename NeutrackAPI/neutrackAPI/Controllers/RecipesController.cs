@@ -75,10 +75,10 @@ namespace NeutrackAPI.Controllers
             try
             {
                 var recipeModel = _mapper.Map<Recipe>(recipeCreateDto);
-                if (recipeCreateDto.RecipeProductsDTO.Any())
+                if (recipeCreateDto.RecipeProducts.Any())
                 {
                     recipeModel.RecipeProducts = new List<RecipeProduct>();
-                    foreach (var recipeProduct in recipeCreateDto.RecipeProductsDTO)
+                    foreach (var recipeProduct in recipeCreateDto.RecipeProducts)
                     {
                         recipeModel.RecipeProducts.Add(new RecipeProduct
                         {

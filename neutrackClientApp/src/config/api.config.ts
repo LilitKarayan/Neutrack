@@ -38,3 +38,8 @@ export const createProduct = '/products/newproduct';
 export const searchProduct = (name) => {
   return `/products/search/${name}`;
 }
+export const getRecipes = '/recipes'
+export const getRecipeById = (recipeId) => {
+  return `/recipes/${recipeId}`
+}
+export const createRecipe = '/recipes/newrecipe';
