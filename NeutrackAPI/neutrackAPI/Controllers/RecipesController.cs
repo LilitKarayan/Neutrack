@@ -15,7 +15,7 @@ using System.Net;
 
 namespace NeutrackAPI.Controllers
 {
-    // [Authorize]
+    [Authorize(Roles = Roles.Admin + "," + Roles.Nutritionist)]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -58,9 +58,9 @@ namespace NeutrackAPI.Controllers
                 }
                 return Ok(_mapper.Map<RecipeReadDTO>(recipeItem));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500);
+                return StatusCode(500, new { message = ex.Message});
             }
         }
 
@@ -70,18 +70,38 @@ namespace NeutrackAPI.Controllers
         /// <param name="recipeCreateDTO"></param>
         /// <returns>The new created Recipe</returns>
         [HttpPost, Route("newrecipe")]
-        public ActionResult<Recipe> RegisterRecipe(Recipe recipe)
+        public ActionResult<RecipeReadDTO> RegisterRecipe(RecipeCreateDTO recipeCreateDto)
         {
             try
             {
-                _recipeRepository.CreateRecipe(recipe);
+                var recipeModel = _mapper.Map<Recipe>(recipeCreateDto);
+                if (recipeCreateDto.RecipeProductsDTO.Any())
+                {
+                    recipeModel.RecipeProducts = new List<RecipeProduct>();
+                    foreach (var recipeProduct in recipeCreateDto.RecipeProductsDTO)
+                    {
+                        recipeModel.RecipeProducts.Add(new RecipeProduct
+                        {
+                            ProductID = recipeProduct.ProductID,
+                            WeightInGrams = recipeProduct.WeightInGrams,
+                            Recipe = recipeModel
+                        });
+                    }
+                }
+                _recipeRepository.CreateRecipe(recipeModel);
                 _recipeRepository.SaveChanges();
-                
-                return CreatedAtRoute(nameof(GetRecipeById), new { recipe.Id }, recipe);
+
+                var recipeReadDto = new RecipeReadDTO()
+                {
+                    Id = recipeModel.Id,
+                    Instruction = recipeModel.Instruction,
+                    Name = recipeModel.Name
+                };
+                return CreatedAtRoute(nameof(GetRecipeById), new { recipeReadDto.Id }, recipeReadDto);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(500, new { message = ex.Message });
             }
         }
 
@@ -103,6 +123,7 @@ namespace NeutrackAPI.Controllers
                 _mapper.Map(recipeUpdate, recipeItem);
                 _recipeRepository.UpdateRecipe(recipeItem);
                 _recipeRepository.SaveChanges();
+           
                 return Ok(_mapper.Map<RecipeReadDTO>(recipeItem));
             }
             catch(Exception ex)
@@ -118,7 +139,6 @@ namespace NeutrackAPI.Controllers
             var recipeItem = _recipeRepository.GetRecipeById(id);
             if (recipeItem == null)
             {
-                return NotFound();
                 return NotFound(new { message = $"Recipe: {id}  not found" });
             }
             _recipeRepository.DeleteRecipe(recipeItem);
@@ -139,7 +159,6 @@ namespace NeutrackAPI.Controllers
                     return Ok(result);
                 }
 
-                return NotFound();
                 return NotFound(new { message = $"Recipe: {name}  not found" });
             }
             catch (Exception)

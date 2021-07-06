@@ -12,4 +12,8 @@ export class RecipesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  async createRecipe(){
+
+  }
+
 }

@@ -64,6 +64,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 import { RecipesComponent } from './nutritionist/recipes/recipes.component';
 import { DeleteRecipeComponent } from './nutritionist/recipes/delete-recipe/delete-recipe.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { AddEditRecipeComponent } from './nutritionist/recipes/add-edit-recipe/add-edit-recipe.component';
 
 
 @NgModule({
@@ -91,6 +93,7 @@ import { DeleteRecipeComponent } from './nutritionist/recipes/delete-recipe/dele
     DeleteProductComponent,
     RecipesComponent,
     DeleteRecipeComponent,
+    AddEditRecipeComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -138,7 +141,8 @@ import { DeleteRecipeComponent } from './nutritionist/recipes/delete-recipe/dele
     }),
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule
   ],
   providers: [UserDataService,
     AuthenticationService, LoadingDialogService, ErrorDialogService,

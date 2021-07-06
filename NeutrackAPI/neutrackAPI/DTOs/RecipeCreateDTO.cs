@@ -14,6 +14,8 @@ namespace NeutrackAPI.DTOs
         [Required(ErrorMessage = "Cooking instruction is requird")]
         public string Instruction { get; set; }
 
+        public List<RecipeProductCreateDTO> RecipeProductsDTO { get; set; }
+
 
     }
 }

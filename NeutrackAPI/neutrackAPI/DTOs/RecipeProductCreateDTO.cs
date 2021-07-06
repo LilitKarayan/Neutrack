@@ -5,7 +5,6 @@ namespace NeutrackAPI.DTOs
 {
     public class RecipeProductCreateDTO
     {
-        [Required(ErrorMessage = "The Recipe ID is required")]
         public int RecipeID { get; set; }
 
         [Required(ErrorMessage = "The Product ID is required")]
