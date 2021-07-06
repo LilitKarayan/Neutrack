@@ -15,6 +15,7 @@ using System.Net;
 
 namespace NeutrackAPI.Controllers
 {
+    // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -22,12 +23,12 @@ namespace NeutrackAPI.Controllers
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public ProductsController(IProductRepository productRepository,
-            IMapper mapper)
+        public ProductsController(IProductRepository productRepository, IMapper mapper)
         {
             _productRepository = productRepository;
             _mapper = mapper;
         }
+
         /// <summary>
         /// GET api/products
         /// </summary>
@@ -52,16 +53,14 @@ namespace NeutrackAPI.Controllers
                 var productItem = _productRepository.GetProductById(id);
                 if (productItem == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = $"Product: {id}  not found" });
                 }
                 return Ok(_mapper.Map<ProductReadDTO>(productItem));
-
             }
             catch (Exception)
             {
                 return StatusCode(500);
             }
-
         }
 
         /// <summary>
@@ -78,7 +77,6 @@ namespace NeutrackAPI.Controllers
                 _productRepository.SaveChanges();
                 
                 return CreatedAtRoute(nameof(GetProductById), new { product.Id }, product);
-
             }
             catch (Exception ex)
             {
@@ -87,7 +85,7 @@ namespace NeutrackAPI.Controllers
         }
 
         /// <summary>
-        /// Update their information
+        /// Update Product information
         /// </summary>
         /// <param name="productUpdate"></param>
         /// <returns></returns>
@@ -99,7 +97,7 @@ namespace NeutrackAPI.Controllers
                 var productItem = _productRepository.GetProductById(id);
                 if (productItem == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = $"Product: {id}  not found" });
                 }
                 _mapper.Map(productUpdate, productItem);
                 _productRepository.UpdateProduct(productItem);
@@ -119,7 +117,7 @@ namespace NeutrackAPI.Controllers
             var productItem = _productRepository.GetProductById(id);
             if (productItem == null)
             {
-                return NotFound();
+                return NotFound(new { message = $"Product: {id}  not found" });
             }
             _productRepository.DeleteProduct(productItem);
             _productRepository.SaveChanges();
@@ -147,39 +145,6 @@ namespace NeutrackAPI.Controllers
                 return StatusCode(500);
             }
         }
-
-    //     /// <summary>
-    //     /// This will deactivate a user by setting IsActive to false
-    //     /// </summary>
-    //     /// <param name="id"></param>
-    //     /// <returns></returns>
-    //     [HttpDelete("{id}")]
-    //     public ActionResult Delete(int id)
-    //     {
-    //         try
-    //         {
-    //             var currentUserId = int.Parse(User.Identity.Name);
-    //             if(id != currentUserId && !User.IsInRole(Roles.Admin))
-    //             {
-    //                 return Forbid();
-    //             }
-    //             var userItem = _userRepository.GetUserById(id);
-    //             if (userItem == null)
-    //             {
-    //                 return NotFound();
-    //             }
-    //             _userRepository.DeactivateUser(userItem);
-    //             _userRepository.SaveChanges();
-    //             return NoContent();
-
-    //         }
-    //         catch (Exception ex)
-    //         {
-    //             return StatusCode(500, new { message = ex.Message });
-    //         }
-    //     }
-
-
-    
+   
     }
 }

@@ -64,6 +64,10 @@ namespace NeutrackAPI.Data
             _context.Add(product);
         }
 
+        /// <summary>
+        /// Updates a new Product
+        /// </summary>
+        /// <param name="product"></param>
         public void UpdateProduct(Product product)
         {
             if(product == null)
@@ -83,8 +87,11 @@ namespace NeutrackAPI.Data
             return (_context.SaveChanges() >= 0);
         }
 
-        
 
+        /// <summary>
+        /// Delete a Product
+        /// </summary>
+        /// <param name="product"></param>
         public string DeleteProduct(Product product)
         {
             if(product == null)
@@ -100,6 +107,10 @@ namespace NeutrackAPI.Data
             // _context.RecipeProducts.RemoveRange(product.RecipeProducts);
         }
 
+        /// <summary>
+        /// Search a Product
+        /// </summary>
+        /// <param name="product"></param>
         public IEnumerable<Product> SearchProduct(string searchQuery)
         {
             IQueryable<Product> query = _context.Products;
