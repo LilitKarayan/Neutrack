@@ -50,4 +50,30 @@ export class PatientHelper {
         cy.get('[formcontrolname=phoneNumber]').type('333-333-3333');
       });
   }
+
+  editPatientFilledOut() {
+    cy.get('[formcontrolname=height]')
+    .click()
+    .then(() => {
+      cy.get('[formcontrolname=height]').type('5.40');
+    });
+
+    cy.get('[formcontrolname=weight]')
+    .click()
+    .then(() => {
+      cy.get('[formcontrolname=weight]').type('160');
+    });
+
+    cy.get('[formcontrolname=activityLevel]')
+    .click()
+    .then(() => {
+      cy.get('[formcontrolname=activityLevel]').type('4');
+    });
+
+    cy.get('[formcontrolname=goal]')
+    .click()
+    .then(() => {
+      cy.get('[formcontrolname=goal]').type('140');
+    });
+  }
 }

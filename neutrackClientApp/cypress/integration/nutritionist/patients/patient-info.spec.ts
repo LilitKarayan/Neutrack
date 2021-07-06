@@ -11,4 +11,19 @@ describe('successful scenario tests - view patient', () => {
 
         cy.get("[href='/patients/2/details']").should("exist");
     });
+
+    it('should have all of patients information', () => {
+        helper.signInStartDashboard();
+        patientHelper.directToPatient();
+
+        cy.get("[href='/patients/2/details']").click();
+        cy.contains("Jane Doe");
+        cy.contains("janeDoe@hello.com");
+        cy.contains("Female");
+        cy.contains("333-333-3333");
+        cy.contains("Height");
+        cy.contains("Weight");
+        cy.contains("Goal");
+        cy.contains("Activity Level");
+    });
 });
