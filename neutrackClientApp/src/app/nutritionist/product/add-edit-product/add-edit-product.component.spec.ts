@@ -11,7 +11,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthenticationService } from '../../../services/authentication.service';
 
 
 describe('AddEditProductComponent', () => {
