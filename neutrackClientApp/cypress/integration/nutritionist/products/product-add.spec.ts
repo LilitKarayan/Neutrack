@@ -47,6 +47,10 @@ describe('successful scenario tests - add patient', () => {
     cy.get('#addButton')
       .click()
       .then(() => {
+        cy.get("#theSearch").click().then(() =>{
+          cy.get("#theSearch").type("chips");
+          cy.get("#theSearchButton").click();
+        });
         cy.contains('Chips');
         cy.contains('150');
         cy.contains('2');
