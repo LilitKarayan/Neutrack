@@ -62,6 +62,11 @@ import { AddEditProductComponent } from './nutritionist/product/add-edit-product
 import { DeleteProductComponent } from './nutritionist/product/delete-product/delete-product.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
+import { RecipesComponent } from './nutritionist/recipes/recipes.component';
+import { DeleteRecipeComponent } from './nutritionist/recipes/delete-recipe/delete-recipe.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { AddEditRecipeComponent } from './nutritionist/recipes/add-edit-recipe/add-edit-recipe.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -87,6 +92,9 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
     ProductComponent,
     AddEditProductComponent,
     DeleteProductComponent,
+    RecipesComponent,
+    DeleteRecipeComponent,
+    AddEditRecipeComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -124,6 +132,7 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
     MatProgressSpinnerModule,
     MatGridListModule,
     MatSlideToggleModule,
+    MatAutocompleteModule,
     SharedModule,
     ChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -134,7 +143,8 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
     }),
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule
   ],
   providers: [UserDataService,
     AuthenticationService, LoadingDialogService, ErrorDialogService,

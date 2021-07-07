@@ -12,6 +12,6 @@ namespace NeutrackAPI.DTOs
 
         public string Instruction { get; set; }
 
-        public List<RecipeProduct> RecipeProducts { get; set; }
+        public List<RecipeProductReadDTO> RecipeProducts { get; set; }
     }
 }

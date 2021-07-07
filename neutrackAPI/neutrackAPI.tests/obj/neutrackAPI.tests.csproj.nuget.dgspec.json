@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj": {}
+    "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj": {}
   },
   "projects": {
-    "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj": {
+    "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj",
+        "projectUniqueName": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj",
         "projectName": "neutrackAPI.tests",
-        "projectPath": "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj",
-        "packagesPath": "/Users/lilitkara/.nuget/packages/",
-        "outputPath": "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI.tests/obj/",
+        "projectPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI.tests/neutrackAPI.tests.csproj",
+        "packagesPath": "/Users/mide/.nuget/packages/",
+        "outputPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI.tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/lilitkara/.nuget/NuGet/NuGet.Config"
+          "/Users/mide/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -26,8 +26,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj": {
-                "projectPath": "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj"
+              "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj": {
+                "projectPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj"
               }
             }
           }
@@ -78,21 +78,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.301/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj": {
+    "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
+        "projectUniqueName": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
         "projectName": "neutrackAPI",
-        "projectPath": "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
-        "packagesPath": "/Users/lilitkara/.nuget/packages/",
-        "outputPath": "/Users/lilitkara/Documents/UWG/CS6920_Project_II/Neutrack/NeutrackAPI/neutrackAPI/obj/",
+        "projectPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/neutrackAPI.csproj",
+        "packagesPath": "/Users/mide/.nuget/packages/",
+        "outputPath": "/Users/mide/Desktop/CS6920/Neutrack/NeutrackAPI/neutrackAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/lilitkara/.nuget/NuGet/NuGet.Config"
+          "/Users/mide/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -173,7 +173,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.301/RuntimeIdentifierGraph.json"
         }
       }
     }

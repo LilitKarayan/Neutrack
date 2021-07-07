@@ -34,7 +34,7 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public IEnumerable<Recipe> GetAllRecipes()
         {
-            return _context.Recipes.ToList();
+            return _context.Recipes.Include(r => r.RecipeProducts).ThenInclude(p => p.Product).ToList();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public Recipe GetRecipeById(int id)
         {
-            return _context.Recipes.FirstOrDefault(x => x.Id.Equals(id));
+            return _context.Recipes.Include(r => r.RecipeProducts).ThenInclude(p => p.Product).FirstOrDefault(x => x.Id.Equals(id));
         }
 
         /// <summary>

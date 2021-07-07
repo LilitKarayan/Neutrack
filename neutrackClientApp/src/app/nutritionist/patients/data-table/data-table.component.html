@@ -1,5 +1,5 @@
-
-<h1> List of Patients </h1>
+<div class="container">
+  <h1 class="mt-3"> List of Patients </h1>
 <button class="addPatient" mat-raised-button color="primary" (click)="addPatient()"> Add a new patient </button>
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -45,3 +45,5 @@
 
     <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 50]" showFirstLastButtons></mat-paginator>
   </div>
+</div>
+
