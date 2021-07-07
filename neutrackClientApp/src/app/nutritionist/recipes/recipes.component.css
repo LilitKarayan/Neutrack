@@ -1,0 +1,49 @@
+.addrecipe {
+  /* float: right; */
+  background-color: #0D7A60;
+  margin: 0 0 15px 0;
+}
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+h1 {
+  color: #084a3a;
+  font-weight: bold;
+}
+.editIcon{
+  background-color: #1688f3;
+  color: #fffeee;
+}
+
+.deleteIcon{
+  background-color: #e61d1d;
+  color: #fffeee;
+}
+.accordion-buttons{
+  float: right;
+}
+.mat-table {
+  width: 100%;
+  margin: 0px;
+}
+
+table {
+  width: 80%;
+  margin: 0 auto 20px auto;
+  border-spacing: 1;
+  border-collapse: collapse;
+  background:white;
+  overflow:hidden;
+  position:relative;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
+}

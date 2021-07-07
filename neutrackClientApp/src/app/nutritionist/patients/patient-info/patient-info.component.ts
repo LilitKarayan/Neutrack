@@ -4,7 +4,7 @@ import { NutritionistService } from '@services/nutritionist.service';
 import { IUser, IPatient, WeightHistory } from '@models';
 import { AuthenticationService } from '@services/authentication.service';
 import * as moment from 'moment';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 

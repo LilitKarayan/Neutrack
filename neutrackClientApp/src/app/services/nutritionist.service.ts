@@ -9,7 +9,8 @@ import { nutritionistUpdatePatient,
   searchProduct,
   updateProduct,
   createProduct,
-  deleteProduct
+  deleteProduct,getProducts,
+  getRecipes, getRecipeById, createRecipe, deleteRecipe, updateRecipe
  } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,7 +18,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import {useTestApi, getApiRoute } from '../../environments/environment';
-import { IPatient, IDashboard, INutritionist, IProduct } from '@models';
+import { IPatient, IDashboard, INutritionist, IProduct, IRecipe, IRecipeProduct } from '@models';
 import * as moment from 'moment';
 import CryptoJS from 'crypto-js';
 
@@ -32,8 +33,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class NutritionistService {
+  private productsSubject = new BehaviorSubject<IProduct[]>(null);
+  public products$: Observable<IProduct[]>;
+  constructor(private http: HttpClient,
 
-  constructor(private http: HttpClient, private router: Router) { }
+    private router: Router) {
+      this.products$ = this.productsSubject.asObservable();
+     }
 
   hashPassword(password: string){
     var hash = CryptoJS.SHA256(password);
@@ -72,6 +78,12 @@ export class NutritionistService {
     return this.http.get<IProduct[]>(getApiRoute(searchProduct(productName)), httpOptions).toPromise<IProduct[]>();
   }
 
+  getProducts(){
+    return this.http.get<IProduct[]>(getApiRoute(getProducts), httpOptions).subscribe(res => {
+      this.productsSubject.next(res);
+    })
+  }
+
   addProduct(product: IProduct){
     return this.http.post<any>(getApiRoute(createProduct), product, httpOptions ).toPromise<any>();
   }
@@ -80,5 +92,23 @@ export class NutritionistService {
   }
   deleteProduct(productId) {
     return this.http.delete<any>(getApiRoute(deleteProduct(productId)), httpOptions).toPromise<any>();
+  }
+
+  getRecipes(): Observable<IRecipe[]>{
+    return this.http.get<IRecipe[]>(getApiRoute(getRecipes), httpOptions);
+  }
+
+  getRecipeById(recipeId): Observable<IRecipe>{
+    return this.http.get<IRecipe>(getApiRoute(getRecipeById(recipeId)), httpOptions);
+  }
+
+  createRecipe(recipe: IRecipe) {
+    return this.http.post<any>(getApiRoute(createRecipe), recipe, httpOptions).toPromise<any>();
+  }
+  deleteRecipe(recipeId) {
+    return this.http.delete<any>(getApiRoute(deleteRecipe(recipeId)), httpOptions).toPromise<any>();
+  }
+  editRecipe(recipe: IRecipe, recipeId){
+    return this.http.put<any>(getApiRoute(updateRecipe(recipeId)), recipe, httpOptions).toPromise<any>();
   }
 }
