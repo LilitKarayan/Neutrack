@@ -1,7 +1,7 @@
 import { ProductHelper } from '../../../helper/productHelper';
 import { Helper } from '../../../helper/helper';
 
-describe('successful scenario tests - add patient', () => {
+describe('successful scenario tests - add product', () => {
   const helper = new Helper();
   const productHelper = new ProductHelper();
 
@@ -47,10 +47,8 @@ describe('successful scenario tests - add patient', () => {
     cy.get('#addButton')
       .click()
       .then(() => {
-        cy.get("#theSearch").click().then(() =>{
-          cy.get("#theSearch").type("chips");
-          cy.get("#theSearchButton").click();
-        });
+        productHelper.searchProduct("chips");
+
         cy.contains('Chips');
         cy.contains('150');
         cy.contains('2');
