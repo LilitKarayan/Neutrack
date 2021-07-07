@@ -43,3 +43,9 @@ export const getRecipeById = (recipeId) => {
   return `/recipes/${recipeId}`
 }
 export const createRecipe = '/recipes/newrecipe';
+export const deleteRecipe = (recipeId) => {
+  return `/recipes/${recipeId}`;
+}
+export const updateRecipe = (recipeId) => {
+  return `/recipes/${recipeId}`;
+}

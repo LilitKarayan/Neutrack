@@ -1,1 +1,62 @@
-<p>add-edit-recipe works!</p>
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formInstance">
+    <mat-grid-list cols="4" rowHeight="150px">
+      <mat-grid-tile [colspan]="4" [rowspan]="1">
+        <div class="mat-grid-tile-content">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Name *</mat-label>
+            <input matInput type="text" name="name" formControlName="name">
+            <mat-error *ngIf="formInstance.controls['name']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="4" [rowspan]="1">
+        <div class="mat-grid-tile-content">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Instruction *</mat-label>
+            <textarea rows="6" matInput type="text" name="instruction" formControlName="instruction"></textarea>
+            <mat-error *ngIf="formInstance.controls['instruction']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div class="mt-2" *ngIf="!data.isEdit">
+      <h3>Products</h3>
+      <button class="mb-1"mat-raised-button color="primary" (click)="addRecipeProduct()">Add Product</button>
+    </div>
+    <div class="mb-2 mt-1" formArrayName="recipeProducts">
+      <div class="mb-2" *ngFor="let recipeProduct of recipeProducts.controls; let i = index">
+        <div [formGroupName]="i">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Product Name *</mat-label>
+            <input matInput type="text" name="productName" formControlName="productName" [matAutocomplete]="auto">
+            <mat-autocomplete #auto>
+              <mat-option *ngFor="let product of filteredProducts | async" [value]="product.name">
+                {{product.name}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="recipeProduct['productName']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Weight (grams) *</mat-label>
+            <input matInput type="number" min="0.000001" step="0.01" name="weightInGrams" formControlName="weightInGrams">
+            <span matSuffix>g</span>
+            <mat-error *ngIf="recipeProduct['weightInGrams']?.errors?.required">field is required</mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="warn" (click)="removeRecipeProduct(i)">Delete</button>
+        </div>
+      </div>
+    </div>
+      <div class="mb-4" mat-dialog-actions>
+        <button  mat-raised-button color="primary"
+         (click)="save()" [disabled]="!formInstance.valid"
+          cdkFocusInitial>Save</button>
+        <button mat-raised-button mat-dialog-close>Cancel</button>
+      </div>
+  </form>
+</div>
+<!-- <button *ngIf="recipeProducts.length > 1" mat-raised-button mat-dialog-close>Remove</button> -->
+<!-- <button  mat-raised-button color="primary"
+(click)="addRecipeProduct()" [disabled]="!formInstance.valid"
+ cdkFocusInitial>Add Ingredient</button> -->

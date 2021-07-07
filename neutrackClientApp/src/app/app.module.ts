@@ -66,6 +66,7 @@ import { RecipesComponent } from './nutritionist/recipes/recipes.component';
 import { DeleteRecipeComponent } from './nutritionist/recipes/delete-recipe/delete-recipe.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { AddEditRecipeComponent } from './nutritionist/recipes/add-edit-recipe/add-edit-recipe.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -131,6 +132,7 @@ import { AddEditRecipeComponent } from './nutritionist/recipes/add-edit-recipe/a
     MatProgressSpinnerModule,
     MatGridListModule,
     MatSlideToggleModule,
+    MatAutocompleteModule,
     SharedModule,
     ChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {

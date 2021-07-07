@@ -9,7 +9,7 @@
           {{recipe.name}}
         </mat-panel-title>
         <mat-panel-description *ngIf="recipe.recipeProducts.length > 0">
-          {{recipe.recipeProducts.length === 1 ? recipe.recipeProducts.length + ' ingredient ' : recipe.recipeProducts.length + ' ingredients ' }} used
+          {{recipe.recipeProducts.length === 1 ? recipe.recipeProducts.length + ' ingredient ' : recipe.recipeProducts.length + ' ingredients ' }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
@@ -30,7 +30,7 @@
           <th mat-header-cell *matHeaderCellDef> Weight (grams) </th>
           <td mat-cell *matCellDef="let element"> {{element.weightInGrams}} </td>
         </ng-container>
-        <ng-container [matColumnDef]="'actions'">
+        <!-- <ng-container [matColumnDef]="'actions'">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let element">
           <button class="edit_button" mat-icon-button (click)="editRecipeProduct(element)">
@@ -40,7 +40,7 @@
             <mat-icon mat-icon-button color="warn">delete</mat-icon>
           </button>
         </td>
-    </ng-container>
+    </ng-container> -->
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>

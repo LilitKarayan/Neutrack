@@ -120,7 +120,15 @@ namespace NeutrackAPI.Controllers
                 {
                     return NotFound(new { message = $"Recipe: {id}  not found" });
                 }
-                _mapper.Map(recipeUpdate, recipeItem);
+                if (!recipeItem.Name.Equals(recipeUpdate.Name, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    recipeItem.Name = recipeUpdate.Name;
+                }
+                if( !recipeItem.Instruction.Equals(recipeUpdate.Instruction, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    recipeItem.Name = recipeUpdate.Name;
+                }
+                //_mapper.Map(recipeUpdate, recipeItem);
                 _recipeRepository.UpdateRecipe(recipeItem);
                 _recipeRepository.SaveChanges();
            
