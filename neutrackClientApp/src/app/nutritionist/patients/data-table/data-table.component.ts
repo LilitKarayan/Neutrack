@@ -6,7 +6,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { PatientEditFormDialogComponent } from '../patient-edit-form-dialog/patient-edit-form-dialog.component';
-import { PatientService } from '../../../core/services/patient.service';
 import { PatientAddFormDialogComponent } from '../patient-add-form-dialog/patient-add-form-dialog.component';
 import { NutritionistService } from '@services/nutritionist.service';
 import { IUser, IPatient } from '@models';
@@ -34,7 +33,6 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   public dataSource: MatTableDataSource<IPatient>;
 
   constructor(
-    private patientsService: PatientService,
     public dialog: MatDialog,
     private authService: AuthenticationService,
     private nutritionistService: NutritionistService,

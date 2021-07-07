@@ -13,6 +13,7 @@ import { AutomaticLoginGuard } from './guards/automatic-login.guard';
 import { NutritionistGuard } from './guards/nutritionist.guard';
 import { DataTableComponent } from './nutritionist/patients/data-table/data-table.component';
 import { ProductComponent } from './nutritionist/product/product.component';
+import { RecipesComponent } from './nutritionist/recipes/recipes.component';
 
 const routes: Routes = [
   {path: 'home', component: WelcomeComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AutomaticLoginGuard]},
   {path: 'signup', component: SignUpComponent, canActivate: [AutomaticLoginGuard]},
   {path: 'products', component: ProductComponent, canActivate: [NutritionistGuard]},
+  {path: 'recipes', component: RecipesComponent, canActivate: [NutritionistGuard]},
 ];
 
 @NgModule({
