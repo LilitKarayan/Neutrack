@@ -23,7 +23,8 @@ describe('PatientInfoComponent', () => {
       imports: [MatDialogModule, BrowserModule ,
         FormsModule, ReactiveFormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, BrowserAnimationsModule],
       providers: [{ provide: MatDialogRef, useValue: {} },
-                  { provide: MAT_DIALOG_DATA, useValue: { id: 100000, name: 'John', gender: 'M', age: 30, email: 'johnsmith@gmail.com' } }]
+                  { provide: MAT_DIALOG_DATA, useValue: { id: 100000, name: 'John', gender: 'M', age: 30, email: 'johnsmith@gmail.com' },
+                 }]
     })
     .compileComponents();
     fixture = TestBed.createComponent(PatientInfoComponent);

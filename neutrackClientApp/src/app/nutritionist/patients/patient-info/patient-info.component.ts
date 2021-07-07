@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router} from '@angular/router'
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { NutritionistService } from '@services/nutritionist.service';
+import { NutritionistService } from '../../../services/nutritionist.service';
 import { IUser, IPatient, WeightHistory } from '@models';
 import { AuthenticationService } from '@services/authentication.service';
 import * as moment from 'moment';
