@@ -23,7 +23,7 @@
       </mat-grid-tile>
       <mat-grid-tile>
         <div>
-          
+<!--
           <div class="fullWidth" >
             <mat-label>Gender<span>*</span></mat-label
             ><br />
@@ -32,8 +32,8 @@
               <option value="Female">Female</option>
             </select>
             <mat-error *ngIf="formInstance.controls['gender']?.errors?.required">field is required</mat-error>
-          </div>
-           <!--
+          </div> -->
+
           <mat-form-field class="fullWidth" appearance="outline">
             <mat-label>Gender *</mat-label>
             <mat-select name="gender" formControlName="gender">
@@ -42,7 +42,7 @@
             </mat-select>
             <mat-error *ngIf="formInstance.controls['gender']?.errors?.required">field is required</mat-error>
           </mat-form-field>
-          -->
+
         </div>
       </mat-grid-tile>
       <mat-grid-tile>

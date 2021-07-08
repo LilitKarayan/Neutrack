@@ -4,6 +4,9 @@
   background-image: url("../../../assets/images/neutrackLogin3.jpg");
   background-position: center;
 }
+ul {
+  list-style: none;
+}
 
 h1 {
   color: #084a3a;

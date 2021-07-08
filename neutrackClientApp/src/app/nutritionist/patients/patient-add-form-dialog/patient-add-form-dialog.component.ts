@@ -30,7 +30,7 @@ export class PatientAddFormDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<PatientAddFormDialogComponent>,
     private formBuilder: FormBuilder) {
-            const currentYear = new Date().getFullYear();
+      const currentYear = new Date().getFullYear();
       this.minDate = new Date(currentYear - 120, 0, 1);
       this.maxDate = new Date(currentYear - 18, 11, 31);
       this.formInstance = this.formBuilder.group({

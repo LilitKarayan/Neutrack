@@ -10,6 +10,7 @@ import { IUser } from '@models';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
+  minDate: Date;
   public maxDate: Date;
   public genders: string[];
   public nutritionist: Object;
@@ -17,7 +18,9 @@ export class SignUpComponent implements OnInit {
   nutritionistInfo:IUser;
 
   constructor(private router: Router, private authService: AuthenticationService) {
-
+    const currentYear = new Date().getFullYear();
+      this.minDate = new Date(currentYear - 120, 0, 1);
+      this.maxDate = new Date(currentYear - 18, 11, 31);
   }
 
   ngOnInit(): void {
