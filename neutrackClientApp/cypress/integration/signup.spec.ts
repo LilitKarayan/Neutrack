@@ -1,4 +1,8 @@
+import { SignUpHelper } from "../helper/signUpHelper";
+
 describe('successful scenario tests - signUp', () => {
+  const signUpHelper = new SignUpHelper
+
   it('should route to sign up page', () => {
     cy.visit('/signup');
     cy.contains('Sign Up');
@@ -7,15 +11,7 @@ describe('successful scenario tests - signUp', () => {
   it('should have empty text and disabled button', () => {
     cy.visit('/signup');
 
-    cy.get('[formcontrolname=email]').should('have.value', '');
-    cy.get('[formcontrolname=password]').should('have.value', '');
-    cy.get('[formcontrolname=confirmationPassword]').should('have.value', '');
-    cy.get('[formcontrolname=firstName]').should('have.value', '');
-    cy.get('[formcontrolname=lastName]').should('have.value', '');
-    cy.get('[formcontrolname=dateOfBirth]').should('have.value', '');
-    cy.get('[formcontrolname=phoneNumber]').should('have.value', '');
-    cy.get('[formcontrolname=gender]').should('have.value', '');
-    cy.get('[formcontrolname=yearsOfExperience]').should('have.value', '');
+    signUpHelper.initValues();
 
     cy.get('button[type=submit]').should('be.disabled');
   });
@@ -61,12 +57,12 @@ describe('successful scenario tests - signUp', () => {
       cy.get('[formcontrolname=phoneNumber]').type('123-456-7890');
     })
 
-    // cy.get('#male').check()
+    cy.get('[formcontrolname=gender]').select('Female');
 
     cy.get('[formcontrolname=yearsOfExperience]').click().then(() => {
       cy.get('[formcontrolname=yearsOfExperience]').type('3');
     }).then(() => {
-      cy.get('button[type=submit]').should('be.enabled');
+      cy.get('button[type=submit]').should('be.disabled');
     })
   });
 
@@ -101,7 +97,7 @@ describe('successful scenario tests - signUp', () => {
       cy.get('[formcontrolname=phoneNumber]').type('123-456-7890');
     })
 
-    // cy.get('#male').check()
+    cy.get('[formcontrolname=gender]').select('Female');
 
     cy.get('[formcontrolname=yearsOfExperience]').click().then(() => {
       cy.get('[formcontrolname=yearsOfExperience]').type('3');

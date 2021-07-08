@@ -8,7 +8,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CalculatorFormComponent implements OnInit {
   public calculator: object;
-  public bmiInt: number;
   public bmiCategory: string;
   public currentDailyCalories: string;
   public goalDailyCalories: string;
@@ -16,13 +15,16 @@ export class CalculatorFormComponent implements OnInit {
   public genders: string[];
   public calculated: boolean;
   public direction: string;
-  public amount: number;
+  public amount: string;
+  public bmi: string;
+  public bmiInt: number;
 
   constructor() {}
 
   ngOnInit(): void {
     this.genders = ['Male', 'Female'];
     this.calculator = {};
+    this.bmi = '';
     this.bmiInt = 0;
     this.bmiCategory = '';
     this.currentDailyCalories = '';
@@ -38,15 +40,15 @@ export class CalculatorFormComponent implements OnInit {
 
     this.calculated = false;
     this.direction = '';
-    this.amount = 0;
+    this.amount = '';
   }
 
   getCalculator(): object {
     return this.calculator;
   }
 
-  getBmi(weight: number, height: number): string {
-    this.bmiInt = (703 * weight) / Math.pow(height, 2);
+  getBmi(height: number, weight: number): string {
+    this.bmiInt = (weight / Math.pow(height, 2)) * 703;
 
     return this.bmiInt.toFixed(2);
   }
@@ -101,11 +103,11 @@ export class CalculatorFormComponent implements OnInit {
     return this.direction;
   }
 
-  getAmount(currentCalorie: string, goalCalorie: string): number {
+  getAmount(currentCalorie: string, goalCalorie: string): string {
 
-    this.amount = Math.abs(Number(currentCalorie) - Number(goalCalorie));
+    let amount = Math.abs(Number(currentCalorie) - Number(goalCalorie));
 
-    return this.amount;
+    return amount.toFixed(2);
   }
 
   activityFactor(activityLevel: number): number {
@@ -133,11 +135,12 @@ export class CalculatorFormComponent implements OnInit {
     this.calculator['activityLevel'] =
       this.form.controls['activityLevel'].value;
     this.calculator['age'] = this.form.controls['age'].value;
-    this.calculator['gender'] = this.form.controls['age'].value;
+    this.calculator['gender'] = this.form.controls['gender'].value;
   }
 
   onSubmit() {
     this.setCalculator();
+    this.bmi = this.getBmi(this.calculator['height'], this.calculator['weight']);
     this.getBmi(this.calculator['height'], this.calculator['weight']);
     this.getBmiCategory();
     this.currentDailyCalories = this.getDailyCalories(
@@ -158,7 +161,7 @@ export class CalculatorFormComponent implements OnInit {
 
     this.getDirection(this.calculator['weight'], this.calculator['goal']);
 
-    this.getAmount(this.currentDailyCalories, this.goalDailyCalories);
+    this.amount = this.getAmount(this.currentDailyCalories, this.goalDailyCalories);
 
     this.calculated = true;
   }

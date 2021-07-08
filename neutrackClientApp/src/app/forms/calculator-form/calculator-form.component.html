@@ -5,7 +5,7 @@
         <h1>BMI & Calorie Calculator</h1>
       </div>
 
-      <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form" class="normal-form">
         <div class="theContainer">
           <mat-label>Height<span>*</span></mat-label>
           <mat-form-field class="normal-full-width" appearance="outline">
@@ -51,7 +51,15 @@
             <small>years</small>
           </mat-form-field>          
         </div>
-
+        <div class="theContainer">
+          <mat-label>Gender<span>*</span></mat-label
+          ><br />
+          <select formControlName="gender">
+            <option [value]="genders[0]">Male</option>
+            <option [value]="genders[1]">Female</option>
+          </select>
+        </div>
+<!--
         <div class="theContainer">
           <mat-label>Gender<span>*</span></mat-label><br />
           <mat-radio-group formControlName="gender">
@@ -59,6 +67,8 @@
             <mat-radio-button [value]="genders[1]">Female</mat-radio-button>
           </mat-radio-group>
         </div>
+-->
+
 
         <div>
           <button class="button-row-submit" mat-raised-button type="submit" [disabled]="form.controls['height'].invalid ||
@@ -87,14 +97,14 @@
 
     <p class="center">Based on the above information the following has been calculated:</p>
     <ul>
-      <li>Body Mass Index of <b>{{ bmiInt }}</b></li>
+      <li>Body Mass Index of <b>{{ bmi }}</b></li>
       <li>The BMI would fall in the category of <b>{{ bmiCategory }}</b> </li>
       <li>Currently, you intake <b>{{ currentDailyCalories }}</b> calories per day</li>
       <li>
         At the ideal goal, you need to intake <b>{{ goalDailyCalories }}</b> calories per day 
       </li>
     </ul>
-    <p class="center">For you journey you need to <b>{{ direction }}</b> your calories intake by <b>{{ amount }}</b>
+    <p class="center">For your journey you need to <b>{{ direction }}</b> your calorie intake by <b>{{ amount }}</b> per day.  <br>
       <b>Note:</b> Regardless if your goal is to gain or lose weight, it should be a <b>gradual</b> 
       process. The <b>recommendation</b> is to {{ direction }} calorie intake by
       anywhere between 500-900 calories per day. It is also recommended that calorie

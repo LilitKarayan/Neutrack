@@ -5,7 +5,7 @@ export class Helper {
     cy.get('[formcontrolname=email]')
       .click()
       .then(() => {
-        cy.get('[formcontrolname=email]').type('test@test.com');
+        cy.get('[formcontrolname=email]').type('tests@test.com');
       });
 
     cy.get('[formcontrolname=password]')

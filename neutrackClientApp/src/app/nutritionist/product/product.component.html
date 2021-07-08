@@ -5,7 +5,7 @@
     <div class="search-form mb-3 col">
       <mat-form-field class="search-width-full" appearance="fill">
         <mat-label>Search product</mat-label>
-        <input type="search"
+        <input id="theSearch" type="search"
             required
             matInput
             name="search"
@@ -17,7 +17,7 @@
         <mat-error *ngIf="!search.valid">field is required</mat-error>
       </mat-form-field>
      </div>
-     <div class="col"><button matSuffix mat-raised-button color="primary" [disabled]="!search.valid" (click)="searchProduct(searchForm)">Search</button></div>
+     <div class="col"><button id="theSearchButton" matSuffix mat-raised-button color="primary" [disabled]="!search.valid" (click)="searchProduct(searchForm)">Search</button></div>
 </form>
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -53,7 +53,7 @@
           <button class="edit_button" mat-icon-button (click)="editProduct(element)">
             <mat-icon mat-icon-button color='primary'>edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="delete(element['id'])">
+          <button id="deleteButton" mat-icon-button (click)="delete(element['id'])">
             <mat-icon mat-icon-button color="warn">delete</mat-icon>
           </button>
         </td>

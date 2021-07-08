@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { IProduct, IRecipe } from '@models';
-import { NutritionistService } from '@services/nutritionist.service';
+import { NutritionistService } from '../../../services/nutritionist.service';
 import { startWith } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 

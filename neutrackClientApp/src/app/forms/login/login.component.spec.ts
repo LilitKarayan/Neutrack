@@ -7,8 +7,8 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpErrorHandlerService } from '../../services/http-error-handler.service';
-import { MessageService } from '../../services/message.service';
+// import { HttpErrorHandlerService } from '../../services/http-error-handler.service';
+// import { MessageService } from '../../services/message.service';
 
 import { LoginComponent } from './login.component';
 
@@ -24,7 +24,7 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       imports: [MatCardModule, MatInputModule, ReactiveFormsModule, MatFormFieldModule, RouterTestingModule, HttpClientModule],
-      providers: [HttpErrorHandlerService, MessageService]
+      // providers: [HttpErrorHandlerService, MessageService]
     })
     .compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
