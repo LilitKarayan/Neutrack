@@ -13,7 +13,7 @@ import { AddEditProductComponent } from './add-edit-product/add-edit-product.com
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
 import { PageEvent } from '@angular/material/paginator';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-product',

@@ -1,6 +1,26 @@
 <div class="container">
   <h1 class="mt-3"> List of Patients </h1>
 <button class="addPatient" mat-raised-button color="primary" (click)="addPatient()"> Add a new patient </button>
+<form (keydown.enter)="searchPatient(searchForm)" #searchForm="ngForm" class="row">
+  <div class="search-form mb-3 col">
+    <mat-form-field class="search-width-full" appearance="fill">
+      <mat-label>Search patient</mat-label>
+      <input id="theSearch" type="search"
+          matInput
+          aria-label="search patient"
+          autocomplete
+          autocapitalize="on"
+          name="search"
+          #search="ngModel"
+          placeholder="search patient by first name, last name or email" [(ngModel)]="searchValue">
+      <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"(click)="clearForm()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-hint>search patient by first name, last name or email</mat-hint>
+    </mat-form-field>
+   </div>
+   <div class="col"><button id="theSearchButton" matSuffix mat-raised-button color="primary" [disabled]="search.pristine" (click)="searchPatient(searchForm)">Search</button></div>
+</form>
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <!-- Name column -->
@@ -30,7 +50,7 @@
           <a mat-icon-button [routerLink]="[element['id'], 'details']">
             <mat-icon mat-icon-button color="basic">portrait</mat-icon>
           </a>
-          <button class="edit_button" mat-icon-button (click)="edit(element)">
+          <button *ngIf="activeUser.nutritionistId == element['nutritionistId']" class="edit_button" mat-icon-button (click)="edit(element)">
             <mat-icon mat-icon-button color='primary'>edit</mat-icon>
           </button>
           <button id="deleteButton" mat-icon-button (click)="delete(element['id'])">
@@ -43,7 +63,7 @@
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>
 
-    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 50]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
   </div>
 </div>
 

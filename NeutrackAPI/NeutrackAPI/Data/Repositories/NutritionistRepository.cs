@@ -73,14 +73,15 @@ namespace NeutrackAPI.Data.Repositories
         {
             return (_context.SaveChanges() >= 0);
         }
-        public async Task<IEnumerable<Patient>> SearchPatient(string query)
+        public async Task<IEnumerable<Patient>> SearchPatient(string query, int currentUserId)
         {
             var results = await _context.Patients
                 .Include(u => u.User)
                 .Include(u => u.PatientActivityHistories)
                 .Where(x => x.User.FirstName.ToLower().Contains(query.ToLower()) ||
                 x.User.LastName.ToLower().Contains(query.ToLower()) ||
-                x.User.Email.ToLower().Contains(query.ToLower())).ToListAsync();
+                x.User.Email.ToLower().Contains(query.ToLower()) &&
+                x.UserId != currentUserId).ToListAsync();
             return results;
         }
         public void UpdateNutritionist(User user)

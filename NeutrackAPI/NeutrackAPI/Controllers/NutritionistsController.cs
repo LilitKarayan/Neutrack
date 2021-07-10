@@ -156,7 +156,7 @@ namespace NeutrackAPI.Controllers
                     return Forbid();
                 }
                
-                var patients = await _nutritionistRepository.SearchPatient(q);
+                var patients = await _nutritionistRepository.SearchPatient(q, currentUserId);
                 return Ok(_mapper.Map<IEnumerable<AllPatientReadDTO>>(patients));
 
             }

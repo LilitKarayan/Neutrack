@@ -18,5 +18,6 @@ namespace NeutrackAPI.DTOs
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public double InitialWeight { get; set; }
+        public int? NutritionistId { get; set; }
     }
 }
