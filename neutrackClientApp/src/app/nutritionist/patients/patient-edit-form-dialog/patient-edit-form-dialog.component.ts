@@ -33,7 +33,7 @@ export class PatientEditFormDialogComponent implements OnInit {
         height:['', Validators.compose([Validators.required, Validators.min(1)])],
         weight:['', Validators.compose([Validators.required, Validators.min(1)])],
         goal:['', Validators.compose([Validators.required, Validators.min(1)])],
-        activityLevel:['', Validators.compose([Validators.required, Validators.min(1)])],
+        activityLevel:['', Validators.compose([Validators.required, Validators.min(1), Validators.max(4)])],
         isActive:['', Validators.compose([Validators.required])],
         fullName:[''],
         phoneNumber:[''],

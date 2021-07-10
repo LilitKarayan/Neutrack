@@ -77,7 +77,8 @@
       <div>
         <mat-form-field class="fullWidth" appearance="outline">
           <mat-label>Activity Level</mat-label>
-          <input  matInput type="number" min="1.00" name="activityLevel" formControlName="activityLevel">
+          <input  matInput type="number" min="1.00" max="4.00" name="activityLevel" formControlName="activityLevel">
+          <mat-hint><span>Activity level ranges from 1 - 4.</span> <br/> <span>1 being the lowest and 4 being the max.</span> </mat-hint>
           <mat-error *ngIf="formInstance.controls['activityLevel']?.errors?.required">field is required</mat-error>
         </mat-form-field>
       </div>
@@ -85,7 +86,7 @@
       <mat-grid-tile>
         <div>
           <mat-form-field class="fullWidth" appearance="outline">
-            <mat-label>Goal</mat-label>
+            <mat-label>Weight Goal</mat-label>
             <input  matInput type="number" min="1.00" name="goal" formControlName="goal">
             <mat-error *ngIf="formInstance.controls['goal']?.errors?.required">field is required</mat-error>
           </mat-form-field>
