@@ -132,5 +132,10 @@ namespace NeutrackAPI.Data
                 .Take(pagingQueryParams.PageSize)
                 .ToListAsync();
         }
+
+        public int TotalProductCount()
+        {
+            return _context.Products.Count();
+        }
     }
 }

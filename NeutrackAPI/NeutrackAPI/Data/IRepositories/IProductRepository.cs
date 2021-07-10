@@ -16,5 +16,6 @@ namespace NeutrackAPI.Data
         string DeleteProduct(Product product);
         IEnumerable<Product> SearchProduct(string searchQuery);
         Task<IEnumerable<Product>> GetProductsPagination(PagingQueryParams pagingQueryParams);
+        int TotalProductCount();
     }
 }

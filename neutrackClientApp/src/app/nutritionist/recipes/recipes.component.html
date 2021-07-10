@@ -56,7 +56,7 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-    <mat-paginator #paginator [length]="pageSize" [pageSize]="5"
+    <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions"
     (page)="pageEvent=getData($event)"
     showFirstLastButtons></mat-paginator>

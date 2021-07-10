@@ -162,9 +162,14 @@ namespace NeutrackAPI.Controllers
                 {
                     return Forbid();
                 }
-
+                var totalProducts = _productRepository.TotalProductCount();
                 var products = await _productRepository.GetProductsPagination(pagingQuery);
-                return Ok(_mapper.Map<IEnumerable<ProductReadDTO>>(products));
+                var result = new
+                {
+                    Total = totalProducts,
+                    Items = _mapper.Map<IEnumerable<ProductReadDTO>>(products)
+                };
+                return Ok(result);
 
             }
             catch (Exception ex)

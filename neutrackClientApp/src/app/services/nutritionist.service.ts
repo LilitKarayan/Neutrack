@@ -10,11 +10,12 @@ import { nutritionistUpdatePatient,
   updateProduct,
   createProduct,
   deleteProduct,getProducts,
-  getRecipes, getRecipeById, createRecipe, deleteRecipe, updateRecipe
+  getRecipes, getRecipeById, createRecipe, deleteRecipe, updateRecipe,
+  searchPatients, getAllProductsWithPaging
  } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import {useTestApi, getApiRoute } from '../../environments/environment';
@@ -110,5 +111,15 @@ export class NutritionistService {
   }
   editRecipe(recipe: IRecipe, recipeId){
     return this.http.put<any>(getApiRoute(updateRecipe(recipeId)), recipe, httpOptions).toPromise<any>();
+  }
+  patientSearch(query: string){
+    const params = new HttpParams().set('q', query);
+    return this.http.get<IPatient[]>(getApiRoute(searchPatients), {params}).toPromise<IPatient[]>();
+  }
+  getProductsWithPaging(pageNumber: string, pageSize: string){
+    const params = new HttpParams()
+    .set('pageNumber', pageNumber)
+    .set('pageSize', pageSize);
+    return this.http.get<any>(getApiRoute(getAllProductsWithPaging), {params}).toPromise<any>();
   }
 }

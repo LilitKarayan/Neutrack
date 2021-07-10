@@ -6,21 +6,21 @@
       <mat-form-field class="search-width-full" appearance="fill">
         <mat-label>Search product</mat-label>
         <input id="theSearch" type="search"
-            required
             matInput
             name="search"
             #search="ngModel"
             placeholder="search by product name" [(ngModel)]="searchValue">
-        <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"(click)="searchValue=''">
+        <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"(click)="clearForm()">
           <mat-icon>close</mat-icon>
         </button>
-        <mat-error *ngIf="!search.valid">field is required</mat-error>
+        <mat-hint>search by product name</mat-hint>
       </mat-form-field>
      </div>
-     <div class="col"><button id="theSearchButton" matSuffix mat-raised-button color="primary" [disabled]="!search.valid" (click)="searchProduct(searchForm)">Search</button></div>
+     <div class="col"><button id="theSearchButton" matSuffix mat-raised-button color="primary" [disabled]="search.pristine" (click)="searchProduct(searchForm)">Search</button></div>
 </form>
+<p *ngIf="(isProductsSearch | async) && searchProductsResult"><strong>{{searchProductsResult.length + ' results'}}</strong></p>
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <table mat-table [dataSource]="pageProducts" matSort class="mat-elevation-z8">
             <!-- Name column -->
             <ng-container matColumnDef="name" >
               <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -63,6 +63,12 @@
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>
 
-    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 50]" showFirstLastButtons></mat-paginator>
+    <mat-paginator #paginator
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageEvent=getProductData($event)"
+      showFirstLastButtons
+    ></mat-paginator>
   </div>
 </div>

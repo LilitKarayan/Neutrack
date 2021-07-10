@@ -12,7 +12,8 @@ import { NgForm } from '@angular/forms';
 import { AddEditProductComponent } from './add-edit-product/add-edit-product.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
-
+import { PageEvent } from '@angular/material/paginator';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-product',
@@ -24,8 +25,15 @@ export class ProductComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('searchForm') searchFrm: NgForm;
   activeUser: IUser;
+  length: number;
+  pageSize = 10;
+  pageSizeOptions: number[] = [10, 20, 30, 40, 50];
+  pageEvent: PageEvent;
+  searchProductsResult:IProduct[];
+  productData: any;
+  pageProducts:IProduct[];
+  public isProductsSearch = new BehaviorSubject<boolean>(false);
   public dataSource: MatTableDataSource<IProduct>;
-
   public displayedColumns: string[] = ['name', 'caloriesPerGram', 'proteinInGrams', 'fatInGrams', 'carbInGrams'];
   public columnsToDisplay: string[] = [...this.displayedColumns, 'actions'];
   searchValue = '';
@@ -37,18 +45,34 @@ export class ProductComponent implements OnInit, AfterViewInit {
     private _snackBar: MatSnackBar
   ) {
     this.authService.user.subscribe(user => this.activeUser = user);
-    this.dataSource = new MatTableDataSource<IProduct>();
   }
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+  }
+  clearForm(){
+    this.searchValue = '';
+    this.searchFrm.reset();
+    this.isProductsSearch.next(false);
+    this.getProducts();
+  }
+  async getProducts(pageNumber?, pageSize?){
+    this.isProductsSearch.next(false);
+    if(pageNumber && pageSize){
+      this.productData = await this.nutritionistService.getProductsWithPaging(pageNumber, pageSize);
+      this.pageProducts = this.productData.items;
+      this.length = this.productData.total;
+    }else{
+      this.productData = await this.nutritionistService.getProductsWithPaging('1', `${this.pageSize}`);
+      this.pageProducts = this.productData.items;
+      this.length = this.productData.total;
+    }
   }
   async searchProduct(form: NgForm){
     if(form.valid){
-       let result =  await this.nutritionistService.searchProduct(form.value['search']);
-       if(result.length > 0){
-        this.dataSource.data = result
-       } else {
-        this.dataSource.data = [];
+      this.isProductsSearch.next(true);
+       this.searchProductsResult =  await this.nutritionistService.searchProduct(form.value['search']);
+       if(this.searchProductsResult.length > 0){
+        this.length = this.searchProductsResult.length;
+        this.pageProducts = this.searchProductsResult.slice( 0, this.pageSize);
        }
     }
   }
@@ -114,6 +138,22 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
   ngOnInit(): void {
+    this.getProducts();
+  }
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
+  getProductData(event?: PageEvent){
+    if(this.isProductsSearch.value){
+      this.pageProducts = this.searchProductsResult.slice(event.pageIndex * event.pageSize,
+        event.pageIndex * event.pageSize + event.pageSize);
+        return event;
+    } else {
+      this.getProducts(`${event.pageIndex + 1}`, `${event.pageSize}`);
+      return event;
+    }
   }
 
 }
