@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -34,7 +35,7 @@ namespace NeutrackAPI.Data
         /// <returns></returns>
         public IEnumerable<Product> GetAllProducts()
         {
-            return _context.Products.ToList();
+            return _context.Products.OrderBy(x => x.Name).ToList();
             // return _context.Products
             //     .Include(rp => rp.RecipeProducts).ThenInclude(r => r.Recipe).ToList();
         }
@@ -121,6 +122,15 @@ namespace NeutrackAPI.Data
             return query.ToList();
 
 
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsPagination(PagingQueryParams pagingQueryParams)
+        {
+            return await _context.Products
+                .OrderBy(p => p.Name)
+                .Skip((pagingQueryParams.PageNumber - 1) * pagingQueryParams.PageSize)
+                .Take(pagingQueryParams.PageSize)
+                .ToListAsync();
         }
     }
 }
