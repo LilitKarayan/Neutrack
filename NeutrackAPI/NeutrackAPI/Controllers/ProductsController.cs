@@ -10,6 +10,7 @@ using NeutrackAPI.Helpers;
 using NeutrackAPI.Data.IRepositories;
 using Microsoft.AspNetCore.Authorization;
 using System.Net;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -145,6 +146,37 @@ namespace NeutrackAPI.Controllers
                 return StatusCode(500);
             }
         }
-   
+
+        /// <summary>
+        /// GET api/products
+        /// </summary>
+        /// <returns>A list of paginated Products</returns>
+        [HttpGet]
+        [Route("all")]
+        public async Task<ActionResult> GetProductsWithPagination([FromQuery] PagingQueryParams pagingQuery)
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                if (!User.IsInRole(Roles.Nutritionist))
+                {
+                    return Forbid();
+                }
+                var totalProducts = _productRepository.TotalProductCount();
+                var products = await _productRepository.GetProductsPagination(pagingQuery);
+                var result = new
+                {
+                    Total = totalProducts,
+                    Items = _mapper.Map<IEnumerable<ProductReadDTO>>(products)
+                };
+                return Ok(result);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.InnerException.Message);
+            }
+        }
+
     }
 }

@@ -49,3 +49,5 @@ export const deleteRecipe = (recipeId) => {
 export const updateRecipe = (recipeId) => {
   return `/recipes/${recipeId}`;
 }
+export const searchPatients = '/nutritionists/search/patients'
+export const getAllProductsWithPaging = '/products/all'

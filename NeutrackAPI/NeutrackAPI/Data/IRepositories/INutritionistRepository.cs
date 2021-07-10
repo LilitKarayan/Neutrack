@@ -16,6 +16,6 @@ namespace NeutrackAPI.Data.IRepositories
         IEnumerable<Patient> GetAllNutritionistPatients(int nutritionistId);
         void AddNewPatientActivityHistory(PatientActivityHistory activityHistory);
         DashboardViewModel GetNutritionistDashboardData(int nutritionistId);
-        Task<IEnumerable<Patient>> SearchPatient(string query);
+        Task<IEnumerable<Patient>> SearchPatient(string query, int currentUserId);
     }
 }

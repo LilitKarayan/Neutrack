@@ -21,5 +21,6 @@ namespace NeutrackAPI.DTOs
         public string PhoneNumber { get; set; }
         public double InitialWeight { get; set; }
         public List<PatientActivityHistoryDTO> PatientActivityHistories { get; set; }
+        public int? NutritionistId { get; set; }
     }
 }

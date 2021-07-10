@@ -27,7 +27,7 @@ export class RecipesComponent implements OnInit, AfterViewInit {
 
   length: number;
   pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 15, 20];
+  pageSizeOptions: number[] = [10, 20, 30, 40, 50];
   pageEvent: PageEvent;
 
   constructor(

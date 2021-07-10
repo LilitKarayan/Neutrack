@@ -1,3 +1,4 @@
+import { searchPatients } from './../../../../config/api.config';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,6 +15,7 @@ import * as moment from 'moment';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-data-table',
@@ -25,13 +27,16 @@ import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component'
 export class DataTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('searchForm') searchFrm: NgForm;
   private patientsSubject = new BehaviorSubject<IPatient[]> (null);
+  public isPatientSearch = new BehaviorSubject<boolean>(false);
   activeUser: IUser;
   public displayedColumns: string[] = ['fullName', 'gender', 'age', 'email'];
   public columnsToDisplay: string[] = [...this.displayedColumns, 'actions'];
-
+  pageSize = 10;
+  pageSizeOptions: number[] = [10, 20, 30, 40, 50];
   public dataSource: MatTableDataSource<IPatient>;
-
+  searchValue = '';
   constructor(
     public dialog: MatDialog,
     private authService: AuthenticationService,
@@ -43,6 +48,18 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource<IPatient>();
   }
 
+  async searchPatient(form: NgForm){
+    if(form.valid){
+      this.isPatientSearch.next(true);
+       this.dataSource.data =  await this.nutritionistService.patientSearch(form.value['search']);
+    }
+  }
+  clearForm(){
+    this.searchValue = '';
+    this.searchFrm.reset();
+    this.isPatientSearch.next(false);
+    this.getAllPatients();
+  }
 
   getAge(dob: string){
     const age = moment().diff(dob, 'years',false);
@@ -118,6 +135,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     this.getAllPatients();
   }
   getAllPatients(): void{
+    this.isPatientSearch.next(false);
     this.nutritionistService.getAllNutritionistPatient(this.activeUser.nutritionistId).subscribe(data => {
       this.dataSource.data = data;
       this.patientsSubject.next(data);
