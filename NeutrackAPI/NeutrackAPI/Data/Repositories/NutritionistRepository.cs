@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -73,7 +73,6 @@ namespace NeutrackAPI.Data.Repositories
         {
             return (_context.SaveChanges() >= 0);
         }
-
         public async Task<IEnumerable<Patient>> SearchPatient(string query)
         {
             var results = await _context.Patients
@@ -84,7 +83,6 @@ namespace NeutrackAPI.Data.Repositories
                 x.User.Email.ToLower().Contains(query.ToLower())).ToListAsync();
             return results;
         }
-
         public void UpdateNutritionist(User user)
         {
             throw new NotImplementedException();
