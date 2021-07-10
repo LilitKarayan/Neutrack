@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NeutrackAPI.Data.IRepositories;
 using NeutrackAPI.DTOs;
@@ -72,7 +73,16 @@ namespace NeutrackAPI.Data.Repositories
         {
             return (_context.SaveChanges() >= 0);
         }
-
+        public async Task<IEnumerable<Patient>> SearchPatient(string query)
+        {
+            var results = await _context.Patients
+                .Include(u => u.User)
+                .Include(u => u.PatientActivityHistories)
+                .Where(x => x.User.FirstName.ToLower().Contains(query.ToLower()) ||
+                x.User.LastName.ToLower().Contains(query.ToLower()) ||
+                x.User.Email.ToLower().Contains(query.ToLower())).ToListAsync();
+            return results;
+        }
         public void UpdateNutritionist(User user)
         {
             throw new NotImplementedException();

@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using NeutrackAPI.DTOs;
 using NeutrackAPI.Models;
 namespace NeutrackAPI.Data.IRepositories
@@ -15,5 +16,6 @@ namespace NeutrackAPI.Data.IRepositories
         IEnumerable<Patient> GetAllNutritionistPatients(int nutritionistId);
         void AddNewPatientActivityHistory(PatientActivityHistory activityHistory);
         DashboardViewModel GetNutritionistDashboardData(int nutritionistId);
+        Task<IEnumerable<Patient>> SearchPatient(string query);
     }
 }
