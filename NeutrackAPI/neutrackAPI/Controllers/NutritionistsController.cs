@@ -10,6 +10,7 @@ using NeutrackAPI.Data.IRepositories;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.JsonPatch;
+using System.Threading.Tasks;
 
 namespace NeutrackAPI.Controllers
 {
@@ -126,6 +127,36 @@ namespace NeutrackAPI.Controllers
                     return Forbid();
                 }
                 var patients = _nutritionistRepository.GetAllNutritionistPatients(currentNutritionistId);
+                return Ok(_mapper.Map<IEnumerable<AllPatientReadDTO>>(patients));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.InnerException.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// search patients by firstname, last name or email
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize(Roles = Roles.Nutritionist)]
+        [HttpGet]
+        [Route("search/patients")]
+        public  async Task<ActionResult> SearchPatient([FromQuery]string q)
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                var currentNutritionistId = int.Parse(User.FindFirstValue(ClaimTypes.Spn));
+                if (!User.IsInRole(Roles.Nutritionist))
+                {
+                    return Forbid();
+                }
+               
+                var patients = await _nutritionistRepository.SearchPatient(q);
                 return Ok(_mapper.Map<IEnumerable<AllPatientReadDTO>>(patients));
 
             }
