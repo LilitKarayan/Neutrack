@@ -298,6 +298,60 @@ namespace NeutrackAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove a patient from 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="patientId"></param>
+        /// <returns></returns>
+        [Authorize(Roles = Roles.Nutritionist)]
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> DeleteAccount(int id)
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                var currentNutritionistId = int.Parse(User.FindFirstValue(ClaimTypes.Spn));
+                if (!User.IsInRole(Roles.Nutritionist))
+                {
+                    return Forbid();
+                }
+                if (currentNutritionistId != id)
+                {
+                    return Forbid();
+                }
+                var nutritionist = _nutritionistRepository.GetNutritionistById(currentNutritionistId);
+                if (nutritionist == null)
+                {
+                    return NotFound(new { message = "Nutritionist not found" });
+                }
+                if (!nutritionist.IsActive)
+                {
+                    return UnprocessableEntity(new { message = "This account does not exist" });
+                }
+                var result = await _nutritionistRepository.DeleteNutritionist(currentNutritionistId);
+                if (result)
+                {
+                    var isUserDeleted = await _userRepository.DeleteUser(currentUserId);
+                    if (isUserDeleted)
+                    {
+                        return Accepted(new { message = "Your account has been deleted successfully" });
+                    }
+                    else
+                    {
+                        return UnprocessableEntity(new { message = "Your cannot be deleted." });
+                    }
+                }
+
+                return StatusCode(412, new { message = "Unable to delete account. Try again later" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.InnerException.Message);
+            }
+        }
+
 
         /// <summary>
         /// Updating a patient

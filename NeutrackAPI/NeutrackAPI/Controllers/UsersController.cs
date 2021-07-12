@@ -9,6 +9,8 @@ using NeutrackAPI.Models;
 using NeutrackAPI.Helpers;
 using NeutrackAPI.Data.IRepositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -104,24 +106,9 @@ namespace NeutrackAPI.Controllers
                 var roleModel = _roleRepository.GetRoleByName(Roles.User);
                 var existingUser = _userRepository.GetUserByEmail(userModel.Email);
                 patientModel.User = userModel;
-                //patientModel.Nutritionist = null;
-                if (existingUser != null && existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
+                if (existingUser != null)
                 {
                     return BadRequest("Email has already been taken");
-                }
-                else if(existingUser != null && !existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
-                {
-                    existingUser.UserRoles.Add(
-                        new UserRole
-                        {
-                            User = existingUser,
-                            Role = roleModel,
-                        }
-                    );
-                    existingUser.Patient = patientModel;
-                    _userRepository.SaveChanges();
-                    var user = _mapper.Map<UserReadDTO>(existingUser);
-                    return CreatedAtRoute(nameof(GetUserById), new { user.Id }, user);
                 }
                 userModel.UserRoles = new List<UserRole>
                 {
@@ -161,23 +148,9 @@ namespace NeutrackAPI.Controllers
                 var existingUser = _userRepository.GetUserByEmail(userModel.Email);
                 nutritionistModel.User = userModel;
                 
-                if (existingUser != null && existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
+                if (existingUser != null)
                 {
                     return BadRequest("Email has already been taken");
-                }
-                else if (existingUser != null && !existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id) && existingUser.Nutritionist == null)
-                {
-                    existingUser.UserRoles.Add(
-                        new UserRole {
-                            User = existingUser,
-                            Role = roleModel,
-                        }
-                    );
-                    existingUser.Nutritionist = nutritionistModel;
-                    _userRepository.SaveChanges();
-                    var user = _mapper.Map<UserReadDTO>(existingUser);
-                    return CreatedAtRoute(nameof(GetUserById), new { user.Id }, user);
-
                 }
                 userModel.UserRoles = new List<UserRole>
                 {
@@ -214,7 +187,7 @@ namespace NeutrackAPI.Controllers
                 var userModel = _mapper.Map<User>(userCreateDTO);
                 var roleModel = _roleRepository.GetRoleByName(Roles.Admin);
                 var existingUser = _userRepository.GetUserByEmail(userModel.Email);
-                if (existingUser != null && existingUser.UserRoles.Any(x => x.RoleId == roleModel.Id))
+                if (existingUser != null)
                 {
                     throw new Exception("Email has already been taken");
                 }
@@ -279,12 +252,13 @@ namespace NeutrackAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
                 var currentUserId = int.Parse(User.Identity.Name);
-                if(id != currentUserId && !User.IsInRole(Roles.Admin))
+                //var patientId = int.Parse(User.FindFirstValue(ClaimTypes.Upn));
+                if (id != currentUserId && !User.IsInRole(Roles.Admin))
                 {
                     return Forbid();
                 }
@@ -293,9 +267,16 @@ namespace NeutrackAPI.Controllers
                 {
                     return NotFound();
                 }
-                _userRepository.DeactivateUser(userItem);
-                _userRepository.SaveChanges();
-                return NoContent();
+                var result = await _userRepository.DeleteUser(currentUserId);
+                if (result) 
+                {
+                    return Accepted(new { message = "Your account has been deleted successfully" });
+                }
+                else
+                {
+                    return UnprocessableEntity(new { message = "Your account has been deleted successfully" });
+                }
+
 
             }
             catch (Exception ex)
@@ -319,6 +300,14 @@ namespace NeutrackAPI.Controllers
                 if(user == null)
                 {
                     return BadRequest(new { message = "Username or password is incorrect" });
+                }
+                if (user.Roles.Contains("Nutritionist") && !user.IsActiveNutritionist)
+                {
+                    return Forbid();
+                }
+                if (user.Roles.Contains("User") && !user.IsActiveUser)
+                {
+                    return Forbid();
                 }
                 return Ok(user);
             }

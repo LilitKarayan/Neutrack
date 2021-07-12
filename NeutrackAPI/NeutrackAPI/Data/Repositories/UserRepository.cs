@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -157,6 +158,29 @@ namespace NeutrackAPI.Data
         public IEnumerable<User> SearchUser(string searchQuery, Role role)
         {
             return null;
+        }
+
+        public async Task<bool> DeleteUser(int userId)
+        {
+            var user = await _context.Users
+                .Include(x => x.UserRoles)
+                .Include(x => x.Nutritionist)
+                .Include(x => x.Patient)
+                .FirstOrDefaultAsync(x => x.Id == userId);
+            if(user.UserRoles != null)
+            {
+                _context.RemoveRange(user.UserRoles);
+            }
+            if (user.Nutritionist != null)
+            {
+                _context.Remove(user.Nutritionist);
+            }
+            if (user.Patient != null)
+            {
+                _context.Remove(user.Patient);
+            }
+            _context.Remove(user);
+            return SaveChanges();
         }
     }
 }

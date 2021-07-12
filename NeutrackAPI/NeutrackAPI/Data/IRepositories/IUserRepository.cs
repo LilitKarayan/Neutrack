@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using NeutrackAPI.DTOs;
 using NeutrackAPI.Models;
 
@@ -16,5 +17,6 @@ namespace NeutrackAPI.Data
         void UpdateUser(User user);
         void DeactivateUser(User user);
         IEnumerable<User> SearchUser(string searchQuery, Role role);
+        Task<bool> DeleteUser(int userId);
     }
 }

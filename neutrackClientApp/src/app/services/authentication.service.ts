@@ -116,6 +116,7 @@ export class AuthenticationService {
     this.rolesSubject.next(null);
     this.isLoggedInSubject.next(false);
     this.isLoggedOutSubject.next(true);
+    this.router.navigateByUrl('/login');
   }
   isLoggedOut() {
     return !this.isLoggedIn();

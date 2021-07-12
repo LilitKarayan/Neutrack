@@ -51,3 +51,6 @@ export const updateRecipe = (recipeId) => {
 }
 export const searchPatients = '/nutritionists/search/patients'
 export const getAllProductsWithPaging = '/products/all'
+export const getUser = (userId) => {
+  return `/users/${userId}`;
+}

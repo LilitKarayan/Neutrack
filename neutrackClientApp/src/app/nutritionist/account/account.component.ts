@@ -1,10 +1,11 @@
-import { updateNutritionist } from './../../../config/api.config';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { INutritionist, IUser } from '@models';
 import { NutritionistService } from '@services/nutritionist.service';
 import { AuthenticationService } from '@services/authentication.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import { DeleteConfirmationComponent } from 'app/shared/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-account',
@@ -26,7 +27,8 @@ export class AccountComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
-    private nutritionistService: NutritionistService
+    private nutritionistService: NutritionistService,
+    public dialog: MatDialog,
   ) {
     this.authService.user.subscribe(user => this.activeUser = user);
     this.nutritionist$ = this.nutritionistSubject.asObservable();
@@ -58,9 +60,6 @@ export class AccountComponent implements OnInit {
       yearsOfExperience:[{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required, Validators.min(1), Validators.max(50)])],
       phoneNumber:[{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required])],
     });
-    // this.formInstance.get('dateOfBirth').valueChanges.subscribe(() => {
-    //   this.updateValue('dateOfBirth');
-    // })
   }
 
   async getNutritionist(){
@@ -79,7 +78,19 @@ export class AccountComponent implements OnInit {
     this.formInstance.get('yearsOfExperience').setValue(data.yearsOfExperience);
     this.formInstance.get('phoneNumber').setValue(data.phoneNumber);
   }
-
+  async deleteAccount(){
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      data: "Are you sure to want delete your account?",
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(this.activeUser);
+        this.nutritionistService.deleteAccount(this.activeUser.id).then(() => {
+          this.authService.logout();
+        })
+      }
+    });
+  }
   updateValue(ctrlName){
     if (!this.updatedFields.includes(ctrlName)){
       this.updatedFields.push(ctrlName);

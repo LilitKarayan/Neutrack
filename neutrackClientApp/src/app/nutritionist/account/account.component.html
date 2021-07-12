@@ -2,8 +2,10 @@
     <div class="accountContent">
         <h1>{{nutritionist.fullName}}</h1>
         <p>{{nutritionist.email}}</p>
-        <div *ngIf="!isEdit">
-          <button mat-raised-button color="primary" (click)="toggleEditing(true)">Edit</button>
+        <div>
+          <button *ngIf="!isEdit" class="mr-2" mat-raised-button color="primary" (click)="toggleEditing(true)">Edit</button>
+
+          <button mat-raised-button color="warn" (click)="deleteAccount()">Delete My Account</button>
         </div>
         <div class="edit-form">
           <form [formGroup]="formInstance">

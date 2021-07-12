@@ -11,7 +11,7 @@ import { nutritionistUpdatePatient,
   createProduct,
   deleteProduct,getProducts,
   getRecipes, getRecipeById, createRecipe, deleteRecipe, updateRecipe,
-  searchPatients, getAllProductsWithPaging
+  searchPatients, getAllProductsWithPaging, getUser
  } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -121,5 +121,8 @@ export class NutritionistService {
     .set('pageNumber', pageNumber)
     .set('pageSize', pageSize);
     return this.http.get<any>(getApiRoute(getAllProductsWithPaging), {params}).toPromise<any>();
+  }
+  deleteAccount(userId){
+    return this.http.delete(getApiRoute(getUser(userId)), httpOptions).toPromise<any>();
   }
 }
