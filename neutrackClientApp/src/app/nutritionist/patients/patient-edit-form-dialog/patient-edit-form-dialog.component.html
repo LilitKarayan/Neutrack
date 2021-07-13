@@ -78,7 +78,13 @@
         <mat-form-field class="fullWidth" appearance="outline">
           <mat-label>Activity Level</mat-label>
           <input  matInput type="number" min="1.00" max="4.00" name="activityLevel" formControlName="activityLevel">
-          <mat-hint><span>Activity level ranges from 1 - 4.</span> <br/> <span>1 being the lowest and 4 being the max.</span> </mat-hint>
+          <mat-hint>
+            <strong>Activity level ranges from 1 - 4.</strong> <br/>
+            <small>Level 1 = Sedentary</small> <br/>
+            <small>Level 2 = Lightly Active</small> <br/>
+            <small>Level 3 = Moderately Active</small> <br/>
+            <small>Level 4 = Very Active</small> <br/>
+          </mat-hint>
           <mat-error *ngIf="formInstance.controls['activityLevel']?.errors?.required">field is required</mat-error>
         </mat-form-field>
       </div>

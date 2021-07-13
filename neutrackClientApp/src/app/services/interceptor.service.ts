@@ -11,6 +11,7 @@ import * as moment from 'moment';
 
 const loginUrl = userLoginEndpoint;
 const nutritionistSignupUrl = nutritionistSignUpEndpoint;
+const patientSignupUrl = userSignUpEndpoint;
 @Injectable({
   providedIn: 'root'
 })
@@ -35,16 +36,16 @@ export class InterceptorService implements HttpInterceptor {
       })
     }
     else if(token && moment().isAfter(this.authService.getExpiration())){
+      this.errorDialogService.openDialog('Your session has expired. Please sign in');
       this.authService.logout();
       this.router.navigateByUrl('/login');
-      this.errorDialogService.openDialog('Your session has expired. Please sign in');
     }
     return next.handle(req).do((event: HttpEvent<any>) => {
       if(event instanceof HttpResponse){
         if(event.ok){
           if(req.url.includes(loginUrl) && event.body.roles){
             event.body.roles.includes('Nutritionist')?this.router.navigateByUrl('/dashboard'):this.router.navigateByUrl('/home');
-          } else if(req.url.includes(nutritionistSignupUrl)){
+          } else if(req.url.includes(nutritionistSignupUrl) || req.url.includes(patientSignupUrl)){
             this.router.navigateByUrl('/login');
           }
           this.loadingDialogService.hideDialog();
@@ -53,6 +54,9 @@ export class InterceptorService implements HttpInterceptor {
     }, (err: any) => {
       let errors = []
       if(err instanceof HttpErrorResponse){
+        if(err.error){
+          errors.push(err.error);
+        }
         if(err.error.errors || err.error.message){
           const errorKey = err.error.errors? Object.keys(err.error.errors):[];
           const errMsg = err.error.message ? err.error.message: '';
@@ -60,7 +64,8 @@ export class InterceptorService implements HttpInterceptor {
             errors.push(err.error.errors[key]);
           });
           errors.push(errMsg);
-        } else if(err.status === 401){
+        }
+        else if(err.status === 401){
           errors.push('Sorry you do not have access to view this page.');
           this.router.navigateByUrl('/login');
         } else if ([0, 405, 422].includes(err.status))

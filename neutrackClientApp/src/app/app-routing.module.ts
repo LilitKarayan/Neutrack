@@ -28,7 +28,7 @@ const routes: Routes = [
     ],
     canActivate: [NutritionistGuard]},
   {path: 'login', component: LoginComponent, canActivate: [AutomaticLoginGuard]},
-  {path: 'signup', component: SignUpComponent, canActivate: [AutomaticLoginGuard]},
+  {path: 'signup/:entity', component: SignUpComponent, canActivate: [AutomaticLoginGuard]},
   {path: 'products', component: ProductComponent, canActivate: [NutritionistGuard]},
   {path: 'recipes', component: RecipesComponent, canActivate: [NutritionistGuard]},
 ];

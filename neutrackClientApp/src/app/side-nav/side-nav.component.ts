@@ -32,5 +32,7 @@ export class SideNavComponent implements OnInit {
   isNutritionist(): boolean{
     return this.roles.includes('Nutritionist');
   }
-
+  isPatient(): boolean{
+    return this.roles.includes('Patient');
+  }
 }

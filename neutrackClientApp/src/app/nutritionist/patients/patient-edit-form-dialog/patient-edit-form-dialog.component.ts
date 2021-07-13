@@ -38,6 +38,7 @@ export class PatientEditFormDialogComponent implements OnInit {
         fullName:[''],
         phoneNumber:[''],
         initialWeight:[''],
+        nutritionistId:[''],
 
       });
 
