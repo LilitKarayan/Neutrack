@@ -52,10 +52,8 @@ export class RecipesComponent implements OnInit, AfterViewInit {
   }
 
   getData( event?: PageEvent) {
-    console.log(event);
     this.paginatedRecipe = this.recipes.slice(event.pageIndex * event.pageSize,
                                              event.pageIndex * event.pageSize + event.pageSize);
-    console.log(this.paginatedRecipe);
     return event;
   }
   isRecipeDataSame(oldRecipe: IRecipe, newRecipe: IRecipe){
@@ -113,7 +111,6 @@ export class RecipesComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(async result => {
       if (result) {
-        console.log(result)
         let newRecipe = await this.nutritionistService.createRecipe(result);
         if(newRecipe){
           this._snackBar.openFromComponent(MessageSnackbarComponent, {

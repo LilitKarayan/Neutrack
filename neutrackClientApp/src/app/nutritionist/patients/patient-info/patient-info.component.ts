@@ -65,7 +65,6 @@ export class PatientInfoComponent implements OnInit, OnDestroy {
           label: 'Weight History'
         }
       ];
-      console.log(dataset);
       return dataset;
     }
     getChartLabel(history: WeightHistory[]): Label[]{

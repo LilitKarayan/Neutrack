@@ -84,7 +84,6 @@ export class AccountComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(this.activeUser);
         this.nutritionistService.deleteAccount(this.activeUser.id).then(() => {
           this.authService.logout();
         })
