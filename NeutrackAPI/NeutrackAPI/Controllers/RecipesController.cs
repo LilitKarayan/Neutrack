@@ -129,13 +129,18 @@ namespace NeutrackAPI.Controllers
                     recipeItem.Name = recipeUpdate.Name;
                 }
                 //_mapper.Map(recipeUpdate, recipeItem);
+                recipeItem.RecipeProducts = _mapper.Map(recipeUpdate.RecipeProducts, recipeItem.RecipeProducts);
                 _recipeRepository.UpdateRecipe(recipeItem);
                 _recipeRepository.SaveChanges();
            
-                return Ok(_mapper.Map<RecipeReadDTO>(recipeItem));
+                return NoContent();
             }
             catch(Exception ex)
             {
+                if (ex.Message.Contains("another instance with the same key value"))
+                {
+                    return BadRequest(new { message = "You cannot add duplicate products to this recipe"});
+                }
                 return StatusCode(500, new { message = ex.Message});
             }
         }

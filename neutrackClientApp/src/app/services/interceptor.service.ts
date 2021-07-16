@@ -54,9 +54,6 @@ export class InterceptorService implements HttpInterceptor {
     }, (err: any) => {
       let errors = []
       if(err instanceof HttpErrorResponse){
-        if(err.error){
-          errors.push(err.error);
-        }
         if(err.error.errors || err.error.message){
           const errorKey = err.error.errors? Object.keys(err.error.errors):[];
           const errMsg = err.error.message ? err.error.message: '';

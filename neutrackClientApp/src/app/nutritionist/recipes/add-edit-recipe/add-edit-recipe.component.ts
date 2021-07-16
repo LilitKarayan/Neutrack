@@ -104,7 +104,17 @@ export class AddEditRecipeComponent implements OnInit {
     return fg;
   }
   addRecipeProduct() {
-    this.recipeProducts.push(this.newRecipeProduct());
+    if(this.data.isEdit){
+      let recipePrd = {
+        recipeID: this.data.recipe.id,
+        productID: '',
+        productName: '',
+        weightInGrams: '',
+      }
+      this.setRecipeProducts(this.existingRecipeProduct(recipePrd));
+    } else{
+      this.recipeProducts.push(this.newRecipeProduct());
+    }
   }
   removeRecipeProduct(i: number) {
     this.recipeProducts.removeAt(i);
