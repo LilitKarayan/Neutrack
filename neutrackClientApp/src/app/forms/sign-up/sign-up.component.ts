@@ -35,8 +35,6 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const currentYear = new Date().getFullYear();
-    this.maxDate = new Date(currentYear - 18, 12, 31);
     this.genders = ['Male', 'Female'];
     this.nutritionist = {};
     this.form =  new FormGroup({

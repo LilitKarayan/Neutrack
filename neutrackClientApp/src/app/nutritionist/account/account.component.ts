@@ -7,6 +7,8 @@ import { AuthenticationService } from '@services/authentication.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/shared/delete-confirmation/delete-confirmation.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
 
 @Component({
   selector: 'app-account',
@@ -24,6 +26,7 @@ export class AccountComponent implements OnInit {
   updatedFields: any[] = [];
   userData: IUser;
   roles:any[];
+  error: string;
 
 
   constructor(
@@ -32,6 +35,7 @@ export class AccountComponent implements OnInit {
     private nutritionistService: NutritionistService,
     private patientService: PatientService,
     public dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {
     this.authService.userRoles.subscribe(userRoles => this.roles = userRoles);
     this.authService.user.subscribe(user => this.activeUser = user);
@@ -51,7 +55,6 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.roles);
     if(this.roles.includes('Nutritionist')){
       this.getNutritionist();
     } else if (this.roles.includes('User')){
@@ -81,6 +84,7 @@ export class AccountComponent implements OnInit {
 
   async getNutritionist(){
     await this.nutritionistService.getNutritionist(this.activeUser.nutritionistId).subscribe(data => {
+      console.log(data);
       this.userData = data;
       this.userSubject.next(data);
       this.setFormData(data);
@@ -130,12 +134,33 @@ export class AccountComponent implements OnInit {
     }
   }
   async save(){
-    const formData = this.formInstance.getRawValue();
-    const updatedData = {...this.userData, ...formData};
-    let res = await this.nutritionistService.updateNutritionist(this.activeUser.nutritionistId, updatedData);
-    if(res)
-      this.setFormData(res);
-      this.toggleEditing(false);
+    if(this.formInstance.valid){
+      this.error = "";
+      const formData = this.formInstance.getRawValue();
+      const updatedData = {...this.userData, ...formData};
+      let res = null;
+      if(this.roles.includes('Nutritionist')){
+        res = await this.nutritionistService.updateNutritionist(this.activeUser.nutritionistId, updatedData);
+        this.showSnackBar();
+        this.getNutritionist();
+      } else if(this.roles.includes('User')){
+        console.log(updatedData);
+        this.patientService.updatePatient(this.activeUser.id, updatedData).subscribe(data => {
+          res = data;
+        });
+        this.showSnackBar();
+        this.getUser();
+      }
+
+    } else {
+      this.error = "Update failed! Please correct all invalid inputs"
+    }
+  }
+  showSnackBar(){
+    this.toggleEditing(false);
+    this._snackBar.openFromComponent(MessageSnackbarComponent, {
+      data: `Your account was updated successfully`
+    })
   }
   toggleEditing(edit: boolean){
     this.updatedFields = [];

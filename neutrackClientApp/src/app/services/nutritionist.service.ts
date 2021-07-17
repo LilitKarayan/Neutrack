@@ -125,4 +125,9 @@ export class NutritionistService {
   deleteAccount(userId){
     return this.http.delete(getApiRoute(getUser(userId)), httpOptions).toPromise<any>();
   }
+
+  addExistingPatientToNutritionist(userId) {
+    let url = getApiRoute(nutritionistAddPatientEndpoint);
+    return this.http.post(`${url}/${userId}`, httpOptions).toPromise<any>();
+  }
 }

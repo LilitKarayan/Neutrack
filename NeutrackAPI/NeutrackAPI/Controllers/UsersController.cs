@@ -131,6 +131,15 @@ namespace NeutrackAPI.Controllers
                         Role = roleModel,
                     },
                 };
+                patientModel.PatientActivityHistories = new List<PatientActivityHistory>
+                {
+                   new PatientActivityHistory
+                   {
+                     Patient = patientModel,
+                     Weight = userCreateDTO.Weight,
+                     CreatedDate = DateTime.UtcNow
+                   }
+                };
                 userModel.Patient = patientModel;
                 _userRepository.CreateUser(userModel);
                 _userRepository.SaveChanges();
@@ -234,21 +243,37 @@ namespace NeutrackAPI.Controllers
         {
             try
             {
+
                 var currentUserId = int.Parse(User.Identity.Name);
                 if (id != currentUserId)
                 {
                     return Forbid();
+                }
+                if (!User.IsInRole(Roles.User))
+                {
+                   return Forbid();
                 }
                 var userItem = await _userRepository.GetUserById(id);
                 if (userItem == null)
                 {
                     return NotFound();
                 }
-                if(userItem.Patient != null)
+                PatientActivityHistory patientActivityHistory = null;
+                if (userUpdate.Weight != userItem.Patient.Weight)
                 {
-                    _mapper.Map(userUpdate, userItem.Patient);
+                    patientActivityHistory = new PatientActivityHistory();
+                    patientActivityHistory.Weight = userUpdate.Weight;
+                    patientActivityHistory.PatientId = userItem.Patient.Id;
+                    patientActivityHistory.CreatedDate = DateTime.UtcNow;
+                    _nutritionistRepository.AddNewPatientActivityHistory(patientActivityHistory);
                 }
-                _mapper.Map(userUpdate, userItem);
+                userItem.FirstName = userUpdate.FirstName;
+                userItem.LastName = userUpdate.LastName;
+                userItem.Email = userUpdate.Email;
+                userItem.Gender = userUpdate.Gender;
+                userItem.PhoneNumber = userUpdate.PhoneNumber;
+                userItem.DateOfBirth = userUpdate.DateOfBirth;
+                _mapper.Map(userUpdate, userItem.Patient);
                 _userRepository.UpdateUser(userItem);
                 _userRepository.SaveChanges();
                 return Ok(_mapper.Map<UserReadDTO>(userItem));
@@ -275,7 +300,7 @@ namespace NeutrackAPI.Controllers
                 {
                     return Forbid();
                 }
-                var userItem = _userRepository.GetUserById(id);
+                var userItem = await _userRepository.GetUserById(id);
                 if (userItem == null)
                 {
                     return NotFound();

@@ -33,6 +33,6 @@ export class SideNavComponent implements OnInit {
     return this.roles.includes('Nutritionist');
   }
   isPatient(): boolean{
-    return this.roles.includes('Patient');
+    return this.roles.includes('User');
   }
 }

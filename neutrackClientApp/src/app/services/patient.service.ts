@@ -25,6 +25,9 @@ export class PatientService {
   getPatient(userId): Observable<IPatient> {
     return this.http.get<IPatient>(getApiRoute(fromApiConfig.userById(userId)), httpOptions);
   }
+  updatePatient(userId, user:any): Observable<IPatient> {
+    return this.http.put<IPatient>(getApiRoute(fromApiConfig.userById(userId)), user, httpOptions);
+  }
 }
 
 

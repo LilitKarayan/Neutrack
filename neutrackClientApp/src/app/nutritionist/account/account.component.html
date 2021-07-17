@@ -8,6 +8,10 @@
           <button *ngIf="roles.includes('User') && user.nutritionistId != null" class="mr-2" mat-raised-button color="accent" (click)="toggleEditing(true)">View Nutritionist</button>
         </div>
         <div class="edit-form">
+          <mat-error *ngIf="error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span> {{error}}</span>
+          </mat-error>
           <form [formGroup]="formInstance">
             <mat-grid-list cols="2" rowHeight="100">
               <mat-grid-tile>
@@ -32,7 +36,7 @@
                 <div class="mat-grid-tile-content">
                   <mat-form-field class="fullWidth" appearance="outline">
                     <mat-label>Gender *</mat-label>
-                    <mat-select name="gender" formControlName="gender" (change)="updateValue('gender')">
+                    <mat-select name="gender" formControlName="gender" (selectionChange)="updateValue('gender')">
                       <mat-option value="Male">Male</mat-option>
                       <mat-option value="Female">Female</mat-option>
                     </mat-select>
@@ -78,7 +82,7 @@
                 <div class="mat-grid-tile-content">
                   <mat-form-field class="normal-full-width" appearance="outline">
                     <mat-label>Height*</mat-label>
-                    <input  matInput type="number" min="1.00" step="0.01" name="height" formControlName="height">
+                    <input  matInput type="number" min="1.00" step="0.01" name="height" (change)="updateValue('height')" formControlName="height">
                     <span matSuffix>ft</span>
                     <mat-error *ngIf="formInstance.controls['height']?.errors?.required">field is required</mat-error>
                     <mat-error *ngIf="formInstance.controls['height']?.errors?.min">minimum allowed is 1</mat-error>
@@ -89,7 +93,7 @@
                 <div class="mat-grid-tile-content">
                   <mat-form-field class="normal-full-width" appearance="outline">
                     <mat-label>Weight*</mat-label>
-                    <input  matInput type="number" min="1.00" step="0.01" name="weight" formControlName="weight">
+                    <input  matInput type="number" min="1.00" step="0.01" name="weight" (change)="updateValue('weight')" formControlName="weight">
                     <span matSuffix>lb</span>
                     <mat-error *ngIf="formInstance.controls['weight']?.errors?.required">field is required</mat-error>
                     <mat-error *ngIf="formInstance.controls['weight']?.errors?.min">minimum allowed is 1</mat-error>
@@ -100,7 +104,7 @@
                 <div class="mat-grid-tile-content">
                   <mat-form-field class="normal-full-width" appearance="outline">
                     <mat-label>Initial Weight</mat-label>
-                    <input  matInput type="number" name="initialWeight" formControlName="initialWeight">
+                    <input  matInput type="number" name="initialWeight" (change)="updateValue('initialWeight')" formControlName="initialWeight">
                   </mat-form-field>
                 </div>
               </mat-grid-tile>
@@ -108,7 +112,7 @@
                 <div class="mat-grid-tile-content">
                   <mat-form-field class="normal-full-width" appearance="outline">
                     <mat-label>Weight Goal*</mat-label>
-                    <input  matInput type="number" min="1.00" name="goal" formControlName="goal">
+                    <input  matInput type="number" min="1.00" name="goal" (change)="updateValue('goal')" formControlName="goal">
                     <mat-error *ngIf="formInstance.controls['goal']?.errors?.required">field is required</mat-error>
                     <mat-error *ngIf="formInstance.controls['goal']?.errors?.min">minimum allowed is 1</mat-error>
                   </mat-form-field>
@@ -118,7 +122,7 @@
                 <div class="mat-grid-tile-content">
                   <mat-form-field class="normal-full-width" appearance="outline">
                     <mat-label>Activity Level*</mat-label>
-                    <input  matInput type="number" min="1.00" max="4.00" name="activityLevel" formControlName="activityLevel">
+                    <input  matInput type="number" min="1.00" max="4.00" name="activityLevel" (change)="updateValue('activityLevel')" formControlName="activityLevel">
                     <mat-hint>
                       <strong>Activity level ranges from 1 - 4.</strong> <br/>
                       <small>Level 1 = Sedentary</small> <br/>

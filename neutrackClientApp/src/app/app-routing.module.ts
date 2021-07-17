@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: '', redirectTo:'home', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent, canActivate: [NutritionistGuard]},
   {path: 'account', component: AccountComponent, canActivate: [AuthorizedGuard]},
-  {path: 'calculator', component: CalculatorComponent, canActivate: [NutritionistGuard]},
+  {path: 'calculator', component: CalculatorComponent, canActivate: [AuthorizedGuard]},
   {path: 'patients', component: PatientsComponent,
     children:[
       {path: '', component: DataTableComponent},
