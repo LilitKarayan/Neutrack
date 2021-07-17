@@ -1,6 +1,6 @@
 
-<div class="dashboardComponent">
-  <mat-grid-list cols="5" rowHeight="150" *ngIf="(dashboardData$ | async) as dashboardData">
+<div class="container">
+  <mat-grid-list class="mr-3" cols="5" rowHeight="150" *ngIf="(dashboardData$ | async) as dashboardData">
     <mat-grid-tile class="dashboard-data" [style.background]="tileColors[0]">
         <p>
           <mat-icon aria-hidden="false" aria-label="Insights icon">insights</mat-icon><br/>

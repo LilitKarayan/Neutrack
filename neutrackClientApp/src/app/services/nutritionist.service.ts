@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import {useTestApi, getApiRoute } from '../../environments/environment';
+import {getApiRoute } from '../../environments/environment';
 import { IPatient, IDashboard, INutritionist, IProduct, IRecipe, IRecipeProduct } from '@models';
 import * as moment from 'moment';
 import CryptoJS from 'crypto-js';

@@ -130,10 +130,10 @@ namespace NeutrackAPI.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return _context.Users.Include(x => x.Nutritionist)
-                .Include(x => x.Patient).Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Id.Equals(id));
+            return await _context.Users.Include(x => x.Nutritionist)
+                .Include(x => x.Patient).Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         /// <summary>
@@ -181,6 +181,14 @@ namespace NeutrackAPI.Data
             }
             _context.Remove(user);
             return SaveChanges();
+        }
+
+        public async Task<Patient> GetPatient(int userId)
+        {
+            return  await _context.Patients
+                .Include(u => u.User)
+                .Include(u => u.PatientActivityHistories)
+                .FirstOrDefaultAsync(x => x.UserId == userId);
         }
     }
 }

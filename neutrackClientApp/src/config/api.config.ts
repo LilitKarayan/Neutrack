@@ -1,4 +1,7 @@
 
+export const userById = (userId: number) =>  {
+  return `/users/${userId}`
+}
 export const userLoginEndpoint = "/users/login";
 export const userSignUpEndpoint = "/users/newuser";
 export const nutritionistSignUpEndpoint = "/users/newnutritionist";

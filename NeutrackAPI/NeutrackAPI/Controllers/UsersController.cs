@@ -65,7 +65,7 @@ namespace NeutrackAPI.Controllers
         /// <param name="id"></param>
         /// <returns>A user matching the id parameter</returns>
         [HttpGet("{id}", Name = "GetUserById")]
-        public ActionResult<UserReadDTO> GetUserById(int id)
+        public async Task<ActionResult> GetUserById(int id)
         {
             try
             {
@@ -74,13 +74,26 @@ namespace NeutrackAPI.Controllers
                 {
                     return Forbid();
                 }
-
-                var userItem = _userRepository.GetUserById(id);
-                if (userItem == null)
+                if (User.IsInRole(Roles.User))
                 {
-                    return NotFound();
+                    var patient = await _userRepository.GetPatient(id);
+                    if (patient == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(_mapper.Map<PatientReadDTO>(patient));
                 }
-                return Ok(_mapper.Map<UserReadDTO>(userItem));
+                else
+                {
+                    var userItem = await _userRepository.GetUserById(id);
+                    if (userItem == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(_mapper.Map<UserReadDTO>(userItem));
+                }
+                
+                
 
             }
             catch (Exception)
@@ -217,7 +230,7 @@ namespace NeutrackAPI.Controllers
         /// <param name="userUpdate"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public ActionResult<UserReadDTO> UpdateUser(int id, PatientCreateDTO userUpdate)
+        public async Task<ActionResult<UserReadDTO>> UpdateUserAsync(int id, PatientCreateDTO userUpdate)
         {
             try
             {
@@ -226,7 +239,7 @@ namespace NeutrackAPI.Controllers
                 {
                     return Forbid();
                 }
-                var userItem = _userRepository.GetUserById(id);
+                var userItem = await _userRepository.GetUserById(id);
                 if (userItem == null)
                 {
                     return NotFound();

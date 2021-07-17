@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { INutritionist, IUser } from '@models';
 import { NutritionistService } from '@services/nutritionist.service';
+import { PatientService } from '@services/patient.service';
 import { AuthenticationService } from '@services/authentication.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
@@ -13,25 +14,28 @@ import { DeleteConfirmationComponent } from 'app/shared/delete-confirmation/dele
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  private nutritionistSubject = new BehaviorSubject<INutritionist> (null);
+  private userSubject = new BehaviorSubject<INutritionist> (null);
   formInstance: FormGroup;
   minDate: Date;
   maxDate: Date;
-  nutritionist$: Observable<INutritionist>;
+  user$: Observable<INutritionist>;
   activeUser: IUser;
   isEdit: boolean = false;
   updatedFields: any[] = [];
-  nutritionistData: IUser;
+  userData: IUser;
+  roles:any[];
 
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
     private nutritionistService: NutritionistService,
+    private patientService: PatientService,
     public dialog: MatDialog,
   ) {
+    this.authService.userRoles.subscribe(userRoles => this.roles = userRoles);
     this.authService.user.subscribe(user => this.activeUser = user);
-    this.nutritionist$ = this.nutritionistSubject.asObservable();
+    this.user$ = this.userSubject.asObservable();
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 120, 0, 1);
     this.maxDate = new Date(currentYear - 18, 11, 31);
@@ -47,7 +51,13 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getNutritionist();
+    console.log(this.roles);
+    if(this.roles.includes('Nutritionist')){
+      this.getNutritionist();
+    } else if (this.roles.includes('User')){
+      this.getUser();
+    }
+
     this.formInstance = this.formBuilder.group({
       id: [''],
       userId: [''],
@@ -57,26 +67,50 @@ export class AccountComponent implements OnInit {
       lastName: [{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required])],
       gender: [{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required])],
       dateOfBirth: [{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required])],
-      yearsOfExperience:[{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required, Validators.min(1), Validators.max(50)])],
+      yearsOfExperience: this.roles.includes('Nutritionist') ? [{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required, Validators.min(1), Validators.max(50)])] : [{ value: '', disabled:true}],
       phoneNumber:[{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required])],
+      height:  this.roles.includes('User') ? [{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required, Validators.min(1)])] : [{ value: '', disabled:true}],
+      weight: this.roles.includes('User') ? [{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required, Validators.min(1)])] : [{ value: '', disabled:true}],
+      goal:   this.roles.includes('User') ? [{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required, Validators.min(1)])] : [{ value: '', disabled:true}],
+      activityLevel: this.roles.includes('User') ? [{ value: '', disabled:!this.isEdit}, Validators.compose([Validators.required, Validators.min(1), Validators.max(4)])] : [{ value: '', disabled:true}],
+      nutritionistId: [{ value: '', disabled:true}],
+      initialWeight:[{ value: '', disabled:true}],
+      patientActivityHistories:[{ value: '', disabled:true}],
     });
   }
 
   async getNutritionist(){
     await this.nutritionistService.getNutritionist(this.activeUser.nutritionistId).subscribe(data => {
-      this.nutritionistData = data;
-      this.nutritionistSubject.next(data);
+      this.userData = data;
+      this.userSubject.next(data);
       this.setFormData(data);
     })
   }
-  setFormData(data: INutritionist) {
+  setFormData(data: any) {
     this.formInstance.get('firstName').setValue(data.firstName);
     this.formInstance.get('email').setValue(data.email);
     this.formInstance.get('lastName').setValue(data.lastName);
     this.formInstance.get('gender').setValue(data.gender);
     this.formInstance.get('dateOfBirth').setValue(data.dateOfBirth);
-    this.formInstance.get('yearsOfExperience').setValue(data.yearsOfExperience);
     this.formInstance.get('phoneNumber').setValue(data.phoneNumber);
+    if(this.roles.includes('Nutritionist')){
+      this.formInstance.get('yearsOfExperience').setValue(data.yearsOfExperience);
+    } else if (this.roles.includes('User')){
+      this.formInstance.get('height').setValue(data.height);
+      this.formInstance.get('weight').setValue(data.weight);
+      this.formInstance.get('goal').setValue(data.goal);
+      this.formInstance.get('activityLevel').setValue(data.activityLevel);
+      this.formInstance.get('nutritionistId').setValue(data.nutritionistId);
+      this.formInstance.get('initialWeight').setValue(data.initialWeight);
+    }
+  }
+
+  async getUser(){
+    await this.patientService.getPatient(this.activeUser.id).subscribe(data => {
+      this.userData = data;
+      this.userSubject.next(data);
+      this.setFormData(data);
+    })
   }
   async deleteAccount(){
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
@@ -97,7 +131,7 @@ export class AccountComponent implements OnInit {
   }
   async save(){
     const formData = this.formInstance.getRawValue();
-    const updatedData = {...this.nutritionistData, ...formData};
+    const updatedData = {...this.userData, ...formData};
     let res = await this.nutritionistService.updateNutritionist(this.activeUser.nutritionistId, updatedData);
     if(res)
       this.setFormData(res);
@@ -111,18 +145,32 @@ export class AccountComponent implements OnInit {
       this.formInstance.get('lastName').enable();
       this.formInstance.get('gender').enable();
       this.formInstance.get('dateOfBirth').enable();
-      this.formInstance.get('yearsOfExperience').enable();
       this.formInstance.get('phoneNumber').enable();
+      if(this.roles.includes('Nutritionist')){
+        this.formInstance.get('yearsOfExperience').enable();
+      } else if(this.roles.includes('User')){
+        this.formInstance.get('height').enable();
+        this.formInstance.get('weight').enable();
+        this.formInstance.get('goal').enable();
+        this.formInstance.get('activityLevel').enable();
+      }
+
     } else{
-      this.formInstance.setValue(this.nutritionistData);
+      this.setFormData(this.userData);
       this.isEdit = false;
       this.formInstance.get('firstName').disable();
       this.formInstance.get('lastName').disable();
       this.formInstance.get('gender').disable();
       this.formInstance.get('dateOfBirth').disable();
-      this.formInstance.get('yearsOfExperience').disable();
       this.formInstance.get('phoneNumber').disable();
+      if(this.roles.includes('Nutritionist')){
+        this.formInstance.get('yearsOfExperience').disable();
+      } else if(this.roles.includes('User')){
+        this.formInstance.get('height').disable();
+        this.formInstance.get('weight').disable();
+        this.formInstance.get('goal').disable();
+        this.formInstance.get('activityLevel').disable();
+      }
     }
   }
-
 }

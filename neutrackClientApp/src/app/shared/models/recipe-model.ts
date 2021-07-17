@@ -2,6 +2,7 @@ export interface IRecipe {
   id?: number;
   name?: string;
   instruction?: string;
+  // mealType?:string;
   recipeProducts?: IRecipeProduct[]
 }
 

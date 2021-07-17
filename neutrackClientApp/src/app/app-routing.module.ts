@@ -1,3 +1,4 @@
+import { PatientGuard } from './guards/patient.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,12 +15,13 @@ import { NutritionistGuard } from './guards/nutritionist.guard';
 import { DataTableComponent } from './nutritionist/patients/data-table/data-table.component';
 import { ProductComponent } from './nutritionist/product/product.component';
 import { RecipesComponent } from './nutritionist/recipes/recipes.component';
+import {AuthorizedGuard} from './guards/authorized.guard';
 
 const routes: Routes = [
   {path: 'home', component: WelcomeComponent},
   {path: '', redirectTo:'home', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent, canActivate: [NutritionistGuard]},
-  {path: 'account', component: AccountComponent, canActivate: [NutritionistGuard]},
+  {path: 'account', component: AccountComponent, canActivate: [AuthorizedGuard]},
   {path: 'calculator', component: CalculatorComponent, canActivate: [NutritionistGuard]},
   {path: 'patients', component: PatientsComponent,
     children:[
