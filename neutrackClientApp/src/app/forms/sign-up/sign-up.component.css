@@ -1,8 +1,10 @@
 #signUpNutritionist {
   padding-top: 25px;
   min-height: 120vh;
+  height: 100%;
   background-image: url("../../../assets/images/neutrackLogin3.jpg");
   background-position: center;
+  overflow: hidden;
 }
 ul {
   list-style: none;
@@ -11,6 +13,7 @@ ul {
 h1 {
   color: #084a3a;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 mat-label {
@@ -22,7 +25,7 @@ mat-label {
 } */
 
 mat-card {
-  max-width: 600px;
+  max-width: 800px;
   margin: 2em auto;
   text-align: center;
   max-height: 1800px;
@@ -49,6 +52,9 @@ form.normal-form {
 
 .normal-full-width {
   width: 80%;
+}
+.confirm-password-width {
+  max-width: 50%;
 }
 
 .theContainer {

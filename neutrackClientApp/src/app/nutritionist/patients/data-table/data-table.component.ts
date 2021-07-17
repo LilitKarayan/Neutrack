@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
 import { NgForm } from '@angular/forms';
+import { DeleteConfirmationComponent } from 'app/shared/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-data-table',
@@ -85,7 +86,21 @@ export class DataTableComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
+  adExistingPatient(userId){
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      data: "Confirm you want to add this patient to your list?",
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.nutritionistService.addExistingPatientToNutritionist(userId).then(() => {
+          this._snackBar.openFromComponent(MessageSnackbarComponent, {
+            data: `patient added successfully`
+          })
+          this.getAllPatients();
+        })
+      }
+    });
+  }
   addPatient(): void {
     const dialogRef = this.dialog.open(PatientAddFormDialogComponent, {
       maxHeight: "100%",

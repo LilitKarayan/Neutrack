@@ -7,7 +7,7 @@ import { IUser } from '@models';
 @Injectable({
   providedIn: 'root'
 })
-export class PatientGuard implements CanActivate {
+export class AuthorizedGuard implements CanActivate {
   isUserLoggedIn: boolean;
   activeUser: IUser;
   roles:string[];
@@ -19,7 +19,7 @@ export class PatientGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.roles && this.roles.includes('User')){
+      if(this.roles && (this.roles.includes('User') || this.roles.includes('Nutritionist') )){
         return true;
       } else {
         this.router.navigate(['/home']);

@@ -97,8 +97,12 @@ export class AuthenticationService {
   }
   signUpNutritionist(userInfo: IUser) {
     userInfo.password = this.hashPassword(userInfo.password);
-     return this.http.post<IUser>(getApiRoute(nutritionistSignUpEndpoint), userInfo, httpOptions).subscribe(res => {
-     })
+    return this.http.post<IUser>(getApiRoute(nutritionistSignUpEndpoint), userInfo, httpOptions);
+  }
+
+  signUpPatient(userInfo: IUser) {
+    userInfo.password = this.hashPassword(userInfo.password);
+    return this.http.post<IUser>(getApiRoute(userSignUpEndpoint), userInfo, httpOptions);
   }
 
   private setSession(token: any) {
@@ -116,6 +120,7 @@ export class AuthenticationService {
     this.rolesSubject.next(null);
     this.isLoggedInSubject.next(false);
     this.isLoggedOutSubject.next(true);
+    this.router.navigateByUrl('/login');
   }
   isLoggedOut() {
     return !this.isLoggedIn();

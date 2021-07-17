@@ -36,7 +36,7 @@ namespace NeutrackAPI.Profiles
 
             CreateMap<PatientCreateDTO, User>();
             CreateMap<Patient, AllPatientReadDTO>()
-                .ForMember(d => d.InitialWeight, o => o.MapFrom(c => c.PatientActivityHistories.OrderByDescending(x => x.CreatedDate).FirstOrDefault().Weight))
+                .ForMember(d => d.InitialWeight, o => o.MapFrom(c => c.PatientActivityHistories.OrderBy(x => x.CreatedDate).FirstOrDefault().Weight))
                 .ForMember(d => d.DateOfBirth, o => o.MapFrom(c => c.User.DateOfBirth))
                 .ForMember(d => d.Email, o => o.MapFrom(c => c.User.Email))
                 .ForMember(d => d.FirstName, o => o.MapFrom(c => c.User.FirstName))
@@ -47,7 +47,7 @@ namespace NeutrackAPI.Profiles
             CreateMap<Patient, PatientReadDTO>()
                 .ForMember(d => d.PatientActivityHistories, o => o.MapFrom(x => x.PatientActivityHistories.Select(x => new PatientActivityHistoryDTO
                 { CreatedDate = x.CreatedDate, Weight = x.Weight})))
-                .ForMember(d => d.InitialWeight, o => o.MapFrom(c => c.PatientActivityHistories.OrderByDescending(x => x.CreatedDate).FirstOrDefault().Weight))
+                .ForMember(d => d.InitialWeight, o => o.MapFrom(c => c.PatientActivityHistories.OrderBy(x => x.CreatedDate).FirstOrDefault().Weight))
                 .ForMember(d => d.DateOfBirth, o => o.MapFrom(c => c.User.DateOfBirth))
                 .ForMember(d => d.Email, o => o.MapFrom(c => c.User.Email))
                 .ForMember(d => d.FirstName, o => o.MapFrom(c => c.User.FirstName))

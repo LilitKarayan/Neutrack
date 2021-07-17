@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Confirm action</h1>
+<div mat-dialog-content [innerText]="data"></div>
+<div mat-dialog-actions class="mt-15">
+  <button id="deleteYesButton" mat-raised-button color="primary"
+  [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+  <button id="deleteNoButton" mat-raised-button mat-dialog-close>No</button>
+</div>

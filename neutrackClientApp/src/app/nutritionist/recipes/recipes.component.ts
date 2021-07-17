@@ -52,14 +52,24 @@ export class RecipesComponent implements OnInit, AfterViewInit {
   }
 
   getData( event?: PageEvent) {
-    console.log(event);
     this.paginatedRecipe = this.recipes.slice(event.pageIndex * event.pageSize,
                                              event.pageIndex * event.pageSize + event.pageSize);
-    console.log(this.paginatedRecipe);
     return event;
   }
   isRecipeDataSame(oldRecipe: IRecipe, newRecipe: IRecipe){
     return oldRecipe.name === newRecipe.name && oldRecipe.instruction === newRecipe.instruction;
+  }
+  isRecipeProductSame(oldRecipe: IRecipe, newRecipe: IRecipe){
+    if(oldRecipe.recipeProducts.length != newRecipe.recipeProducts.length){
+      return false;
+    } else {
+      const diff = oldRecipe.recipeProducts.filter(o => {
+        !newRecipe.recipeProducts.some( n => o.productID === n.productID ||
+          o.recipeID === n.recipeID ||
+          o.weightInGrams === n.weightInGrams)
+      });
+      return diff ? false : true;
+    }
   }
   editRecipe(item){
     const dialogRef = this.dialog.open(AddEditRecipeComponent, {
@@ -74,15 +84,13 @@ export class RecipesComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(async result => {
-      if (result && !this.isRecipeDataSame(item, result)) {
-        delete result.recipeProducts
-        let updatedRecipe = await this.nutritionistService.editRecipe(result, result.id);
-        if(updatedRecipe){
-          this.getAllRecipes();
-          this._snackBar.openFromComponent(MessageSnackbarComponent, {
-            data: `recipe: ${updatedRecipe.id} updated successfully`
-          })
-        }
+      if (result && (!this.isRecipeDataSame(item, result) || !this.isRecipeProductSame(item, result))) {
+        // delete result.recipeProducts
+        await this.nutritionistService.editRecipe(result, result.id);
+        this._snackBar.openFromComponent(MessageSnackbarComponent, {
+          data: `Recipe updated successfully`
+        });
+        this.getAllRecipes();
       }
     });
   }
@@ -113,7 +121,6 @@ export class RecipesComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(async result => {
       if (result) {
-        console.log(result)
         let newRecipe = await this.nutritionistService.createRecipe(result);
         if(newRecipe){
           this._snackBar.openFromComponent(MessageSnackbarComponent, {

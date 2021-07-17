@@ -3,5 +3,20 @@
 }
 
 ::ng-deep .mat-drawer-content {
-    height: calc(100vh - 10px) !important;
+  min-height: 100vh;
+}
+mat-sidenav{
+  background-color: #095040;
+  background: linear-gradient(0deg,#095040 0, #109374 100%);
+  height: 100%;
+  width: 200px;
+  display: block;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
+  transition: .5s cubic-bezier(0.685, 0.0473, 0.346, 346.1);
+  overflow:hidden;
+}
+app-side-nav{
+  overflow:hidden;
 }

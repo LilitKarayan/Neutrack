@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -129,10 +130,10 @@ namespace NeutrackAPI.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return _context.Users.Include(x => x.Nutritionist)
-                .Include(x => x.Patient).Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefault(x => x.Id.Equals(id));
+            return await _context.Users.Include(x => x.Nutritionist)
+                .Include(x => x.Patient).Include(x => x.UserRoles).ThenInclude(xr => xr.Role).FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         /// <summary>
@@ -157,6 +158,37 @@ namespace NeutrackAPI.Data
         public IEnumerable<User> SearchUser(string searchQuery, Role role)
         {
             return null;
+        }
+
+        public async Task<bool> DeleteUser(int userId)
+        {
+            var user = await _context.Users
+                .Include(x => x.UserRoles)
+                .Include(x => x.Nutritionist)
+                .Include(x => x.Patient)
+                .FirstOrDefaultAsync(x => x.Id == userId);
+            if(user.UserRoles != null)
+            {
+                _context.RemoveRange(user.UserRoles);
+            }
+            if (user.Nutritionist != null)
+            {
+                _context.Remove(user.Nutritionist);
+            }
+            if (user.Patient != null)
+            {
+                _context.Remove(user.Patient);
+            }
+            _context.Remove(user);
+            return SaveChanges();
+        }
+
+        public async Task<Patient> GetPatient(int userId)
+        {
+            return  await _context.Patients
+                .Include(u => u.User)
+                .Include(u => u.PatientActivityHistories)
+                .FirstOrDefaultAsync(x => x.UserId == userId);
         }
     }
 }

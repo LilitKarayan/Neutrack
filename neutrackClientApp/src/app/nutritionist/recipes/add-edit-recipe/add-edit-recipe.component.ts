@@ -36,7 +36,7 @@ export class AddEditRecipeComponent implements OnInit {
     }
   ) {
     this.nutritionistService.products$.subscribe(
-      (prodcts) => (this.products = prodcts)
+      (products) => (this.products = products)
     );
     this.title = this.data.isEdit ? 'Edit Recipe' : 'Create Recipe';
     this.formInstance = this.data.isEdit
@@ -44,7 +44,7 @@ export class AddEditRecipeComponent implements OnInit {
           id: [''],
           name: ['', Validators.compose([Validators.required])],
           instruction: ['', Validators.compose([Validators.required])],
-          recipeProducts:[]
+          recipeProducts: this.formBuilder.array([])
         })
       : this.formBuilder.group({
           name: ['', Validators.compose([Validators.required])],
@@ -70,12 +70,15 @@ export class AddEditRecipeComponent implements OnInit {
     this.formInstance.get('id').setValue(recipe.id);
     this.formInstance.get('name').setValue(recipe.name);
     this.formInstance.get('instruction').setValue(recipe.instruction);
+    recipe.recipeProducts.forEach((item, idx) => {
+      this.setRecipeProducts(this.existingRecipeProduct(item));
+    })
   }
   save() {
     if(this.recipeProducts.length > 0){
       this.recipeProducts.controls.forEach(fGroup => {
-        let productId = this.products.find(x => x.name === fGroup.get('productName').value).id;
-        fGroup.get('productId').setValue(productId);
+        let productID = this.products.find(x => x.name === fGroup.get('productName').value).id;
+        fGroup.get('productID').setValue(productID);
       })
     }
     if(this.formInstance.valid){
@@ -89,7 +92,8 @@ export class AddEditRecipeComponent implements OnInit {
   }
   newRecipeProduct(): FormGroup {
     let fg = this.formBuilder.group({
-      productId: [],
+      recipeID: [],
+      productID: [],
       productName: ['', Validators.compose([Validators.required])],
       weightInGrams: ['', Validators.compose([Validators.required, Validators.min(0)])],
     });
@@ -100,9 +104,35 @@ export class AddEditRecipeComponent implements OnInit {
     return fg;
   }
   addRecipeProduct() {
-    this.recipeProducts.push(this.newRecipeProduct());
+    if(this.data.isEdit){
+      let recipePrd = {
+        recipeID: this.data.recipe.id,
+        productID: '',
+        productName: '',
+        weightInGrams: '',
+      }
+      this.setRecipeProducts(this.existingRecipeProduct(recipePrd));
+    } else{
+      this.recipeProducts.push(this.newRecipeProduct());
+    }
   }
   removeRecipeProduct(i: number) {
     this.recipeProducts.removeAt(i);
+  }
+  existingRecipeProduct(item){
+    let fg = this.formBuilder.group({
+      recipeID: [item[`recipeID`]],
+      productID: [item[`productID`]],
+      productName: [item[`productName`], Validators.compose([Validators.required])],
+      weightInGrams: [item[`weightInGrams`], Validators.compose([Validators.required, Validators.min(0)])],
+    });
+    this.filteredProducts = fg.get('productName').valueChanges.pipe(
+      startWith(''),
+      map((product) =>  product ? this._filterProducts(product) : this.products.slice())
+    );
+    return fg;
+  }
+  setRecipeProducts(rcpFG: FormGroup){
+    this.recipeProducts.push(rcpFG);
   }
 }

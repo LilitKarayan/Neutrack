@@ -2,113 +2,171 @@
   <mat-card>
     <mat-card-content>
       <div class="header">
-        <h1>Sign Up</h1>
+        <h1>Sign Up As A {{entity}}</h1>
       </div>
-
       <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
-
-        <div class="theContainer">
-          <mat-form-field class="normal-full-width" appearance="fill">
-            <mat-label>First Name<span>*</span></mat-label>
-            <input formControlName="firstName" matInput/>
-            <mat-error *ngIf="form.controls['firstName'].errors?.required">First Name is mandatory</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="theContainer">
-          <mat-form-field class="normal-full-width" appearance="fill">
-            <mat-label>Last Name<span>*</span></mat-label>
-            <input formControlName="lastName" matInput />
-            <mat-error *ngIf="form.controls['lastName'].errors?.required">Last Name is mandatory</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="theContainer">
-          <mat-form-field class="normal-full-width" appearance="fill">
-            <mat-label>Date of Birth *</mat-label>
-            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="dateOfBirth">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="form.controls['dateOfBirth'].errors?.required">Date of Birth is mandatory</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="theContainer">
-          <mat-form-field appearance="fill">
-            <mat-label>Gender<span>*</span></mat-label><br />
-            <mat-select formControlName="gender">
-              <mat-option *ngFor="let gender of genders" [value]="gender">
-                {{gender}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-         </div>
-
-
-        <div class="theContainer">
-          <mat-form-field class="normal-full-width" appearance="fill">
-            <mat-label>How many years of experience as a nutritionist do you have?<span>*</span></mat-label>
-            <input formControlName="yearsOfExperience" matInput type="number" min="0" max="100"/>
-            <mat-error *ngIf="form.controls['yearsOfExperience'].errors?.required">Years of Experience is mandatory</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="theContainer">
-          <mat-form-field class="normal-full-width" appearance="fill">
-            <mat-label>Phone Number<span>*</span></mat-label>
-            <input
-              formControlName="phoneNumber"
-              matInput
-              type="tel"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              placeholder="Format: 123-456-7890"/>
-            <mat-error *ngIf="form.controls['phoneNumber'].errors?.required">Phone Number is mandatory</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="theContainer">
-          <mat-form-field class="normal-full-width" appearance="fill">
-            <mat-label>Email<span>*</span></mat-label>
-            <input formControlName="email" matInput />
-            <mat-error *ngIf="form.controls['email'].errors?.email">Invalid email address</mat-error>
-            <mat-error *ngIf="form.controls['email'].errors?.required">Email is mandatory</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="theContainer">
-          <mat-form-field class="normal-full-width" appearance="fill">
-            <mat-label>Password<span>*</span></mat-label>
-            <input formControlName="password" type="password" matInput pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
-            <mat-hint>
-              <ul>
-                <li>8-16 characters</li>
-                <li>1 lower case character</li>
-                <li>1 upper case character</li>
-                <li>1 numerical character</li>
-                <li>1 special character</li>
-              </ul>
-            </mat-hint>
-            <mat-error *ngIf="form.controls['password'].errors?.required">Password is mandatory</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="theContainer">
-          <mat-form-field class="normal-full-width" appearance="fill">
-            <mat-label>Confirm Password<span>*</span></mat-label>
-            <input
-              formControlName="confirmationPassword"
-              type="password"
-              matInput
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
-            <mat-error *ngIf="form.controls['confirmationPassword'].errors?.required">Confirmation Password is mandatory</mat-error>
-          </mat-form-field>
-          <div *ngIf="
-              form.controls['password'].value !==
-              form.controls['confirmationPassword'].value">
-            <mat-error>Does not match above password</mat-error>
-          </div>
-        </div>
-
+        <mat-grid-list cols="2" rowHeight="150">
+          <mat-grid-tile>
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>First Name<span>*</span></mat-label>
+                <input formControlName="firstName" matInput/>
+                <mat-error *ngIf="form.controls['firstName'].errors?.required">First Name is mandatory</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>Last Name<span>*</span></mat-label>
+                <input formControlName="lastName" matInput />
+                <mat-error *ngIf="form.controls['lastName'].errors?.required">Last Name is mandatory</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>Date of Birth *</mat-label>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="dateOfBirth">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="form.controls['dateOfBirth'].errors?.required">Date of Birth is mandatory</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="theContainer">
+              <mat-form-field appearance="fill">
+                <mat-label>Gender<span>*</span></mat-label><br />
+                <mat-select formControlName="gender">
+                  <mat-option *ngFor="let gender of genders" [value]="gender">
+                    {{gender}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+             </div>
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="entity === 'nutritionist'">
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>How many years of experience as a nutritionist do you have?<span>*</span></mat-label>
+                <input formControlName="yearsOfExperience" matInput type="number" min="0" max="100"/>
+                <mat-error *ngIf="entity === 'nutritionist' && form.controls['yearsOfExperience'].errors?.required">Years of Experience is mandatory</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>Phone Number<span>*</span></mat-label>
+                <input
+                  formControlName="phoneNumber"
+                  matInput
+                  type="tel"
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  placeholder="Format: 123-456-7890"/>
+                <mat-error *ngIf="form.controls['phoneNumber'].errors?.required">Phone Number is mandatory</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="entity === 'patient'">
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>Activity Level*</mat-label>
+                <input  matInput type="number" min="1.00" max="4.00" name="activityLevel" formControlName="activityLevel">
+                <mat-hint>
+                  <strong>Activity level ranges from 1 - 4.</strong> <br/>
+                  <small>Level 1 = Sedentary</small> <br/>
+                  <small>Level 2 = Lightly Active</small> <br/>
+                  <small>Level 3 = Moderately Active</small> <br/>
+                  <small>Level 4 = Very Active</small> <br/>
+                </mat-hint>
+                <mat-error *ngIf="form.controls['activityLevel']?.errors?.required">field is required</mat-error>
+                <mat-error *ngIf="form.controls['activityLevel']?.errors?.min">Minimum level allowed is 1</mat-error>
+                <mat-error *ngIf="form.controls['activityLevel']?.errors?.max">Maximum level allowed is 4</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="entity === 'patient'">
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>Height*</mat-label>
+                <input  matInput type="number" min="1.00" step="0.01" name="height" formControlName="height">
+                <span matSuffix>ft</span>
+                <mat-error *ngIf="form.controls['height']?.errors?.required">field is required</mat-error>
+                <mat-error *ngIf="form.controls['height']?.errors?.min">minimum allowed is 1</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="entity === 'patient'">
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>Weight*</mat-label>
+                <input  matInput type="number" min="1.00" step="0.01" name="weight" formControlName="weight">
+                <span matSuffix>lb</span>
+                <mat-error *ngIf="form.controls['weight']?.errors?.required">field is required</mat-error>
+                <mat-error *ngIf="form.controls['weight']?.errors?.min">minimum allowed is 1</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="entity === 'patient'">
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>Weight Goal*</mat-label>
+                <input  matInput type="number" min="1.00" name="goal" formControlName="goal">
+                <mat-error *ngIf="form.controls['goal']?.errors?.required">field is required</mat-error>
+                <mat-error *ngIf="form.controls['goal']?.errors?.min">minimum allowed is 1</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>Email<span>*</span></mat-label>
+                <input formControlName="email" matInput />
+                <mat-error *ngIf="form.controls['email'].errors?.email">Invalid email address</mat-error>
+                <mat-error *ngIf="form.controls['email'].errors?.required">Email is mandatory</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="theContainer">
+              <mat-form-field class="normal-full-width" appearance="fill">
+                <mat-label>Password<span>*</span></mat-label>
+                <input formControlName="password" type="password" matInput pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+                <mat-hint>
+                  <ul>
+                    <li>8-16 characters</li>
+                    <li>1 lower case character</li>
+                    <li>1 upper case character</li>
+                    <li>1 numerical character</li>
+                    <li>1 special character</li>
+                  </ul>
+                </mat-hint>
+                <mat-error *ngIf="form.controls['password'].errors?.required">Password is mandatory</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="entity === 'patient' ? 1 : 2">
+            <div class="theContainer">
+              <mat-form-field [ngClass]="entity === 'patient' ? 'normal-full-width' : 'confirm-password-width'" appearance="fill">
+                <mat-label>Confirm Password<span>*</span></mat-label>
+                <input
+                  formControlName="confirmationPassword"
+                  type="password"
+                  matInput
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+                <mat-error *ngIf="form.controls['confirmationPassword'].errors?.required">Confirmation Password is mandatory</mat-error>
+              </mat-form-field>
+              <div *ngIf="
+                  form.controls['password'].value !==
+                  form.controls['confirmationPassword'].value">
+                <mat-error>Does not match above password</mat-error>
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
         <div>
           <button class="button-row-submit" mat-raised-button type="submit"
             [disabled]="
@@ -123,7 +181,7 @@
               form.controls['phoneNumber'].invalid ||
               form.controls['gender'].invalid ||
               form.controls['yearsOfExperience'].invalid "> Submit </button>
-          <button class="button-row-clear" mat-raised-button (click)="clear()"> Clear </button>
+          <button class="button-row-clear" type="reset" mat-raised-button> Clear </button>
         </div>
       </form>
     </mat-card-content>

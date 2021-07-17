@@ -1,13 +1,5 @@
 .sidenav {
-    background-color: #095040;
-    background: linear-gradient(0deg,#095040 0, #109374 100%);
-    height: calc(100vh - 100px);
-    width: 200px;
-    display: block;
-    margin: 5px;
-    border-radius: 5px;
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .6);
-    transition: .5s cubic-bezier(0.685, 0.0473, 0.346, 346.1);
+    overflow:hidden;
 }
 
 .apple_logo {

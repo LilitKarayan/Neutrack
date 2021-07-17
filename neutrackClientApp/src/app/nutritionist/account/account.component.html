@@ -1,11 +1,17 @@
-<div class="accountComponent" *ngIf="(nutritionist$ | async) as nutritionist">
+<div class="container" *ngIf="(user$ | async) as user">
     <div class="accountContent">
-        <h1>{{nutritionist.fullName}}</h1>
-        <p>{{nutritionist.email}}</p>
-        <div *ngIf="!isEdit">
-          <button mat-raised-button color="primary" (click)="toggleEditing(true)">Edit</button>
+        <h1>{{user.fullName}}</h1>
+        <p>{{user.email}}</p>
+        <div>
+          <button *ngIf="!isEdit" class="mr-2" mat-raised-button color="primary" (click)="toggleEditing(true)">Edit</button>
+          <button mat-raised-button class="mr-2" color="warn" (click)="deleteAccount()">Delete My Account</button>
+          <button *ngIf="roles.includes('User') && user.nutritionistId != null" class="mr-2" mat-raised-button color="accent" (click)="toggleEditing(true)">View Nutritionist</button>
         </div>
         <div class="edit-form">
+          <mat-error *ngIf="error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span> {{error}}</span>
+          </mat-error>
           <form [formGroup]="formInstance">
             <mat-grid-list cols="2" rowHeight="100">
               <mat-grid-tile>
@@ -30,7 +36,7 @@
                 <div class="mat-grid-tile-content">
                   <mat-form-field class="fullWidth" appearance="outline">
                     <mat-label>Gender *</mat-label>
-                    <mat-select name="gender" formControlName="gender" (change)="updateValue('gender')">
+                    <mat-select name="gender" formControlName="gender" (selectionChange)="updateValue('gender')">
                       <mat-option value="Male">Male</mat-option>
                       <mat-option value="Female">Female</mat-option>
                     </mat-select>
@@ -50,7 +56,7 @@
                   </mat-form-field>
                 </div>
               </mat-grid-tile>
-              <mat-grid-tile>
+              <mat-grid-tile *ngIf="roles.includes('Nutritionist')">
                 <div class="mat-grid-tile-content">
                   <mat-form-field class="fullWidth" appearance="outline">
                     <mat-label>Years of Experience</mat-label>
@@ -71,7 +77,65 @@
                     <mat-hint *ngIf="isEdit" align="start">Phone number format: 123-456-7890</mat-hint>
                   </mat-form-field>
                 </div>
-                </mat-grid-tile>
+              </mat-grid-tile>
+              <mat-grid-tile *ngIf="roles.includes('User')">
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="normal-full-width" appearance="outline">
+                    <mat-label>Height*</mat-label>
+                    <input  matInput type="number" min="1.00" step="0.01" name="height" (change)="updateValue('height')" formControlName="height">
+                    <span matSuffix>ft</span>
+                    <mat-error *ngIf="formInstance.controls['height']?.errors?.required">field is required</mat-error>
+                    <mat-error *ngIf="formInstance.controls['height']?.errors?.min">minimum allowed is 1</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile *ngIf="roles.includes('User')">
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="normal-full-width" appearance="outline">
+                    <mat-label>Weight*</mat-label>
+                    <input  matInput type="number" min="1.00" step="0.01" name="weight" (change)="updateValue('weight')" formControlName="weight">
+                    <span matSuffix>lb</span>
+                    <mat-error *ngIf="formInstance.controls['weight']?.errors?.required">field is required</mat-error>
+                    <mat-error *ngIf="formInstance.controls['weight']?.errors?.min">minimum allowed is 1</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile *ngIf="roles.includes('User')">
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="normal-full-width" appearance="outline">
+                    <mat-label>Initial Weight</mat-label>
+                    <input  matInput type="number" name="initialWeight" (change)="updateValue('initialWeight')" formControlName="initialWeight">
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile *ngIf="roles.includes('User')">
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="normal-full-width" appearance="outline">
+                    <mat-label>Weight Goal*</mat-label>
+                    <input  matInput type="number" min="1.00" name="goal" (change)="updateValue('goal')" formControlName="goal">
+                    <mat-error *ngIf="formInstance.controls['goal']?.errors?.required">field is required</mat-error>
+                    <mat-error *ngIf="formInstance.controls['goal']?.errors?.min">minimum allowed is 1</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile *ngIf="roles.includes('User')" [rowspan]="2">
+                <div class="mat-grid-tile-content">
+                  <mat-form-field class="normal-full-width" appearance="outline">
+                    <mat-label>Activity Level*</mat-label>
+                    <input  matInput type="number" min="1.00" max="4.00" name="activityLevel" (change)="updateValue('activityLevel')" formControlName="activityLevel">
+                    <mat-hint>
+                      <strong>Activity level ranges from 1 - 4.</strong> <br/>
+                      <small>Level 1 = Sedentary</small> <br/>
+                      <small>Level 2 = Lightly Active</small> <br/>
+                      <small>Level 3 = Moderately Active</small> <br/>
+                      <small>Level 4 = Very Active</small> <br/>
+                    </mat-hint>
+                    <mat-error *ngIf="formInstance.controls['activityLevel']?.errors?.required">field is required</mat-error>
+                    <mat-error *ngIf="formInstance.controls['activityLevel']?.errors?.min">Minimum level allowed is 1</mat-error>
+                    <mat-error *ngIf="formInstance.controls['activityLevel']?.errors?.max">Maximum level allowed is 4</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
               <mat-grid-tile>
                 <div class="mat-grid-tile-content" mat-dialog-actions>
                   <button [ngClass]="{'button-color-validation':rc}" mat-raised-button color="primary" [disabled]="updatedFields.length < 1"

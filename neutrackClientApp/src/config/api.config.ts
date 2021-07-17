@@ -1,4 +1,7 @@
 
+export const userById = (userId: number) =>  {
+  return `/users/${userId}`
+}
 export const userLoginEndpoint = "/users/login";
 export const userSignUpEndpoint = "/users/newuser";
 export const nutritionistSignUpEndpoint = "/users/newnutritionist";
@@ -51,3 +54,6 @@ export const updateRecipe = (recipeId) => {
 }
 export const searchPatients = '/nutritionists/search/patients'
 export const getAllProductsWithPaging = '/products/all'
+export const getUser = (userId) => {
+  return `/users/${userId}`;
+}

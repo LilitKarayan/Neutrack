@@ -132,7 +132,7 @@ namespace NeutrackAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.InnerException.Message);
+                return StatusCode(500, new { message = "Server error" + Environment.NewLine + "Unable to proccess request." }); 
             }
         }
 
@@ -162,7 +162,7 @@ namespace NeutrackAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.InnerException.Message);
+                return StatusCode(500, new { message = "Server error" + Environment.NewLine + "Unable to proccess request." }); 
             }
         }
 
@@ -190,12 +190,16 @@ namespace NeutrackAPI.Controllers
                     return Forbid();
                 }
                 var patient = _nutritionistRepository.GetNutritionistPatientById(patientId, currentNutritionistId);
+                if(patient == null)
+                {
+                    return NotFound(new { message = "Patient was not found in your list." });
+                }
                 return Ok(_mapper.Map<PatientReadDTO>(patient));
 
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.InnerException.Message);
+                return StatusCode(500, new { message = "Server error" + Environment.NewLine + "Unable to proccess request." });
             }
         }
 
@@ -294,7 +298,61 @@ namespace NeutrackAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.InnerException.Message);
+                return StatusCode(500, new { message = "Server error" + Environment.NewLine + "Unable to proccess request." }); 
+            }
+        }
+
+        /// <summary>
+        /// Remove a patient from 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="patientId"></param>
+        /// <returns></returns>
+        [Authorize(Roles = Roles.Nutritionist)]
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> DeleteAccount(int id)
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                var currentNutritionistId = int.Parse(User.FindFirstValue(ClaimTypes.Spn));
+                if (!User.IsInRole(Roles.Nutritionist))
+                {
+                    return Forbid();
+                }
+                if (currentNutritionistId != id)
+                {
+                    return Forbid();
+                }
+                var nutritionist = _nutritionistRepository.GetNutritionistById(currentNutritionistId);
+                if (nutritionist == null)
+                {
+                    return NotFound(new { message = "Nutritionist not found" });
+                }
+                if (!nutritionist.IsActive)
+                {
+                    return UnprocessableEntity(new { message = "This account does not exist" });
+                }
+                var result = await _nutritionistRepository.DeleteNutritionist(currentNutritionistId);
+                if (result)
+                {
+                    var isUserDeleted = await _userRepository.DeleteUser(currentUserId);
+                    if (isUserDeleted)
+                    {
+                        return Accepted(new { message = "Your account has been deleted successfully" });
+                    }
+                    else
+                    {
+                        return UnprocessableEntity(new { message = "Your cannot be deleted." });
+                    }
+                }
+
+                return StatusCode(412, new { message = "Unable to delete account. Try again later" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Server error" + Environment.NewLine + "Unable to proccess request." }); 
             }
         }
 
@@ -347,7 +405,7 @@ namespace NeutrackAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.InnerException.Message);
+                return StatusCode(500, new { message = "Server error" + Environment.NewLine + "Unable to proccess request." }); 
             }
         }
 
@@ -441,7 +499,62 @@ namespace NeutrackAPI.Controllers
             }
             catch(Exception ex)
             {
-                return StatusCode(500, ex.InnerException.Message);
+                return StatusCode(500, new { message = "Server error" + Environment.NewLine + "Unable to proccess request." }); 
+            }
+        }
+
+
+        /// <summary>
+        /// Adds an existing patient to the nutritionist list
+        /// </summary>
+        /// <param name="patientId"></param>
+        /// <returns></returns>
+        [Authorize(Roles = Roles.Nutritionist)]
+        [HttpPost, Route("addpatient/{patientId}")]
+        public async Task<ActionResult> AddExistingPatient(int patientId)
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.Identity.Name);
+                var currentNutritionistId = int.Parse(User.FindFirstValue(ClaimTypes.Spn));
+                if (!User.IsInRole(Roles.Nutritionist))
+                {
+                    return Forbid();
+                }
+
+                var user = await _userRepository.GetUserById(patientId);
+                if(user.Patient.NutritionistId != null )
+                {
+                    return Forbid();
+                }
+                user.Patient.NutritionistId = currentNutritionistId;
+                if(user.Patient.PatientActivityHistories == null || user.Patient.PatientActivityHistories.Count < 1)
+                {
+                    user.Patient.PatientActivityHistories = new List<PatientActivityHistory>
+                    {
+                        new PatientActivityHistory
+                        {
+                            Patient = user.Patient,
+                            Weight = (double)user.Patient.Weight,
+                            CreatedDate = DateTime.UtcNow
+                        }
+                    };
+                }
+                user.Patient.NutritionistPatientHistories = new List<NutritionistPatientHistory>
+                {
+                    new NutritionistPatientHistory
+                    {
+                        NutritionistId = currentNutritionistId,
+                        Patient = user.Patient
+                    }
+                };
+                _nutritionistRepository.SaveChanges();
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Server error" + Environment.NewLine + "Unable to proccess request." });
             }
         }
 

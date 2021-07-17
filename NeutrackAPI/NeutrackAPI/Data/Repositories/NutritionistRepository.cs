@@ -29,6 +29,29 @@ namespace NeutrackAPI.Data.Repositories
             _context.Nutritionists.RemoveRange();
         }
 
+        public async Task<bool> DeleteNutritionist(int nutritionistId)
+        {
+            var nutritionist = await _context.Nutritionists
+                .Include(x=>x.Feedbacks)
+                .Include(x => x.Patients)
+                .Include(x => x.NutritionistPatientHistories)
+                .FirstOrDefaultAsync(x => x.Id == nutritionistId);
+            if(nutritionist.Feedbacks != null)
+            {
+                _context.RemoveRange(nutritionist.Feedbacks);
+            }
+            if (nutritionist.Patients != null)
+            {
+                _context.RemoveRange(nutritionist.Patients);
+            }
+            if (nutritionist.NutritionistPatientHistories != null)
+            {
+                _context.RemoveRange(nutritionist.NutritionistPatientHistories);
+            }
+            _context.Remove(nutritionist);
+            return SaveChanges();
+        }
+
         public IEnumerable<Nutritionist> GetAllNutritionist()
         {
             return _context.Nutritionists.Where(x=>x.IsActive).Include(u => u.User).ToList();

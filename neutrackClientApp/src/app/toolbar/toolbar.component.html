@@ -14,7 +14,7 @@
     </button>
     <div class="pe-5 collapse navbar-collapse" id="navbarNavDropdown">
         <ul  class="navbar-nav ms-auto ">
-            <li *ngIf="isUserLoggedIn" class="nav-item dropdown">
+            <li class="nav-item" *ngIf="isUserLoggedIn" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="photo">
                       <mat-icon>account_circle</mat-icon>
@@ -22,8 +22,8 @@
                     {{activeUser.firstName}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a routerLink="/account" (click)="goToPage('account')" class="dropdown-item"><mat-icon>account_box</mat-icon> My account</a>
-                    <a class="dropdown-item" (click)="logout()"><mat-icon>exit_to_app</mat-icon> Sign Out</a>
+                    <a routerLink="/account" (click)="goToPage('account')" class="dropdown-item"><i class="fas fa-user-cog"></i> &nbsp; &nbsp; My account</a>
+                    <a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> &nbsp; &nbsp; Sign Out</a>
                 </div>
             </li>
             <li *ngIf="!isUserLoggedIn" class="nav-item dropdown">
@@ -31,8 +31,8 @@
                   Sign Up
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a routerLink="/signup" class="dropdown-item"><i class="fa fa-user fa-sm"></i> Nutritionist</a>
-                  <!-- <a class="dropdown-item"><i class="fa fa-sign-out fa-sm" aria-hidden="true"> </i>Create a user account</a> -->
+                  <a [routerLink]="['signup', 'nutritionist']" class="dropdown-item"><i class="fa fa-user-md fa-sm"></i> Nutritionist </a>
+                  <a [routerLink]="['signup', 'patient']" class="dropdown-item"><i class="fa fa-user fa-sm"></i> Patient </a>
               </div>
           </li>
           <li *ngIf="!isUserLoggedIn" class="nav-item">

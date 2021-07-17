@@ -45,16 +45,19 @@
           </ng-container>
 
       <ng-container [matColumnDef]="'actions'">
-        <th mat-header-cell *matHeaderCellDef> actions </th>
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let element">
-          <a mat-icon-button [routerLink]="[element['id'], 'details']">
+          <a mat-icon-button *ngIf="activeUser.nutritionistId == element['nutritionistId']" [routerLink]="[element['id'], 'details']">
             <mat-icon mat-icon-button color="basic">portrait</mat-icon>
           </a>
           <button *ngIf="activeUser.nutritionistId == element['nutritionistId']" class="edit_button" mat-icon-button (click)="edit(element)">
             <mat-icon mat-icon-button color='primary'>edit</mat-icon>
           </button>
-          <button id="deleteButton" mat-icon-button (click)="delete(element['id'])">
+          <button *ngIf="activeUser.nutritionistId == element['nutritionistId']" id="deleteButton" mat-icon-button (click)="delete(element['id'])">
             <mat-icon mat-icon-button color="warn">delete</mat-icon>
+          </button>
+          <button *ngIf="element['nutritionistId'] === null || element['nutritionistId'] === 0" id="add" mat-icon-button (click)="adExistingPatient(element['userId'])">
+            <mat-icon mat-icon-button color="accent">add_circle</mat-icon>
           </button>
         </td>
       </ng-container>

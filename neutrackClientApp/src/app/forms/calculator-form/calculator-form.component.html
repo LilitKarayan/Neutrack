@@ -151,7 +151,7 @@
     <p><b>Height:</b> {{ calculator["height"] }} inches</p>
     <p><b>Weight:</b> {{ calculator["weight"] }} lbs</p>
     <p><b>Goal Weight:</b> {{ calculator["goal"] }} lbs</p>
-    <p><b>Activity Level:</b> {{ calculator["activityLevel"] }} days per week</p>
+    <p><b>Activity Level:</b> {{ calculator["activityLevel"] }}</p>
     <p><b>Age:</b> {{ calculator["age"] }} years</p>
     <p><b>Gender:</b> {{ calculator["gender"] }}</p>
 
@@ -161,11 +161,11 @@
       <li>The BMI would fall in the category of <b>{{ bmiCategory }}</b> </li>
       <li>Currently, you intake <b>{{ currentDailyCalories }}</b> calories per day</li>
       <li>
-        At the ideal goal, you need to intake <b>{{ goalDailyCalories }}</b> calories per day 
+        At the ideal goal, you need to intake <b>{{ goalDailyCalories }}</b> calories per day
       </li>
     </ul>
     <p class="center">For your journey you need to <b>{{ direction }}</b> your calorie intake by <b>{{ amount }}</b> per day.  <br>
-      <b>Note:</b> Regardless if your goal is to gain or lose weight, it should be a <b>gradual</b> 
+      <b>Note:</b> Regardless if your goal is to gain or lose weight, it should be a <b>gradual</b>
       process. The <b>recommendation</b> is to {{ direction }} calorie intake by
       anywhere between 500-900 calories per day. It is also recommended that calorie
       levels <b>never drop below</b> 1200 per day for women and 1800 per day for men

@@ -6,23 +6,29 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { MessageSnackbarComponent } from './message-snackbar.component';
-
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     ErrorDialogComponent,
     LoadingDialogComponent,
-    MessageSnackbarComponent
+    MessageSnackbarComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    CdkTableModule,
+    MatButtonModule
   ],
   exports:[
     ErrorDialogComponent,
     LoadingDialogComponent,
     MessageSnackbarComponent,
+    DeleteConfirmationComponent,
   ],
   entryComponents:[ ErrorDialogComponent,
     LoadingDialogComponent]

@@ -11,14 +11,14 @@ import { nutritionistUpdatePatient,
   createProduct,
   deleteProduct,getProducts,
   getRecipes, getRecipeById, createRecipe, deleteRecipe, updateRecipe,
-  searchPatients, getAllProductsWithPaging
+  searchPatients, getAllProductsWithPaging, getUser
  } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import {useTestApi, getApiRoute } from '../../environments/environment';
+import {getApiRoute } from '../../environments/environment';
 import { IPatient, IDashboard, INutritionist, IProduct, IRecipe, IRecipeProduct } from '@models';
 import * as moment from 'moment';
 import CryptoJS from 'crypto-js';
@@ -121,5 +121,13 @@ export class NutritionistService {
     .set('pageNumber', pageNumber)
     .set('pageSize', pageSize);
     return this.http.get<any>(getApiRoute(getAllProductsWithPaging), {params}).toPromise<any>();
+  }
+  deleteAccount(userId){
+    return this.http.delete(getApiRoute(getUser(userId)), httpOptions).toPromise<any>();
+  }
+
+  addExistingPatientToNutritionist(userId) {
+    let url = getApiRoute(nutritionistAddPatientEndpoint);
+    return this.http.post(`${url}/${userId}`, httpOptions).toPromise<any>();
   }
 }
