@@ -111,7 +111,7 @@ namespace NeutrackAPI.Data
             {
                 throw new ArgumentNullException(nameof(patientRecipe));
             }
-            _context.PatientRecipe.Remove(patientRecipe); 
+            _context.PatientRecipes.Remove(patientRecipe); 
             return "The patientRecipe is deleted successfully."; 
                       
         }

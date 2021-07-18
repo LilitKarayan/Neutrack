@@ -91,7 +91,7 @@ namespace NeutrackAPI.Controllers
         /// </summary>
         /// <param name="patientRecipeUpdate"></param>
         /// <returns></returns>
-        [HttpPut, Route("{patientd}/{recipeId}")]
+        [HttpPut, Route("{patientId}/{recipeId}")]
         public ActionResult<PatientRecipeReadDTO> UpdatePatientRecipe(int recipeId, int patientId, PatientRecipeCreateDTO patientRecipeUpdate)
         {
             try
