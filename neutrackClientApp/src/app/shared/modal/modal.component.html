@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div mat-dialog-content>
+      <div><strong>{{data.details.fullName}}</strong> <br>
+        <a [href]="mailTo">{{data.details.email}}</a>
+      </div>
+      <p></p>
+      <mat-card-content>
+        <mat-grid-list  cols="2" rowHeight="5:1">
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Gender</strong> <br/><span>{{data.details.gender}}</span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile >
+            <div class="mat-grid-tile-content">
+              <p><strong>Date of Birth</strong> <br/><span>{{data.details.dateOfBirth | date}}</span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Phone Number</strong> <br/><span>
+                <a [href]="telTo">{{data.details.phoneNumber}}</a>
+              </span></p>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="mat-grid-tile-content">
+              <p><strong>Years of Experience</strong> <br/><span>{{data.details.yearsOfExperience|number}}</span></p>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+    </div>
+<div mat-dialog-actions class="mt-15">
+  <button id="closeBtn" mat-raised-button mat-dialog-close>Close</button>
+</div>

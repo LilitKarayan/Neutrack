@@ -1,1 +1,39 @@
-<p>patient-main works!</p>
+<div *ngIf="(patient$ | async) as patient" class="container">
+  <mat-grid-list class="mt-2 grid-p" cols="4" rowHeight="5:1">
+    <mat-grid-tile>
+      <div class="ml-1 mat-grid-tile-content">
+        <p><strong>Initial Weight</strong> <br/><span>{{patient.initialWeight}} lbs</span></p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="mat-grid-tile-content">
+        <p><strong>Current Weight</strong> <br/><span>{{patient.weight}} lbs</span></p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="mat-grid-tile-content">
+        <p><strong>Weight Goal</strong> <br/><span>{{patient.goal}} lbs</span></p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="mat-grid-tile-content">
+        <p><strong>Activity Level</strong> <br/><span>{{patient.activityLevel | activityLevel}}</span></p>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div *ngIf="patient.patientActivityHistories.length > 0" class="canvas">
+    <mat-card>
+      <div style="display: block;">
+        <canvas baseChart width="400" height="200"
+          [datasets]="dataset"
+          [labels]="labels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
+    </mat-card>
+  </div>
+</div>
