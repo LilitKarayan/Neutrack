@@ -5,7 +5,7 @@
         </a>
     </div>
     <ul class="nav">
-      <li *ngIf='isPatient()' ><a routerLink="/feed"><i class="fa fa-home"></i>Dashboard</a></li>
+      <li *ngIf='isPatient()' ><a routerLink="/history"><i class="fas fa-history"></i>History</a></li>
         <li *ngIf='isNutritionist()' ><a routerLink="/dashboard"><i class="fa fa-home"></i>Dashboard</a></li>
         <li *ngIf='isNutritionist()'><a routerLink="/patients"><i class="fa fa-users fa-lg"></i>Patients</a></li>
         <li *ngIf='isNutritionist() || isPatient()'><a routerLink="/calculator"><i class="fas fa-calculator fa-lg"></i>Calculator</a></li>

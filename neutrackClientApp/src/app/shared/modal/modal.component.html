@@ -1,7 +1,7 @@
-<h2 mat-dialog-title>{{data.title}}</h2>
+<h2 class="dialog-title" mat-dialog-title><i class="fas fa-user-md"></i> {{data.title}}</h2>
 <div mat-dialog-content>
-      <div><strong>{{data.details.fullName}}</strong> <br>
-        <a [href]="mailTo">{{data.details.email}}</a>
+      <div class="subtitle"><strong>{{data.details.fullName}}</strong> <br>
+        <a [href]="mailTo"><i class="fas fa-envelope-open-text"></i> {{data.details.email}}</a>
       </div>
       <p></p>
       <mat-card-content>
@@ -13,13 +13,13 @@
           </mat-grid-tile>
           <mat-grid-tile >
             <div class="mat-grid-tile-content">
-              <p><strong>Date of Birth</strong> <br/><span>{{data.details.dateOfBirth | date}}</span></p>
+              <p><strong>Age</strong> <br/><span>{{getAge(data.details.dateOfBirth)}}</span></p>
             </div>
           </mat-grid-tile>
           <mat-grid-tile>
             <div class="mat-grid-tile-content">
               <p><strong>Phone Number</strong> <br/><span>
-                <a [href]="telTo">{{data.details.phoneNumber}}</a>
+                <a [href]="telTo"><i class="fas fa-phone"></i> {{data.details.phoneNumber}}</a>
               </span></p>
             </div>
           </mat-grid-tile>

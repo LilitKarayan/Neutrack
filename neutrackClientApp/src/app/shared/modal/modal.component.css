@@ -10,4 +10,14 @@
   height: 100%;
   padding: 0;
   margin: 0;
+  color: #05532f;
+}
+.subtitle{
+  color: #05532f;
+}
+.dialog-title{
+  color: #05532f;
+}
+a{
+  text-decoration: none;
 }

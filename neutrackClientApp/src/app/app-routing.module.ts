@@ -33,7 +33,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AutomaticLoginGuard]},
   {path: 'signup/:entity', component: SignUpComponent, canActivate: [AutomaticLoginGuard]},
   {path: 'products', component: ProductComponent, canActivate: [NutritionistGuard]},
-  {path: 'feed', component: PatientMainComponent, canActivate: [PatientGuard]},
+  {path: 'history', component: PatientMainComponent, canActivate: [PatientGuard]},
   {path: 'recipes', component: RecipesComponent, canActivate: [NutritionistGuard]},
 ];
 
