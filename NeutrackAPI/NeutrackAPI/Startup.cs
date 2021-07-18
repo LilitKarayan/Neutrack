@@ -66,6 +66,7 @@ namespace NeutrackAPI
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IRecipeProductRepository, RecipeProductRepository>();
+            services.AddScoped<IPatientRecipeRepository, PatientRecipeRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IRateRepository, RateRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();

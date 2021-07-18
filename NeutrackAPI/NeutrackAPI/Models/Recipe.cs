@@ -13,8 +13,12 @@ namespace NeutrackAPI.Models
 
         public string Instruction { get; set; }
 
+        public string MealType { get; set; }
+
         // Navigation Properties
         public List<RecipeProduct> RecipeProducts { get; set; }
+        
+        public List<PatientRecipe> PatientRecipes { get; set; }
 
     }
 }

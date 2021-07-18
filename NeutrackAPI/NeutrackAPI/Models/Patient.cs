@@ -21,7 +21,9 @@ namespace NeutrackAPI.Models
         public Nutritionist Nutritionist { get; set; }
         public List<Feedback> Feedbacks { get; set; }
         public List<NutritionistPatientHistory> NutritionistPatientHistories { get; set; }
-        public List<PatientActivityHistory>PatientActivityHistories { get; set; }
+        public List<PatientActivityHistory> PatientActivityHistories { get; set; }
+        public List<PatientRecipe> PatientRecipes { get; set; }
+        
     }
 
 
