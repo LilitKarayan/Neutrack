@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NeutrackAPI.Data;
 
 namespace NeutrackAPI.Migrations
 {
     [DbContext(typeof(NeutrackContext))]
-    partial class NeutrackContextModelSnapshot : ModelSnapshot
+    [Migration("20210718034331_PatientRecipeManyToManyAndMealTypeInRecipeAdded")]
+    partial class PatientRecipeManyToManyAndMealTypeInRecipeAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,13 +196,10 @@ namespace NeutrackAPI.Migrations
                     b.Property<int>("PatientID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
                     b.Property<double>("Portion")
                         .HasColumnType("float");
 
-                    b.HasKey("RecipeID", "PatientID", "Day");
+                    b.HasKey("RecipeID", "PatientID");
 
                     b.HasIndex("PatientID");
 

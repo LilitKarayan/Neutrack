@@ -180,5 +180,17 @@ namespace NeutrackAPI.Controllers
             }
         }
 
+        
+        /// <summary>
+        /// GET api/recipes
+        /// </summary>
+        /// <returns>A list of Recipes</returns>
+        [HttpGet, Route("calories/{recipeId}")]
+        
+        public double GetTotalCalories(int recipeId)
+        {
+            return _recipeRepository.GetTotalCalories(recipeId);
+        }
+
     }
 }
