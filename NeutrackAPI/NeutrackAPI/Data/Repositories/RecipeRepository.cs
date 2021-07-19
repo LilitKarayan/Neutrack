@@ -113,6 +113,25 @@ namespace NeutrackAPI.Data
         }
 
 
+    
+         /// <summary>
+        /// Gets the total calories of the recipe
+        /// </summary>
+        /// <returns>double totalCalories</returns>
+        public double GetTotalCalories(int recipeID)
+        {
+            Recipe recipe = this.GetRecipeById(recipeID);
+            double totalCalories = 0;
+            IEnumerable<RecipeProduct> theRecipeProducts = _context.RecipeProducts.ToList();
+            theRecipeProducts = theRecipeProducts.Where(e => e.RecipeID.Equals(recipe.Id)).ToList();
+            foreach (var theProduct in theRecipeProducts)
+                {
+                    int theProductId = theProduct.ProductID;
+                    totalCalories += theProduct.WeightInGrams * _context.Products.FirstOrDefault(x => x.Id.Equals(theProductId)).CaloriesPerGram;
+                }
+            return totalCalories;
+        }
+
 
 
 

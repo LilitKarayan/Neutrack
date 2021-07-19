@@ -15,7 +15,7 @@ using System.Net;
 
 namespace NeutrackAPI.Controllers
 {
-    [Authorize(Roles = Roles.Admin + "," + Roles.Nutritionist)]
+    // [Authorize(Roles = Roles.Admin + "," + Roles.Nutritionist)]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -178,6 +178,18 @@ namespace NeutrackAPI.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        
+        /// <summary>
+        /// GET api/recipes
+        /// </summary>
+        /// <returns>A list of Recipes</returns>
+        [HttpGet, Route("calories/{recipeId}")]
+        
+        public double GetTotalCalories(int recipeId)
+        {
+            return _recipeRepository.GetTotalCalories(recipeId);
         }
 
     }

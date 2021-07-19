@@ -14,6 +14,7 @@ namespace NeutrackAPI.Data
         void UpdateRecipe(Recipe recipe);
         string DeleteRecipe(Recipe recipe);
         IEnumerable<Recipe> SearchRecipe(string searchQuery);
-        // ActionResult<Recipe> CreateRecipe(Recipe recipe);
+
+        double GetTotalCalories(int recipeID);
     }
 }

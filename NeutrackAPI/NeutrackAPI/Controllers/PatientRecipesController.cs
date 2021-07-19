@@ -11,6 +11,7 @@ using NeutrackAPI.Data.IRepositories;
 using Microsoft.AspNetCore.Authorization;
 using System.Net;
 
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace NeutrackAPI.Controllers
@@ -21,11 +22,17 @@ namespace NeutrackAPI.Controllers
     public class PatientRecipesController : ControllerBase
     {
         private readonly IPatientRecipeRepository _patientRecipeRepository;
+        private readonly IRecipeRepository _recipeRepository;
+        private readonly IRecipeProductRepository _recipeProductRepository;
+        private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public PatientRecipesController(IPatientRecipeRepository patientRecipeRepository, IMapper mapper)
+        public PatientRecipesController(IPatientRecipeRepository patientRecipeRepository, IMapper mapper, IRecipeRepository recipeRepository, IRecipeProductRepository recipeProductRepository, IProductRepository productRepository)
         {
             _patientRecipeRepository = patientRecipeRepository;
+            _recipeRepository = recipeRepository;
+            _recipeProductRepository = recipeProductRepository;
+            _productRepository = productRepository;
             _mapper = mapper;
         }
 
@@ -125,6 +132,54 @@ namespace NeutrackAPI.Controllers
             _patientRecipeRepository.SaveChanges();
             return NoContent();
         }
+
+
+
+
+
+
+
+
+        // /// <summary>
+        // /// Generate a new MealPlan for Given Number of Dates
+        // /// </summary>
+        // /// <param name=""></param>
+        // /// <returns></returns>
+        // [HttpPost, Route("newplan/{patientId}/{dailyCalories}/{numberOfDays}")]
+        // public ActionResult<IEnumerable<PatientRecipeReadDTO>> GenerateMealPlan(int patientId, int dailyCalories, int numberOfDays)
+        // {
+        //     try
+        //     {
+        //         var oldPatientRecipes = _patientRecipeRepository.GetPatientRecipesByPatientId(patientId);
+        //         foreach (var patientRecipeItem in oldPatientRecipes)
+        //         {
+        //             _patientRecipeRepository.DeletePatientRecipe(patientRecipeItem);
+        //         }
+        //         var allRecipes = _recipeRepository.GetAllRecipes();
+        //         var breakfastOptions = allRecipes.Where(e => e.MealType.Contains("Breakfast"));
+        //         var lunchOptions = allRecipes.Where(e => e.MealType.Contains("Lunch"));
+        //         var dinnerOptions = allRecipes.Where(e => e.MealType.Contains("Dinner"));
+        //         double breakfastCalories = dailyCalories * 0.30;
+        //         double lunchCalories = dailyCalories * 0.35;
+        //         double dinnerCalories = dailyCalories * 0.35;
+        //         for (int i = 0; i < numberOfDays; i++)
+        //         {
+        //             var random = new Random();
+        //             int breakfastIndex = random.Next(breakfastOptions.Count());
+        //             Recipe theChoosenBreakfast = breakfastOptions.ElementAt(breakfastIndex);
+
+        //         }
+                
+        //         _patientRecipeRepository.CreatePatientRecipe(patientRecipe);
+        //         _patientRecipeRepository.SaveChanges();
+                
+        //         return CreatedAtRoute(new { patientRecipe.RecipeID, patientRecipe.PatientID }, patientRecipe);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return StatusCode(500, ex.Message);
+        //     }
+        // }
    
     }
 }
