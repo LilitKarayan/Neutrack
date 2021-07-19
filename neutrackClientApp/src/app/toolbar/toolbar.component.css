@@ -9,7 +9,10 @@ a.sidenav-button {
     font-size: 25px;
     transform: all .3s ease 0s;
 }
-
+.verified{
+  color: #d63384;
+  font-size: 12px;
+}
 a.sidenav-button:hover {
     color: rgba(255, 255, 255, 1);
     transition: all .3s ease 0s;
@@ -23,6 +26,15 @@ a.sidenav-button:hover {
     vertical-align: middle;
     overflow: hidden;
 }
+.icon {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
 
 /* .photo imp {
     width: 100%;

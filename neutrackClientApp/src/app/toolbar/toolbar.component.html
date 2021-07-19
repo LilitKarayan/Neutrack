@@ -20,6 +20,12 @@
                       <mat-icon>account_circle</mat-icon>
                     </div>
                     {{activeUser.firstName}}
+                    <div *ngIf="roles.includes('Nutritionist')" class="icon">
+                      <span  class="verified material-icons">
+                        verified
+                      </span>
+                    </div>
+
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a routerLink="/account" (click)="goToPage('account')" class="dropdown-item"><i class="fas fa-user-cog"></i> &nbsp; &nbsp; My account</a>
