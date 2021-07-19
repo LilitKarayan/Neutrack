@@ -35,7 +35,16 @@
               </mat-form-field>
             </div>
           </mat-grid-tile>
-          <mat-grid-tile>
+          
+             <!--Do not touch. For testing --> 
+                <mat-label>Gender<span>*</span></mat-label><br />
+              <select formControlName="gender">
+                <option *ngFor="let gender of genders" [value]="gender">
+                  {{gender}}
+                </option>
+              </select>
+                  
+          <!-- <mat-grid-tile>
             <div class="theContainer">
               <mat-form-field appearance="fill">
                 <mat-label>Gender<span>*</span></mat-label><br />
@@ -46,7 +55,7 @@
                 </mat-select>
               </mat-form-field>
              </div>
-          </mat-grid-tile>
+          </mat-grid-tile> -->
           <mat-grid-tile *ngIf="entity === 'nutritionist'">
             <div class="theContainer">
               <mat-form-field class="normal-full-width" appearance="fill">

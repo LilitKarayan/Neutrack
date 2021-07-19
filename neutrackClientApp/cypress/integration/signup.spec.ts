@@ -4,12 +4,13 @@ describe('successful scenario tests - signUp', () => {
   const signUpHelper = new SignUpHelper
 
   it('should route to sign up page', () => {
-    cy.visit('/signup');
-    cy.contains('Sign Up');
+    cy.visit('/signup/nutritionist');
+    cy.contains('Sign Up As A');
+    cy.contains('Nutritionist');
   });
 
   it('should have empty text and disabled button', () => {
-    cy.visit('/signup');
+    cy.visit('/signup/nutritionist');
 
     signUpHelper.initValues();
 
@@ -17,7 +18,7 @@ describe('successful scenario tests - signUp', () => {
   });
 
   it('should correctly add text to input element', () => {
-    cy.visit('/signup');
+    cy.visit('/signup/nutritionist');
 
     cy.get('[formcontrolname=email]').click().then(() => {
       cy.get('[formcontrolname=email]').type('Hello, World');
@@ -27,7 +28,7 @@ describe('successful scenario tests - signUp', () => {
   });
 
   it('should have submit button remain disabled - non matching password', () => {
-    cy.visit('/signup');
+    cy.visit('/signup/nutritionist');
 
     cy.get('[formcontrolname=email]').click().then(() => {
       cy.get('[formcontrolname=email]').type('test@test.com');
@@ -67,7 +68,7 @@ describe('successful scenario tests - signUp', () => {
   });
 
   it('should have submit button become enabled', () => {
-    cy.visit('/signup');
+    cy.visit('/signup/nutritionist');
 
     cy.get('[formcontrolname=email]').click().then(() => {
       cy.get('[formcontrolname=email]').type('test@test.com');
