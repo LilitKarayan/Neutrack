@@ -24,6 +24,7 @@ export class AddEditRecipeComponent implements OnInit {
   updatedFields: any[] = [];
   products: IProduct[];
   filteredProducts: Observable<IProduct[]>;
+  mealTypes: string[] = [`Breakfast`, `Lunch`, `Dinner`];
 
   constructor(
     private nutritionistService: NutritionistService,
@@ -44,11 +45,13 @@ export class AddEditRecipeComponent implements OnInit {
           id: [''],
           name: ['', Validators.compose([Validators.required])],
           instruction: ['', Validators.compose([Validators.required])],
+          mealType: ['', Validators.compose([Validators.required])],
           recipeProducts: this.formBuilder.array([])
         })
       : this.formBuilder.group({
           name: ['', Validators.compose([Validators.required])],
           instruction: ['', Validators.compose([Validators.required])],
+          mealType: ['', Validators.compose([Validators.required])],
           recipeProducts: this.formBuilder.array([]),
         });
     if (this.data.recipe) {
@@ -70,6 +73,7 @@ export class AddEditRecipeComponent implements OnInit {
     this.formInstance.get('id').setValue(recipe.id);
     this.formInstance.get('name').setValue(recipe.name);
     this.formInstance.get('instruction').setValue(recipe.instruction);
+    this.formInstance.get('mealType').setValue(recipe.mealType);
     recipe.recipeProducts.forEach((item, idx) => {
       this.setRecipeProducts(this.existingRecipeProduct(item));
     })

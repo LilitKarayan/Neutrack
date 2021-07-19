@@ -81,6 +81,6 @@ button.button-row-submit:hover {
 }
 
 .button-row-clear {
-  background-color: #0F8D6E;
+  /* background-color: #0F8D6E; */
   color: white;
 }

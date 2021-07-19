@@ -16,6 +16,7 @@ import { DataTableComponent } from './nutritionist/patients/data-table/data-tabl
 import { ProductComponent } from './nutritionist/product/product.component';
 import { RecipesComponent } from './nutritionist/recipes/recipes.component';
 import {AuthorizedGuard} from './guards/authorized.guard';
+import { PatientMainComponent } from './patient/patient-main/patient-main.component';
 
 const routes: Routes = [
   {path: 'home', component: WelcomeComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AutomaticLoginGuard]},
   {path: 'signup/:entity', component: SignUpComponent, canActivate: [AutomaticLoginGuard]},
   {path: 'products', component: ProductComponent, canActivate: [NutritionistGuard]},
+  {path: 'history', component: PatientMainComponent, canActivate: [PatientGuard]},
   {path: 'recipes', component: RecipesComponent, canActivate: [NutritionistGuard]},
 ];
 

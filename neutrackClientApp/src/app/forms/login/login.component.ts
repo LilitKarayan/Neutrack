@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginInfo: IUserLogin;
   returnToUrl: string = '';
   roles:string[];
+  hide = true;
   constructor(private router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService) {

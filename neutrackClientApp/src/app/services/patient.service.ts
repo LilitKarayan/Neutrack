@@ -28,6 +28,9 @@ export class PatientService {
   updatePatient(userId, user:any): Observable<IPatient> {
     return this.http.put<IPatient>(getApiRoute(fromApiConfig.userById(userId)), user, httpOptions);
   }
+  getNutritionist(nutritionistId) {
+    return this.http.get<INutritionist>(getApiRoute(fromApiConfig.getNutritionist(nutritionistId)), httpOptions).toPromise<INutritionist>();
+  }
 }
 
 

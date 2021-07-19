@@ -1,6 +1,3 @@
-.canvas{
-  margin-top: 10px;
-}
 .mat-grid-tile-content {
   top: 0;
   left: 0;
@@ -13,7 +10,14 @@
   height: 100%;
   padding: 0;
   margin: 0;
+  color: #05532f;
 }
-.grid-p{
-  background-color:#d3ebd1;
+.subtitle{
+  color: #05532f;
+}
+.dialog-title{
+  color: #05532f;
+}
+a{
+  text-decoration: none;
 }
