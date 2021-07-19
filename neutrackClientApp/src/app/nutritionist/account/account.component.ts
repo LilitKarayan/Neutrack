@@ -85,7 +85,6 @@ export class AccountComponent implements OnInit {
 
   async getNutritionist(){
     await this.nutritionistService.getNutritionist(this.activeUser.nutritionistId).subscribe(data => {
-      console.log(data);
       this.userData = data;
       this.userSubject.next(data);
       this.setFormData(data);
@@ -165,7 +164,6 @@ export class AccountComponent implements OnInit {
           this.getNutritionist();
         }
       } else if(this.roles.includes('User')){
-        console.log(updatedData);
         this.patientService.updatePatient(this.activeUser.id, updatedData).subscribe(data => {
           res = data;
           this.showSnackBar();
