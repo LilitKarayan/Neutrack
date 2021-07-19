@@ -55,7 +55,7 @@ describe('successful scenario tests - login', () => {
     cy.visit('/login');
 
     cy.get('[formcontrolname=email]').click().then(() => {
-      cy.get('[formcontrolname=email]').type('test@test.com');
+      cy.get('[formcontrolname=email]').type('tests@test.com');
     })
 
     cy.get('[formcontrolname=password]').click().then(() => {
@@ -86,7 +86,7 @@ describe('successful scenario tests - login', () => {
     cy.visit('/login');
 
     cy.get('[formcontrolname=email]').click().then(() => {
-      cy.get('[formcontrolname=email]').type('testing@test.com');
+      cy.get('[formcontrolname=email]').type('testing123@test.com');
     })
 
     cy.get('[formcontrolname=password]').click().then(() => {
