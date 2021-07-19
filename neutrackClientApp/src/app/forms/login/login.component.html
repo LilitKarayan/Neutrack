@@ -7,8 +7,8 @@
 
       <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
         <div class="theContainer">
-          <mat-label>Email<span>*</span></mat-label>
-          <mat-form-field class="normal-full-width" appearance="outline">
+          <mat-form-field class="normal-full-width" appearance="fill">
+            <mat-label>Email<span>*</span></mat-label>
             <input formControlName="email" matInput />
             <mat-error *ngIf="form.controls['email'].errors?.email">Invalid email address</mat-error>
             <mat-error *ngIf="form.controls['email'].errors?.required">Email is mandatory</mat-error>
@@ -16,10 +16,13 @@
         </div>
 
         <div class="theContainer">
-          <mat-label>Password<span>*</span></mat-label>
-          <mat-form-field class="normal-full-width" appearance="outline">
-            <input formControlName="password" matInput type="password"
+          <mat-form-field class="normal-full-width" appearance="fill">
+            <mat-label>Password<span>*</span></mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'"
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+              <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
             <!-- <ul>
               <li>8-16 characters</li>
               <li>1 lower case character</li>
@@ -35,7 +38,7 @@
           <button class="button-row-submit" mat-raised-button type="submit" [disabled]="
             form.controls['email'].invalid ||
             form.controls['password'].invalid"> Submit </button>
-          <button id="theButton" class="button-row-clear" mat-raised-button type="reset">Clear</button>
+          <button id="theButton" class="button-row-clear" color="accent" mat-raised-button type="reset">Clear</button>
         </div>
       </form>
     </mat-card-content>

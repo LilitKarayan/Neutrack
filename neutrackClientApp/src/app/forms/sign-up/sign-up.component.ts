@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { IUser } from '@models';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,6 +21,8 @@ export class SignUpComponent implements OnInit {
   public form: FormGroup;
   nutritionistInfo:IUser;
   patient: IUser;
+  hide = true;
+  hideConfirmation = true;
 
   constructor(
     private router: Router,
@@ -56,6 +59,10 @@ export class SignUpComponent implements OnInit {
 
   getNutritionist(): object {
     return this.nutritionist;
+  }
+  formatPhoneNumber(){
+    let formattedVal = this.authService.formatPhoneNumber(this.form.get('phoneNumber').value);
+    this.form.get('phoneNumber').setValue(formattedVal);
   }
 
   initializeForm() {

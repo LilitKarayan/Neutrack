@@ -65,6 +65,7 @@
                   matInput
                   type="tel"
                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  (change)="formatPhoneNumber()"
                   placeholder="Format: 123-456-7890"/>
                 <mat-error *ngIf="form.controls['phoneNumber'].errors?.required">Phone Number is mandatory</mat-error>
               </mat-form-field>
@@ -134,7 +135,10 @@
             <div class="theContainer">
               <mat-form-field class="normal-full-width" appearance="fill">
                 <mat-label>Password<span>*</span></mat-label>
-                <input formControlName="password" type="password" matInput pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+                <input formControlName="password" [type]="hide ? 'password' : 'text'" matInput pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+                <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
                 <mat-hint>
                   <ul>
                     <li>8-16 characters</li>
@@ -154,9 +158,12 @@
                 <mat-label>Confirm Password<span>*</span></mat-label>
                 <input
                   formControlName="confirmationPassword"
-                  type="password"
+                  [type]="hideConfirmation ? 'password' : 'text'"
                   matInput
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+                  <button mat-icon-button matSuffix type="button" (click)="hideConfirmation = !hideConfirmation" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hideConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
                 <mat-error *ngIf="form.controls['confirmationPassword'].errors?.required">Confirmation Password is mandatory</mat-error>
               </mat-form-field>
               <div *ngIf="
@@ -181,7 +188,7 @@
               form.controls['phoneNumber'].invalid ||
               form.controls['gender'].invalid ||
               form.controls['yearsOfExperience'].invalid "> Submit </button>
-          <button class="button-row-clear" type="reset" mat-raised-button> Clear </button>
+          <button class="button-row-clear" color="accent" type="reset" mat-raised-button> Clear </button>
         </div>
       </form>
     </mat-card-content>

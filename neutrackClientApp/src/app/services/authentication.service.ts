@@ -143,5 +143,16 @@ export class AuthenticationService {
     const token = localStorage.getItem("access_token");
     return token;
   }
+  formatPhoneNumber(phone: String){
+    let phoneNumber = [];
+    if(phone.length == 10) {
+      phoneNumber.push(phone.substring(0, 3));
+      phoneNumber.push(phone.substring(3, 6));
+      phoneNumber.push(phone.substring(6, 10));
+      return phoneNumber.join('-');
+    } else {
+      return phone;
+    }
+  }
 
 }
