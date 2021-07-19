@@ -37,14 +37,14 @@
           </mat-grid-tile>
           
              <!--Do not touch. For testing --> 
-                <mat-label>Gender<span>*</span></mat-label><br />
+                <!-- <mat-label>Gender<span>*</span></mat-label><br />
               <select formControlName="gender">
                 <option *ngFor="let gender of genders" [value]="gender">
                   {{gender}}
                 </option>
-              </select>
+              </select> -->
                   
-          <!-- <mat-grid-tile>
+          <mat-grid-tile>
             <div class="theContainer">
               <mat-form-field appearance="fill">
                 <mat-label>Gender<span>*</span></mat-label><br />
@@ -55,7 +55,7 @@
                 </mat-select>
               </mat-form-field>
              </div>
-          </mat-grid-tile> -->
+          </mat-grid-tile>
           <mat-grid-tile *ngIf="entity === 'nutritionist'">
             <div class="theContainer">
               <mat-form-field class="normal-full-width" appearance="fill">
@@ -189,7 +189,12 @@
               form.controls['dateOfBirth'].invalid ||
               form.controls['phoneNumber'].invalid ||
               form.controls['gender'].invalid ||
-              form.controls['yearsOfExperience'].invalid "> Submit </button>
+              form.controls['yearsOfExperience'].invalid ||
+              form.controls['activityLevel'].invalid ||
+              form.controls['height'].invalid ||
+              form.controls['weight'].invalid ||
+              form.controls['goal'].invalid 
+               "> Submit </button>
           <button class="button-row-clear" type="reset" mat-raised-button> Clear </button>
         </div>
       </form>

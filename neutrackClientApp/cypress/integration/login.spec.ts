@@ -65,7 +65,7 @@ describe('successful scenario tests - login', () => {
     })
   });
 
-  it('should successfully login', () => {
+  it('should successfully login - Nutritionist', () => {
     cy.visit('/login');
 
     cy.get('[formcontrolname=email]').click().then(() => {
@@ -78,6 +78,23 @@ describe('successful scenario tests - login', () => {
       cy.get('button[type=submit]').click();
     }).then(() => {
       cy.contains('Johnny');
+    })
+  
+  });
+
+  it('should successfully login - Patient', () => {
+    cy.visit('/login');
+
+    cy.get('[formcontrolname=email]').click().then(() => {
+      cy.get('[formcontrolname=email]').type('testing@test.com');
+    })
+
+    cy.get('[formcontrolname=password]').click().then(() => {
+      cy.get('[formcontrolname=password]').type('uwG-12345');
+    }).then(() => {
+      cy.get('button[type=submit]').click();
+    }).then(() => {
+      cy.contains('George');
     })
   
   });
