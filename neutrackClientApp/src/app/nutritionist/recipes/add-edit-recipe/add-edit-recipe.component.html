@@ -25,7 +25,7 @@
       <h3>Products</h3>
       <button id="productButton" class="mb-1"mat-raised-button color="primary" (click)="addRecipeProduct()">Add Product</button>
     </div>
-    <div class="mb-2 mt-1" formArrayName="recipeProducts">
+    <div id="theRecipeProducts" class="mb-2 mt-1" formArrayName="recipeProducts">
       <div class="mb-2" *ngFor="let recipeProduct of recipeProducts.controls; let i = index">
         <div [formGroupName]="i">
           <mat-form-field class="fullWidth" appearance="fill">

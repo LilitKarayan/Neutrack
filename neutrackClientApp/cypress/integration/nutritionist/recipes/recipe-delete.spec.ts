@@ -44,7 +44,9 @@ describe('successful scenario tests - delete recipe', () => {
     cy.get('#deleteNoButton')
       .click()
       .then(() => {
-        cy.get('mat-accordion mat-expansion-panel:last').contains("Pizza Pinapple");
+        cy.get('mat-accordion mat-expansion-panel:last').contains(
+          'Pizza Pinapple'
+        );
       });
   });
 
@@ -53,15 +55,18 @@ describe('successful scenario tests - delete recipe', () => {
     recipeHelper.directToRecipe();
 
     cy.get('mat-accordion mat-expansion-panel:last')
-    .click()
-    .then(() => {
-      cy.get('mat-accordion mat-expansion-panel:last button:last').click();
-    });
+      .click()
+      .then(() => {
+        cy.get('mat-accordion mat-expansion-panel:last button:last').click();
+      });
 
     cy.get('#deleteYesButton')
       .click()
       .then(() => {
-        cy.get('mat-accordion mat-expansion-panel:last').should('not.contain', 'Pizza Pinapple');
+        cy.get('mat-accordion mat-expansion-panel:last').should(
+          'not.contain',
+          'Pizza Pinapple'
+        );
       });
   });
 
@@ -69,5 +74,26 @@ describe('successful scenario tests - delete recipe', () => {
     helper.signInStartDashboard();
     recipeHelper.directToRecipe();
 
+    cy.get('mat-accordion mat-expansion-panel:last')
+      .click()
+      .then(() => {
+        cy.get('mat-accordion mat-expansion-panel:last button:first').click();
+      });
+
+    cy.get('#theRecipeProducts button:first')
+      .should('exist')
+      .then(() => {
+        cy.get('#theRecipeProducts button:first').click();
+      });
+
+    cy.get('#theRecipeProducts').should('not.contain', 'Cornstarch');
+    cy.get('#addButton').click();
+    cy.wait(5000);
+
+    cy.get('mat-accordion mat-expansion-panel:last')
+      .click()
+      .then(() => {
+        cy.get('mat-accordion mat-expansion-panel:last').should('not.contain', 'Cornstarch');
+      });
   });
 });

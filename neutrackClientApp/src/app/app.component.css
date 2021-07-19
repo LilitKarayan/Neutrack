@@ -18,5 +18,6 @@ mat-sidenav{
   overflow:hidden;
 }
 app-side-nav{
-  overflow:hidden;
+  /* comment out for testing */
+  /* overflow:hidden;  */
 }
