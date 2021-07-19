@@ -48,4 +48,10 @@ describe('successful scenario tests - edit recipe', () => {
         cy.contains('Pizza Pinapple');
       });
   });
+
+  it('should edit recipe product', () => {
+    helper.signInStartDashboard();
+    recipeHelper.directToRecipe();
+
+  });
 });

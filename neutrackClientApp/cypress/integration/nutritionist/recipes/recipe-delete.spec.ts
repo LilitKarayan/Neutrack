@@ -31,7 +31,7 @@ describe('successful scenario tests - delete recipe', () => {
     cy.contains('Confirm action');
   });
 
-  it('should not delete patient', () => {
+  it('should not delete recipe', () => {
     helper.signInStartDashboard();
     recipeHelper.directToRecipe();
 
@@ -48,7 +48,7 @@ describe('successful scenario tests - delete recipe', () => {
       });
   });
 
-  it('should delete patient', () => {
+  it('should delete recipe', () => {
     helper.signInStartDashboard();
     recipeHelper.directToRecipe();
 
@@ -63,5 +63,11 @@ describe('successful scenario tests - delete recipe', () => {
       .then(() => {
         cy.get('mat-accordion mat-expansion-panel:last').should('not.contain', 'Pizza Pinapple');
       });
+  });
+
+  it('should delete recipe product', () => {
+    helper.signInStartDashboard();
+    recipeHelper.directToRecipe();
+
   });
 });
