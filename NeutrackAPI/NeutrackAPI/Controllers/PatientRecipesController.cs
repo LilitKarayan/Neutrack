@@ -145,12 +145,12 @@ namespace NeutrackAPI.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        [HttpPost, Route("newplan/{patientId}/{dailyCalories}/{numberOfDays}")]
-        public ActionResult<IEnumerable<PatientRecipeReadDTO>> GenerateMealPlan(int patientId, int dailyCalories, int numberOfDays)
+        [HttpPost, Route("generatemealplan")]
+        public ActionResult<IEnumerable<PatientRecipeReadDTO>> GenerateMealPlan(GenerateMealPlanDTO mealPlanDTO)
         {
             try
             {
-                var oldPatientRecipes = _patientRecipeRepository.GetPatientRecipesByPatientId(patientId);
+                var oldPatientRecipes = _patientRecipeRepository.GetPatientRecipesByPatientId(mealPlanDTO.PatientId);
                 foreach (var patientRecipeItem in oldPatientRecipes)
                 {
                     _patientRecipeRepository.DeletePatientRecipe(patientRecipeItem);
@@ -159,16 +159,16 @@ namespace NeutrackAPI.Controllers
                 var breakfastOptions = allRecipes.Where(e => e.MealType.Contains("Breakfast"));
                 var lunchOptions = allRecipes.Where(e => e.MealType.Contains("Lunch"));
                 var dinnerOptions = allRecipes.Where(e => e.MealType.Contains("Dinner"));
-                double breakfastCalories = dailyCalories * 0.30;
-                double lunchCalories = dailyCalories * 0.35;
-                double dinnerCalories = dailyCalories * 0.35;
-                for (int i = 0; i < numberOfDays; i++)
+                double breakfastCalories = mealPlanDTO.DailyCalories * 0.30;
+                double lunchCalories = mealPlanDTO.DailyCalories * 0.35;
+                double dinnerCalories = mealPlanDTO.DailyCalories * 0.35;
+                for (int i = 0; i < mealPlanDTO.NumberOfDays; i++)
                 {
                     var randomBreakfast = new Random();
                     int breakfastIndex = randomBreakfast.Next(breakfastOptions.Count());
                     Recipe theChoosenBreakfast = breakfastOptions.ElementAt(breakfastIndex);
                     PatientRecipe newPatientRecipeBreakfast = new PatientRecipe();
-                    newPatientRecipeBreakfast.PatientID = patientId;
+                    newPatientRecipeBreakfast.PatientID = mealPlanDTO.PatientId;
                     newPatientRecipeBreakfast.RecipeID = theChoosenBreakfast.Id;
                     newPatientRecipeBreakfast.Portion = breakfastCalories/ _recipeRepository.GetTotalCalories(theChoosenBreakfast.Id);
                     newPatientRecipeBreakfast.Day = i+1;
@@ -178,7 +178,7 @@ namespace NeutrackAPI.Controllers
                     int lunchIndex = randomLunch.Next(lunchOptions.Count());
                     Recipe theChoosenLunch = lunchOptions.ElementAt(lunchIndex);
                     PatientRecipe newPatientRecipeLunch = new PatientRecipe();
-                    newPatientRecipeLunch.PatientID = patientId;
+                    newPatientRecipeLunch.PatientID = mealPlanDTO.PatientId;
                     newPatientRecipeLunch.RecipeID = theChoosenLunch.Id;
                     newPatientRecipeLunch.Portion = lunchCalories/ _recipeRepository.GetTotalCalories(theChoosenLunch.Id);
                     newPatientRecipeLunch.Day = i+1;
@@ -188,7 +188,7 @@ namespace NeutrackAPI.Controllers
                     int dinnerIndex = randomDinner.Next(dinnerOptions.Count());
                     Recipe theChoosenDinner = dinnerOptions.ElementAt(dinnerIndex);
                     PatientRecipe newPatientRecipeDinner = new PatientRecipe();
-                    newPatientRecipeDinner.PatientID = patientId;
+                    newPatientRecipeDinner.PatientID = mealPlanDTO.PatientId;
                     newPatientRecipeDinner.RecipeID = theChoosenDinner.Id;
                     newPatientRecipeDinner.Portion = dinnerCalories/ _recipeRepository.GetTotalCalories(theChoosenDinner.Id);
                     newPatientRecipeDinner.Day = i+1;
@@ -198,7 +198,7 @@ namespace NeutrackAPI.Controllers
                 
                 _patientRecipeRepository.SaveChanges();
                 
-                return this.GetPatientRecipesByPatientId(patientId);
+                return this.GetPatientRecipesByPatientId(mealPlanDTO.PatientId);
             }
             catch (Exception ex)
             {
