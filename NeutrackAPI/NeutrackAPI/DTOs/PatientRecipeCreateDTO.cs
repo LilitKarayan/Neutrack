@@ -13,5 +13,7 @@ namespace NeutrackAPI.DTOs
         [Required(ErrorMessage = "The portion is required")]
         public double Portion { get; set; }
 
+        public int Day { get; set; }
+
     }
 }

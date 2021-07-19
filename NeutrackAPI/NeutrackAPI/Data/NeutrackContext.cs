@@ -32,7 +32,7 @@ namespace NeutrackAPI.Data
             modelBuilder.Entity<RecipeProduct>().HasOne(p => p.Product).WithMany(rp => rp.RecipeProducts).HasForeignKey(pi => pi.ProductID);
             modelBuilder.Entity<RecipeProduct>().HasOne(r => r.Recipe).WithMany(rp => rp.RecipeProducts).HasForeignKey(ri => ri.RecipeID);
             
-            modelBuilder.Entity<PatientRecipe>().HasKey(pr => new { pr.RecipeID, pr.PatientID });
+            modelBuilder.Entity<PatientRecipe>().HasKey(pr => new { pr.RecipeID, pr.PatientID, pr.Day });
             modelBuilder.Entity<PatientRecipe>().HasOne(p => p.Patient).WithMany(pr => pr.PatientRecipes).HasForeignKey(pi => pi.PatientID);
             modelBuilder.Entity<PatientRecipe>().HasOne(r => r.Recipe).WithMany(pr => pr.PatientRecipes).HasForeignKey(ri => ri.RecipeID);
         }

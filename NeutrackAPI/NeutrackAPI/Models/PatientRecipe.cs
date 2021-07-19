@@ -16,5 +16,7 @@ namespace NeutrackAPI.Models
 
         [Required]
         public double Portion { get; set; }
+
+        public int Day { get; set; }
     }
 }

@@ -8,5 +8,7 @@ namespace NeutrackAPI.DTOs
         public int PatientID { get; set; }
 
         public double Portion { get; set; }
+
+        public int Day { get; set; }
     }
 }

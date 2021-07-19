@@ -14,7 +14,6 @@ namespace NeutrackAPI.Recipess
             {
                 RecipeID = rp.RecipeID,
                 ProductID = rp.ProductID,
-                ProductName = rp.Product.Name,
                 WeightInGrams = rp.WeightInGrams
             })));
             CreateMap<RecipeCreateDTO, Recipe>();

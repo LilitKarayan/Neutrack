@@ -140,46 +140,71 @@ namespace NeutrackAPI.Controllers
 
 
 
-        // /// <summary>
-        // /// Generate a new MealPlan for Given Number of Dates
-        // /// </summary>
-        // /// <param name=""></param>
-        // /// <returns></returns>
-        // [HttpPost, Route("newplan/{patientId}/{dailyCalories}/{numberOfDays}")]
-        // public ActionResult<IEnumerable<PatientRecipeReadDTO>> GenerateMealPlan(int patientId, int dailyCalories, int numberOfDays)
-        // {
-        //     try
-        //     {
-        //         var oldPatientRecipes = _patientRecipeRepository.GetPatientRecipesByPatientId(patientId);
-        //         foreach (var patientRecipeItem in oldPatientRecipes)
-        //         {
-        //             _patientRecipeRepository.DeletePatientRecipe(patientRecipeItem);
-        //         }
-        //         var allRecipes = _recipeRepository.GetAllRecipes();
-        //         var breakfastOptions = allRecipes.Where(e => e.MealType.Contains("Breakfast"));
-        //         var lunchOptions = allRecipes.Where(e => e.MealType.Contains("Lunch"));
-        //         var dinnerOptions = allRecipes.Where(e => e.MealType.Contains("Dinner"));
-        //         double breakfastCalories = dailyCalories * 0.30;
-        //         double lunchCalories = dailyCalories * 0.35;
-        //         double dinnerCalories = dailyCalories * 0.35;
-        //         for (int i = 0; i < numberOfDays; i++)
-        //         {
-        //             var random = new Random();
-        //             int breakfastIndex = random.Next(breakfastOptions.Count());
-        //             Recipe theChoosenBreakfast = breakfastOptions.ElementAt(breakfastIndex);
+        /// <summary>
+        /// Generate a new MealPlan for Given Number of Dates
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [HttpPost, Route("newplan/{patientId}/{dailyCalories}/{numberOfDays}")]
+        public ActionResult<IEnumerable<PatientRecipeReadDTO>> GenerateMealPlan(int patientId, int dailyCalories, int numberOfDays)
+        {
+            try
+            {
+                var oldPatientRecipes = _patientRecipeRepository.GetPatientRecipesByPatientId(patientId);
+                foreach (var patientRecipeItem in oldPatientRecipes)
+                {
+                    _patientRecipeRepository.DeletePatientRecipe(patientRecipeItem);
+                }
+                var allRecipes = _recipeRepository.GetAllRecipes();
+                var breakfastOptions = allRecipes.Where(e => e.MealType.Contains("Breakfast"));
+                var lunchOptions = allRecipes.Where(e => e.MealType.Contains("Lunch"));
+                var dinnerOptions = allRecipes.Where(e => e.MealType.Contains("Dinner"));
+                double breakfastCalories = dailyCalories * 0.30;
+                double lunchCalories = dailyCalories * 0.35;
+                double dinnerCalories = dailyCalories * 0.35;
+                for (int i = 0; i < numberOfDays; i++)
+                {
+                    var randomBreakfast = new Random();
+                    int breakfastIndex = randomBreakfast.Next(breakfastOptions.Count());
+                    Recipe theChoosenBreakfast = breakfastOptions.ElementAt(breakfastIndex);
+                    PatientRecipe newPatientRecipeBreakfast = new PatientRecipe();
+                    newPatientRecipeBreakfast.PatientID = patientId;
+                    newPatientRecipeBreakfast.RecipeID = theChoosenBreakfast.Id;
+                    newPatientRecipeBreakfast.Portion = breakfastCalories/ _recipeRepository.GetTotalCalories(theChoosenBreakfast.Id);
+                    newPatientRecipeBreakfast.Day = i+1;
+                    _patientRecipeRepository.CreatePatientRecipe(newPatientRecipeBreakfast);
 
-        //         }
+                    var randomLunch = new Random();
+                    int lunchIndex = randomLunch.Next(lunchOptions.Count());
+                    Recipe theChoosenLunch = lunchOptions.ElementAt(lunchIndex);
+                    PatientRecipe newPatientRecipeLunch = new PatientRecipe();
+                    newPatientRecipeLunch.PatientID = patientId;
+                    newPatientRecipeLunch.RecipeID = theChoosenLunch.Id;
+                    newPatientRecipeLunch.Portion = lunchCalories/ _recipeRepository.GetTotalCalories(theChoosenLunch.Id);
+                    newPatientRecipeLunch.Day = i+1;
+                    _patientRecipeRepository.CreatePatientRecipe(newPatientRecipeLunch);
+
+                    var randomDinner = new Random();
+                    int dinnerIndex = randomDinner.Next(dinnerOptions.Count());
+                    Recipe theChoosenDinner = dinnerOptions.ElementAt(dinnerIndex);
+                    PatientRecipe newPatientRecipeDinner = new PatientRecipe();
+                    newPatientRecipeDinner.PatientID = patientId;
+                    newPatientRecipeDinner.RecipeID = theChoosenDinner.Id;
+                    newPatientRecipeDinner.Portion = dinnerCalories/ _recipeRepository.GetTotalCalories(theChoosenDinner.Id);
+                    newPatientRecipeDinner.Day = i+1;
+                    _patientRecipeRepository.CreatePatientRecipe(newPatientRecipeDinner);
+                }
                 
-        //         _patientRecipeRepository.CreatePatientRecipe(patientRecipe);
-        //         _patientRecipeRepository.SaveChanges();
                 
-        //         return CreatedAtRoute(new { patientRecipe.RecipeID, patientRecipe.PatientID }, patientRecipe);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         return StatusCode(500, ex.Message);
-        //     }
-        // }
+                _patientRecipeRepository.SaveChanges();
+                
+                return this.GetPatientRecipesByPatientId(patientId);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
    
     }
 }

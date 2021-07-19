@@ -15,7 +15,7 @@ using System.Net;
 
 namespace NeutrackAPI.Controllers
 {
-    // [Authorize(Roles = Roles.Admin + "," + Roles.Nutritionist)]
+    [Authorize(Roles = Roles.Admin + "," + Roles.Nutritionist)]
     [Route("api/[controller]")]
     [ApiController]
 
