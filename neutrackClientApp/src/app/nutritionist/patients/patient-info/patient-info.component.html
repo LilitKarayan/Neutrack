@@ -2,7 +2,12 @@
   <div>
     <mat-card>
       <mat-card-title>{{patient.fullName}}</mat-card-title>
-      <mat-card-subtitle>{{patient.email}}</mat-card-subtitle>
+      <mat-card-subtitle>
+        {{patient.email}}
+      </mat-card-subtitle>
+      <button id="generateMealPlan" mat-raised-button color="accent" (click)="generateMealPlan()"
+           cdkFocusInitial>Generate Meal Plan
+      </button>
       <mat-card-content>
         <mat-grid-list  cols="2" rowHeight="5:1">
           <mat-grid-tile>

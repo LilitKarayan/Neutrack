@@ -11,7 +11,8 @@ import { nutritionistUpdatePatient,
   createProduct,
   deleteProduct,getProducts,
   getRecipes, getRecipeById, createRecipe, deleteRecipe, updateRecipe,
-  searchPatients, getAllProductsWithPaging, getUser
+  searchPatients, getAllProductsWithPaging,
+  generateMealPlan
  } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,7 +20,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import {getApiRoute } from '../../environments/environment';
-import { IPatient, IDashboard, INutritionist, IProduct, IRecipe, IRecipeProduct } from '@models';
+import { IPatient, IDashboard, INutritionist, IProduct, IRecipe, IRecipeProduct, IGenerateMealPlan } from '@models';
 import * as moment from 'moment';
 import CryptoJS from 'crypto-js';
 
@@ -129,5 +130,8 @@ export class NutritionistService {
   addExistingPatientToNutritionist(userId) {
     let url = getApiRoute(nutritionistAddPatientEndpoint);
     return this.http.post(`${url}/${userId}`, httpOptions).toPromise<any>();
+  }
+  generatePatientMealPlan(mealPlan: IGenerateMealPlan) {
+    return this.http.post(getApiRoute(generateMealPlan), mealPlan, httpOptions).toPromise<any>();
   }
 }

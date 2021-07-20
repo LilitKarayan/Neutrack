@@ -68,6 +68,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { AddEditRecipeComponent } from './nutritionist/recipes/add-edit-recipe/add-edit-recipe.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { PatientMainComponent } from './patient/patient-main/patient-main.component';
+import { GenerateMealPlanModalComponent } from './nutritionist/patients/generate-meal-plan-modal/generate-meal-plan-modal.component';
 
 
 @NgModule({
@@ -97,6 +98,7 @@ import { PatientMainComponent } from './patient/patient-main/patient-main.compon
     DeleteRecipeComponent,
     AddEditRecipeComponent,
     PatientMainComponent,
+    GenerateMealPlanModalComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Generate Meal Plan</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formInstance">
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile>
+        <div>
+          <mat-form-field class="fullWidth" appearance="outline">
+            <mat-label>Daily Calories *</mat-label>
+            <input matInput min="100" max="2000" type="number" name="dailyCalories" formControlName="dailyCalories">
+            <mat-error *ngIf="formInstance.controls['dailyCalories']?.errors?.required">Daily calories is required</mat-error>
+            <mat-error *ngIf="formInstance.controls['dailyCalories']?.errors?.min">Minimum daily calories should not be less than 100</mat-error>
+            <mat-error *ngIf="formInstance.controls['dailyCalories']?.errors?.max">Maximum daily calories should not be over 2000</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <div class="mb-3">
+            <label>Number of days *</label>
+            <label class="example-value-label">{{formInstance.get('numberOfDays').value + 'day(s)'}}</label>
+          </div>
+            <mat-slider
+                class="slider"
+                name="numberOfDays"
+                formControlName="numberOfDays"
+                thumbLabel
+                [displayWith]="formatLabel"
+                tickInterval="1"
+                step="1"
+                min="1"
+                max="7"
+                aria-label="days">
+            </mat-slider>
+            <div>
+              <mat-error *ngIf="formInstance.controls['numberOfDays']?.errors?.required">Number of days  is required</mat-error>
+            </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="" mat-dialog-actions>
+          <button id="submitButton" mat-raised-button color="primary"
+           (click)="save()"
+            cdkFocusInitial>Save</button>
+          <button mat-raised-button mat-dialog-close color="accent">Cancel</button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
