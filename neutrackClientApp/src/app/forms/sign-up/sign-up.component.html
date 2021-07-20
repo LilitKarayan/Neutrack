@@ -125,7 +125,7 @@
             <div class="theContainer">
               <mat-form-field class="normal-full-width" appearance="fill">
                 <mat-label>Email<span>*</span></mat-label>
-                <input formControlName="email" matInput />
+                <input autocomplete="off" formControlName="email" matInput />
                 <mat-error *ngIf="form.controls['email'].errors?.email">Invalid email address</mat-error>
                 <mat-error *ngIf="form.controls['email'].errors?.required">Email is mandatory</mat-error>
               </mat-form-field>
@@ -135,7 +135,7 @@
             <div class="theContainer">
               <mat-form-field class="normal-full-width" appearance="fill">
                 <mat-label>Password<span>*</span></mat-label>
-                <input formControlName="password" [type]="hide ? 'password' : 'text'" matInput pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+                <input formControlName="password" autocomplete="off" [type]="hide ? 'password' : 'text'" matInput pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
                 <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
@@ -160,6 +160,7 @@
                   formControlName="confirmationPassword"
                   [type]="hideConfirmation ? 'password' : 'text'"
                   matInput
+                  autocomplete="off"
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
                   <button mat-icon-button matSuffix type="button" (click)="hideConfirmation = !hideConfirmation" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hideConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -176,18 +177,7 @@
         </mat-grid-list>
         <div>
           <button class="button-row-submit" mat-raised-button type="submit"
-            [disabled]="
-              form.controls['email'].invalid ||
-              form.controls['password'].invalid ||
-              form.controls['confirmationPassword'].invalid ||
-              form.controls['confirmationPassword'].value !==
-                form.controls['password'].value ||
-              form.controls['firstName'].invalid ||
-              form.controls['lastName'].invalid ||
-              form.controls['dateOfBirth'].invalid ||
-              form.controls['phoneNumber'].invalid ||
-              form.controls['gender'].invalid ||
-              form.controls['yearsOfExperience'].invalid "> Submit </button>
+            [disabled]="form.invalid"> Submit </button>
           <button class="button-row-clear" color="accent" type="reset" mat-raised-button> Clear </button>
         </div>
       </form>

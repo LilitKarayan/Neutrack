@@ -140,9 +140,16 @@ export class AccountComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.nutritionistService.deleteAccount(this.activeUser.id).then(() => {
-          this.authService.logout();
-        })
+        if(this.roles.includes('Nutritionist')){
+          this.nutritionistService.deleteAccount(this.activeUser.nutritionistId).then(() => {
+            this.authService.logout();
+          })
+        } else if(this.roles.includes('User')){
+          this.patientService.deleteAccount(this.activeUser.id).then(() => {
+            this.authService.logout();
+          })
+        }
+
       }
     });
   }

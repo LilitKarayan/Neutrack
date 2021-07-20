@@ -42,13 +42,13 @@ export class InterceptorService implements HttpInterceptor {
     }
     return next.handle(req).do((event: HttpEvent<any>) => {
       if(event instanceof HttpResponse){
+        this.loadingDialogService.hideDialog();
         if(event.ok){
           if(req.url.includes(loginUrl) && event.body.roles){
             event.body.roles.includes('Nutritionist')?this.router.navigateByUrl('/dashboard'):this.router.navigateByUrl('/home');
           } else if(req.url.includes(nutritionistSignupUrl) || req.url.includes(patientSignupUrl)){
             this.router.navigateByUrl('/login');
           }
-          this.loadingDialogService.hideDialog();
         }
       }
     }, (err: any) => {
