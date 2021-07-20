@@ -121,7 +121,7 @@ namespace NeutrackAPI.Controllers
                 patientModel.User = userModel;
                 if (existingUser != null)
                 {
-                    return BadRequest("Email has already been taken");
+                    return BadRequest(new {message = "Email has already been taken" });
                 }
                 userModel.UserRoles = new List<UserRole>
                 {
@@ -172,7 +172,7 @@ namespace NeutrackAPI.Controllers
                 
                 if (existingUser != null)
                 {
-                    return BadRequest("Email has already been taken");
+                    return BadRequest(new { message = "Email has already been taken" });
                 }
                 userModel.UserRoles = new List<UserRole>
                 {
@@ -211,7 +211,7 @@ namespace NeutrackAPI.Controllers
                 var existingUser = _userRepository.GetUserByEmail(userModel.Email);
                 if (existingUser != null)
                 {
-                    throw new Exception("Email has already been taken");
+                    return BadRequest(new { message = "Email has already been taken" });
                 }
                 userModel.UserRoles = new List<UserRole>
                 {

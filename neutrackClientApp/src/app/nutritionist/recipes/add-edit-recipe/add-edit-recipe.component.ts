@@ -96,7 +96,7 @@ export class AddEditRecipeComponent implements OnInit {
   }
   newRecipeProduct(): FormGroup {
     let fg = this.formBuilder.group({
-      recipeID: [],
+      recipeID: [0],
       productID: [],
       productName: ['', Validators.compose([Validators.required])],
       weightInGrams: ['', Validators.compose([Validators.required, Validators.min(0)])],
