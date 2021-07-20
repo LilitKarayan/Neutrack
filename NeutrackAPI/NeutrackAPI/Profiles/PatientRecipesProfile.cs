@@ -9,7 +9,7 @@ namespace NeutrackAPI.Profiles
     {
         public PatientRecipesProfile()
         {
-            CreateMap<PatientRecipe, PatientRecipeReadDTO>();
+            CreateMap<PatientRecipe, PatientRecipeReadDTO>().ForMember(d => d.RecipeName, o => o.MapFrom(s => s.Recipe.Name));
             CreateMap<PatientRecipeCreateDTO, PatientRecipe>();
             CreateMap<PatientRecipe, PatientRecipeCreateDTO>();
         }
