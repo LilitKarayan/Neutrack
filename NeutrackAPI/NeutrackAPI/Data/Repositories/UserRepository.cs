@@ -183,12 +183,45 @@ namespace NeutrackAPI.Data
             return SaveChanges();
         }
 
+
+
         public async Task<Patient> GetPatient(int userId)
         {
             return  await _context.Patients
                 .Include(u => u.User)
                 .Include(u => u.PatientActivityHistories)
                 .FirstOrDefaultAsync(x => x.UserId == userId);
+        }
+
+        public async Task<bool> DeletePatient(int userId)
+        {
+            var patient = await _context.Patients
+                .Include(x => x.NutritionistPatientHistories)
+                .Include(x => x.Nutritionist)
+                .Include(x => x.PatientActivityHistories)
+                .Include(x => x.PatientRecipes)
+                .Include(x => x.Feedbacks)
+                .FirstOrDefaultAsync(x => x.UserId == userId);
+
+            if (patient.Feedbacks != null)
+            {
+                _context.RemoveRange(patient.Feedbacks);
+            }
+            if (patient.NutritionistPatientHistories != null)
+            {
+                _context.RemoveRange(patient.NutritionistPatientHistories);
+            }
+            if (patient.PatientActivityHistories != null)
+            {
+                _context.RemoveRange(patient.PatientActivityHistories);
+            }
+            if (patient.PatientRecipes != null)
+            {
+                _context.RemoveRange(patient.PatientRecipes);
+            }
+            _context.Remove(patient);
+            return SaveChanges();
+
         }
     }
 }

@@ -31,6 +31,9 @@ export class PatientService {
   getNutritionist(nutritionistId) {
     return this.http.get<INutritionist>(getApiRoute(fromApiConfig.getNutritionist(nutritionistId)), httpOptions).toPromise<INutritionist>();
   }
+  deleteAccount(userId){
+    return this.http.delete(getApiRoute(fromApiConfig.userById(userId)), httpOptions).toPromise<any>();
+  }
 }
 
 

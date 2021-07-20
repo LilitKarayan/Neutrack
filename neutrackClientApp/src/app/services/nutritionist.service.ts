@@ -122,8 +122,8 @@ export class NutritionistService {
     .set('pageSize', pageSize);
     return this.http.get<any>(getApiRoute(getAllProductsWithPaging), {params}).toPromise<any>();
   }
-  deleteAccount(userId){
-    return this.http.delete(getApiRoute(getUser(userId)), httpOptions).toPromise<any>();
+  deleteAccount(nutritionistId){
+    return this.http.delete(getApiRoute(getNutritionist(nutritionistId)), httpOptions).toPromise<any>();
   }
 
   addExistingPatientToNutritionist(userId) {

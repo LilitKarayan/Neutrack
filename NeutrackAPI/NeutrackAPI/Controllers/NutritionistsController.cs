@@ -330,10 +330,6 @@ namespace NeutrackAPI.Controllers
                 {
                     return NotFound(new { message = "Nutritionist not found" });
                 }
-                if (!nutritionist.IsActive)
-                {
-                    return UnprocessableEntity(new { message = "This account does not exist" });
-                }
                 var result = await _nutritionistRepository.DeleteNutritionist(currentNutritionistId);
                 if (result)
                 {
