@@ -8,8 +8,14 @@
         <mat-panel-title>
           {{recipe.name}}
         </mat-panel-title>
-        <mat-panel-description *ngIf="recipe.recipeProducts.length > 0">
-          {{recipe.recipeProducts.length === 1 ? recipe.recipeProducts.length + ' ingredient ' : recipe.recipeProducts.length + ' ingredients ' }}
+        <mat-panel-description>
+          <strong>
+            {{recipe.mealType}}
+          </strong>
+
+          <strong *ngIf="recipe.recipeProducts.length > 0">
+            {{recipe.recipeProducts.length === 1 ? recipe.recipeProducts.length + ' ingredient ' : recipe.recipeProducts.length + ' ingredients ' }}
+          </strong>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>

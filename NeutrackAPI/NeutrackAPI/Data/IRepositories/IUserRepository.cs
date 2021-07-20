@@ -18,6 +18,7 @@ namespace NeutrackAPI.Data
         void DeactivateUser(User user);
         IEnumerable<User> SearchUser(string searchQuery, Role role);
         Task<bool> DeleteUser(int userId);
+        Task<bool> DeletePatient(int userId);
         Task<Patient> GetPatient(int userId);
     }
 }

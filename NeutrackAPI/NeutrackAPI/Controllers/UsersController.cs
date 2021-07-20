@@ -121,7 +121,7 @@ namespace NeutrackAPI.Controllers
                 patientModel.User = userModel;
                 if (existingUser != null)
                 {
-                    return BadRequest("Email has already been taken");
+                    return BadRequest(new {message = "Email has already been taken" });
                 }
                 userModel.UserRoles = new List<UserRole>
                 {
@@ -172,7 +172,7 @@ namespace NeutrackAPI.Controllers
                 
                 if (existingUser != null)
                 {
-                    return BadRequest("Email has already been taken");
+                    return BadRequest(new { message = "Email has already been taken" });
                 }
                 userModel.UserRoles = new List<UserRole>
                 {
@@ -211,7 +211,7 @@ namespace NeutrackAPI.Controllers
                 var existingUser = _userRepository.GetUserByEmail(userModel.Email);
                 if (existingUser != null)
                 {
-                    throw new Exception("Email has already been taken");
+                    return BadRequest(new { message = "Email has already been taken" });
                 }
                 userModel.UserRoles = new List<UserRole>
                 {
@@ -294,6 +294,7 @@ namespace NeutrackAPI.Controllers
         {
             try
             {
+                bool isPatientDeleted = false;
                 var currentUserId = int.Parse(User.Identity.Name);
                 //var patientId = int.Parse(User.FindFirstValue(ClaimTypes.Upn));
                 if (id != currentUserId && !User.IsInRole(Roles.Admin))
@@ -305,16 +306,24 @@ namespace NeutrackAPI.Controllers
                 {
                     return NotFound();
                 }
-                var result = await _userRepository.DeleteUser(currentUserId);
-                if (result) 
+                isPatientDeleted = await _userRepository.DeletePatient(currentUserId);
+                if (isPatientDeleted)
                 {
-                    return Accepted(new { message = "Your account has been deleted successfully" });
+                    var userDeleted = await _userRepository.DeleteUser(currentUserId);
+                    if (userDeleted)
+                    {
+                        return Accepted(new { message = "Your account has been deleted successfully" });
+                    }
+                    else
+                    {
+                        return UnprocessableEntity(new { message = "Your cannot be deleted, please contact admin" });
+                    }
+
                 }
                 else
                 {
-                    return UnprocessableEntity(new { message = "Your account has been deleted successfully" });
+                    return UnprocessableEntity(new { message = "Your cannot be deleted, please contact admin" });
                 }
-
 
             }
             catch (Exception ex)

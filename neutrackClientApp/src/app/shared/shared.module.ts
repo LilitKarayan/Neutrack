@@ -9,26 +9,37 @@ import { MessageSnackbarComponent } from './message-snackbar.component';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { ActivityLevelPipe } from './activity-level.pipe';
+import { ModalComponent } from './modal/modal.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
     ErrorDialogComponent,
     LoadingDialogComponent,
     MessageSnackbarComponent,
-    DeleteConfirmationComponent
+    DeleteConfirmationComponent,
+    ActivityLevelPipe,
+    ModalComponent
   ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
     CdkTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSlideToggleModule
   ],
   exports:[
     ErrorDialogComponent,
     LoadingDialogComponent,
     MessageSnackbarComponent,
     DeleteConfirmationComponent,
+    ActivityLevelPipe,
   ],
   entryComponents:[ ErrorDialogComponent,
     LoadingDialogComponent]

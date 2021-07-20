@@ -74,6 +74,7 @@
                   matInput
                   type="tel"
                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  (change)="formatPhoneNumber()"
                   placeholder="Format: 123-456-7890"/>
                 <mat-error *ngIf="form.controls['phoneNumber'].errors?.required">Phone Number is mandatory</mat-error>
               </mat-form-field>
@@ -133,7 +134,7 @@
             <div class="theContainer">
               <mat-form-field class="normal-full-width" appearance="fill">
                 <mat-label>Email<span>*</span></mat-label>
-                <input formControlName="email" matInput />
+                <input autocomplete="off" formControlName="email" matInput />
                 <mat-error *ngIf="form.controls['email'].errors?.email">Invalid email address</mat-error>
                 <mat-error *ngIf="form.controls['email'].errors?.required">Email is mandatory</mat-error>
               </mat-form-field>
@@ -143,7 +144,10 @@
             <div class="theContainer">
               <mat-form-field class="normal-full-width" appearance="fill">
                 <mat-label>Password<span>*</span></mat-label>
-                <input formControlName="password" type="password" matInput pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+                <input formControlName="password" autocomplete="off" [type]="hide ? 'password' : 'text'" matInput pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+                <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
                 <mat-hint>
                   <ul>
                     <li>8-16 characters</li>
@@ -163,9 +167,13 @@
                 <mat-label>Confirm Password<span>*</span></mat-label>
                 <input
                   formControlName="confirmationPassword"
-                  type="password"
+                  [type]="hideConfirmation ? 'password' : 'text'"
                   matInput
+                  autocomplete="off"
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&\-*]).{8,16}"/>
+                  <button mat-icon-button matSuffix type="button" (click)="hideConfirmation = !hideConfirmation" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hideConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
                 <mat-error *ngIf="form.controls['confirmationPassword'].errors?.required">Confirmation Password is mandatory</mat-error>
               </mat-form-field>
               <div *ngIf="
@@ -177,25 +185,29 @@
           </mat-grid-tile>
         </mat-grid-list>
         <div>
+          <!-- <button class="button-row-submit" mat-raised-button type="submit"
+          <<<<<<< HEAD
+                      [disabled]="
+                        form.controls['email'].invalid ||
+                        form.controls['password'].invalid ||
+                        form.controls['confirmationPassword'].invalid ||
+                        form.controls['confirmationPassword'].value !==
+                          form.controls['password'].value ||
+                        form.controls['firstName'].invalid ||
+                        form.controls['lastName'].invalid ||
+                        form.controls['dateOfBirth'].invalid ||
+                        form.controls['phoneNumber'].invalid ||
+                        form.controls['gender'].invalid ||
+                        form.controls['yearsOfExperience'].invalid ||
+                        form.controls['activityLevel'].invalid ||
+                        form.controls['height'].invalid ||
+                        form.controls['weight'].invalid ||
+                        form.controls['goal'].invalid 
+                         "> Submit </button>
+                    <button class="button-row-clear" type="reset" mat-raised-button> Clear </button> -->
           <button class="button-row-submit" mat-raised-button type="submit"
-            [disabled]="
-              form.controls['email'].invalid ||
-              form.controls['password'].invalid ||
-              form.controls['confirmationPassword'].invalid ||
-              form.controls['confirmationPassword'].value !==
-                form.controls['password'].value ||
-              form.controls['firstName'].invalid ||
-              form.controls['lastName'].invalid ||
-              form.controls['dateOfBirth'].invalid ||
-              form.controls['phoneNumber'].invalid ||
-              form.controls['gender'].invalid ||
-              form.controls['yearsOfExperience'].invalid ||
-              form.controls['activityLevel'].invalid ||
-              form.controls['height'].invalid ||
-              form.controls['weight'].invalid ||
-              form.controls['goal'].invalid 
-               "> Submit </button>
-          <button class="button-row-clear" type="reset" mat-raised-button> Clear </button>
+            [disabled]="form.invalid"> Submit </button>
+          <button class="button-row-clear" color="accent" type="reset" mat-raised-button> Clear </button>
         </div>
       </form>
     </mat-card-content>

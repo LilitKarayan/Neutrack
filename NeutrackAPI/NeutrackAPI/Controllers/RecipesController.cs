@@ -124,9 +124,13 @@ namespace NeutrackAPI.Controllers
                 {
                     recipeItem.Name = recipeUpdate.Name;
                 }
-                if( !recipeItem.Instruction.Equals(recipeUpdate.Instruction, StringComparison.InvariantCultureIgnoreCase))
+                if(recipeItem.Instruction == null || !recipeItem.Instruction.Equals(recipeUpdate.Instruction, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    recipeItem.Name = recipeUpdate.Name;
+                    recipeItem.Instruction = recipeUpdate.Instruction;
+                }
+                if (recipeItem.MealType == null || !recipeItem.MealType.Equals(recipeUpdate.MealType, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    recipeItem.MealType = recipeUpdate.MealType;
                 }
                 //_mapper.Map(recipeUpdate, recipeItem);
                 recipeItem.RecipeProducts = _mapper.Map(recipeUpdate.RecipeProducts, recipeItem.RecipeProducts);
@@ -178,6 +182,18 @@ namespace NeutrackAPI.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        
+        /// <summary>
+        /// GET api/recipes
+        /// </summary>
+        /// <returns>A list of Recipes</returns>
+        [HttpGet, Route("calories/{recipeId}")]
+        
+        public double GetTotalCalories(int recipeId)
+        {
+            return _recipeRepository.GetTotalCalories(recipeId);
         }
 
     }

@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from 'app/shared/delete-confirmation/delete-confirmation.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
+import { ModalComponent } from 'app/shared/modal/modal.component';
 
 @Component({
   selector: 'app-account',
@@ -84,7 +85,6 @@ export class AccountComponent implements OnInit {
 
   async getNutritionist(){
     await this.nutritionistService.getNutritionist(this.activeUser.nutritionistId).subscribe(data => {
-      console.log(data);
       this.userData = data;
       this.userSubject.next(data);
       this.setFormData(data);
@@ -116,15 +116,40 @@ export class AccountComponent implements OnInit {
       this.setFormData(data);
     })
   }
+  async getPatientNutritionistDetail(nutritionistId){
+    let nutritionistData = await this.patientService.getNutritionist(nutritionistId);
+    if(nutritionistData){
+      const dialogRef = this.dialog.open(ModalComponent, {
+        maxHeight: "100%",
+        width: "600px",
+        maxWidth: "100%",
+        hasBackdrop: true,
+        data:{
+          title: 'Nutritionist Detail',
+          content: '',
+          details: nutritionistData,
+        },
+      });
+    } else {
+      throw new Error('Nutritionist not found');
+    }
+  }
   async deleteAccount(){
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
       data: "Are you sure to want delete your account?",
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.nutritionistService.deleteAccount(this.activeUser.id).then(() => {
-          this.authService.logout();
-        })
+        if(this.roles.includes('Nutritionist')){
+          this.nutritionistService.deleteAccount(this.activeUser.nutritionistId).then(() => {
+            this.authService.logout();
+          })
+        } else if(this.roles.includes('User')){
+          this.patientService.deleteAccount(this.activeUser.id).then(() => {
+            this.authService.logout();
+          })
+        }
+
       }
     });
   }
@@ -141,15 +166,16 @@ export class AccountComponent implements OnInit {
       let res = null;
       if(this.roles.includes('Nutritionist')){
         res = await this.nutritionistService.updateNutritionist(this.activeUser.nutritionistId, updatedData);
-        this.showSnackBar();
-        this.getNutritionist();
+        if(res){
+          this.showSnackBar();
+          this.getNutritionist();
+        }
       } else if(this.roles.includes('User')){
-        console.log(updatedData);
         this.patientService.updatePatient(this.activeUser.id, updatedData).subscribe(data => {
           res = data;
+          this.showSnackBar();
+          this.getUser();
         });
-        this.showSnackBar();
-        this.getUser();
       }
 
     } else {
