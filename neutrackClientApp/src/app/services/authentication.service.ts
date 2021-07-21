@@ -48,7 +48,7 @@ export class AuthenticationService {
       this.userRoles = this.rolesSubject.asObservable();
       this.userLoggedIn = this.isLoggedInSubject.asObservable();
       this.userLoggedOut = this.isLoggedOutSubject.asObservable();
-      //useTestApi();
+      useTestApi();
   }
 
   public isLoggedIn(){
