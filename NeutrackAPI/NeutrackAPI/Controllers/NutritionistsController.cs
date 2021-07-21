@@ -524,18 +524,6 @@ namespace NeutrackAPI.Controllers
                     return Forbid();
                 }
                 user.Patient.NutritionistId = currentNutritionistId;
-                if(user.Patient.PatientActivityHistories == null || user.Patient.PatientActivityHistories.Count < 1)
-                {
-                    user.Patient.PatientActivityHistories = new List<PatientActivityHistory>
-                    {
-                        new PatientActivityHistory
-                        {
-                            Patient = user.Patient,
-                            Weight = (double)user.Patient.Weight,
-                            CreatedDate = DateTime.UtcNow
-                        }
-                    };
-                }
                 user.Patient.NutritionistPatientHistories = new List<NutritionistPatientHistory>
                 {
                     new NutritionistPatientHistory

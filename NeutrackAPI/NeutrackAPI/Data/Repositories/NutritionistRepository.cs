@@ -36,13 +36,13 @@ namespace NeutrackAPI.Data.Repositories
                 .Include(x => x.Patients)
                 .Include(x => x.NutritionistPatientHistories)
                 .FirstOrDefaultAsync(x => x.Id == nutritionistId);
+            nutritionist.Patients.ForEach(p =>
+            {
+                p.NutritionistId = null;
+            });
             if(nutritionist.Feedbacks != null)
             {
                 _context.RemoveRange(nutritionist.Feedbacks);
-            }
-            if (nutritionist.Patients != null)
-            {
-                _context.RemoveRange(nutritionist.Patients);
             }
             if (nutritionist.NutritionistPatientHistories != null)
             {
