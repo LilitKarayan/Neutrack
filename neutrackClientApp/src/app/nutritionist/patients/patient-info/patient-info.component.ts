@@ -92,7 +92,6 @@ export class PatientInfoComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed().subscribe(async result => {
         let resp = await this.nutritionistService.generatePatientMealPlan(result);
         if(resp){
-          console.log(resp);
           this._snackBar.openFromComponent(MessageSnackbarComponent, {
             data: `Meal plan generated successfully`
           })

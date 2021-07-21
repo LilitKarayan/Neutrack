@@ -33,6 +33,9 @@
               "src/web.config"
             ],
             "styles": [
+              "./node_modules/primeng/resources/themes/md-light-indigo/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeicons/primeicons.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],

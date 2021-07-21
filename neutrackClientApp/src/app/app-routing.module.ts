@@ -17,6 +17,7 @@ import { ProductComponent } from './nutritionist/product/product.component';
 import { RecipesComponent } from './nutritionist/recipes/recipes.component';
 import {AuthorizedGuard} from './guards/authorized.guard';
 import { PatientMainComponent } from './patient/patient-main/patient-main.component';
+import { MealPlanListComponent } from './patient/meal-plan-list/meal-plan-list.component';
 
 const routes: Routes = [
   {path: 'home', component: WelcomeComponent},
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'products', component: ProductComponent, canActivate: [NutritionistGuard]},
   {path: 'history', component: PatientMainComponent, canActivate: [PatientGuard]},
   {path: 'recipes', component: RecipesComponent, canActivate: [NutritionistGuard]},
+  {path: 'meal-plans', component: MealPlanListComponent, canActivate: [PatientGuard]},
 ];
 
 @NgModule({

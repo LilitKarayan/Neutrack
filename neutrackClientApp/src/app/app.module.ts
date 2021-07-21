@@ -71,7 +71,10 @@ import { PatientMainComponent } from './patient/patient-main/patient-main.compon
 import { GenerateMealPlanModalComponent } from './nutritionist/patients/generate-meal-plan-modal/generate-meal-plan-modal.component';
 import {TableModule} from 'primeng/table';
 import { MealPlanListComponent } from './patient/meal-plan-list/meal-plan-list.component';
-
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ButtonModule} from 'primeng/button';
+import {ContextMenuModule} from 'primeng/contextmenu';
 
 @NgModule({
   declarations: [
@@ -143,6 +146,10 @@ import { MealPlanListComponent } from './patient/meal-plan-list/meal-plan-list.c
     SharedModule,
     ChartsModule,
     TableModule,
+    MessagesModule,
+    MessageModule,
+    ButtonModule,
+    ContextMenuModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

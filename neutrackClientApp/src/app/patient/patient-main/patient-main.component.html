@@ -1,5 +1,5 @@
-<div *ngIf="(patient$ | async) as patient" class="container">
-  <mat-grid-list class="mt-2 grid-p" cols="4" rowHeight="5:1">
+<div *ngIf="(patient$ | async) as patient" class="mt-3 container">
+  <mat-grid-list class="mt-1 pt-2 grid-p" [cols]="breakpoint" rowHeight="4:1" (window:resize)="onResize($event)">
     <mat-grid-tile>
       <div class="ml-1 mat-grid-tile-content">
         <p><strong>Initial Weight</strong> <br/><span>{{patient.initialWeight}} lbs</span></p>
