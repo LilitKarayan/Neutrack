@@ -1,6 +1,10 @@
 <div class="mt-2 container">
   <div *ngIf="mealPlans && mealPlans.length == 0">
-    <p-messages [(value)]="noMealPlanMsg" [enableService]="false"></p-messages>
+    <p-messages severity="info">
+      <ng-template pTemplate>
+          <div class="p-ml-2">Your nutritionist has not created a meal plan for you</div>
+      </ng-template>
+  </p-messages>
   </div>
   <div class="mt-4" *ngIf="mealPlans && mealPlans.length > 0">
     <h1>Meal Plans</h1>
