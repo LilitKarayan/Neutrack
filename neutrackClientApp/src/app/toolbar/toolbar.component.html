@@ -29,7 +29,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a routerLink="/account" (click)="goToPage('account')" class="dropdown-item"><i class="fas fa-user-cog"></i> &nbsp; &nbsp; My account</a>
-                    <a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> &nbsp; &nbsp; Sign Out</a>
+                    <a id="signOut" class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> &nbsp; &nbsp; Sign Out</a>
                 </div>
             </li>
             <li *ngIf="!isUserLoggedIn" class="nav-item dropdown">

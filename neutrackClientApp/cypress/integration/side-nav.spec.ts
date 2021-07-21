@@ -70,7 +70,7 @@ const helper = new Helper();
 
   it('should direct to meal plans - patient', () => {
     helper.signInStartDashboardPatient();
-    cy.get("[routerLink='/recipes']").click().then(() => {
+    cy.get("[routerLink='/meal-plans']").click().then(() => {
       cy.contains('Your nutritionist has not created a meal plan for you');
     });
   });
