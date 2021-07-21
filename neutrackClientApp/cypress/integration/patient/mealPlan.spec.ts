@@ -4,20 +4,40 @@ describe('successful scenario tests - meal plan', () => {
   const helper = new Helper();
 
     it('should be able to view generated meal plan', () => {
-      helper.signInStartDashboardPatient();
-      cy.get("[routerLink='/meal-plans']").click()
-  
-      cy.get("table").find('tr').should('have.length', 3)
-      cy.get("table").should('contain', "Test Testing")
-  
-      cy.get("#theSearch").click().then(() => {
-          cy.get("#theSearch").type("Janice")
-      })
-  
-      cy.get("#theSearchButton").click().then(() => {
-          cy.get("table").find('tr').should('have.length', 2)
-          cy.get("table").should('not.contain', "Test Testing")
-      })
+        helper.signInStartDashboardPatient();
+        cy.get("[routerLink='/meal-plans']").click()
+        cy.contains("Day")
+        cy.contains("Recipe")
+        cy.contains("Meal")
+        cy.contains("Portion")
+    });
+
+    it('should have the download buttons', () => {
+        helper.signInStartDashboardPatient();
+        cy.get("[routerLink='/meal-plans']").click()
+        cy.get("#downloadXlsx").should("exist")
+        cy.get("#downloadPdf").should("exist")
+    });
+
+    it('should have breakfast, lunch, and dinner for a given day', () => {
+        helper.signInStartDashboardPatient();
+        cy.get("[routerLink='/meal-plans']").click()
+        cy.get("td:first button:first").should("exist")
+        cy.get("td:first button:first").click()
+        cy.contains("Breakfast")
+        cy.contains("Lunch")
+        cy.contains("Dinner")
+    });
+
+    it('should see recipe details when clicked', () => {
+        helper.signInStartDashboardPatient();
+        cy.get("[routerLink='/meal-plans']").click()
+        cy.get("td:first button:first").should("exist")
+        cy.get("td:first button:first").click()
+        cy.get("tr").eq(2).find("a").should("exist")
+        cy.get("tr").eq(2).find("a").click()
+        cy.contains("Recipe Detail")
+        cy.contains("Instructions")
     });
 
 });

@@ -11,9 +11,9 @@
     <p-table [value]="mealPlans" sortField="day" sortMode="single" (onSort)="onSort()" dataKey="day">
       <ng-template  pTemplate="caption">
         <div class="p-d-flex">
-            <button type="button" label="Download xlsx" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+            <button id="downloadXlsx" type="button" label="Download xlsx" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
             &nbsp;
-            <button type="button" label="Download pdf"  pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-info p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+            <button id="downloadPdf" type="button" label="Download pdf"  pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-info p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
         </div>
     </ng-template>
       <ng-template pTemplate="header">
