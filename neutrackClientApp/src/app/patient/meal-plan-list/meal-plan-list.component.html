@@ -3,14 +3,21 @@
     <p-messages [(value)]="noMealPlanMsg" [enableService]="false"></p-messages>
   </div>
   <div class="mt-4" *ngIf="mealPlans && mealPlans.length > 0">
-    <h3>Meal Plans</h3>
+    <h1>Meal Plans</h1>
     <p-table [value]="mealPlans" sortField="day" sortMode="single" (onSort)="onSort()" dataKey="day">
+      <ng-template  pTemplate="caption">
+        <div class="p-d-flex">
+            <button type="button" label="Download xlsx" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success p-mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+            &nbsp;
+            <button type="button" label="Download pdf"  pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-info p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+        </div>
+    </ng-template>
       <ng-template pTemplate="header">
         <tr>
             <th>Day</th>
             <th>Recipe</th>
             <th>Meal</th>
-            <th>Calories</th>
+            <th>Portion</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-mealPlan let-rowIndex="rowIndex" let-expanded="expanded">
@@ -27,13 +34,16 @@
 
           </td>
           <td>
-            {{mealPlan.recipeName}}
+            <a pButton type="button" class="p-button-info p-button-text" (click)="getRecipe(mealPlan.recipeID)">
+              {{mealPlan.recipeName}}
+            </a>
           </td>
           <td>
               <span [class]="'meal-type-' + mealPlan.mealType">{{mealPlan.mealType}}</span>
           </td>
           <td>
-            {{mealPlan.portion * 100 | number: '1.0-0'}}
+            {{mealPlan.portion  | number: '1.00'}}
+            <!-- {{mealPlan.portion | percent}} -->
           </td>
       </tr>
   </ng-template>

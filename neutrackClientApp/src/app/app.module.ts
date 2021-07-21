@@ -75,6 +75,9 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ButtonModule} from 'primeng/button';
 import {ContextMenuModule} from 'primeng/contextmenu';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { RecipleModalDialogComponent } from './patient/reciple-modal-dialog/reciple-modal-dialog.component';
+import {PanelModule} from 'primeng/panel'
 
 @NgModule({
   declarations: [
@@ -105,6 +108,7 @@ import {ContextMenuModule} from 'primeng/contextmenu';
     PatientMainComponent,
     GenerateMealPlanModalComponent,
     MealPlanListComponent,
+    RecipleModalDialogComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -159,7 +163,9 @@ import {ContextMenuModule} from 'primeng/contextmenu';
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    DynamicDialogModule,
+    PanelModule
   ],
   providers: [UserDataService,
     AuthenticationService, LoadingDialogService, ErrorDialogService,
