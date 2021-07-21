@@ -58,7 +58,7 @@ namespace NeutrackAPI.Data
         {
             IEnumerable<PatientRecipe> query = _context.PatientRecipes.Include(x => x.Recipe);
             query = query.Where(e => e.PatientID.Equals(patientId));
-            return query.ToList();
+            return query.ToList().OrderBy(x => x.Day);
 
 
         }

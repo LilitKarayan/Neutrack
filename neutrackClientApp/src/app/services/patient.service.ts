@@ -34,6 +34,9 @@ export class PatientService {
   deleteAccount(userId){
     return this.http.delete(getApiRoute(fromApiConfig.userById(userId)), httpOptions).toPromise<any>();
   }
+  getPatientsMealPlan(patientId){
+    return this.http.get(getApiRoute(fromApiConfig.getPatientsMealPlan(patientId)), httpOptions).toPromise<any>();
+  }
 }
 
 

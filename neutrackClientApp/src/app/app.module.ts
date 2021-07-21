@@ -69,6 +69,8 @@ import { AddEditRecipeComponent } from './nutritionist/recipes/add-edit-recipe/a
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { PatientMainComponent } from './patient/patient-main/patient-main.component';
 import { GenerateMealPlanModalComponent } from './nutritionist/patients/generate-meal-plan-modal/generate-meal-plan-modal.component';
+import {TableModule} from 'primeng/table';
+import { MealPlanListComponent } from './patient/meal-plan-list/meal-plan-list.component';
 
 
 @NgModule({
@@ -99,6 +101,7 @@ import { GenerateMealPlanModalComponent } from './nutritionist/patients/generate
     AddEditRecipeComponent,
     PatientMainComponent,
     GenerateMealPlanModalComponent,
+    MealPlanListComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -139,6 +142,7 @@ import { GenerateMealPlanModalComponent } from './nutritionist/patients/generate
     MatAutocompleteModule,
     SharedModule,
     ChartsModule,
+    TableModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
