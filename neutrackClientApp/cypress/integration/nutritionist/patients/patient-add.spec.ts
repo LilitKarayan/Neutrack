@@ -52,4 +52,32 @@ describe('successful scenario tests - add patient', () => {
         cy.contains('janiceDoe@hello.com');
       });
   });
+
+  it('should successfully add patient without a nutritionist', () => {
+    helper.signInStartDashboard();
+
+    patientHelper.directToPatient();
+
+    cy.get('table').find('tr').should('have.length', 3);
+
+    cy.get('#theSearch')
+      .click()
+      .then(() => {
+        cy.get('#theSearch').type('George');
+      });
+
+    cy.get('#theSearchButton')
+      .click()
+      .then(() => {
+        cy.contains('George Lucas');
+        cy.get('table').find('tr').should('have.length', 2);
+        cy.get('#add').click();
+        cy.get('#deleteYesButton').click();
+      });
+
+    cy.get("[routerLink='/dashboard']").click();
+    patientHelper.directToPatient();
+    cy.get('table').find('tr').should('have.length', 4);
+    cy.contains('George Lucas');
+  });
 });

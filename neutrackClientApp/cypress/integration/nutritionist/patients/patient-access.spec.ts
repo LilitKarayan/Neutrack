@@ -21,7 +21,7 @@ describe('successful scenario tests - view patient', () => {
         })
     });
 
-    it('should not have access to actions of patient that does not belong to nutritionist', () => {
+    it('should not have access to actions of patient that belongs to another nutritionist', () => {
         helper.signInStartDashboard();
         patientHelper.directToPatient();
 
@@ -33,6 +33,21 @@ describe('successful scenario tests - view patient', () => {
             cy.contains("Test Patient")
             cy.get("table td:last").find("a").should("not.exist")
             cy.get("table td:last").find("a").should("not.exist")
+        })
+    });
+
+    it('should be able to add a patient that does not already have a nutritionist', () => {
+        helper.signInStartDashboard();
+        patientHelper.directToPatient();
+
+        cy.get("#theSearch").click().then(() => {
+            cy.get("#theSearch").type("george")
+        })
+    
+        cy.get("#theSearchButton").click().then(() => {
+            cy.contains("George Lucas")
+            cy.get("table td:last").find("button").should("have.length", 1)
+            cy.get("#add").should("exist")
         })
     });
 });
