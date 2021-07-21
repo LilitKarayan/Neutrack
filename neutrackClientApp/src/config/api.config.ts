@@ -57,3 +57,7 @@ export const getAllProductsWithPaging = '/products/all'
 export const getUser = (userId) => {
   return `/users/${userId}`;
 }
+export const generateMealPlan = '/patientRecipes/generatemealplan'
+export const getPatientsMealPlan = (patientId) => {
+  return `/patientrecipes/${patientId}`
+}

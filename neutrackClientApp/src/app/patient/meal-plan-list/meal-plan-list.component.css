@@ -1,0 +1,20 @@
+.meal-type-Breakfast{
+  padding: 4px 4px 4px 4px;
+  border-radius: 3px;
+  background-color: #6f42c1;
+  color: #ffffff;
+}
+
+.meal-type-Lunch{
+  padding: 4px 4px 4px 4px;
+  border-radius: 3px;
+  background-color: #fd7e14;
+  color: #ffffff;
+}
+
+.meal-type-Dinner{
+  padding: 4px 4px 4px 4px;
+  border-radius: 3px;
+  background-color: #198754;
+  color: #ffffff;
+}

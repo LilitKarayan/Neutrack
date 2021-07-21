@@ -7,6 +7,11 @@ import * as moment from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { MatDialog } from '@angular/material/dialog';
+import { GenerateMealPlanModalComponent } from '../generate-meal-plan-modal/generate-meal-plan-modal.component';
+import { IGenerateMealPlan } from '@models';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { MessageSnackbarComponent } from 'app/shared/message-snackbar.component';
 
 @Component({
   selector: 'app-patient-info',
@@ -37,7 +42,9 @@ export class PatientInfoComponent implements OnInit, OnDestroy {
       private route: ActivatedRoute,
       private router: Router,
       private authService: AuthenticationService,
-      private nutritionistService: NutritionistService
+      private nutritionistService: NutritionistService,
+      public dialog: MatDialog,
+      private _snackBar: MatSnackBar
   ) {
     this.authService.user.subscribe(user => this.activeUser = user);
     this.patient$ = this.patientSubject.asObservable();
@@ -70,5 +77,25 @@ export class PatientInfoComponent implements OnInit, OnDestroy {
     getChartLabel(history: WeightHistory[]): Label[]{
       const labels = history.map(x => moment(x.createdDate).format('MMM DD YYYY'));
       return labels;
+    }
+    generateMealPlan(){
+      const patientId = Number(this.route.snapshot.params['id']);
+      const dialogRef = this.dialog.open(GenerateMealPlanModalComponent, {
+        maxHeight: "100%",
+        width: "600px",
+        maxWidth: "100%",
+        data: {
+          patientId:patientId,
+        },
+        hasBackdrop: true,
+      });
+      dialogRef.afterClosed().subscribe(async result => {
+        let resp = await this.nutritionistService.generatePatientMealPlan(result);
+        if(resp){
+          this._snackBar.openFromComponent(MessageSnackbarComponent, {
+            data: `Meal plan generated successfully`
+          })
+        }
+      })
     }
 }

@@ -18,6 +18,7 @@ export class PatientMainComponent implements OnInit {
   private patientSubject = new BehaviorSubject<IPatient> (null);
   activeUser: IUser;
   patient$: Observable<IPatient>;
+  breakpoint: any;
 
   public lineChartOptions: ChartOptions = {
     responsive: true,
@@ -51,11 +52,14 @@ export class PatientMainComponent implements OnInit {
       this.dataset = this.getChartData(data.patientActivityHistories);
       this.labels = this.getChartLabel(data.patientActivityHistories);
     });
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
   }
   ngOnDestroy(): void {
     this.patientSubject.unsubscribe;
   }
-
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 4;
+  }
   getChartData(history: WeightHistory[]): ChartDataSets[]{
     const weights = history.map(x => x.weight);
     const dataset = [
