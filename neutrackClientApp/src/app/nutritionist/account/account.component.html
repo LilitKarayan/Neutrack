@@ -4,7 +4,7 @@
         <p>{{user.email}}</p>
         <div>
           <button *ngIf="!isEdit" class="mr-2" mat-raised-button color="primary" (click)="toggleEditing(true)">Edit</button>
-          <button mat-raised-button class="mr-2" color="warn" (click)="deleteAccount()">Delete My Account</button>
+          <button id="deleteButton" mat-raised-button class="mr-2" color="warn" (click)="deleteAccount()">Delete My Account</button>
           <button *ngIf="roles.includes('User') && user.nutritionistId != null" class="mr-2" mat-raised-button color="accent" (click)="getPatientNutritionistDetail(user.nutritionistId)">View Nutritionist</button>
         </div>
         <div class="edit-form">
