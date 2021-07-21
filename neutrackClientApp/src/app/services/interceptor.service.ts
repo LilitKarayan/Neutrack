@@ -52,6 +52,7 @@ export class InterceptorService implements HttpInterceptor {
         }
       }
     }, (err: any) => {
+      this.loadingDialogService.hideDialog();
       let errors = []
       if(err instanceof HttpErrorResponse){
         if(err.error.errors || err.error.message){

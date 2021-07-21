@@ -68,7 +68,16 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { AddEditRecipeComponent } from './nutritionist/recipes/add-edit-recipe/add-edit-recipe.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { PatientMainComponent } from './patient/patient-main/patient-main.component';
-
+import { GenerateMealPlanModalComponent } from './nutritionist/patients/generate-meal-plan-modal/generate-meal-plan-modal.component';
+import {TableModule} from 'primeng/table';
+import { MealPlanListComponent } from './patient/meal-plan-list/meal-plan-list.component';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ButtonModule} from 'primeng/button';
+import {ContextMenuModule} from 'primeng/contextmenu';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { RecipleModalDialogComponent } from './patient/reciple-modal-dialog/reciple-modal-dialog.component';
+import {PanelModule} from 'primeng/panel'
 
 @NgModule({
   declarations: [
@@ -97,6 +106,9 @@ import { PatientMainComponent } from './patient/patient-main/patient-main.compon
     DeleteRecipeComponent,
     AddEditRecipeComponent,
     PatientMainComponent,
+    GenerateMealPlanModalComponent,
+    MealPlanListComponent,
+    RecipleModalDialogComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -137,6 +149,11 @@ import { PatientMainComponent } from './patient/patient-main/patient-main.compon
     MatAutocompleteModule,
     SharedModule,
     ChartsModule,
+    TableModule,
+    MessagesModule,
+    MessageModule,
+    ButtonModule,
+    ContextMenuModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -146,7 +163,9 @@ import { PatientMainComponent } from './patient/patient-main/patient-main.compon
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    DynamicDialogModule,
+    PanelModule
   ],
   providers: [UserDataService,
     AuthenticationService, LoadingDialogService, ErrorDialogService,

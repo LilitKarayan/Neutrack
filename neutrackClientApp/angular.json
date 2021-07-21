@@ -33,6 +33,9 @@
               "src/web.config"
             ],
             "styles": [
+              "./node_modules/primeng/resources/themes/saga-green/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeicons/primeicons.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
@@ -40,7 +43,9 @@
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/popper.js/dist/umd/popper.js"
+              "./node_modules/popper.js/dist/umd/popper.js",
+              "./node_modules/jspdf/dist/jspdf.umd.min.js",
+              "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"

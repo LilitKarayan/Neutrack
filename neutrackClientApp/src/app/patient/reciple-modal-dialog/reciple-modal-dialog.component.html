@@ -1,0 +1,32 @@
+<mat-grid-list cols="1" rowHeight="6:1">
+  <mat-grid-tile>
+    <div class="mat-grid-tile-content">
+      <p><strong>Recipe</strong> <br/><span>{{recipe.name}}</span></p>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="mat-grid-tile-content">
+      <p><strong>Meal</strong> <br/><span>{{recipe.mealType}}</span></p>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="mat-grid-tile-content">
+      <p><strong>Instructions</strong> <br/><span>{{recipe.instruction}}</span></p>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+<p-table [value]="recipe.recipeProducts">
+  <h3>Ingredients</h3>
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Name</th>
+          <th>Weight in Grams</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-ingredients>
+      <tr>
+          <td>{{ingredients.productName}}</td>
+          <td>{{ingredients.weightInGrams}} g</td>
+      </tr>
+  </ng-template>
+</p-table>
