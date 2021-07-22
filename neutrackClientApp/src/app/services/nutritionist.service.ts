@@ -24,7 +24,7 @@ import { IPatient, IDashboard, INutritionist, IProduct, IRecipe, IRecipeProduct,
 import * as moment from 'moment';
 import CryptoJS from 'crypto-js';
 
-const DEFAULT_PASSWORD = "neutrack-123456";
+const DEFAULT_PASSWORD = "Neutrack-123456";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'

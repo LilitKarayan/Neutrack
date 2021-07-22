@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -114,6 +115,21 @@ namespace NeutrackAPI.Data
             _context.PatientRecipes.Remove(patientRecipe); 
             return "The patientRecipe is deleted successfully."; 
                       
+        }
+
+        public async Task DeletePatientRecipes(int patientId)
+        {
+            var patientRecipes = await _context.PatientRecipes.Where(x => x.PatientID == patientId).ToListAsync();
+            _context.RemoveRange(patientRecipes);
+        }
+
+        public async Task InsertPatientRecipes(List<PatientRecipe> patientRecipes)
+        {
+            if(patientRecipes.Count <= 0)
+            {
+                throw new ArgumentNullException("No recipes provided");
+            }
+            await _context.AddRangeAsync(patientRecipes);
         }
     }
 }

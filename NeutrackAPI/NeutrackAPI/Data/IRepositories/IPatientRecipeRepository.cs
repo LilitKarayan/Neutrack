@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using NeutrackAPI.DTOs;
 using NeutrackAPI.Models;
 
@@ -14,5 +15,7 @@ namespace NeutrackAPI.Data
         void CreatePatientRecipe(PatientRecipe patientRecipe);
         void UpdatePatientRecipe(PatientRecipe patientRecipe);
         string DeletePatientRecipe(PatientRecipe patientRecipe);
+        Task DeletePatientRecipes(int patientId);
+        Task InsertPatientRecipes(List<PatientRecipe> patientRecipes);
     }
 }
